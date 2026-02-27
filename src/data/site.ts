@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "Portfolio-first full-stack MERN and cloud engineer showcasing shipped products, production reliability, and measurable outcomes across modern web systems.",
+    "Full-stack MERN and cloud engineer portfolio featuring shipped products, reliable delivery, and clear business outcomes in production.",
   longDescription:
     "I ship cloud-first MERN products that scale cleanly and deliver measurable outcomes across performance, reliability, and developer experience.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.netlify.app",
@@ -20,12 +20,12 @@ export const siteConfig = {
     twitter: "https://twitter.com/frostdev7506",
   },
   nav: [
-    { label: "About", href: "#about" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Projects", href: "#open-source" },
-    { label: "Tech", href: "#tech-stack" },
+    { label: "About", href: "/#about" },
+    { label: "Portfolio", href: "/#portfolio" },
+    { label: "Projects", href: "/#open-source" },
+    { label: "Tech", href: "/#tech-stack" },
     { label: "Blog", href: "/blog" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/#contact" },
   ],
   skills: [
     "AWS",

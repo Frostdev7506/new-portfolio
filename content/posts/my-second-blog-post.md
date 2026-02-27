@@ -1,10 +1,10 @@
 ---
-title: Reducing Deployment Risk with Small Release Slices
+title: Safer Deployments with Small Release Slices
 date: 2023-08-08
 slug: my-second-blog-post
 readtime: 4 min read
 tags: DevOps,Release,Reliability
-description: How small release slices and observability-first workflows reduce deployment risk while improving team velocity.
+description: A practical playbook for reducing deployment risk through small release slices, observability checks, and fast rollback workflows.
 ---
 
 ## The deployment problem most teams repeat

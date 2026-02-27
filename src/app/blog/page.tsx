@@ -7,7 +7,7 @@ import { buildPageMetadata, fullUrl } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Engineering Blog and Technical Notes",
   description:
-    "Actionable engineering notes on web rendering, full-stack architecture, cloud delivery, and practical decisions used in real production projects.",
+    "Practical engineering articles on architecture, rendering, APIs, performance, and release quality from real production software projects.",
   path: "/blog",
   keywords: [
     "software engineering blog",
@@ -24,7 +24,7 @@ export default async function BlogPage() {
     "@type": "Blog",
     name: `${siteConfig.name} Blog`,
     description:
-      "Engineering notes on web rendering, full-stack development, and software delivery.",
+      "Practical engineering articles on architecture, rendering, APIs, performance, and release quality from real production software projects.",
     url: `${siteConfig.url}/blog`,
     inLanguage: siteConfig.language,
     author: {
@@ -80,11 +80,18 @@ export default async function BlogPage() {
       <section className="rounded-2xl border border-border bg-white p-6 text-slate-700 shadow-sm dark:bg-slate-900 dark:text-slate-200">
         <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">What you will find here</h2>
         <p className="mt-3 leading-relaxed">
-          These articles document implementation decisions I use in day-to-day full-stack work. Instead of generic tutorials, each post focuses on what works in production: where bottlenecks appear, how trade-offs are evaluated, and which patterns improve reliability over time.
+          These posts document the implementation choices used in day-to-day product engineering. The focus is on practical trade-offs, not generic tutorials. You will see how architecture, performance, and delivery decisions are evaluated under real constraints.
         </p>
         <p className="mt-3 leading-relaxed">
-          Topics include rendering strategy, API design, performance optimization, and delivery workflows. Every article is written from practical engineering experience and updated as the codebase evolves.
+          Topics include rendering strategy, API design, deployment workflows, and maintainability patterns. Every article is based on applied project experience and updated when a better approach proves itself.
         </p>
+        <h3 className="mt-5 text-xl font-semibold text-slate-900 dark:text-slate-100">Article themes</h3>
+        <ul className="mt-3 list-disc space-y-2 pl-6 leading-relaxed">
+          <li>Choosing between SSR, CSR, SSG, and hybrid rendering with clear decision criteria.</li>
+          <li>Designing APIs and background jobs for predictable behavior at production scale.</li>
+          <li>Improving release quality with small deploy slices, observability, and rollback discipline.</li>
+          <li>Balancing product velocity with long-term maintainability and technical clarity.</li>
+        </ul>
       </section>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

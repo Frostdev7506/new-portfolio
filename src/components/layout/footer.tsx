@@ -44,7 +44,9 @@ export function Footer() {
           <div className="flex items-center gap-4 text-sm text-slate-300">
             <Link href="/">Home</Link>
             <Link href="/blog">Blog</Link>
-            <a href="#contact">Contact</a>
+            <Link href="/#contact">Contact</Link>
+            <Link href={siteConfig.resumeUrl}>Resume</Link>
+            <Link href="/llms.txt">LLMS</Link>
             <Link href="/privacy">Privacy</Link>
             <Link href="/editorial-policy">Editorial</Link>
           </div>

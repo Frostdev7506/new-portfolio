@@ -26,7 +26,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const structuredData = [websiteJsonLd(), organizationJsonLd()];
+  const websiteData = websiteJsonLd();
+  const organizationData = organizationJsonLd();
 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
@@ -38,7 +39,12 @@ export default function RootLayout({
           <script
             type="application/ld+json"
             suppressHydrationWarning
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
+          />
+          <script
+            type="application/ld+json"
+            suppressHydrationWarning
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
           />
           <div className="relative min-h-screen bg-page text-slate-100">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_5%,rgba(222,111,73,0.15),transparent_30%),radial-gradient(circle_at_92%_10%,rgba(14,118,105,0.2),transparent_28%),radial-gradient(circle_at_50%_95%,rgba(15,23,42,0.07),transparent_38%)]" />
