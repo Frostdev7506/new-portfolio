@@ -1,4 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Post not found",
+  description: "The requested blog article could not be found.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function BlogPostNotFound() {
   return (

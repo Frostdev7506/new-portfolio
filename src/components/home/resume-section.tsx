@@ -3,9 +3,13 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { siteConfig } from "@/data/site";
 
 export function ResumeSection() {
+  const resumeFileUrl = siteConfig.resumeUrl.startsWith("http")
+    ? siteConfig.resumeUrl
+    : `${siteConfig.url}${siteConfig.resumeUrl}`;
+
   const googleViewerUrl =
     "https://drive.google.com/viewerng/viewer?embedded=true&url=" +
-    encodeURIComponent(siteConfig.resumeUrl);
+    encodeURIComponent(resumeFileUrl);
 
   return (
     <section className="space-y-10">
@@ -22,7 +26,7 @@ export function ResumeSection() {
             <h3 className="font-semibold text-slate-900 dark:text-slate-100">Resume Preview</h3>
           </div>
           <a
-            href={siteConfig.resumeUrl}
+            href={resumeFileUrl}
             className="inline-flex w-fit rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
           >
             Download PDF

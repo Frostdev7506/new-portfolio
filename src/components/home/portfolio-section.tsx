@@ -57,9 +57,10 @@ export function PortfolioSection() {
                   href={project.link}
                   target="_blank"
                   rel="noreferrer noopener"
+                  aria-label={`Open ${project.title} project`}
                   className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-slate-900/75 px-3.5 py-2 text-sm font-medium text-slate-100 transition duration-200 hover:border-brand-300/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                 >
-                  Open Project
+                  View {project.title}
                   <ExternalLink className="h-4 w-4" />
                 </a>
               </div>

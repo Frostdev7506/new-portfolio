@@ -3,15 +3,16 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "Portfolio-first full-stack developer site focused on shipped products and measurable impact.",
+    "Portfolio-first full-stack MERN and cloud engineer showcasing shipped products, production reliability, and measurable outcomes across modern web systems.",
   longDescription:
-    "I ship cloud-first MERN products that scale cleanly and deliver measurable outcomes.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.dev",
+    "I ship cloud-first MERN products that scale cleanly and deliver measurable outcomes across performance, reliability, and developer experience.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.netlify.app",
   locale: "en_US",
+  language: "en",
   email: "neeraj.butola.dev@gmail.com",
   location: "India",
-  resumeUrl:
-    "https://raw.githubusercontent.com/Frostdev7506/Auto-resume/build/Neeraj_Butola_Resume.pdf",
+  resumeUrl: "/Neeraj_Butola_Resume.pdf",
+  image: "/dev-ed-wave.png",
   githubUsername: "Frostdev7506",
   social: {
     github: "https://github.com/Frostdev7506",

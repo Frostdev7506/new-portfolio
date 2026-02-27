@@ -12,6 +12,28 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeSlug]}
+        components={{
+          h1: ({ children }) => (
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {children}
+            </h2>
+          ),
+          input: ({ type, checked }) => {
+            if (type === "checkbox") {
+              return (
+                <input
+                  type="checkbox"
+                  checked={Boolean(checked)}
+                  readOnly
+                  aria-label={checked ? "Completed task item" : "Task item"}
+                  className="mr-2 align-middle"
+                />
+              );
+            }
+
+            return <input type={type} readOnly />;
+          },
+        }}
       >
         {content}
       </ReactMarkdown>

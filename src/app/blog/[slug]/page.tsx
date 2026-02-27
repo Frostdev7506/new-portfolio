@@ -7,6 +7,7 @@ import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
 import { siteConfig } from "@/data/site";
 import { getBlogPostUrl, getPostBySlug, getPostSlugs, getRecentPosts } from "@/lib/posts";
+import { buildPageMetadata, fullUrl } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
 type BlogPostPageProps = {
@@ -25,38 +26,32 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   if (!post) {
     return {
       title: "Post not found",
+      description: "The requested article is unavailable.",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
-  return {
+  const publishedTime = new Date(post.date).toISOString();
+  const metadata = buildPageMetadata({
     title: post.title,
     description: post.description,
+    path: `/blog/${post.slug}`,
     keywords: [...post.tags, siteConfig.name, "engineering blog"],
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-    },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.description,
-      url: `/blog/${post.slug}`,
-      publishedTime: new Date(post.date).toISOString(),
-      tags: post.tags,
-      images: [
-        {
-          url: "/dev-ed-wave.png",
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: ["/dev-ed-wave.png"],
-    },
+    type: "article",
+    publishedTime,
+    modifiedTime: publishedTime,
+    tags: post.tags,
+  });
+
+  return {
+    ...metadata,
+    authors: [{ name: siteConfig.name, url: siteConfig.url }],
+    creator: siteConfig.name,
+    publisher: siteConfig.name,
+    category: "technology",
   };
 }
 
@@ -82,14 +77,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     author: {
       "@type": "Person",
       name: siteConfig.name,
+      url: siteConfig.url,
     },
     publisher: {
-      "@type": "Person",
-      name: siteConfig.name,
+      "@type": "Organization",
+      name: siteConfig.shortName,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: fullUrl(siteConfig.image),
+      },
     },
     mainEntityOfPage: shareUrl,
-    image: [`${siteConfig.url}/dev-ed-wave.png`],
+    image: [fullUrl(siteConfig.image)],
     keywords: post.tags.join(", "),
+    isPartOf: {
+      "@type": "Blog",
+      name: `${siteConfig.name} Blog`,
+      url: `${siteConfig.url}/blog`,
+    },
   };
 
   const breadcrumbJsonLd = {

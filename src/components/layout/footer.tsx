@@ -17,6 +17,9 @@ export function Footer() {
           <p className="mt-2 max-w-md text-sm text-slate-300">
             Full-stack portfolio focused on engineering outcomes, speed, and clear product value.
           </p>
+          <p className="mt-2 max-w-md text-xs text-slate-400">
+            Built and maintained by {siteConfig.name}, {siteConfig.stats[0].value} experience in full-stack and cloud delivery.
+          </p>
         </div>
 
         <div className="flex flex-col items-start gap-4">
@@ -42,6 +45,8 @@ export function Footer() {
             <Link href="/">Home</Link>
             <Link href="/blog">Blog</Link>
             <a href="#contact">Contact</a>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/editorial-policy">Editorial</Link>
           </div>
 
           <p className="text-xs text-slate-400">
