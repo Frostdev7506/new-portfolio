@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${bodyFont.variable} ${headingFont.variable} antialiased`}>
         <ThemeProvider>
           <script
@@ -35,7 +35,7 @@ export default function RootLayout({
             suppressHydrationWarning
             dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
           />
-          <div className="relative min-h-screen bg-page text-slate-900 dark:text-slate-100">
+          <div className="relative min-h-screen bg-page text-slate-100">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_5%,rgba(222,111,73,0.15),transparent_30%),radial-gradient(circle_at_92%_10%,rgba(14,118,105,0.2),transparent_28%),radial-gradient(circle_at_50%_95%,rgba(15,23,42,0.07),transparent_38%)]" />
             <div className="relative z-10 flex min-h-screen flex-col">
               <a

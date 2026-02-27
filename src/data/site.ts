@@ -3,9 +3,9 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "Production-focused full-stack developer portfolio featuring MERN projects, technical writing, GitHub work, and direct contact options.",
+    "Portfolio-first full-stack developer site featuring shipped MERN products, case-study style project highlights, and practical engineering impact.",
   longDescription:
-    "I build cloud-first MERN products that ship fast, stay secure, and scale reliably under real-world traffic.",
+    "I design and ship cloud-first MERN products with measurable business impact, clean architecture, and dependable production performance.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.dev",
   locale: "en_US",
   email: "neeraj.butola.dev@gmail.com",
@@ -20,8 +20,9 @@ export const siteConfig = {
   },
   nav: [
     { label: "About", href: "#about" },
+    { label: "Portfolio", href: "#portfolio" },
+    { label: "Projects", href: "#open-source" },
     { label: "Tech", href: "#tech-stack" },
-    { label: "Work", href: "#portfolio" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "#contact" },
   ],

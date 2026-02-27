@@ -1,6 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { SectionHeading } from "@/components/shared/section-heading";
+import { SnapCarousel } from "@/components/shared/snap-carousel";
+import { siteConfig } from "@/data/site";
 
 type Repo = {
   id: number;
@@ -10,11 +13,10 @@ type Repo = {
   languages: string[];
 };
 
-const reposPerPage = 6;
+const maxVisibleRepos = 12;
 
 export function GitHubWidget({ repos }: { repos: Repo[] }) {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const technologies = useMemo(() => {
     const set = new Set<string>();
@@ -30,39 +32,33 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
     return repos.filter((repo) => repo.languages.includes(selectedTech));
   }, [repos, selectedTech]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredRepos.length / reposPerPage));
-  const currentRepos = filteredRepos.slice(
-    (currentPage - 1) * reposPerPage,
-    currentPage * reposPerPage,
+  const visibleRepos = useMemo(
+    () => filteredRepos.slice(0, maxVisibleRepos),
+    [filteredRepos],
   );
 
   const updateTechFilter = (tech: string) => {
-    setCurrentPage(1);
     setSelectedTech((prev) => (prev === tech ? null : tech));
   };
 
   return (
-    <section className="space-y-8">
-      <header className="text-center">
-        <p className="text-xs uppercase tracking-[0.22em] text-brand-700 dark:text-brand-300">Open Source</p>
-        <h2 className="mt-3 text-3xl font-semibold text-slate-900 dark:text-slate-100 md:text-4xl">
-          GitHub Repositories
-        </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-300">
-          Current work, experiments, and learning builds from my public GitHub profile.
-        </p>
-      </header>
+    <section id="open-source" className="space-y-8">
+      <SectionHeading
+        label="Open Source"
+        title="Code Portfolio on GitHub"
+        description="Filter by language and explore current experiments, product builds, and implementation-level engineering work."
+      />
 
-      <div className="flex flex-wrap justify-center gap-2">
+      <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {technologies.map((tech) => (
           <button
             key={tech}
             type="button"
             onClick={() => updateTechFilter(tech)}
-            className={`rounded-full border px-3 py-1 text-xs font-medium transition sm:text-sm ${
+            className={`shrink-0 cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 sm:text-sm ${
               selectedTech === tech
-                ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-slate-900"
-                : "border-border bg-white text-slate-600 hover:text-slate-900 dark:bg-slate-900 dark:text-slate-300 dark:hover:text-white"
+                ? "border-brand-300 bg-brand-300/20 text-white"
+                : "border-border bg-slate-950/80 text-slate-300 hover:border-brand-300/70 hover:text-white"
             }`}
           >
             {tech}
@@ -70,76 +66,59 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        {currentRepos.map((repo) => (
-          <article
-            key={repo.id}
-            className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-slate-900"
-          >
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{repo.name}</h3>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-              {repo.description || "View this repository for implementation details and source code."}
-            </p>
+      {visibleRepos.length ? (
+        <div className="rounded-3xl border border-border bg-[linear-gradient(145deg,rgba(56,189,248,0.14),rgba(15,23,42,0.92),rgba(15,23,42,0.95))] px-3 py-4 sm:px-4 sm:py-5">
+          <SnapCarousel ariaLabel="github repositories" itemClassName="w-[90%] shrink-0 snap-start sm:w-[58%] lg:w-[44%] xl:w-[34%]">
+            {visibleRepos.map((repo) => (
+              <article
+                key={repo.id}
+                className="h-full rounded-2xl border border-border bg-slate-950/85 p-5 shadow-[0_20px_50px_-42px_rgba(34,211,238,0.8)]"
+              >
+                <h3 className="text-lg font-semibold text-slate-100">{repo.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                  {repo.description || "View this repository for implementation details and source code."}
+                </p>
 
-            <div className="mt-3 flex flex-wrap gap-2">
-              {(repo.languages.length ? repo.languages : ["GitHub"]).map((language) => (
-                <span
-                  key={`${repo.id}-${language}`}
-                  className="rounded-full border border-border px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300"
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {(repo.languages.length ? repo.languages : ["GitHub"]).map((language) => (
+                    <span
+                      key={`${repo.id}-${language}`}
+                      className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2.5 py-1 text-xs text-slate-300"
+                    >
+                      {language}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="mt-5 inline-flex cursor-pointer rounded-full border border-border bg-slate-900/75 px-4 py-2 text-sm font-medium text-slate-100 transition duration-200 hover:border-brand-300/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                 >
-                  {language}
-                </span>
-              ))}
-            </div>
+                  View on GitHub
+                </a>
+              </article>
+            ))}
+          </SnapCarousel>
+        </div>
+      ) : (
+        <p className="rounded-2xl border border-border bg-slate-950/80 px-4 py-4 text-sm text-slate-300">
+          No repositories found for this filter. Try another language.
+        </p>
+      )}
 
-            <a
-              href={repo.html_url}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="mt-4 inline-flex rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
-            >
-              View on GitHub
-            </a>
-          </article>
-        ))}
-      </div>
-
-      {totalPages > 1 ? (
-        <nav aria-label="Repository pagination" className="flex items-center justify-center gap-2">
-          <button
-            type="button"
-            onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-            disabled={currentPage === 1}
-            className="rounded-full border border-border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Previous
-          </button>
-
-          {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
-            <button
-              key={page}
-              type="button"
-              onClick={() => setCurrentPage(page)}
-              className={`h-10 w-10 rounded-full border text-sm ${
-                page === currentPage
-                  ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-slate-900"
-                  : "border-border"
-              }`}
-            >
-              {page}
-            </button>
-          ))}
-
-          <button
-            type="button"
-            onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-            disabled={currentPage === totalPages}
-            className="rounded-full border border-border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Next
-          </button>
-        </nav>
-      ) : null}
+      <p className="text-center text-xs text-slate-400">
+        Showing up to {maxVisibleRepos} repositories.
+        <a
+          href={siteConfig.social.github}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="ml-1.5 cursor-pointer font-medium text-brand-300 underline underline-offset-2"
+        >
+          View full profile
+        </a>
+      </p>
     </section>
   );
 }

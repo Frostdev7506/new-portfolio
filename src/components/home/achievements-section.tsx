@@ -1,33 +1,32 @@
 import { achievements } from "@/data/achievements";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { SnapCarousel } from "@/components/shared/snap-carousel";
 
 export function AchievementsSection() {
   return (
-    <section className="space-y-10 rounded-3xl border border-border bg-gradient-to-b from-white to-slate-50 px-6 py-10 dark:from-slate-950 dark:to-slate-900/70 md:px-8">
+    <section className="space-y-8 rounded-3xl border border-border bg-[linear-gradient(155deg,rgba(6,182,212,0.14),rgba(15,23,42,0.92),rgba(2,6,23,0.95))] px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
       <SectionHeading
         label="Key Accomplishments"
         title="Impact that scales with the product"
         description="Outcomes across cloud architecture, delivery velocity, and platform reliability."
       />
 
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+      <SnapCarousel ariaLabel="achievement highlights" itemClassName="w-[89%] shrink-0 snap-start sm:w-[58%] lg:w-[44%] xl:w-[35%]">
         {achievements.map((achievement) => (
           <article
             key={achievement.title}
-            className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-slate-900"
+            className="h-full rounded-2xl border border-border bg-slate-950/85 p-5 shadow-[0_22px_60px_-46px_rgba(34,211,238,0.8)]"
           >
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{achievement.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              {achievement.description}
-            </p>
-            <p className="mt-3 rounded-xl border border-border bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+            <h3 className="text-lg font-semibold text-slate-100">{achievement.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-300">{achievement.description}</p>
+            <p className="mt-3 rounded-xl border border-slate-700/80 bg-slate-900/80 px-3 py-2 text-sm font-medium text-cyan-200">
               {achievement.metrics}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {achievement.keywords.map((keyword) => (
                 <span
                   key={keyword}
-                  className="rounded-full border border-border px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300"
+                  className="rounded-full border border-slate-700/80 bg-slate-900/70 px-2.5 py-1 text-xs text-slate-300"
                 >
                   {keyword}
                 </span>
@@ -35,7 +34,7 @@ export function AchievementsSection() {
             </div>
           </article>
         ))}
-      </div>
+      </SnapCarousel>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
@@ -46,10 +45,10 @@ export function AchievementsSection() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="rounded-2xl border border-border bg-white px-4 py-3 text-center dark:bg-slate-900"
+            className="rounded-2xl border border-border bg-slate-950/80 px-4 py-3 text-center"
           >
-            <p className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{stat.value}</p>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">{stat.label}</p>
+            <p className="text-2xl font-semibold text-slate-100">{stat.value}</p>
+            <p className="mt-1 text-xs text-slate-300">{stat.label}</p>
           </div>
         ))}
       </div>
