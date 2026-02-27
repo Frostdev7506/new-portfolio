@@ -122,9 +122,6 @@ export function HeroSection() {
           <p className="rise-on-load-slow mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-slate-300 sm:text-base">
             {siteConfig.longDescription}
           </p>
-          <p className="rise-on-load-slow mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-slate-400 sm:text-base">
-            This portfolio is engineered to show real product outcomes, not just screenshots.
-          </p>
 
           <div className="rise-on-load-slow mt-7 grid gap-3 sm:flex sm:flex-wrap">
             <a
@@ -150,7 +147,7 @@ export function HeroSection() {
 
           <div className="mt-6">
             <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Core Stack</p>
-            <ul aria-label="Core skills" className="mt-2 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <ul aria-label="Core skills" className="no-scrollbar mt-2 flex gap-2 overflow-x-auto pb-1">
               {siteConfig.skills.map((skill) => (
                 <li
                   key={skill}

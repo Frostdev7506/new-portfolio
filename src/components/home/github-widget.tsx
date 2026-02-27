@@ -46,7 +46,7 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
       <SectionHeading
         label="Open Source"
         title="Code Portfolio on GitHub"
-        description="Filter by language and explore current experiments, product builds, and implementation-level engineering work."
+        description="Filter and skim recent repos."
       />
 
       <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -68,19 +68,28 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
 
       {visibleRepos.length ? (
         <div className="rounded-3xl border border-border bg-[linear-gradient(145deg,rgba(56,189,248,0.14),rgba(15,23,42,0.92),rgba(15,23,42,0.95))] px-3 py-4 sm:px-4 sm:py-5">
-          <SnapCarousel ariaLabel="github repositories" itemClassName="w-[90%] shrink-0 snap-start sm:w-[58%] lg:w-[44%] xl:w-[34%]">
-            {visibleRepos.map((repo) => (
+          <SnapCarousel
+            ariaLabel="github repositories"
+            itemClassName="w-[88%] shrink-0 snap-start sm:w-[56%] lg:w-[42%] xl:w-[33%]"
+            autoScroll
+          >
+            {visibleRepos.map((repo, index) => (
               <article
                 key={repo.id}
                 className="h-full rounded-2xl border border-border bg-slate-950/85 p-5 shadow-[0_20px_50px_-42px_rgba(34,211,238,0.8)]"
               >
-                <h3 className="text-lg font-semibold text-slate-100">{repo.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-lg font-semibold text-slate-100">{repo.name}</h3>
+                  <span className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="text-clip-2 mt-2 text-sm leading-relaxed text-slate-300">
                   {repo.description || "View this repository for implementation details and source code."}
                 </p>
 
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {(repo.languages.length ? repo.languages : ["GitHub"]).map((language) => (
+                  {(repo.languages.length ? repo.languages : ["GitHub"]).slice(0, 3).map((language) => (
                     <span
                       key={`${repo.id}-${language}`}
                       className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2.5 py-1 text-xs text-slate-300"
@@ -109,7 +118,7 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
       )}
 
       <p className="text-center text-xs text-slate-400">
-        Showing up to {maxVisibleRepos} repositories.
+        Showing {visibleRepos.length} of {Math.min(filteredRepos.length, maxVisibleRepos)} filtered repos.
         <a
           href={siteConfig.social.github}
           target="_blank"

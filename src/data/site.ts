@@ -3,9 +3,9 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "Portfolio-first full-stack developer site featuring shipped MERN products, case-study style project highlights, and practical engineering impact.",
+    "Portfolio-first full-stack developer site focused on shipped products and measurable impact.",
   longDescription:
-    "I design and ship cloud-first MERN products with measurable business impact, clean architecture, and dependable production performance.",
+    "I ship cloud-first MERN products that scale cleanly and deliver measurable outcomes.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.dev",
   locale: "en_US",
   email: "neeraj.butola.dev@gmail.com",
