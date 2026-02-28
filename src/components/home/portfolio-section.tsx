@@ -1,72 +1,68 @@
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
-import { SectionHeading } from "@/components/shared/section-heading";
-import { SnapCarousel } from "@/components/shared/snap-carousel";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export function PortfolioSection() {
   return (
-    <section id="portfolio" className="space-y-8">
-      <SectionHeading
-        label="Portfolio"
-        title="Featured Work"
-        description="Fast project snapshots with direct links."
-      />
+    <section id="portfolio" className="py-24 lg:py-32 border-b border-border/40">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div>
+          <h2 className="text-4xl font-black tracking-tighter sm:text-5xl uppercase mb-4">Featured Work</h2>
+          <p className="text-muted-foreground max-w-md font-light tracking-wide leading-relaxed">
+            A selection of projects that demonstrate my approach to problem-solving and technical execution.
+          </p>
+        </div>
+        <div className="hidden md:block text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground/40 text-right">
+          01 // Portfolio
+        </div>
+      </div>
 
-      <div className="rounded-3xl border border-border bg-[linear-gradient(140deg,rgba(14,165,233,0.12),rgba(30,41,59,0.55),rgba(15,23,42,0.92))] px-3 py-4 sm:px-4 sm:py-5">
-        <SnapCarousel
-          ariaLabel="featured portfolio projects"
-          itemClassName="w-[88%] shrink-0 snap-start sm:w-[58%] lg:w-[43%] xl:w-[36%]"
-          autoScroll
-        >
-          {projects.map((project, index) => (
-            <article
-              key={project.title}
-              className="group h-full overflow-hidden rounded-2xl border border-border bg-slate-950/85 shadow-[0_22px_60px_-44px_rgba(56,189,248,0.7)]"
-            >
-              <div className="relative h-52 overflow-hidden sm:h-56">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, index) => (
+          <a href={project.link} target="_blank" rel="noreferrer" key={project.title} className="group block focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-4 focus:ring-offset-background rounded-none">
+            <Card className="h-full bg-background border-border/40 hover:bg-muted/5 transition-colors duration-500 rounded-none overflow-hidden relative shadow-none">
+              <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                <div className="bg-background/90 backdrop-blur-md p-2 rounded-none border border-border shadow-sm">
+                  <ArrowUpRight className="h-4 w-4" />
+                </div>
+              </div>
+
+              <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-border/40">
                 <Image
                   src={project.image}
                   alt={project.altText}
                   fill
-                  className="object-cover transition duration-300 ease-out group-hover:scale-[1.03]"
-                  sizes="(max-width: 640px) 86vw, (max-width: 1024px) 56vw, 38vw"
-                  loading="lazy"
+                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale-[0.8] group-hover:grayscale-0 opacity-90 group-hover:opacity-100"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent" />
-                <p className="absolute bottom-3 left-3 rounded-full border border-slate-700/80 bg-slate-950/80 px-2.5 py-1 text-[11px] uppercase tracking-[0.18em] text-cyan-200">
-                  Case {String(index + 1).padStart(2, "0")}
-                </p>
               </div>
 
-              <div className="space-y-3 p-5">
-                <h3 className="text-lg font-semibold text-slate-100">{project.title}</h3>
-                <div className="flex flex-wrap gap-2">
+              <CardHeader className="pt-6 pb-2 px-6">
+                <div className="flex justify-between items-start gap-4 mb-3">
+                  <h3 className="text-xl font-bold tracking-tight uppercase group-hover:text-primary transition-colors">{project.title}</h3>
+                  <span className="text-[10px] font-mono tracking-widest text-muted-foreground/40 mt-1">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground/80 leading-relaxed font-light line-clamp-2">
+                  {project.description}
+                </p>
+              </CardHeader>
+
+              <CardContent className="pb-6 px-6">
+                <div className="flex flex-wrap gap-2 mt-4">
                   {project.technologies.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2.5 py-1 text-xs text-slate-300"
-                    >
+                    <Badge key={tech} variant="secondary" className="rounded-none bg-muted/30 hover:bg-muted/50 text-[9px] tracking-[0.2em] uppercase font-medium border-border/30">
                       {tech}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
-                <p className="text-clip-2 text-sm leading-relaxed text-slate-300">{project.description}</p>
-
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label={`Open ${project.title} project`}
-                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-slate-900/75 px-3.5 py-2 text-sm font-medium text-slate-100 transition duration-200 hover:border-brand-300/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-                >
-                  View {project.title}
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </div>
-            </article>
-          ))}
-        </SnapCarousel>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
       </div>
     </section>
   );

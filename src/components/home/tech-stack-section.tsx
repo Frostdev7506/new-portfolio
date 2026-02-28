@@ -1,54 +1,49 @@
 import Image from "next/image";
-import { Layers } from "lucide-react";
 import { techStackData } from "@/data/tech-stack";
-import { SectionHeading } from "@/components/shared/section-heading";
-import { SnapCarousel } from "@/components/shared/snap-carousel";
 
 export function TechStackSection() {
   return (
-    <section id="tech-stack" className="space-y-8">
-      <SectionHeading
-        label="Tooling"
-        title="Core Stack"
-        description="Tools I ship with every week."
-      />
+    <section id="tech-stack" className="py-24 lg:py-32 border-b border-border/40">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div>
+          <h2 className="text-4xl font-black tracking-tighter sm:text-5xl uppercase mb-4">Core Stack</h2>
+          <p className="text-muted-foreground/80 max-w-md font-light tracking-wide">
+            Tools and technologies I rely on to ship production-ready applications.
+          </p>
+        </div>
+        <div className="hidden md:block text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground/40 text-right">
+          03 // Tooling
+        </div>
+      </div>
 
-      <div className="rounded-3xl border border-border bg-[linear-gradient(145deg,rgba(30,64,175,0.15),rgba(15,23,42,0.9),rgba(17,24,39,0.92))] px-3 py-4 sm:px-4 sm:py-5">
-        <SnapCarousel
-          ariaLabel="technology stack cards"
-          itemClassName="w-[74%] shrink-0 snap-start sm:w-[42%] lg:w-[29%] xl:w-[23%]"
-          autoScroll
-          autoScrollIntervalMs={3600}
-        >
-          {techStackData.map((tech, index) => (
-            <article
-              key={tech.title}
-              className="group h-full rounded-2xl border border-border bg-slate-950/85 p-5 shadow-[0_20px_54px_-45px_rgba(14,165,233,0.8)]"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-700/80 bg-slate-900/90">
-                  <Image
-                    src={tech.imageUrl}
-                    alt={`${tech.title} logo`}
-                    width={30}
-                    height={30}
-                    loading="lazy"
-                  />
-                </div>
-                <span className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-slate-100">{tech.title}</h3>
-              <p className="text-clip-2 mt-2 text-sm leading-relaxed text-slate-300">{tech.description}</p>
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-px bg-border/40 border border-border/40">
+        {techStackData.map((tech) => (
+          <div
+            key={tech.title}
+            className="group relative bg-background p-6 flex flex-col items-center justify-center aspect-square hover:bg-muted/5 transition-all duration-500 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-primary/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
 
-              <p className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-slate-700/80 bg-slate-900/80 px-2.5 py-1 text-[11px] uppercase tracking-[0.18em] text-cyan-200">
-                <Layers className="h-3.5 w-3.5" />
-                Shipping Tool
+            <div className="relative z-10 w-12 h-12 mb-4 grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-110">
+              <Image
+                src={tech.imageUrl}
+                alt={`${tech.title} logo`}
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            <h3 className="relative z-10 text-[10px] uppercase tracking-widest font-bold text-muted-foreground group-hover:text-primary transition-colors duration-300 text-center">
+              {tech.title}
+            </h3>
+
+            <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 inset-0 m-auto flex items-center justify-center bg-background/90 backdrop-blur-sm z-20">
+              <p className="text-[10px] tracking-wider font-light text-center px-4 leading-relaxed text-muted-foreground">
+                {tech.description}
               </p>
-            </article>
-          ))}
-        </SnapCarousel>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -1,9 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SectionHeading } from "@/components/shared/section-heading";
-import { SnapCarousel } from "@/components/shared/snap-carousel";
 import { siteConfig } from "@/data/site";
+import { ArrowUpRight, Github } from "lucide-react";
 
 type Repo = {
   id: number;
@@ -13,7 +12,7 @@ type Repo = {
   languages: string[];
 };
 
-const maxVisibleRepos = 12;
+const maxVisibleRepos = 6;
 
 export function GitHubWidget({ repos }: { repos: Repo[] }) {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
@@ -25,10 +24,7 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
   }, [repos]);
 
   const filteredRepos = useMemo(() => {
-    if (!selectedTech) {
-      return repos;
-    }
-
+    if (!selectedTech) return repos;
     return repos.filter((repo) => repo.languages.includes(selectedTech));
   }, [repos, selectedTech]);
 
@@ -37,97 +33,93 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
     [filteredRepos],
   );
 
-  const updateTechFilter = (tech: string) => {
-    setSelectedTech((prev) => (prev === tech ? null : tech));
-  };
-
   return (
-    <section id="open-source" className="space-y-8">
-      <SectionHeading
-        label="Open Source"
-        title="Code Portfolio on GitHub"
-        description="Filter and skim recent repos."
-      />
+    <section id="open-source" className="py-24 lg:py-32 border-b border-border/40">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div>
+          <h2 className="text-4xl font-black tracking-tighter sm:text-5xl uppercase mb-4">Open Source</h2>
+          <p className="text-muted-foreground max-w-md font-light tracking-wide leading-relaxed">
+            A curated selection of my public repositories and contributions.
+          </p>
+        </div>
+        <div className="hidden md:block text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground/40 text-right">
+          02 // GitHub
+        </div>
+      </div>
 
-      <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex flex-wrap gap-x-8 gap-y-4 mb-16">
+        <button
+          onClick={() => setSelectedTech(null)}
+          className={`text-[10px] tracking-[0.2em] font-bold uppercase transition-all duration-300 pb-2 border-b-2 ${selectedTech === null ? "border-primary text-primary" : "border-transparent text-muted-foreground/60 hover:text-foreground"
+            }`}
+        >
+          All
+        </button>
         {technologies.map((tech) => (
           <button
             key={tech}
-            type="button"
-            onClick={() => updateTechFilter(tech)}
-            className={`shrink-0 cursor-pointer rounded-full border px-3 py-1 text-xs font-medium transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 sm:text-sm ${
-              selectedTech === tech
-                ? "border-brand-300 bg-brand-300/20 text-white"
-                : "border-border bg-slate-950/80 text-slate-300 hover:border-brand-300/70 hover:text-white"
-            }`}
+            onClick={() => setSelectedTech(tech)}
+            className={`text-[10px] tracking-[0.2em] font-bold uppercase transition-all duration-300 pb-2 border-b-2 ${selectedTech === tech ? "border-primary text-primary" : "border-transparent text-muted-foreground/60 hover:text-foreground"
+              }`}
           >
             {tech}
           </button>
         ))}
       </div>
 
-      {visibleRepos.length ? (
-        <div className="rounded-3xl border border-border bg-[linear-gradient(145deg,rgba(56,189,248,0.14),rgba(15,23,42,0.92),rgba(15,23,42,0.95))] px-3 py-4 sm:px-4 sm:py-5">
-          <SnapCarousel
-            ariaLabel="github repositories"
-            itemClassName="w-[88%] shrink-0 snap-start sm:w-[56%] lg:w-[42%] xl:w-[33%]"
-            autoScroll
+      <div className="grid gap-px bg-border/40 sm:grid-cols-2 lg:grid-cols-3 border border-border/40">
+        {visibleRepos.map((repo) => (
+          <a
+            key={repo.id}
+            href={repo.html_url}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative bg-background p-8 focus:outline-none hover:bg-muted/5 transition-all duration-500 flex flex-col justify-between min-h-[300px]"
           >
-            {visibleRepos.map((repo, index) => (
-              <article
-                key={repo.id}
-                className="h-full rounded-2xl border border-border bg-slate-950/85 p-5 shadow-[0_20px_50px_-42px_rgba(34,211,238,0.8)]"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-lg font-semibold text-slate-100">{repo.name}</h3>
-                  <span className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <p className="text-clip-2 mt-2 text-sm leading-relaxed text-slate-300">
-                  {repo.description || "View this repository for implementation details and source code."}
-                </p>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {(repo.languages.length ? repo.languages : ["GitHub"]).slice(0, 3).map((language) => (
-                    <span
-                      key={`${repo.id}-${language}`}
-                      className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2.5 py-1 text-xs text-slate-300"
-                    >
-                      {language}
-                    </span>
-                  ))}
-                </div>
+            <div className="relative z-10">
+              <div className="flex items-start justify-between mb-8">
+                <Github className="h-5 w-5 text-muted-foreground/60 group-hover:text-primary transition-colors duration-300" />
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 -translate-y-2 translate-x-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-500" />
+              </div>
+              <h3 className="text-lg font-bold tracking-tight uppercase mb-4 group-hover:text-primary transition-colors duration-300 line-clamp-1">{repo.name}</h3>
+              <p className="text-sm text-muted-foreground/80 font-light leading-relaxed line-clamp-3">
+                {repo.description || "Implementation details and source code."}
+              </p>
+            </div>
 
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="mt-5 inline-flex cursor-pointer rounded-full border border-border bg-slate-900/75 px-4 py-2 text-sm font-medium text-slate-100 transition duration-200 hover:border-brand-300/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+            <div className="relative z-10 flex flex-wrap gap-3 mt-10">
+              {(repo.languages.length ? repo.languages : ["GitHub"]).slice(0, 3).map((language) => (
+                <span
+                  key={`${repo.id}-${language}`}
+                  className="text-[9px] tracking-[0.2em] uppercase font-mono text-muted-foreground/50 border border-border/50 px-2 py-1 bg-background"
                 >
-                  View on GitHub
-                </a>
-              </article>
-            ))}
-          </SnapCarousel>
+                  {language}
+                </span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {visibleRepos.length === 0 && (
+        <div className="py-32 text-center text-muted-foreground/60 font-mono text-sm tracking-widest uppercase border border-border/40 border-t-0 bg-muted/5">
+          No repositories found for this filter.
         </div>
-      ) : (
-        <p className="rounded-2xl border border-border bg-slate-950/80 px-4 py-4 text-sm text-slate-300">
-          No repositories found for this filter. Try another language.
-        </p>
       )}
 
-      <p className="text-center text-xs text-slate-400">
-        Showing {visibleRepos.length} of {Math.min(filteredRepos.length, maxVisibleRepos)} filtered repos.
+      <div className="mt-16 text-center">
         <a
           href={siteConfig.social.github}
           target="_blank"
-          rel="noreferrer noopener"
-          className="ml-1.5 cursor-pointer font-medium text-brand-300 underline underline-offset-2"
+          rel="noreferrer"
+          className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground hover:text-primary transition-all duration-300 group"
         >
           View full profile
+          <ArrowUpRight className="h-4 w-4 transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
         </a>
-      </p>
+      </div>
     </section>
   );
 }

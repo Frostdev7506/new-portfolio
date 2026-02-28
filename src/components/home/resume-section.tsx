@@ -1,47 +1,36 @@
-import { FileText } from "lucide-react";
-import { SectionHeading } from "@/components/shared/section-heading";
+import { ArrowDownRight } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { Button } from "@/components/ui/button";
 
 export function ResumeSection() {
   const resumeFileUrl = siteConfig.resumeUrl.startsWith("http")
     ? siteConfig.resumeUrl
     : `${siteConfig.url}${siteConfig.resumeUrl}`;
 
-  const googleViewerUrl =
-    "https://drive.google.com/viewerng/viewer?embedded=true&url=" +
-    encodeURIComponent(resumeFileUrl);
-
   return (
-    <section className="space-y-10">
-      <SectionHeading
-        label="Resume"
-        title="Full CV"
-        description="Preview the resume inline or download the latest PDF directly."
-      />
-
-      <article className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:bg-slate-900">
-        <header className="flex flex-col gap-3 border-b border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-slate-600 dark:text-slate-300" />
-            <h3 className="font-semibold text-slate-900 dark:text-slate-100">Resume Preview</h3>
-          </div>
-          <a
-            href={resumeFileUrl}
-            className="inline-flex w-fit rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
-          >
-            Download PDF
-          </a>
-        </header>
-
-        <div className="h-[65vh] min-h-[420px] w-full bg-slate-50 dark:bg-slate-950">
-          <iframe
-            src={googleViewerUrl}
-            title="Neeraj Butola Resume"
-            className="h-full w-full"
-            loading="lazy"
-          />
+    <section className="py-24 lg:py-40 border-b border-border/40 bg-muted/5">
+      <div className="max-w-4xl mx-auto text-center px-4">
+        <div className="text-[10px] uppercase tracking-[0.4em] font-bold text-muted-foreground/40 mb-8">
+          06 // Résumé
         </div>
-      </article>
+        <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-8">
+          Full Résumé
+        </h2>
+        <p className="text-muted-foreground/80 font-light tracking-wide max-w-lg mx-auto mb-16 leading-relaxed">
+          Comprehensive overview of experience, education, and technical proficiency available for offline review.
+        </p>
+
+        <Button
+          asChild
+          size="lg"
+          className="h-16 px-12 rounded-none text-[10px] tracking-[0.3em] font-bold uppercase hover:bg-primary/90 hover:scale-[1.02] transition-all duration-500"
+        >
+          <a href={resumeFileUrl} target="_blank" rel="noreferrer">
+            Download PDF
+            <ArrowDownRight className="ml-4 h-4 w-4" />
+          </a>
+        </Button>
+      </div>
     </section>
   );
 }

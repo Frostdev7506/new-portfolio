@@ -1,9 +1,9 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { Clock3, Github, Linkedin, Mail, Send, ShieldCheck, Sparkles } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { siteConfig } from "@/data/site";
+import { ArrowUpRight } from "lucide-react";
 
 type ContactErrors = {
   name?: string;
@@ -42,17 +42,9 @@ const validateContact = (values: ContactValues): ContactErrors => {
   const trimmedEmail = values.email.trim();
   const trimmedMessage = values.message.trim();
 
-  if (trimmedName.length < 3) {
-    nextErrors.name = "Name must be at least 3 characters.";
-  }
-
-  if (!isValidEmail(trimmedEmail)) {
-    nextErrors.email = "Please enter a valid email address.";
-  }
-
-  if (trimmedMessage.length < 10) {
-    nextErrors.message = "Message must be at least 10 characters.";
-  }
+  if (trimmedName.length < 3) nextErrors.name = "Name must be at least 3 characters.";
+  if (!isValidEmail(trimmedEmail)) nextErrors.email = "Please enter a valid email address.";
+  if (trimmedMessage.length < 10) nextErrors.message = "Message must be at least 10 characters.";
 
   return nextErrors;
 };
@@ -83,52 +75,46 @@ export function ContactSection() {
   const handleFieldChange = (field: keyof ContactValues, value: string) => {
     setValues((prev) => {
       const next = { ...prev, [field]: value };
-
       if (touched[field]) {
         const nextErrors = validateContact(next);
         setErrors((prevErrors) => ({ ...prevErrors, [field]: nextErrors[field] }));
       }
-
       return next;
     });
   };
 
   const handleFieldBlur = (field: keyof ContactValues) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
-
     const nextErrors = validateContact(values);
     setErrors((prevErrors) => ({ ...prevErrors, [field]: nextErrors[field] }));
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const normalizedValues: ContactValues = {
       name: values.name.trim(),
       email: values.email.trim(),
       message: values.message.trim(),
     };
-
     const nextErrors = validateContact(normalizedValues);
-
     setErrors(nextErrors);
     setTouched({ name: true, email: true, message: true });
 
     if (Object.keys(nextErrors).length > 0) {
-      setStatus({ message: "Please fix the highlighted fields before submitting.", tone: "error" });
+      setStatus({ message: "Fix errors to proceed.", tone: "error" });
       return;
     }
 
     if (!canSend) {
       setStatus({
-        message: "Form delivery is unavailable right now. Please use direct email below.",
+        message: "Form unavailable. Please use direct email.",
         tone: "error",
       });
       return;
     }
 
     setIsSubmitting(true);
-    setStatus({ message: "Sending message...", tone: "neutral" });
+    setStatus({ message: "Transmitting...", tone: "neutral" });
 
     try {
       await emailjs.send(
@@ -143,13 +129,13 @@ export function ContactSection() {
         { publicKey: emailJsConfig.publicKey },
       );
 
-      setStatus({ message: "Message sent successfully. I will get back to you soon.", tone: "success" });
+      setStatus({ message: "Transmission complete.", tone: "success" });
       setValues(emptyValues);
       setErrors({});
       setTouched(emptyTouched);
     } catch {
       setStatus({
-        message: "Unable to send right now. Please use direct email.",
+        message: "Delivery failed. Try direct email.",
         tone: "error",
       });
     } finally {
@@ -158,41 +144,28 @@ export function ContactSection() {
   };
 
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden rounded-3xl border border-border bg-[linear-gradient(155deg,rgba(56,189,248,0.12),rgba(15,23,42,0.94),rgba(2,6,23,0.97))] p-4 sm:p-6 md:p-8"
-    >
-      <div className="pointer-events-none absolute -left-14 top-10 h-36 w-36 rounded-full bg-cyan-300/20 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 bottom-8 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl" />
-
-      <div className="relative grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-2xl border border-border bg-slate-950/80 p-5 sm:p-6">
-          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-slate-900/80 px-3 py-1 text-xs uppercase tracking-[0.18em] text-brand-300">
-            <Sparkles className="h-3.5 w-3.5" />
-            Contact
+    <section id="contact" className="py-24 lg:py-32 border-b border-border/40">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+        <div>
+          <h2 className="text-4xl font-black tracking-tighter w-full max-w-[10ch] uppercase mb-4 leading-none">Start a Dialogue</h2>
+          <p className="text-muted-foreground/80 max-w-sm font-light tracking-wide mt-8">
+            I am currently open to select engineering opportunities and rigorous challenges.
           </p>
-          <h2 className="mt-4 text-2xl font-semibold text-slate-100 sm:text-3xl">Start a project conversation</h2>
-          <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-            Short brief is enough. I&apos;ll follow up quickly.
-          </p>
+        </div>
+        <div className="hidden md:block text-[10px] uppercase tracking-[0.4em] font-bold text-muted-foreground/30 text-right">
+          07 // Contact
+        </div>
+      </div>
 
-          <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {[
-              { label: "Response", value: "< 24 hours" },
-              { label: "Availability", value: "Open to projects" },
-              { label: "Mode", value: "Remote / Hybrid" },
-            ].map((item) => (
-              <div key={item.label} className="rounded-xl border border-slate-700/80 bg-slate-900/80 px-3 py-2">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">{item.label}</p>
-                <p className="mt-1 text-xs font-medium text-slate-200">{item.value}</p>
-              </div>
-            ))}
-          </div>
-
-          <form className="mt-6 space-y-4" onSubmit={onSubmit} noValidate>
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-200" htmlFor="user_name">
-                Name
+      <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
+        <div className="lg:col-span-8">
+          <form className="space-y-12" onSubmit={onSubmit} noValidate>
+            <div className="group relative">
+              <label
+                className={`absolute left-0 transition-all duration-300 font-medium tracking-[0.2em] uppercase text-[10px] ${values.name || touched.name ? '-top-5 text-muted-foreground' : 'top-4 text-muted-foreground'}`}
+                htmlFor="user_name"
+              >
+                Identification
               </label>
               <input
                 id="user_name"
@@ -201,22 +174,24 @@ export function ContactSection() {
                 value={values.name}
                 onChange={(event) => handleFieldChange("name", event.target.value)}
                 onBlur={() => handleFieldBlur("name")}
-                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)]"
-                placeholder="Your full name"
+                className="w-full bg-transparent border-b border-border/40 py-4 text-foreground rounded-none transition duration-300 focus:border-primary focus:outline-none placeholder:text-transparent"
+                placeholder="Identification"
                 autoComplete="name"
                 aria-invalid={Boolean(errors.name)}
-                aria-describedby={errors.name ? "contact-name-error" : undefined}
               />
-              {errors.name ? (
-                <p id="contact-name-error" role="alert" className="mt-1 text-xs text-rose-300">
+              {errors.name && (
+                <p className="absolute -bottom-6 left-0 text-[10px] tracking-widest uppercase text-destructive">
                   {errors.name}
                 </p>
-              ) : null}
+              )}
             </div>
 
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-200" htmlFor="user_email">
-                Email
+            <div className="group relative mt-12">
+              <label
+                className={`absolute left-0 transition-all duration-300 font-medium tracking-[0.2em] uppercase text-[10px] ${values.email || touched.email ? '-top-5 text-muted-foreground' : 'top-4 text-muted-foreground'}`}
+                htmlFor="user_email"
+              >
+                Return Address
               </label>
               <input
                 id="user_email"
@@ -225,132 +200,112 @@ export function ContactSection() {
                 value={values.email}
                 onChange={(event) => handleFieldChange("email", event.target.value)}
                 onBlur={() => handleFieldBlur("email")}
-                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)]"
-                placeholder="you@company.com"
+                className="w-full bg-transparent border-b border-border/40 py-4 text-foreground rounded-none transition duration-300 focus:border-primary focus:outline-none placeholder:text-transparent"
+                placeholder="Return Address"
                 inputMode="email"
                 autoComplete="email"
                 aria-invalid={Boolean(errors.email)}
-                aria-describedby={errors.email ? "contact-email-error" : undefined}
               />
-              {errors.email ? (
-                <p id="contact-email-error" role="alert" className="mt-1 text-xs text-rose-300">
+              {errors.email && (
+                <p className="absolute -bottom-6 left-0 text-[10px] tracking-widest uppercase text-destructive">
                   {errors.email}
                 </p>
-              ) : null}
+              )}
             </div>
 
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-200" htmlFor="message">
-                Project details
+            <div className="group relative mt-12">
+              <label
+                className={`absolute left-0 transition-all duration-300 font-medium tracking-[0.2em] uppercase text-[10px] ${values.message || touched.message ? '-top-5 text-muted-foreground' : 'top-4 text-muted-foreground'}`}
+                htmlFor="message"
+              >
+                Correspondence
               </label>
               <textarea
                 id="message"
                 name="message"
-                rows={6}
+                rows={4}
                 value={values.message}
                 onChange={(event) => handleFieldChange("message", event.target.value)}
                 onBlur={() => handleFieldBlur("message")}
-                className="w-full rounded-xl border border-slate-700/80 bg-slate-950 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)]"
-                placeholder="Share timeline, scope, and goals."
+                className="w-full bg-transparent border-b border-border/40 py-4 text-foreground rounded-none transition duration-300 focus:border-primary focus:outline-none resize-none placeholder:text-transparent"
+                placeholder="Correspondence"
                 aria-invalid={Boolean(errors.message)}
-                aria-describedby={errors.message ? "contact-message-error" : undefined}
               />
-              {errors.message ? (
-                <p id="contact-message-error" role="alert" className="mt-1 text-xs text-rose-300">
+              {errors.message && (
+                <p className="absolute -bottom-6 left-0 text-[10px] tracking-widest uppercase text-destructive">
                   {errors.message}
                 </p>
-              ) : null}
+              )}
             </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[color:var(--accent)] px-5 py-3 text-sm font-medium text-white transition duration-200 hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-            >
-              <Send className="h-4 w-4" />
-              {isSubmitting ? "Sending..." : "Send Message"}
-            </button>
-
-            {status.message ? (
-              <p
-                className={`text-sm ${
-                  status.tone === "success"
-                    ? "text-emerald-300"
-                    : status.tone === "error"
-                      ? "text-rose-300"
-                      : "text-slate-300"
-                }`}
-                role={status.tone === "error" ? "alert" : "status"}
-                aria-live="polite"
+            <div className="pt-8 flex flex-wrap items-center gap-6">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex h-16 items-center justify-center gap-4 bg-primary px-12 text-[10px] tracking-[0.3em] font-bold uppercase text-primary-foreground transition duration-500 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {status.message}
-              </p>
-            ) : null}
+                {isSubmitting ? "Transmitting..." : "Send Dispatch"}
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+
+              {status.message && (
+                <p
+                  className={`text-[10px] uppercase tracking-[0.2em] font-medium ${status.tone === "success"
+                      ? "text-primary"
+                      : status.tone === "error"
+                        ? "text-destructive"
+                        : "text-muted-foreground"
+                    }`}
+                  role={status.tone === "error" ? "alert" : "status"}
+                  aria-live="polite"
+                >
+                  {status.message}
+                </p>
+              )}
+            </div>
           </form>
         </div>
 
-        <aside className="space-y-4">
-          <div className="rounded-2xl border border-border bg-slate-950/80 p-5">
-            <h3 className="text-xl font-semibold text-slate-100">Direct channels</h3>
-
-            <ul className="mt-4 space-y-3">
+        <aside className="lg:col-span-4 flex flex-col gap-16 mt-12 lg:mt-0">
+          <div>
+            <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground mb-6">Direct Channels</h3>
+            <ul className="space-y-6">
               <li>
                 <a
-                  className="inline-flex w-full cursor-pointer items-center justify-between rounded-xl border border-slate-700/80 bg-slate-900/70 px-4 py-3 text-sm text-slate-200 transition duration-200 hover:border-brand-300/70 hover:text-white"
+                  className="group flex flex-col gap-1 transition-colors"
                   href={`mailto:${siteConfig.email}`}
                 >
-                  <span className="inline-flex items-center gap-2">
-                    <Mail className="h-4 w-4 text-brand-300" />
+                  <span className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
                     {siteConfig.email}
                   </span>
-                  <span className="text-xs uppercase tracking-[0.16em] text-slate-400">Email</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-muted-foreground/60 mt-1">Email</span>
                 </a>
               </li>
               <li>
                 <a
-                  className="inline-flex w-full cursor-pointer items-center justify-between rounded-xl border border-slate-700/80 bg-slate-900/70 px-4 py-3 text-sm text-slate-200 transition duration-200 hover:border-brand-300/70 hover:text-white"
+                  className="group flex flex-col gap-1 transition-colors"
                   href={siteConfig.social.github}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <span className="inline-flex items-center gap-2">
-                    <Github className="h-4 w-4 text-brand-300" />
+                  <span className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
                     {siteConfig.githubUsername}
                   </span>
-                  <span className="text-xs uppercase tracking-[0.16em] text-slate-400">GitHub</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-muted-foreground/60 mt-1">GitHub</span>
                 </a>
               </li>
               <li>
                 <a
-                  className="inline-flex w-full cursor-pointer items-center justify-between rounded-xl border border-slate-700/80 bg-slate-900/70 px-4 py-3 text-sm text-slate-200 transition duration-200 hover:border-brand-300/70 hover:text-white"
+                  className="group flex flex-col gap-1 transition-colors"
                   href={siteConfig.social.linkedin}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <span className="inline-flex items-center gap-2">
-                    <Linkedin className="h-4 w-4 text-brand-300" />
-                    View Profile
+                  <span className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                    LinkedIn /neerajbutola
                   </span>
-                  <span className="text-xs uppercase tracking-[0.16em] text-slate-400">LinkedIn</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-muted-foreground/60 mt-1">Professional Profile</span>
                 </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-slate-950/80 p-5">
-            <h3 className="text-base font-semibold text-slate-100">Quick checklist</h3>
-            <ul className="mt-3 space-y-2 text-sm text-slate-300">
-              <li className="inline-flex items-start gap-2">
-                <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                Share timeline + goal.
-              </li>
-              <li className="inline-flex items-start gap-2">
-                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                Mention constraints.
-              </li>
-              <li className="inline-flex items-start gap-2">
-                <Send className="mt-0.5 h-4 w-4 shrink-0 text-brand-300" />
-                Reply window: under 24h.
               </li>
             </ul>
           </div>
