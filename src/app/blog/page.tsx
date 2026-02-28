@@ -68,48 +68,53 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      {/* Ambient background glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+      {/* Ambient floating background glow */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 relative z-10 w-full">
-        <div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase mb-6">
-            Engineering Blog
+      <div className="grid gap-16 lg:grid-cols-12 lg:gap-8 relative z-10 w-full mb-32">
+        <div className="lg:col-span-8 flex flex-col items-start justify-center">
+          <div className="mb-8 border border-primary/20 bg-primary/5 px-4 py-1.5 text-[0.65rem] tracking-[0.3em] uppercase text-muted-foreground w-fit">
+            Practical Notes
+          </div>
+
+          <h1 className="text-6xl font-black tracking-tighter sm:text-7xl lg:text-8xl w-full max-w-[12ch] leading-[0.9] mb-8 uppercase">
+            <span className="block text-primary">Engineering</span>
+            <span className="block text-muted-foreground/30 font-light mt-2 tracking-tight">Blog</span>
           </h1>
-          <p className="text-muted-foreground/80 max-w-lg font-light tracking-wide text-lg sm:text-xl">
-            Practical notes from real product work: architecture choices, performance trade-offs, and shipping patterns.
+
+          <p className="max-w-xl text-base text-muted-foreground leading-relaxed font-light tracking-wide">
+            Practical notes from real product work: architecture choices, API design, delivery quality, and reliability patterns from production software projects.
           </p>
         </div>
-        <div className="hidden md:block text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground/40 text-right">
-          04 // Writing
+
+        <div className="lg:col-span-4 relative hidden lg:flex items-end justify-end pb-8">
+          <div className="absolute top-1/2 right-0 -mr-8 origin-bottom-right -rotate-90 text-[10px] tracking-[0.5em] text-muted-foreground/30 whitespace-nowrap uppercase">
+            04 // Writing
+          </div>
         </div>
       </div>
 
-      <div className="space-y-12">
-        <section className="bg-muted/30 border border-border/50 rounded-2xl p-8 shadow-sm backdrop-blur-sm relative overflow-hidden group">
-          {/* Subtle reveal gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10" />
-
-          <h2 className="text-2xl font-bold tracking-tight uppercase text-foreground mb-4">What you will find here</h2>
-          <div className="space-y-4 text-muted-foreground font-light leading-relaxed">
-            <p>
-              These posts document the implementation choices used in day-to-day product engineering. The focus is on practical trade-offs, not generic tutorials. You will see how architecture, performance, and delivery decisions are evaluated under real constraints.
-            </p>
-            <p>
-              Topics include rendering strategy, API design, deployment workflows, and maintainability patterns. Every article is based on applied project experience and updated when a better approach proves itself.
-            </p>
+      <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-4 space-y-12">
+          <div>
+            <h2 className="text-sm font-semibold tracking-[0.2em] uppercase text-foreground mb-6 flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-primary/40 block"></span>
+              The Approach
+            </h2>
+            <div className="space-y-6 text-sm text-muted-foreground font-light leading-relaxed">
+              <p>
+                These posts document implementation choices evaluated under real constraints. The focus is on practical trade-offs, not theoretical generic tutorials.
+              </p>
+              <p>
+                Topics include hybrid rendering strategies, API predictability at scale, rollout observability, and technical maintainability patterns.
+              </p>
+            </div>
           </div>
+        </div>
 
-          <h3 className="text-lg font-semibold tracking-tight uppercase text-foreground mt-8 mb-4">Article themes</h3>
-          <ul className="list-disc space-y-2 pl-5 text-muted-foreground font-light leading-relaxed">
-            <li>Choosing between SSR, CSR, SSG, and hybrid rendering with clear decision criteria.</li>
-            <li>Designing APIs and background jobs for predictable behavior at production scale.</li>
-            <li>Improving release quality with small deploy slices, observability, and rollback discipline.</li>
-            <li>Balancing product velocity with long-term maintainability and technical clarity.</li>
-          </ul>
-        </section>
-
-        <BlogClientContent posts={posts} />
+        <div className="lg:col-span-8">
+          <BlogClientContent posts={posts} />
+        </div>
       </div>
     </section>
   );

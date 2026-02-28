@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <article className="space-y-8">
+    <article className="pb-32">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -136,43 +136,44 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <header className="space-y-4">
+      <header className="pt-32 pb-16 border-b border-border/40 relative">
+        <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1.5 text-sm text-slate-700 transition hover:text-slate-900 dark:bg-slate-900 dark:text-slate-200"
+          className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] font-medium uppercase text-muted-foreground hover:text-primary transition-colors mb-16"
         >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Blog
+          <ArrowLeft className="h-3 w-3" />
+          Back to Writing
         </Link>
 
-        <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-foreground mb-12 max-w-[15ch]">
           {post.title}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+        <div className="flex flex-wrap items-center gap-6 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium mb-12">
           <time dateTime={new Date(post.date).toISOString()}>{formatDate(post.date)}</time>
-          <span>•</span>
+          <span className="w-8 h-[1px] bg-primary/20 block"></span>
           <span>{post.readtime}</span>
-          <span>•</span>
+          <span className="w-8 h-[1px] bg-primary/20 block"></span>
           <span>By {siteConfig.name}</span>
         </div>
-        <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-          Written from applied work across MERN and cloud delivery with focus on production reliability, performance, and release quality.
-        </p>
       </header>
 
-      <div className="rounded-3xl border border-border bg-white px-6 py-8 shadow-sm dark:bg-slate-900 md:px-8 md:py-10">
+      <div className="py-16 md:py-24 max-w-4xl">
         <MarkdownContent content={post.content} />
       </div>
 
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Share This Article</h2>
+      <section className="py-12 border-t border-border/40">
+        <h2 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-foreground mb-8">Share Article</h2>
         <ShareLinks title={post.title} url={shareUrl} />
       </section>
 
-      <section className="space-y-4 rounded-3xl border border-border bg-white p-6 shadow-sm dark:bg-slate-900">
-        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Recent Articles</h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <section className="pt-24 pb-12 border-t border-border/40 mt-12">
+        <div className="flex items-center justify-between mb-12">
+          <h2 className="text-3xl font-black tracking-tighter uppercase text-foreground">Next Article</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-border/40">
           {recentPosts
             .filter((candidate) => candidate.slug !== post.slug)
             .slice(0, 2)

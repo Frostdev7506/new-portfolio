@@ -9,7 +9,8 @@ const containerVariants: Variants = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.1,
+            staggerChildren: 0.15,
+            delayChildren: 0.1,
         },
     },
 };
@@ -19,7 +20,7 @@ const itemVariants: Variants = {
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.5, ease: "easeOut" },
+        transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
     },
 };
 
@@ -29,7 +30,7 @@ export function BlogClientContent({ posts }: { posts: BlogPost[] }) {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 gap-6 md:grid-cols-2 relative z-10"
+            className="flex flex-col gap-0 relative z-10"
         >
             {posts.map((post) => (
                 <motion.div key={post.slug} variants={itemVariants}>

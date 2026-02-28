@@ -148,10 +148,10 @@ export function ContactSection() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
         <div>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight w-full max-w-xl mb-6">
-            Let's create something great together
+            Let&apos;s create something great together
           </h2>
           <p className="text-muted-foreground text-lg max-w-lg font-light leading-relaxed">
-            I'm always excited to connect, whether it's for a project, a partnership, or just a quick chat. Drop me a message below!
+            I&apos;m always excited to connect, whether it&apos;s for a project, a partnership, or just a quick chat. Drop me a message below!
           </p>
         </div>
       </div>
