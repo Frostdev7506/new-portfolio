@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { siteConfig } from "@/data/site";
 import { getAllPosts } from "@/lib/posts";
 import { buildPageMetadata, fullUrl } from "@/lib/seo";
+import { BlogClientContent } from "@/components/blog/blog-client-content";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Engineering Blog and Technical Notes",
@@ -56,7 +56,7 @@ export default async function BlogPage() {
   };
 
   return (
-    <section className="space-y-8">
+    <section className="relative overflow-hidden py-24 lg:py-32 border-b border-border/40">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -67,37 +67,49 @@ export default async function BlogPage() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <header className="rounded-3xl border border-border bg-white px-6 py-10 text-center shadow-sm dark:bg-slate-900">
-        <p className="text-xs uppercase tracking-[0.22em] text-brand-700 dark:text-brand-300">Writing</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-          Engineering Blog
-        </h1>
-        <p className="mx-auto mt-3 max-w-2xl text-pretty text-base text-slate-600 dark:text-slate-300">
-          Practical notes from real product work: architecture choices, performance trade-offs, and shipping patterns.
-        </p>
-      </header>
 
-      <section className="rounded-2xl border border-border bg-white p-6 text-slate-700 shadow-sm dark:bg-slate-900 dark:text-slate-200">
-        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">What you will find here</h2>
-        <p className="mt-3 leading-relaxed">
-          These posts document the implementation choices used in day-to-day product engineering. The focus is on practical trade-offs, not generic tutorials. You will see how architecture, performance, and delivery decisions are evaluated under real constraints.
-        </p>
-        <p className="mt-3 leading-relaxed">
-          Topics include rendering strategy, API design, deployment workflows, and maintainability patterns. Every article is based on applied project experience and updated when a better approach proves itself.
-        </p>
-        <h3 className="mt-5 text-xl font-semibold text-slate-900 dark:text-slate-100">Article themes</h3>
-        <ul className="mt-3 list-disc space-y-2 pl-6 leading-relaxed">
-          <li>Choosing between SSR, CSR, SSG, and hybrid rendering with clear decision criteria.</li>
-          <li>Designing APIs and background jobs for predictable behavior at production scale.</li>
-          <li>Improving release quality with small deploy slices, observability, and rollback discipline.</li>
-          <li>Balancing product velocity with long-term maintainability and technical clarity.</li>
-        </ul>
-      </section>
+      {/* Ambient background glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {posts.map((post) => (
-          <BlogPostCard key={post.slug} post={post} />
-        ))}
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 relative z-10 w-full">
+        <div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase mb-6">
+            Engineering Blog
+          </h1>
+          <p className="text-muted-foreground/80 max-w-lg font-light tracking-wide text-lg sm:text-xl">
+            Practical notes from real product work: architecture choices, performance trade-offs, and shipping patterns.
+          </p>
+        </div>
+        <div className="hidden md:block text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground/40 text-right">
+          04 // Writing
+        </div>
+      </div>
+
+      <div className="space-y-12">
+        <section className="bg-muted/30 border border-border/50 rounded-2xl p-8 shadow-sm backdrop-blur-sm relative overflow-hidden group">
+          {/* Subtle reveal gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10" />
+
+          <h2 className="text-2xl font-bold tracking-tight uppercase text-foreground mb-4">What you will find here</h2>
+          <div className="space-y-4 text-muted-foreground font-light leading-relaxed">
+            <p>
+              These posts document the implementation choices used in day-to-day product engineering. The focus is on practical trade-offs, not generic tutorials. You will see how architecture, performance, and delivery decisions are evaluated under real constraints.
+            </p>
+            <p>
+              Topics include rendering strategy, API design, deployment workflows, and maintainability patterns. Every article is based on applied project experience and updated when a better approach proves itself.
+            </p>
+          </div>
+
+          <h3 className="text-lg font-semibold tracking-tight uppercase text-foreground mt-8 mb-4">Article themes</h3>
+          <ul className="list-disc space-y-2 pl-5 text-muted-foreground font-light leading-relaxed">
+            <li>Choosing between SSR, CSR, SSG, and hybrid rendering with clear decision criteria.</li>
+            <li>Designing APIs and background jobs for predictable behavior at production scale.</li>
+            <li>Improving release quality with small deploy slices, observability, and rollback discipline.</li>
+            <li>Balancing product velocity with long-term maintainability and technical clarity.</li>
+          </ul>
+        </section>
+
+        <BlogClientContent posts={posts} />
       </div>
     </section>
   );
