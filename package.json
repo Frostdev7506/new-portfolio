@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:report": "bash scripts/seo-report.sh",
+    "seo:report:live": "bash scripts/seo-report.sh https://neerajbutola.netlify.app/",
+    "seo:report:local": "bash scripts/seo-report.sh http://127.0.0.1:3000/"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

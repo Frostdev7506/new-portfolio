@@ -150,10 +150,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </h1>
 
         <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-          <span>{formatDate(post.date)}</span>
+          <time dateTime={new Date(post.date).toISOString()}>{formatDate(post.date)}</time>
           <span>•</span>
           <span>{post.readtime}</span>
+          <span>•</span>
+          <span>By {siteConfig.name}</span>
         </div>
+        <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+          Written from applied work across MERN and cloud delivery with focus on production reliability, performance, and release quality.
+        </p>
       </header>
 
       <div className="rounded-3xl border border-border bg-white px-6 py-8 shadow-sm dark:bg-slate-900 md:px-8 md:py-10">

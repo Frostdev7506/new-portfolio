@@ -12,6 +12,8 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function EditorialPolicyPage() {
   const pageUrl = `${siteConfig.url}/editorial-policy`;
+  const lastUpdatedIso = "2026-02-28";
+  const lastUpdatedText = "February 28, 2026";
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -44,25 +46,87 @@ export default function EditorialPolicyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <h1 className="text-3xl font-semibold text-slate-100">Editorial Policy</h1>
+      <p className="text-sm text-slate-400">
+        Last updated: <time dateTime={lastUpdatedIso}>{lastUpdatedText}</time>
+      </p>
       <p className="leading-relaxed text-slate-300">
-        This policy explains how technical articles are created on this site. The goal is to publish practical engineering content that is accurate, readable, and useful for implementation.
+        Editorial policy describing how technical articles are planned, reviewed, updated, and corrected on this engineering blog.
+      </p>
+      <p className="leading-relaxed text-slate-300">
+        This publication is written for software engineers, founders, and hiring teams who want implementation-level guidance. Articles are educational and experience-based; they are not legal, financial, or medical advice.
       </p>
 
-      <h2 className="text-2xl font-semibold text-slate-100">How content is written</h2>
+      <h2 className="text-2xl font-semibold text-slate-100">How articles are written</h2>
       <ul className="list-disc space-y-2 pl-6 leading-relaxed text-slate-300">
-        <li>Posts are based on applied work from full-stack and cloud projects.</li>
-        <li>Examples focus on decisions, trade-offs, and production outcomes.</li>
-        <li>Claims are kept specific and updated when better approaches appear.</li>
+        <li>Posts start from real delivery work across full-stack and cloud projects.</li>
+        <li>Each topic is scoped around a concrete problem, constraints, and trade-offs.</li>
+        <li>Examples prioritize reproducible patterns over broad, theory-only guidance.</li>
+        <li>Ambiguous claims are avoided; practical limits and assumptions are stated directly.</li>
       </ul>
 
-      <h2 className="text-2xl font-semibold text-slate-100">Review and updates</h2>
+      <h2 className="text-2xl font-semibold text-slate-100">Review process</h2>
+      <ul className="list-disc space-y-2 pl-6 leading-relaxed text-slate-300">
+        <li>Drafts are checked for technical consistency, terminology, and operational accuracy.</li>
+        <li>Code snippets are validated for syntax and realistic implementation context.</li>
+        <li>Titles and descriptions are reviewed for clarity and search intent alignment.</li>
+        <li>Major updates are published when framework behavior or platform defaults change.</li>
+      </ul>
       <p className="leading-relaxed text-slate-300">
-        Articles are reviewed for technical consistency before publication. Older posts are revised when frameworks, platform behavior, or recommended delivery practices change materially.
+        Before publication, each article is reviewed for production relevance: deployment impact, failure modes, rollback strategy, and observability implications. This quality gate ensures recommendations are practical for real systems, not only for demo projects. When uncertainty exists, the post states boundaries and avoids absolute claims.
+        The goal is to help readers execute with confidence, not copy vague checklists.
       </p>
 
-      <h2 className="text-2xl font-semibold text-slate-100">Corrections</h2>
+      <h2 className="text-2xl font-semibold text-slate-100">Sources and trust model</h2>
       <p className="leading-relaxed text-slate-300">
-        If you notice an error or outdated section, please report it using the contact channel on the homepage. Verified corrections are applied directly in the source content.
+        When external references are needed, preference is given to primary documentation and recognized standards. Typical source categories include runtime/framework docs, browser platform references, and security guidance.
+      </p>
+      <ul className="list-disc space-y-2 pl-6 leading-relaxed text-slate-300">
+        <li>
+          <a
+            className="underline decoration-slate-500 underline-offset-2 hover:text-white"
+            href="https://developer.mozilla.org/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            MDN Web Docs
+          </a>{" "}
+          for browser and web platform behavior.
+        </li>
+        <li>
+          <a
+            className="underline decoration-slate-500 underline-offset-2 hover:text-white"
+            href="https://nextjs.org/docs"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Next.js Documentation
+          </a>{" "}
+          for framework-specific capabilities and constraints.
+        </li>
+        <li>
+          <a
+            className="underline decoration-slate-500 underline-offset-2 hover:text-white"
+            href="https://owasp.org/www-project-top-ten/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            OWASP Top 10
+          </a>{" "}
+          for security baseline considerations.
+        </li>
+      </ul>
+
+      <h2 className="text-2xl font-semibold text-slate-100">Corrections and updates</h2>
+      <p className="leading-relaxed text-slate-300">
+        Corrections are applied when errors are verified. Substantive revisions update this page date and the article publication metadata so readers can evaluate freshness.
+      </p>
+
+      <p className="leading-relaxed text-slate-300">
+        If you find an issue or outdated section, contact me through the homepage form or email at{" "}
+        <a className="underline decoration-slate-500 underline-offset-2 hover:text-white" href={`mailto:${siteConfig.email}`}>
+          {siteConfig.email}
+        </a>
+        . Verified fixes are published directly in source with transparent updates.
       </p>
     </section>
   );

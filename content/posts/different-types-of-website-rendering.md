@@ -1,5 +1,5 @@
 ---
-title: Choosing the Right Website Rendering Strategy
+title: "SSR vs CSR vs SSG: Rendering Strategy Guide"
 date: 2023-08-15
 slug: different-types-of-website-rendering
 readtime: 5 min read

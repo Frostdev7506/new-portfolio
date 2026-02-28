@@ -7,7 +7,7 @@ import { BlogClientContent } from "@/components/blog/blog-client-content";
 export const metadata: Metadata = buildPageMetadata({
   title: "Engineering Blog and Technical Notes",
   description:
-    "Practical notes on architecture, rendering, APIs, and release quality from real software projects.",
+    "Practical engineering notes on architecture, rendering, APIs, delivery quality, and reliability patterns from production software projects.",
   path: "/blog",
   keywords: [
     "software engineering blog",
@@ -24,7 +24,7 @@ export default async function BlogPage() {
     "@type": "Blog",
     name: `${siteConfig.name} Blog`,
     description:
-      "Practical notes on architecture, rendering, APIs, and release quality from real software projects.",
+      "Practical engineering notes on architecture, rendering, APIs, delivery quality, and reliability patterns from production software projects.",
     url: `${siteConfig.url}/blog`,
     inLanguage: siteConfig.language,
     author: {

@@ -1,5 +1,5 @@
 ---
-title: Practical Baseline for Shipping a MERN Product
+title: Production MERN Delivery Baseline
 date: 2023-08-01
 slug: my-first-blog-post
 readtime: 6 min read
@@ -55,3 +55,9 @@ When these answers are available in minutes, product and support teams recover f
 ## Final takeaway
 
 A reliable baseline is a multiplier. It allows teams to move quickly, onboard new engineers smoothly, and maintain product quality even as scope and traffic grow.
+
+## References for deeper implementation
+
+- [The Twelve-Factor App](https://12factor.net/)
+- [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- [Google SRE Workbook](https://sre.google/workbook/)

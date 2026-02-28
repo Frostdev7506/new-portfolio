@@ -1,0 +1,3570 @@
+{
+  "url": "http://127.0.0.1:3000/blog",
+  "overallScore": 97,
+  "categoryResults": [
+    {
+      "categoryId": "core",
+      "score": 99,
+      "passCount": 17,
+      "warnCount": 1,
+      "failCount": 1,
+      "results": [
+        {
+          "ruleId": "core-title-present",
+          "status": "pass",
+          "message": "Title tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "title": "Engineering Blog and Technical Notes | Neeraj Butola",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-title-length",
+          "status": "pass",
+          "message": "Title length is optimal (52 characters)",
+          "score": 100,
+          "details": {
+            "length": 52,
+            "minLength": 30,
+            "maxLength": 60,
+            "title": "Engineering Blog and Technical Notes | Neeraj Butola",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-description-present",
+          "status": "pass",
+          "message": "Meta description tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "description": "Practical engineering notes on architecture, rendering, APIs, delivery quality, and reliability patterns from production software projects.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-description-length",
+          "status": "pass",
+          "message": "Meta description length is optimal (139 characters)",
+          "score": 100,
+          "details": {
+            "length": 139,
+            "minLength": 120,
+            "maxLength": 160,
+            "description": "Practical engineering notes on architecture, rendering, APIs, delivery quality, and reliability patterns from production software projects.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-canonical-present",
+          "status": "pass",
+          "message": "Canonical URL tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "canonicalUrl": "https://neerajbutola.netlify.app/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-canonical-valid",
+          "status": "pass",
+          "message": "Canonical URL is a valid absolute URL",
+          "score": 100,
+          "details": {
+            "canonicalUrl": "https://neerajbutola.netlify.app/blog",
+            "isAbsolute": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-viewport-present",
+          "status": "pass",
+          "message": "Viewport meta tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "viewport": "width=device-width, initial-scale=1",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-favicon-present",
+          "status": "pass",
+          "message": "Favicon link tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "faviconUrl": "/favicon.ico?favicon.0b3bf435.ico",
+            "rel": "icon",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-h1-present",
+          "status": "pass",
+          "message": "H1 tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "count": 1,
+            "text": "Engineering Blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-h1-single",
+          "status": "pass",
+          "message": "Document has exactly one <h1> tag",
+          "score": 100,
+          "details": {
+            "count": 1,
+            "text": "Engineering Blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-canonical-header",
+          "status": "pass",
+          "message": "Single canonical signal present (no conflict)",
+          "score": 100,
+          "details": {
+            "htmlCanonical": "https://neerajbutola.netlify.app/blog",
+            "headerCanonical": null,
+            "source": "html",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-nosnippet",
+          "status": "pass",
+          "message": "Page allows search engine snippets",
+          "score": 100,
+          "details": {
+            "directives": [
+              "index, follow",
+              "googlebot: index, follow, max-image-preview:large"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-robots-meta",
+          "status": "pass",
+          "message": "Robots directives allow indexing",
+          "score": 100,
+          "details": {
+            "allDirectives": [
+              {
+                "source": "meta[name=\"robots\"]",
+                "directives": [
+                  "index",
+                  "follow"
+                ]
+              },
+              {
+                "source": "meta[name=\"googlebot\"]",
+                "directives": [
+                  "index",
+                  "follow",
+                  "max-image-preview:large"
+                ]
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-title-unique",
+          "status": "pass",
+          "message": "Page title is unique",
+          "score": 100,
+          "details": {
+            "title": "Engineering Blog and Technical Notes | Neeraj Butola",
+            "normalizedTitle": "engineering blog and technical notes | neeraj butola",
+            "url": "http://127.0.0.1:3000/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-canonical-conflicting",
+          "status": "pass",
+          "message": "No conflicting canonical URLs detected (at most one canonical source present)",
+          "score": 100,
+          "details": {
+            "htmlCanonical": "https://neerajbutola.netlify.app/blog",
+            "headerCanonical": null,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-canonical-to-homepage",
+          "status": "pass",
+          "message": "Canonical URL does not point to the homepage",
+          "score": 100,
+          "details": {
+            "canonicalUrl": "https://neerajbutola.netlify.app/blog",
+            "canonicalPath": "/blog",
+            "pagePath": "/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "core-canonical-http-mismatch",
+          "status": "fail",
+          "message": "Protocol mismatch: page is HTTP but canonical points to HTTPS (\"https://neerajbutola.netlify.app/blog\")",
+          "score": 0,
+          "details": {
+            "pageProtocol": "http:",
+            "canonicalProtocol": "https:",
+            "canonicalUrl": "https://neerajbutola.netlify.app/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog",
+            "isDowngrade": false,
+            "recommendation": "Ensure canonical protocol matches the page protocol"
+          }
+        },
+        {
+          "ruleId": "core-canonical-loop",
+          "status": "warn",
+          "message": "Canonical points to a different URL (\"https://neerajbutola.netlify.app/blog\"); verify the target does not canonicalize back to this page",
+          "score": 50,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog",
+            "canonicalUrl": "https://neerajbutola.netlify.app/blog",
+            "selfReferencing": false,
+            "recommendation": "Ensure the canonical target page does not point back to this page, which would create a loop that confuses search engines"
+          }
+        },
+        {
+          "ruleId": "core-canonical-to-noindex",
+          "status": "pass",
+          "message": "No noindex directive found; no conflict with canonical",
+          "score": 100,
+          "details": {
+            "canonicalUrl": "https://neerajbutola.netlify.app/blog",
+            "hasNoindex": false,
+            "selfReferencing": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "technical",
+      "score": 100,
+      "passCount": 13,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "technical-robots-txt-exists",
+          "status": "pass",
+          "message": "robots.txt file exists and is accessible",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/robots.txt",
+            "statusCode": 200,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-robots-txt-valid",
+          "status": "pass",
+          "message": "robots.txt has valid syntax",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/robots.txt",
+            "userAgents": [
+              "*",
+              "GPTBot",
+              "Google-Extended",
+              "ClaudeBot",
+              "PerplexityBot"
+            ],
+            "sitemapUrls": [
+              "https://neerajbutola.netlify.app/sitemap.xml"
+            ],
+            "hasDirectives": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-sitemap-exists",
+          "status": "pass",
+          "message": "Sitemap found: 2 sitemap(s) accessible",
+          "score": 100,
+          "details": {
+            "foundSitemaps": [
+              "http://127.0.0.1:3000/sitemap.xml",
+              "https://neerajbutola.netlify.app/sitemap.xml"
+            ],
+            "checkedLocations": [
+              "http://127.0.0.1:3000/sitemap.xml",
+              "https://neerajbutola.netlify.app/sitemap.xml"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-sitemap-valid",
+          "status": "pass",
+          "message": "Sitemap has valid XML structure (9 URLs)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/sitemap.xml",
+            "isSitemapIndex": false,
+            "urlCount": 9,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-url-structure",
+          "status": "pass",
+          "message": "URL follows SEO best practices",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "pathLength": 5,
+            "totalLength": 26,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-trailing-slash",
+          "status": "pass",
+          "message": "Trailing slash usage is consistent (without-slash)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "currentHasTrailingSlash": false,
+            "withSlashCount": 0,
+            "withoutSlashCount": 9,
+            "dominantStyle": "without-slash",
+            "sampleWithSlash": [],
+            "sampleWithoutSlash": [
+              "http://127.0.0.1:3000/blog#main-content",
+              "http://127.0.0.1:3000/blog",
+              "http://127.0.0.1:3000/blog"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-www-redirect",
+          "status": "pass",
+          "message": "Canonical URL is set to non-www version",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "wwwUrl": "http://127.0.0.1:3000/blog",
+            "nonWwwUrl": "http://127.0.0.1:3000/blog",
+            "currentIsWww": false,
+            "wwwStatus": 200,
+            "nonWwwStatus": 200,
+            "canonicalHostname": "neerajbutola.netlify.app",
+            "canonicalMatchesCurrent": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-404-page",
+          "status": "pass",
+          "message": "Site has a custom 404 page with proper navigation and content",
+          "score": 100,
+          "details": {
+            "testUrl": "http://127.0.0.1:3000/seo-audit-test-nonexistent-page-ukpwnr17ctj-1772267871492",
+            "statusCode": 404,
+            "isCustom": true,
+            "hasNavigation": true,
+            "hasHelpfulContent": true,
+            "indicators": [
+              "Has navigation elements",
+              "Has substantial content",
+              "Has 8 helpful content indicators",
+              "Has title tag"
+            ],
+            "issues": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-soft-404",
+          "status": "pass",
+          "message": "Page does not appear to be a soft 404",
+          "score": 100,
+          "details": {
+            "statusCode": 200,
+            "wordCount": 2367,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-server-error",
+          "status": "pass",
+          "message": "Page returned a successful response",
+          "score": 100,
+          "details": {
+            "statusCode": 200,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-4xx-non-404",
+          "status": "pass",
+          "message": "No client error detected",
+          "score": 100,
+          "details": {
+            "statusCode": 200,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-timeout",
+          "status": "pass",
+          "message": "Page response time is 40ms",
+          "score": 100,
+          "details": {
+            "responseTimeMs": 40,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "technical-bad-content-type",
+          "status": "pass",
+          "message": "Content-Type is correct: text/html; charset=utf-8",
+          "score": 100,
+          "details": {
+            "contentType": "text/html; charset=utf-8",
+            "mediaType": "text/html",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "perf",
+      "score": 87,
+      "passCount": 13,
+      "warnCount": 9,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "cwv-lcp",
+          "status": "warn",
+          "message": "Could not measure Largest Contentful Paint",
+          "score": 50,
+          "details": {
+            "metric": "LCP",
+            "reason": "Metric not available",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "cwv-cls",
+          "status": "warn",
+          "message": "Could not measure Cumulative Layout Shift",
+          "score": 50,
+          "details": {
+            "metric": "CLS",
+            "reason": "Metric not available",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "cwv-inp",
+          "status": "warn",
+          "message": "Could not measure Interaction to Next Paint (no user interaction detected or metric not available)",
+          "score": 50,
+          "details": {
+            "metric": "INP",
+            "reason": "No interaction or metric not available",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "cwv-ttfb",
+          "status": "warn",
+          "message": "Could not measure Time to First Byte",
+          "score": 50,
+          "details": {
+            "metric": "TTFB",
+            "reason": "Metric not available",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "cwv-fcp",
+          "status": "warn",
+          "message": "Could not measure First Contentful Paint",
+          "score": 50,
+          "details": {
+            "metric": "FCP",
+            "reason": "Metric not available",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-dom-size",
+          "status": "pass",
+          "message": "DOM size is optimal (171 nodes, depth 11)",
+          "score": 100,
+          "details": {
+            "totalNodes": 171,
+            "maxDepth": 11,
+            "maxChildren": 7,
+            "deepestSelector": "span",
+            "widestSelector": "div.flex",
+            "thresholds": {
+              "nodes": {
+                "good": 800,
+                "warning": 1500
+              },
+              "depth": {
+                "good": 32,
+                "warning": 48
+              },
+              "children": {
+                "good": 60
+              }
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-css-file-size",
+          "status": "pass",
+          "message": "CSS is well optimized: 1 CSS file(s), 0KB inline",
+          "score": 100,
+          "details": {
+            "externalCssCount": 1,
+            "externalCssUrls": [
+              "/_next/static/chunks/%5Broot-of-the-server%5D__f6842ec7._.css"
+            ],
+            "inlineStyleCount": 0,
+            "inlineCssKb": 0,
+            "hasPreloadCss": false,
+            "thresholds": {
+              "externalFiles": {
+                "good": 3,
+                "warning": 6
+              },
+              "inlineCssKb": {
+                "good": 50,
+                "warning": 100
+              }
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-font-loading",
+          "status": "pass",
+          "message": "No custom fonts detected",
+          "score": 100,
+          "details": {
+            "preloadedFonts": [],
+            "googleFontsLinks": [],
+            "fontFacesWithDisplay": 0,
+            "fontFacesWithoutDisplay": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-preconnect",
+          "status": "pass",
+          "message": "No third-party origins detected",
+          "score": 100,
+          "details": {
+            "preconnects": [],
+            "dnsPrefetches": [],
+            "thirdPartyOrigins": [],
+            "missingPreconnects": [],
+            "criticalOrigins": [
+              "fonts.googleapis.com",
+              "fonts.gstatic.com",
+              "www.google-analytics.com",
+              "www.googletagmanager.com",
+              "connect.facebook.net",
+              "platform.twitter.com",
+              "cdn.jsdelivr.net",
+              "cdnjs.cloudflare.com",
+              "unpkg.com",
+              "ajax.googleapis.com"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-render-blocking",
+          "status": "warn",
+          "message": "Render-blocking resources found: 1 script(s) in <head> without async/defer",
+          "score": 50,
+          "details": {
+            "blockingScripts": [
+              {
+                "src": "/_next/static/chunks/node_modules_next_dist_build_polyfills_polyfill-nomodule.js",
+                "inHead": true
+              }
+            ],
+            "inlineScriptsInHead": 0,
+            "largeInlineScripts": [],
+            "potentiallyBlockingCss": [
+              "/_next/static/chunks/%5Broot-of-the-server%5D__f6842ec7._.css"
+            ],
+            "asyncScripts": 19,
+            "deferScripts": 0,
+            "moduleScripts": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-lazy-above-fold",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "aboveFoldImages": [],
+            "totalImages": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-lcp-hints",
+          "status": "pass",
+          "message": "No clear LCP image candidate detected",
+          "score": 100,
+          "details": {
+            "candidate": null,
+            "preloadedImages": [],
+            "hasAnyOptimization": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-text-compression",
+          "status": "pass",
+          "message": "Text compression enabled (gzip)",
+          "score": 100,
+          "details": {
+            "contentEncoding": "gzip",
+            "supportedEncodings": [
+              "gzip",
+              "br",
+              "deflate",
+              "zstd"
+            ],
+            "detectedEncoding": "gzip",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-brotli",
+          "status": "warn",
+          "message": "Using gzip but not Brotli — Brotli gives ~15-20% better compression for text assets",
+          "score": 50,
+          "details": {
+            "contentEncoding": "gzip",
+            "currentEncoding": "gzip",
+            "recommendation": "br",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-cache-policy",
+          "status": "pass",
+          "message": "Cache policy set to \"no-store, must-revalidate\" — appropriate for dynamic HTML content",
+          "score": 100,
+          "details": {
+            "cacheControl": "no-store, must-revalidate",
+            "expires": "not set",
+            "etag": "not set",
+            "lastModified": "not set",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-minify-css",
+          "status": "pass",
+          "message": "No inline CSS found",
+          "score": 100,
+          "details": {
+            "styleTagCount": 0,
+            "totalBytes": 0,
+            "thresholds": {
+              "minBytesToCheck": 500,
+              "whitespaceRatio": 0.15
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-minify-js",
+          "status": "pass",
+          "message": "Inline JavaScript is minified (68140 bytes, 0% whitespace)",
+          "score": 100,
+          "details": {
+            "scriptTagCount": 29,
+            "totalBytes": 68140,
+            "thresholds": {
+              "minBytesToCheck": 500,
+              "whitespaceRatio": 0.15
+            },
+            "whitespaceRatio": 0.002,
+            "blockCommentBytes": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-response-time",
+          "status": "pass",
+          "message": "Response time is 40ms — within optimal range",
+          "score": 100,
+          "details": {
+            "responseTimeMs": 40,
+            "thresholds": {
+              "good": 500,
+              "warning": 1000
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-http2",
+          "status": "warn",
+          "message": "No alt-svc header found — server may not support HTTP/2 or HTTP/3 (informational)",
+          "score": 50,
+          "details": {
+            "altSvc": "not set",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-page-weight",
+          "status": "pass",
+          "message": "HTML document is 94KB — within optimal range",
+          "score": 100,
+          "details": {
+            "htmlBytes": 96488,
+            "htmlSize": "94KB",
+            "externalScripts": 20,
+            "externalStylesheets": 1,
+            "imageCount": 0,
+            "thresholds": {
+              "good": "100KB",
+              "warning": "300KB"
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-js-file-size",
+          "status": "warn",
+          "message": "Total inline JavaScript is 67KB across 29 script(s) (recommended: <50KB) — consider externalizing",
+          "score": 50,
+          "details": {
+            "totalBytes": 68140,
+            "totalSize": "67KB",
+            "inlineScriptCount": 29,
+            "largestScriptBytes": 4532,
+            "largestScriptSize": "4KB",
+            "thresholds": {
+              "good": "50KB",
+              "warning": "150KB"
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "perf-video-for-animations",
+          "status": "pass",
+          "message": "No GIF images found — page uses appropriate media formats",
+          "score": 100,
+          "details": {
+            "gifCount": 0,
+            "gifUrls": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "links",
+      "score": 98,
+      "passCount": 16,
+      "warnCount": 1,
+      "failCount": 2,
+      "results": [
+        {
+          "ruleId": "links-broken-internal",
+          "status": "fail",
+          "message": "Found 3 broken internal link(s) out of 25",
+          "score": 0,
+          "details": {
+            "brokenCount": 3,
+            "totalChecked": 25,
+            "brokenLinks": [
+              {
+                "href": "http://127.0.0.1:3000/blog/my-second-blog-post",
+                "statusCode": 500
+              },
+              {
+                "href": "http://127.0.0.1:3000/blog/my-first-blog-post",
+                "statusCode": 500
+              },
+              {
+                "href": "http://127.0.0.1:3000/blog/different-types-of-website-rendering",
+                "statusCode": 500
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-external-valid",
+          "status": "warn",
+          "message": "Found 1 unreachable external link(s) out of 3 checked",
+          "score": 50,
+          "details": {
+            "unreachableCount": 1,
+            "totalChecked": 3,
+            "totalExternal": 3,
+            "unreachableLinks": [
+              {
+                "href": "https://www.linkedin.com/in/neeraj-butola/",
+                "statusCode": 999
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-internal-present",
+          "status": "pass",
+          "message": "Found 21 internal link(s) on this page",
+          "score": 100,
+          "details": {
+            "internalLinkCount": 21,
+            "examples": [
+              "http://127.0.0.1:3000/",
+              "http://127.0.0.1:3000/#about",
+              "http://127.0.0.1:3000/#portfolio",
+              "http://127.0.0.1:3000/#open-source",
+              "http://127.0.0.1:3000/#tech-stack"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-nofollow-appropriate",
+          "status": "pass",
+          "message": "Nofollow attributes appear to be used appropriately",
+          "score": 100,
+          "details": {
+            "totalLinks": 28,
+            "externalNofollow": 0,
+            "internalNofollow": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-anchor-text",
+          "status": "pass",
+          "message": "All 28 link(s) have descriptive anchor text",
+          "score": 100,
+          "details": {
+            "totalLinks": 28,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-depth",
+          "status": "pass",
+          "message": "Page depth is 1 level(s) from homepage",
+          "score": 100,
+          "details": {
+            "depth": 1,
+            "maxRecommended": 3,
+            "url": "http://127.0.0.1:3000/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-dead-end-pages",
+          "status": "pass",
+          "message": "Page has 21 outgoing internal link(s)",
+          "score": 100,
+          "details": {
+            "internalLinkCount": 21,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-https-downgrade",
+          "status": "pass",
+          "message": "Page is not served over HTTPS, check not applicable",
+          "score": 100,
+          "details": {
+            "pageProtocol": "http",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-external-count",
+          "status": "pass",
+          "message": "Page has 3 external link(s) across 3 domain(s)",
+          "score": 100,
+          "details": {
+            "externalLinkCount": 3,
+            "uniqueDomains": 3,
+            "topDomains": [
+              "github.com",
+              "www.linkedin.com",
+              "twitter.com"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-invalid",
+          "status": "pass",
+          "message": "No invalid links found",
+          "score": 100,
+          "details": {
+            "invalidCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-tel-mailto",
+          "status": "pass",
+          "message": "No tel: or mailto: links found",
+          "score": 100,
+          "details": {
+            "totalSpecialLinks": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-redirect-chains",
+          "status": "pass",
+          "message": "All 15 sampled internal link(s) resolve directly",
+          "score": 100,
+          "details": {
+            "totalChecked": 15,
+            "totalInternalLinks": 15,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-orphan-pages",
+          "status": "pass",
+          "message": "Page provides 25 internal link(s) to other pages. Full orphan detection requires crawl mode.",
+          "score": 100,
+          "details": {
+            "outgoingInternalLinkCount": 25,
+            "note": "Orphan page detection requires analyzing all pages in crawl mode to build a complete link graph",
+            "recommendation": "Use --crawl flag to enable full orphan page detection across the site",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-localhost",
+          "status": "fail",
+          "message": "Found 25 localhost/development URL reference(s)",
+          "score": 0,
+          "details": {
+            "localhostCount": 25,
+            "localhostLinks": [
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/blog#main-content"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/#about"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/#portfolio"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/#open-source"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/#tech-stack"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/blog"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/#contact"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/Neeraj_Butola_Resume.pdf"
+              },
+              {
+                "element": "a",
+                "href": "http://127.0.0.1:3000/#about"
+              }
+            ],
+            "recommendation": "Replace localhost and development URLs with production URLs before deploying",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-local-file",
+          "status": "pass",
+          "message": "No local file references found",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-broken-fragment",
+          "status": "pass",
+          "message": "All 1 same-page fragment link(s) have matching IDs",
+          "score": 100,
+          "details": {
+            "fragmentLinksChecked": 1,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-excessive",
+          "status": "pass",
+          "message": "Page has 28 link(s), within recommended limits",
+          "score": 100,
+          "details": {
+            "totalLinks": 28,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-onclick",
+          "status": "pass",
+          "message": "No onclick-based navigation detected",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "links-whitespace-href",
+          "status": "pass",
+          "message": "All link hrefs are free of whitespace issues",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "images",
+      "score": 100,
+      "passCount": 14,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "images-alt-present",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-alt-quality",
+          "status": "pass",
+          "message": "No images with alt attributes to evaluate",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-dimensions",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-lazy-loading",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-modern-format",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-size",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-responsive",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-broken",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-figure-captions",
+          "status": "pass",
+          "message": "No figure elements found on page",
+          "score": 100,
+          "details": {
+            "figureCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-filename-quality",
+          "status": "pass",
+          "message": "No images found on page",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-inline-svg-size",
+          "status": "pass",
+          "message": "All 4 inline SVG(s) are appropriately sized (1.7KB total)",
+          "score": 100,
+          "details": {
+            "svgCount": 4,
+            "totalSizeKB": "1.7",
+            "maxRecommendedKB": 5,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-picture-element",
+          "status": "pass",
+          "message": "No picture elements found on page",
+          "score": 100,
+          "details": {
+            "pictureCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-alt-length",
+          "status": "pass",
+          "message": "No images with alt text to evaluate for length",
+          "score": 100,
+          "details": {
+            "imageCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "images-background-seo",
+          "status": "pass",
+          "message": "No inline CSS background images detected",
+          "score": 100,
+          "details": {
+            "count": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "security",
+      "score": 97,
+      "passCount": 11,
+      "warnCount": 1,
+      "failCount": 4,
+      "results": [
+        {
+          "ruleId": "security-https",
+          "status": "fail",
+          "message": "Page is served over HTTP instead of HTTPS",
+          "score": 0,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "protocol": "http:",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-https-redirect",
+          "status": "fail",
+          "message": "HTTP version is accessible without redirecting to HTTPS",
+          "score": 0,
+          "details": {
+            "httpUrl": "http://127.0.0.1:3000/blog",
+            "expectedHttpsUrl": "https://127.0.0.1:3000/blog",
+            "statusCode": 200,
+            "redirectLocation": null,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-hsts",
+          "status": "warn",
+          "message": "HSTS only applies to HTTPS URLs; site is currently served over HTTP",
+          "score": 50,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "protocol": "http:",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-csp",
+          "status": "pass",
+          "message": "Content-Security-Policy is properly configured with 12 directives",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "headerValue": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.github.com https://api.emailjs.com https://*.emailjs.com; frame-src https://drive.google.com https://docs.google.com; form-action 'self'; upgrade-insecure-requests",
+            "directives": [
+              "default-src",
+              "base-uri",
+              "object-src",
+              "frame-ancestors",
+              "script-src",
+              "style-src",
+              "img-src",
+              "font-src",
+              "connect-src",
+              "frame-src",
+              "form-action",
+              "upgrade-insecure-requests"
+            ],
+            "missingRecommended": [],
+            "hasReportOnly": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-x-frame-options",
+          "status": "pass",
+          "message": "X-Frame-Options is set to SAMEORIGIN",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "xFrameOptions": "SAMEORIGIN",
+            "hasFrameAncestors": true,
+            "value": "SAMEORIGIN",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-x-content-type-options",
+          "status": "pass",
+          "message": "X-Content-Type-Options is correctly set to nosniff",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "value": "nosniff",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-external-links",
+          "status": "pass",
+          "message": "All external target=\"_blank\" links have noopener/noreferrer",
+          "score": 100,
+          "details": {
+            "checkedLinks": 3,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-form-https",
+          "status": "pass",
+          "message": "No forms found on page",
+          "score": 100,
+          "details": {
+            "formCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-mixed-content",
+          "status": "pass",
+          "message": "Page is not HTTPS, mixed content check not applicable",
+          "score": 100,
+          "details": {
+            "isHttps": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-permissions-policy",
+          "status": "pass",
+          "message": "Permissions-Policy header is set with 4 feature(s)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "headerValue": "camera=(), microphone=(), geolocation=(), payment=()",
+            "features": [
+              "camera",
+              "microphone",
+              "geolocation",
+              "payment"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-referrer-policy",
+          "status": "pass",
+          "message": "Referrer-Policy is set to \"strict-origin-when-cross-origin\" (recommended)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "policy": "strict-origin-when-cross-origin",
+            "source": "header",
+            "isRecommended": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-leaked-secrets",
+          "status": "pass",
+          "message": "No exposed secrets detected",
+          "score": 100,
+          "details": {
+            "patternsChecked": 25,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-password-http",
+          "status": "pass",
+          "message": "No password input fields found on this HTTP page",
+          "score": 100,
+          "details": {
+            "isHttps": false,
+            "passwordInputCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-protocol-relative",
+          "status": "pass",
+          "message": "No protocol-relative URLs found in resource references",
+          "score": 100,
+          "details": {
+            "count": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-ssl-expiry",
+          "status": "fail",
+          "message": "Page is served over HTTP; no SSL certificate in use",
+          "score": 0,
+          "details": {
+            "isHttps": false,
+            "recommendation": "Install an SSL certificate and serve the site over HTTPS",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "security-ssl-protocol",
+          "status": "fail",
+          "message": "Page is served over HTTP; TLS configuration check not applicable",
+          "score": 0,
+          "details": {
+            "isHttps": false,
+            "recommendation": "Migrate to HTTPS to enable TLS protection",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "crawl",
+      "score": 98,
+      "passCount": 16,
+      "warnCount": 1,
+      "failCount": 1,
+      "results": [
+        {
+          "ruleId": "crawl-schema-noindex-conflict",
+          "status": "pass",
+          "message": "Page has 1 rich result schema type(s) and is indexable",
+          "score": 100,
+          "details": {
+            "isNoindexed": false,
+            "schemaTypes": [
+              "WebSite",
+              "Organization",
+              "Blog",
+              "BreadcrumbList"
+            ],
+            "richResultTypes": [
+              "Organization"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-pagination-canonical",
+          "status": "pass",
+          "message": "Page does not appear to be paginated",
+          "score": 100,
+          "details": {
+            "isPaginated": false,
+            "hasPaginationLinks": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-sitemap-domain",
+          "status": "fail",
+          "message": "9 of 9 sitemap URLs (100.0%) have incorrect domain",
+          "score": 0,
+          "details": {
+            "sitemapUrl": "http://127.0.0.1:3000/sitemap.xml",
+            "isSitemapIndex": false,
+            "totalUrls": 9,
+            "expectedHostnames": [
+              "127.0.0.1",
+              "www.127.0.0.1"
+            ],
+            "invalidCount": 9,
+            "invalidDomainUrls": [
+              {
+                "url": "https://neerajbutola.netlify.app",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/blog",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/Neeraj_Butola_Resume.pdf",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/llms.txt",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/privacy",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/editorial-policy",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/blog/my-second-blog-post",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/blog/my-first-blog-post",
+                "hostname": "neerajbutola.netlify.app"
+              },
+              {
+                "url": "https://neerajbutola.netlify.app/blog/different-types-of-website-rendering",
+                "hostname": "neerajbutola.netlify.app"
+              }
+            ],
+            "impact": "Search engines will ignore URLs that do not match the sitemap domain",
+            "recommendation": "Remove cross-domain URLs from the sitemap or fix incorrect domain formatting",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-noindex-in-sitemap",
+          "status": "pass",
+          "message": "Page is indexable (no noindex directive)",
+          "score": 100,
+          "details": {
+            "isNoindexed": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-indexability-conflict",
+          "status": "pass",
+          "message": "No indexability conflict detected",
+          "score": 100,
+          "details": {
+            "url": "/blog",
+            "robotsTxtStatus": "accessible",
+            "hasNoindex": false,
+            "noindexSources": [],
+            "isDisallowedByRobotsTxt": false,
+            "matchedDisallowRule": null,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-canonical-redirect",
+          "status": "pass",
+          "message": "Canonical URL does not redirect",
+          "score": 100,
+          "details": {
+            "canonical": "https://neerajbutola.netlify.app/blog",
+            "currentUrl": "http://127.0.0.1:3000/blog",
+            "isSelfReferencing": false,
+            "redirects": false,
+            "statusCode": 200,
+            "chainLength": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-sitemap-url-limit",
+          "status": "pass",
+          "message": "Sitemap contains 9 URLs (within 50,000 limit)",
+          "score": 100,
+          "details": {
+            "urlCount": 9,
+            "maxAllowed": 50000,
+            "warnThreshold": 40000,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-sitemap-size-limit",
+          "status": "pass",
+          "message": "Sitemap size is 1.6 KB (within 50 MB limit)",
+          "score": 100,
+          "details": {
+            "sizeBytes": 1689,
+            "sizeFormatted": "1.6 KB",
+            "maxSizeBytes": 52428800,
+            "maxSizeFormatted": "50.0 MB",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-sitemap-duplicate-urls",
+          "status": "pass",
+          "message": "All 9 sitemap URLs are unique",
+          "score": 100,
+          "details": {
+            "totalUrls": 9,
+            "uniqueUrls": 9,
+            "duplicateCount": 0,
+            "duplicates": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-sitemap-orphan-urls",
+          "status": "warn",
+          "message": "9 sitemap URL(s) (100.0%) are not linked from any crawled page",
+          "score": 50,
+          "details": {
+            "crawledUrlCount": 9,
+            "sitemapUrlCount": 9,
+            "orphanCount": 9,
+            "orphanUrls": [
+              "https://neerajbutola.netlify.app/",
+              "https://neerajbutola.netlify.app/blog",
+              "https://neerajbutola.netlify.app/Neeraj_Butola_Resume.pdf",
+              "https://neerajbutola.netlify.app/llms.txt",
+              "https://neerajbutola.netlify.app/privacy",
+              "https://neerajbutola.netlify.app/editorial-policy",
+              "https://neerajbutola.netlify.app/blog/different-types-of-website-rendering",
+              "https://neerajbutola.netlify.app/blog/my-second-blog-post",
+              "https://neerajbutola.netlify.app/blog/my-first-blog-post"
+            ],
+            "impact": "Orphan pages lack internal links, reducing discoverability and crawl priority",
+            "recommendation": "Add internal links to orphan pages or remove them from the sitemap if obsolete",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-blocked-resources",
+          "status": "pass",
+          "message": "No Disallow rules found in robots.txt",
+          "score": 100,
+          "details": {
+            "disallowRuleCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-crawl-delay",
+          "status": "pass",
+          "message": "No Crawl-delay directive found in robots.txt",
+          "score": 100,
+          "details": {
+            "hasCrawlDelay": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-sitemap-in-robotstxt",
+          "status": "pass",
+          "message": "robots.txt references 1 sitemap(s)",
+          "score": 100,
+          "details": {
+            "sitemapDirectiveCount": 1,
+            "sitemapUrls": [
+              "https://neerajbutola.netlify.app/sitemap.xml"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-pagination-broken",
+          "status": "pass",
+          "message": "No pagination links found (rel=\"next\"/\"prev\")",
+          "score": 100,
+          "details": {
+            "hasPagination": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-pagination-loop",
+          "status": "pass",
+          "message": "No pagination links found (rel=\"next\"/\"prev\")",
+          "score": 100,
+          "details": {
+            "hasPagination": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-pagination-sequence",
+          "status": "pass",
+          "message": "No pagination links found",
+          "score": 100,
+          "details": {
+            "hasNext": false,
+            "hasPrev": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-pagination-noindex",
+          "status": "pass",
+          "message": "Page is not paginated (no rel=\"next\"/\"prev\" links)",
+          "score": 100,
+          "details": {
+            "isPaginated": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "crawl-pagination-orphaned",
+          "status": "pass",
+          "message": "Page does not appear to be paginated",
+          "score": 100,
+          "details": {
+            "isPaginated": false,
+            "hasPaginationLinks": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "schema",
+      "score": 96,
+      "passCount": 11,
+      "warnCount": 2,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "schema-present",
+          "status": "pass",
+          "message": "Structured data found: JSON-LD, RDFa",
+          "score": 100,
+          "details": {
+            "jsonLdCount": 4,
+            "microdataCount": 0,
+            "rdfaCount": 10,
+            "formats": [
+              "JSON-LD",
+              "RDFa"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-valid",
+          "status": "pass",
+          "message": "All 4 JSON-LD script(s) contain valid JSON",
+          "score": 100,
+          "details": {
+            "totalScripts": 4,
+            "validCount": 4,
+            "invalidCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-type",
+          "status": "pass",
+          "message": "All 4 JSON-LD script(s) have @type: WebSite, Organization, Blog, BreadcrumbList",
+          "score": 100,
+          "details": {
+            "totalScripts": 4,
+            "scriptsWithType": 4,
+            "types": [
+              "WebSite",
+              "Organization",
+              "Blog",
+              "BreadcrumbList"
+            ],
+            "recognizedTypes": [
+              "WebSite",
+              "Organization",
+              "BreadcrumbList"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-required-fields",
+          "status": "warn",
+          "message": "All required fields present, but 2 recommended field(s) missing",
+          "score": 50,
+          "details": {
+            "typesChecked": 3,
+            "totalMissingRequired": 0,
+            "totalMissingRecommended": 2,
+            "recommendations": [
+              "Organization: consider adding contactPoint, address"
+            ],
+            "validations": [
+              {
+                "type": "WebSite",
+                "missingRequired": [],
+                "missingRecommended": []
+              },
+              {
+                "type": "Organization",
+                "missingRequired": [],
+                "missingRecommended": [
+                  "contactPoint",
+                  "address"
+                ]
+              },
+              {
+                "type": "BreadcrumbList",
+                "missingRequired": [],
+                "missingRecommended": []
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-article",
+          "status": "pass",
+          "message": "No Article schema found (not required)",
+          "score": 100,
+          "details": {
+            "articlesFound": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-breadcrumb",
+          "status": "pass",
+          "message": "Valid BreadcrumbList schema found with proper structure",
+          "score": 100,
+          "details": {
+            "breadcrumbsFound": 1,
+            "isHomepage": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-faq",
+          "status": "pass",
+          "message": "No FAQPage schema found (not required)",
+          "score": 100,
+          "details": {
+            "faqPagesFound": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-local-business",
+          "status": "pass",
+          "message": "No LocalBusiness schema found (not required)",
+          "score": 100,
+          "details": {
+            "businessesFound": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-organization",
+          "status": "warn",
+          "message": "Organization schema valid with suggestions",
+          "score": 50,
+          "details": {
+            "orgCount": 2,
+            "warnings": [
+              "consider adding logo for brand visibility",
+              "consider adding sameAs with social media profiles",
+              "consider adding logo, sameAs, contactPoint, address",
+              "consider adding contactPoint, address"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-product",
+          "status": "pass",
+          "message": "No Product schema found (not required)",
+          "score": 100,
+          "details": {
+            "found": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-review",
+          "status": "pass",
+          "message": "No Review/AggregateRating schema found (not required)",
+          "score": 100,
+          "details": {
+            "found": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-video",
+          "status": "pass",
+          "message": "No VideoObject schema found (not required)",
+          "score": 100,
+          "details": {
+            "found": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "schema-website-search",
+          "status": "pass",
+          "message": "WebSite schema with SearchAction properly configured",
+          "score": 100,
+          "details": {
+            "websiteCount": 1,
+            "hasSearchAction": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "a11y",
+      "score": 100,
+      "passCount": 12,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "a11y-aria-labels",
+          "status": "pass",
+          "message": "All interactive elements have accessible names",
+          "score": 100,
+          "details": {
+            "checkedElements": 25,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-color-contrast",
+          "status": "pass",
+          "message": "No obvious color contrast issues detected",
+          "score": 100,
+          "details": {
+            "note": "Full WCAG contrast checking requires visual rendering",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-focus-visible",
+          "status": "pass",
+          "message": "No focus indicator issues detected",
+          "score": 100,
+          "details": {
+            "hasFocusVisibleSupport": false,
+            "customTabindexElements": 1,
+            "externalStylesheets": 1,
+            "note": "External stylesheets not analyzed",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-form-labels",
+          "status": "pass",
+          "message": "No form inputs found on page",
+          "score": 100,
+          "details": {
+            "totalInputs": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-heading-order",
+          "status": "pass",
+          "message": "Heading hierarchy is correct",
+          "score": 100,
+          "details": {
+            "totalHeadings": 6,
+            "levels": "H1, H2, H3",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-landmark-regions",
+          "status": "pass",
+          "message": "All essential landmark regions present",
+          "score": 100,
+          "details": {
+            "landmarks": {
+              "main": {
+                "type": "main",
+                "count": 1
+              },
+              "navigation": {
+                "type": "navigation",
+                "count": 2
+              },
+              "banner": {
+                "type": "banner",
+                "count": 1
+              },
+              "contentinfo": {
+                "type": "contentinfo",
+                "count": 1
+              }
+            },
+            "recommendation": "Consider adding role=\"search\" to search forms",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-link-text",
+          "status": "pass",
+          "message": "All links have descriptive text",
+          "score": 100,
+          "details": {
+            "totalLinks": 27,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-skip-link",
+          "status": "pass",
+          "message": "Skip link is present",
+          "score": 100,
+          "details": {
+            "skipLink": {
+              "text": "skip to content",
+              "href": "#main-content",
+              "isVisible": false
+            },
+            "hasMainLandmark": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-table-headers",
+          "status": "pass",
+          "message": "No data tables found on page",
+          "score": 100,
+          "details": {
+            "layoutTables": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-touch-targets",
+          "status": "pass",
+          "message": "No obvious touch target size issues detected",
+          "score": 100,
+          "details": {
+            "note": "Full touch target analysis requires visual rendering",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-video-captions",
+          "status": "pass",
+          "message": "No video or audio elements found on page",
+          "score": 100,
+          "details": {
+            "note": "If adding video content, include captions or transcripts",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "a11y-zoom-disabled",
+          "status": "pass",
+          "message": "Viewport allows user zoom",
+          "score": 100,
+          "details": {
+            "viewport": "width=device-width, initial-scale=1",
+            "userScalable": "yes (default)",
+            "maximumScale": "not set",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "content",
+      "score": 89,
+      "passCount": 11,
+      "warnCount": 6,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "content-word-count",
+          "status": "warn",
+          "message": "Thin content detected: 210 words (300+ recommended)",
+          "score": 50,
+          "details": {
+            "wordCount": 210,
+            "thresholds": {
+              "fail": 100,
+              "warn": 300,
+              "optimal": {
+                "min": 500,
+                "max": 2500
+              }
+            },
+            "impact": "Thin content may struggle to rank for competitive queries",
+            "recommendation": "Add more comprehensive content covering the topic thoroughly. Aim for 500+ words for standard pages, 1000+ for in-depth articles.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-reading-level",
+          "status": "warn",
+          "message": "Content may be too complex: 7.5 (Very Difficult (college graduate))",
+          "score": 50,
+          "details": {
+            "score": 7.5,
+            "levelDescription": "Very Difficult (college graduate)",
+            "wordCount": 210,
+            "sentenceCount": 14,
+            "avgWordsPerSentence": 15,
+            "thresholds": {
+              "optimal": {
+                "min": 60,
+                "max": 70
+              },
+              "acceptable": {
+                "min": 50,
+                "max": 80
+              }
+            },
+            "impact": "Complex content may alienate general audiences and reduce engagement",
+            "recommendation": "Simplify language by: using shorter sentences, replacing jargon with common words, breaking long paragraphs into smaller chunks, and using bullet points for lists.",
+            "note": "Technical content for expert audiences may legitimately score lower.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-keyword-stuffing",
+          "status": "warn",
+          "message": "Potential keyword stuffing: 2 words exceed 2% density",
+          "score": 50,
+          "details": {
+            "totalWords": 210,
+            "contentWords": 158,
+            "thresholds": {
+              "warnDensity": 2,
+              "failDensity": 5
+            },
+            "overusedWords": [
+              {
+                "word": "release",
+                "count": 4,
+                "density": 2.53
+              },
+              {
+                "word": "min",
+                "count": 4,
+                "density": 2.53
+              }
+            ],
+            "severelyOverusedWords": [],
+            "impact": "High keyword density may appear unnatural to search engines",
+            "recommendation": "Review flagged words and consider using synonyms or rephrasing. Write naturally for users first.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-article-links",
+          "status": "warn",
+          "message": "Link density too high: 13.33 links per 100 words (maximum 5)",
+          "score": 50,
+          "details": {
+            "wordCount": 210,
+            "totalLinks": 28,
+            "internalLinks": 25,
+            "externalLinks": 3,
+            "linksPer100Words": 13.33,
+            "thresholds": {
+              "min": 0.5,
+              "max": 5
+            },
+            "impact": "Excessive linking can appear spammy and dilute page authority",
+            "recommendation": "Remove less relevant links. Focus on quality over quantity - each link should provide clear value to users.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-broken-html",
+          "status": "warn",
+          "message": "HTML structure issues found: 2 problems",
+          "score": 50,
+          "details": {
+            "issueCount": 2,
+            "criticalCount": 2,
+            "minorCount": 0,
+            "issues": [
+              {
+                "type": "invalid-nesting",
+                "element": "<a> > <div>",
+                "details": "Block element <div> inside inline element <a> (found 3)"
+              },
+              {
+                "type": "invalid-nesting",
+                "element": "<a> > <p>",
+                "details": "Block element <p> inside inline element <a> (found 3)"
+              }
+            ],
+            "categories": {
+              "duplicate-id": 0,
+              "invalid-nesting": 2,
+              "missing-attribute": 0,
+              "empty-element": 0,
+              "accessibility": 0,
+              "deprecated-element": 0
+            },
+            "impact": "Minor HTML issues may affect accessibility or cause subtle rendering problems",
+            "recommendation": "Review and fix the identified issues. Modern browsers are forgiving, but search engine parsers may not be.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-meta-in-body",
+          "status": "pass",
+          "message": "All meta elements are correctly placed in document head",
+          "score": 100,
+          "details": {
+            "checkedElements": [
+              "<meta>",
+              "<title>",
+              "<link rel=\"canonical\">",
+              "<link rel=\"icon\">"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-mime-type",
+          "status": "pass",
+          "message": "Content-Type header is correctly configured",
+          "score": 100,
+          "details": {
+            "header": "text/html; charset=utf-8",
+            "mimeType": "text/html",
+            "charset": "utf-8",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-duplicate-description",
+          "status": "pass",
+          "message": "Meta description is unique",
+          "score": 100,
+          "details": {
+            "description": "Practical engineering notes on architecture, rendering, APIs, delivery quality, and reliability patterns from production software projects.",
+            "normalizedDescription": "practical engineering notes on architecture, rendering, apis, delivery quality, and reliability patterns from production software projects.",
+            "length": 139,
+            "url": "http://127.0.0.1:3000/blog",
+            "isOptimalLength": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-heading-hierarchy",
+          "status": "pass",
+          "message": "Heading hierarchy is correct",
+          "score": 100,
+          "details": {
+            "headingCount": 6,
+            "structure": [
+              {
+                "level": 1,
+                "text": "Engineering Blog"
+              },
+              {
+                "level": 2,
+                "text": "What you will find here"
+              },
+              {
+                "level": 3,
+                "text": "Article themes"
+              },
+              {
+                "level": 2,
+                "text": "Safer Deployments with Small Release Slices"
+              },
+              {
+                "level": 2,
+                "text": "Production MERN Delivery Baseline"
+              },
+              {
+                "level": 2,
+                "text": "different-types-of-website-rendering"
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-heading-length",
+          "status": "pass",
+          "message": "All 6 headings have appropriate length",
+          "score": 100,
+          "details": {
+            "headingCount": 6,
+            "minLength": 10,
+            "maxLength": 70,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-heading-unique",
+          "status": "pass",
+          "message": "All 6 headings have unique content",
+          "score": 100,
+          "details": {
+            "uniqueHeadings": 6,
+            "duplicateCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-text-html-ratio",
+          "status": "pass",
+          "message": "Good text-to-HTML ratio: 74.5% (71917 text bytes / 96486 HTML bytes)",
+          "score": 100,
+          "details": {
+            "textLength": 71917,
+            "htmlLength": 96486,
+            "ratio": 74.5,
+            "thresholds": {
+              "good": 25,
+              "low": 10
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-title-same-as-h1",
+          "status": "pass",
+          "message": "Title tag and H1 heading are different",
+          "score": 100,
+          "details": {
+            "title": "Engineering Blog and Technical Notes | Neeraj Butola",
+            "h1": "Engineering Blog",
+            "normalizedTitle": "engineering blog and technical notes | neeraj butola",
+            "normalizedH1": "engineering blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-title-pixel-width",
+          "status": "pass",
+          "message": "Title fits within SERP display: estimated 374px",
+          "score": 100,
+          "details": {
+            "title": "Engineering Blog and Technical Notes | Neeraj Butola",
+            "estimatedWidth": 374,
+            "characterCount": 52,
+            "thresholds": {
+              "good": 580,
+              "warn": 620
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-description-pixel-width",
+          "status": "warn",
+          "message": "Meta description may be truncated in SERP: estimated 981px (max ~920px)",
+          "score": 50,
+          "details": {
+            "description": "Practical engineering notes on architecture, rendering, APIs, delivery quality, and reliability patterns from production software projects.",
+            "estimatedWidth": 981,
+            "characterCount": 139,
+            "thresholds": {
+              "good": 920,
+              "warn": 990
+            },
+            "impact": "Description is borderline and may be truncated depending on exact font rendering",
+            "recommendation": "Consider trimming a few characters to ensure the description displays fully in search results",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-duplicate-exact",
+          "status": "pass",
+          "message": "Content is unique (no exact duplicates detected)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "contentHash": "1993f70e02a85a17211763914006746e",
+            "textLength": 71917,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "content-duplicate-near",
+          "status": "pass",
+          "message": "First page analyzed (no comparison available yet)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "trigramCount": 496,
+            "highestSimilarity": 0,
+            "mostSimilarUrl": null,
+            "thresholds": {
+              "duplicate": 0.8,
+              "similar": 0.6
+            },
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "social",
+      "score": 97,
+      "passCount": 8,
+      "warnCount": 1,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "social-og-title",
+          "status": "pass",
+          "message": "Open Graph title tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "ogTitle": "Engineering Blog and Technical Notes",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-og-description",
+          "status": "pass",
+          "message": "Open Graph description tag is present",
+          "score": 100,
+          "details": {
+            "found": true,
+            "ogDescription": "Practical engineering notes on architecture, rendering, APIs, delivery quality, and reliability patterns from production software projects.",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-og-image",
+          "status": "pass",
+          "message": "Open Graph image tag is present with a valid URL",
+          "score": 100,
+          "details": {
+            "found": true,
+            "ogImage": "https://neerajbutola.netlify.app/dev-ed-wave.png",
+            "isValidUrl": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-og-image-size",
+          "status": "pass",
+          "message": "og:image has optimal dimensions (1200x630)",
+          "score": 100,
+          "details": {
+            "hasImage": true,
+            "ogImage": "https://neerajbutola.netlify.app/dev-ed-wave.png",
+            "width": 1200,
+            "height": 630,
+            "optimal": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-twitter-card",
+          "status": "pass",
+          "message": "Twitter card tag is present with a valid type",
+          "score": 100,
+          "details": {
+            "found": true,
+            "twitterCard": "summary_large_image",
+            "isValidType": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-og-url",
+          "status": "pass",
+          "message": "Open Graph URL tag is present with a valid URL",
+          "score": 100,
+          "details": {
+            "found": true,
+            "ogUrl": "https://neerajbutola.netlify.app/blog",
+            "isValidUrl": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-og-url-canonical",
+          "status": "pass",
+          "message": "og:url matches canonical URL",
+          "score": 100,
+          "details": {
+            "hasOgUrl": true,
+            "hasCanonical": true,
+            "ogUrl": "https://neerajbutola.netlify.app/blog",
+            "canonical": "https://neerajbutola.netlify.app/blog",
+            "match": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-share-buttons",
+          "status": "warn",
+          "message": "No social sharing buttons detected. Add share buttons to encourage social engagement",
+          "score": 50,
+          "details": {
+            "hasShareButtons": false,
+            "platformCount": 0,
+            "suggestion": "Add share buttons for Facebook, Twitter/X, and LinkedIn",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "social-profiles",
+          "status": "pass",
+          "message": "Found links to 3 social profiles: GitHub, LinkedIn, Twitter/X",
+          "score": 100,
+          "details": {
+            "hasProfiles": true,
+            "profileCount": 3,
+            "profiles": [
+              {
+                "platform": "GitHub",
+                "url": "https://github.com/Frostdev7506"
+              },
+              {
+                "platform": "LinkedIn",
+                "url": "https://www.linkedin.com/in/neeraj-butola/"
+              },
+              {
+                "platform": "Twitter/X",
+                "url": "https://twitter.com/frostdev7506"
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "eeat",
+      "score": 96,
+      "passCount": 12,
+      "warnCount": 2,
+      "failCount": 0,
+      "results": [
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "About page link found in navigation",
+          "details": {
+            "hasAboutPage": true,
+            "inNavigation": true,
+            "links": [
+              {
+                "href": "/#about",
+                "text": "About",
+                "location": "navigation"
+              },
+              {
+                "href": "/#about",
+                "text": "About",
+                "location": "navigation"
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-about-page"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "No affiliate or sponsored content detected",
+          "details": {
+            "hasAffiliateLinks": false,
+            "hasDisclosure": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-affiliate-disclosure"
+        },
+        {
+          "ruleId": "eeat-author-byline",
+          "status": "pass",
+          "message": "Author byline found (2 signals)",
+          "score": 100,
+          "details": {
+            "signals": [
+              "Schema.org author: \"Neeraj Butola\"",
+              "Meta author: \"Neeraj Butola\""
+            ],
+            "impact": "Author attribution supports E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness)",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "status": "warn",
+          "score": 50,
+          "message": "Author found but no expertise indicators detected",
+          "details": {
+            "signals": [],
+            "credentials": [],
+            "socialLinks": [],
+            "recommendation": "Add author credentials, bio, and professional social links to establish expertise",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-author-expertise"
+        },
+        {
+          "status": "warn",
+          "score": 60,
+          "message": "3 external links found, but none to recognized authoritative sources",
+          "details": {
+            "citationCount": 0,
+            "externalLinkCount": 3,
+            "hasCitationMarkup": false,
+            "hasReferencesSection": false,
+            "recommendation": "Consider linking to authoritative sources like .gov, .edu, or peer-reviewed publications",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-citations"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "Contact page found (1 contact method visible)",
+          "details": {
+            "hasContactPage": true,
+            "contactMethods": [
+              "phone (visible)"
+            ],
+            "links": [
+              {
+                "href": "/#contact",
+                "text": "Contact",
+                "location": "navigation"
+              },
+              {
+                "href": "/#contact",
+                "text": "Contact",
+                "location": "navigation"
+              },
+              {
+                "href": "/#contact",
+                "text": "Contact",
+                "location": "footer"
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-contact-page"
+        },
+        {
+          "ruleId": "eeat-content-dates",
+          "status": "pass",
+          "message": "Content date signals found (1 type)",
+          "score": 100,
+          "details": {
+            "signals": [
+              {
+                "type": "Schema.org dateModified",
+                "value": "2026-02-28T08:37:50.040Z"
+              }
+            ],
+            "recommendation": "Update dateModified when making significant content changes",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "Non-YMYL content - disclaimers not required",
+          "details": {
+            "isYMYL": false,
+            "disclaimers": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-disclaimers"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "Editorial policy page found",
+          "details": {
+            "hasEditorialPolicy": true,
+            "links": [
+              {
+                "href": "/editorial-policy",
+                "text": "Editorial"
+              }
+            ],
+            "signals": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-editorial-policy"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "No physical address found (may not be required for this site type)",
+          "details": {
+            "hasAddress": false,
+            "isBusinessSite": false,
+            "recommendation": "Consider adding a physical address if you operate a business to build trust",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-physical-address"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "Privacy policy link found in footer (1 link)",
+          "details": {
+            "hasPrivacyPolicy": true,
+            "inFooter": true,
+            "hasSchemaMarkup": false,
+            "links": [
+              {
+                "href": "/privacy",
+                "text": "Privacy",
+                "location": "footer"
+              }
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-privacy-policy"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "No terms of service link found (may not be required for this site type)",
+          "details": {
+            "hasTermsOfService": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-terms-of-service"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "No trust signals detected (may not be required for this site type)",
+          "details": {
+            "signalCount": 0,
+            "signalTypes": [],
+            "recommendation": "Add trust signals: customer reviews/testimonials, certifications, security badges, media mentions, or client logos",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-trust-signals"
+        },
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "No YMYL content detected",
+          "details": {
+            "isYMYL": false,
+            "categories": [],
+            "confidence": "none",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "eeat-ymyl-detection"
+        }
+      ]
+    },
+    {
+      "categoryId": "url",
+      "score": 98,
+      "passCount": 13,
+      "warnCount": 1,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "url-slug-keywords",
+          "status": "pass",
+          "message": "URL contains descriptive keywords: blog",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "slugSegments": [
+              "blog"
+            ],
+            "hasDescriptiveSlug": true,
+            "isGeneric": false,
+            "isDynamic": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-stop-words",
+          "status": "pass",
+          "message": "URL contains no stop words",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "words": [
+              "blog"
+            ],
+            "stopWordsFound": [],
+            "stopWordCount": 0,
+            "stopWordRatio": 0,
+            "suggestions": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-uppercase",
+          "status": "pass",
+          "message": "URL path is all lowercase",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-underscores",
+          "status": "pass",
+          "message": "URL path uses no underscores",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-double-slash",
+          "status": "pass",
+          "message": "URL path has no double slashes",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-spaces",
+          "status": "pass",
+          "message": "URL contains no spaces",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-non-ascii",
+          "status": "pass",
+          "message": "URL path contains only ASCII characters",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-length",
+          "status": "pass",
+          "message": "URL length is 26 characters (good, <= 75)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "length": 26,
+            "maxRecommended": 75,
+            "maxAcceptable": 200,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-repetitive-path",
+          "status": "pass",
+          "message": "URL path has no repetitive segments",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "path": "/blog",
+            "segments": [
+              "blog"
+            ],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-parameters",
+          "status": "pass",
+          "message": "URL has no query parameters",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "parameterCount": 0,
+            "parameters": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-session-ids",
+          "status": "pass",
+          "message": "No session IDs found in URL",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-tracking-params",
+          "status": "pass",
+          "message": "No tracking parameters found in URL",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-internal-search",
+          "status": "pass",
+          "message": "URL does not appear to be an internal search page",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "url-http-https-duplicate",
+          "status": "warn",
+          "message": "Canonical protocol (https://) differs from page protocol (http://)",
+          "score": 50,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "pageProtocol": "http:",
+            "canonical": "https://neerajbutola.netlify.app/blog",
+            "canonicalProtocol": "https:",
+            "fix": "Update canonical to use http://: http://neerajbutola.netlify.app/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "mobile",
+      "score": 100,
+      "passCount": 5,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "mobile-font-size",
+          "status": "pass",
+          "message": "No mobile font size issues detected",
+          "score": 100,
+          "details": {
+            "note": "Static analysis - verify on actual mobile device",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "mobile-horizontal-scroll",
+          "status": "pass",
+          "message": "No elements likely to cause horizontal scrolling detected",
+          "score": 100,
+          "details": {
+            "note": "Static analysis - test on actual mobile devices",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "mobile-interstitials",
+          "status": "pass",
+          "message": "No intrusive interstitials detected",
+          "score": 100,
+          "details": {
+            "note": "Static analysis - JavaScript-triggered popups may not be detected",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "mobile-viewport-width",
+          "status": "pass",
+          "message": "Viewport width is set to device-width (responsive)",
+          "score": 100,
+          "details": {
+            "viewportContent": "width=device-width, initial-scale=1",
+            "widthValue": "device-width",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "mobile-multiple-viewports",
+          "status": "pass",
+          "message": "Single viewport meta tag found (correct)",
+          "score": 100,
+          "details": {
+            "viewportCount": 1,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "i18n",
+      "score": 100,
+      "passCount": 10,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "i18n-lang-attribute",
+          "status": "pass",
+          "message": "HTML lang attribute set to \"en\"",
+          "score": 100,
+          "details": {
+            "found": true,
+            "lang": "en",
+            "validFormat": true,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang",
+          "status": "pass",
+          "message": "No hreflang tags found (single-language site)",
+          "score": 100,
+          "details": {
+            "count": 0,
+            "note": "Add hreflang tags if you have multi-language or regional versions",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-return-links",
+          "status": "pass",
+          "message": "No hreflang tags found (single-language site)",
+          "score": 100,
+          "details": {
+            "count": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-to-noindex",
+          "status": "pass",
+          "message": "No hreflang tags found, no conflict possible",
+          "score": 100,
+          "details": {
+            "hasHreflang": false,
+            "hasNoindex": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-to-non-canonical",
+          "status": "pass",
+          "message": "No hreflang tags found, no conflict possible",
+          "score": 100,
+          "details": {
+            "hasHreflang": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-to-broken",
+          "status": "pass",
+          "message": "No hreflang tags found",
+          "score": 100,
+          "details": {
+            "count": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-to-redirect",
+          "status": "pass",
+          "message": "No hreflang tags found",
+          "score": 100,
+          "details": {
+            "count": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-conflicting",
+          "status": "pass",
+          "message": "No hreflang tags found",
+          "score": 100,
+          "details": {
+            "count": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-lang-mismatch",
+          "status": "pass",
+          "message": "No hreflang tags found, no mismatch possible",
+          "score": 100,
+          "details": {
+            "hasHreflang": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "i18n-hreflang-multiple-methods",
+          "status": "pass",
+          "message": "No hreflang declarations found",
+          "score": 100,
+          "details": {
+            "htmlHreflang": false,
+            "headerHreflang": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "legal",
+      "score": 100,
+      "passCount": 1,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "status": "pass",
+          "score": 100,
+          "message": "No cookie consent mechanism detected (may not be required if no tracking cookies used)",
+          "details": {
+            "hasConsent": false,
+            "hasTracking": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          },
+          "ruleId": "legal-cookie-consent"
+        }
+      ]
+    },
+    {
+      "categoryId": "js",
+      "score": 100,
+      "passCount": 13,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "js-rendered-title",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-rendered-description",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-rendered-h1",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-rendered-canonical",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-canonical-mismatch",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-noindex-mismatch",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-title-modified",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-description-modified",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-h1-modified",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-rendered-content",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-rendered-links",
+          "status": "pass",
+          "message": "Rendered DOM not available (CWV/rendering not enabled), skipping check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-blocked-resources",
+          "status": "pass",
+          "message": "No Disallow rules found in robots.txt",
+          "score": 100,
+          "details": {
+            "disallowCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "js-ssr-check",
+          "status": "pass",
+          "message": "Page appears to be server-side rendered with content in the initial HTML",
+          "score": 100,
+          "details": {
+            "bodyTextLength": 72069,
+            "hasEmptyRoot": false,
+            "rootSelector": null,
+            "hasJsRequiredNoscript": false,
+            "scriptCount": 53,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "redirect",
+      "score": 100,
+      "passCount": 8,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "redirect-meta-refresh",
+          "status": "pass",
+          "message": "No meta refresh redirect found",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "redirect-javascript",
+          "status": "pass",
+          "message": "No JavaScript redirects detected in inline scripts",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "redirect-http-refresh",
+          "status": "pass",
+          "message": "No Refresh HTTP header present",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "redirect-loop",
+          "status": "pass",
+          "message": "No redirect chain to check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "redirect-type",
+          "status": "pass",
+          "message": "Page is not a redirect",
+          "score": 100,
+          "details": {
+            "statusCode": 200,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "redirect-broken",
+          "status": "pass",
+          "message": "No redirect chain to check",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "redirect-resource",
+          "status": "pass",
+          "message": "Page is not HTTPS; resource redirect check not applicable",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "redirect-case-normalization",
+          "status": "pass",
+          "message": "URL and canonical differ by more than case (handled by other rules)",
+          "score": 100,
+          "details": {
+            "url": "http://127.0.0.1:3000/blog",
+            "canonical": "https://neerajbutola.netlify.app/blog",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "htmlval",
+      "score": 100,
+      "passCount": 9,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "htmlval-missing-doctype",
+          "status": "pass",
+          "message": "DOCTYPE declaration is present",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-missing-charset",
+          "status": "pass",
+          "message": "Charset is declared via <meta charset>",
+          "score": 100,
+          "details": {
+            "method": "meta-charset",
+            "value": "utf-8",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-invalid-head",
+          "status": "pass",
+          "message": "<head> contains only valid metadata elements",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-noscript-in-head",
+          "status": "pass",
+          "message": "No <noscript> elements found in <head>",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-multiple-heads",
+          "status": "pass",
+          "message": "Document has a single <head> element",
+          "score": 100,
+          "details": {
+            "count": 1,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-size-limit",
+          "status": "pass",
+          "message": "HTML document size is 94.2 KB",
+          "score": 100,
+          "details": {
+            "sizeBytes": 96488,
+            "sizeFormatted": "94.2 KB",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-lorem-ipsum",
+          "status": "pass",
+          "message": "No placeholder text detected",
+          "score": 100,
+          "details": {
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-multiple-titles",
+          "status": "pass",
+          "message": "Document has a single <title> element",
+          "score": 100,
+          "details": {
+            "count": 1,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "htmlval-multiple-descriptions",
+          "status": "pass",
+          "message": "Document has a single meta description",
+          "score": 100,
+          "details": {
+            "count": 1,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    },
+    {
+      "categoryId": "geo",
+      "score": 100,
+      "passCount": 5,
+      "warnCount": 0,
+      "failCount": 0,
+      "results": [
+        {
+          "ruleId": "geo-semantic-html",
+          "status": "pass",
+          "message": "Excellent semantic HTML structure (6 distinct semantic elements found)",
+          "score": 100,
+          "details": {
+            "found": [
+              "article",
+              "section",
+              "nav",
+              "main",
+              "header",
+              "footer"
+            ],
+            "foundCount": 6,
+            "elementCounts": {
+              "article": 3,
+              "section": 2,
+              "nav": 2,
+              "main": 1,
+              "header": 1,
+              "footer": 1
+            },
+            "missingRecommended": [],
+            "totalSemanticChecked": 13,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "geo-content-structure",
+          "status": "pass",
+          "message": "Page has excellent content structure for AI extraction (all 4 signals present)",
+          "score": 100,
+          "details": {
+            "presentSignals": [
+              "main content area",
+              "hierarchical headings",
+              "paragraph content",
+              "structured data (lists/tables)"
+            ],
+            "missingSignals": [],
+            "signalCount": 4,
+            "headingLevels": [
+              1,
+              2,
+              3
+            ],
+            "paragraphWordCount": 159,
+            "hasLists": true,
+            "hasTables": false,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "geo-ai-bot-access",
+          "status": "pass",
+          "message": "AI bots are not blocked in robots.txt",
+          "score": 100,
+          "details": {
+            "robotsTxtUrl": "http://127.0.0.1:3000/robots.txt",
+            "robotsTxtAccessible": true,
+            "blockedBots": [],
+            "allowedBots": [
+              "GPTBot",
+              "ChatGPT-User",
+              "Google-Extended",
+              "CCBot",
+              "anthropic-ai",
+              "Claude-Web",
+              "Bytespider",
+              "PerplexityBot",
+              "Amazonbot"
+            ],
+            "totalBotsChecked": 9,
+            "blockedCount": 0,
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "geo-llms-txt",
+          "status": "pass",
+          "message": "llms.txt reference found (2 reference(s))",
+          "score": 100,
+          "details": {
+            "references": [
+              "<link rel=\"llms\" href=\"/llms.txt\">",
+              "<a href=\"/llms.txt\"> link to /llms.txt"
+            ],
+            "referenceCount": 2,
+            "note": "llms.txt is an emerging standard (llmstxt.org) - not yet required but recommended for AI visibility",
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        },
+        {
+          "ruleId": "geo-schema-drift",
+          "status": "pass",
+          "message": "Schema data is consistent with visible content (6 field(s) verified)",
+          "score": 100,
+          "details": {
+            "jsonLdCount": 4,
+            "parsedSchemas": 4,
+            "totalChecks": 6,
+            "consistentFields": [
+              "name/headline",
+              "description",
+              "name/headline",
+              "name/headline",
+              "description",
+              "author.name"
+            ],
+            "driftFields": [],
+            "pageUrl": "http://127.0.0.1:3000/blog"
+          }
+        }
+      ]
+    }
+  ],
+  "timestamp": "2026-02-28T08:37:56.693Z",
+  "crawledPages": 1
+}
