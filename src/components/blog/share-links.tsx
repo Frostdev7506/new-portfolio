@@ -1,4 +1,5 @@
 import { Linkedin, Mail, MessageCircle, Twitter } from "lucide-react";
+import { siteConfig } from "@/data/site";
 
 type ShareLinksProps = {
   title: string;
@@ -28,7 +29,7 @@ export function ShareLinks({ title, url }: ShareLinksProps) {
     },
     {
       label: "Email",
-      href: `mailto:?subject=${encode(title)}&body=${encode(url)}`,
+      href: `mailto:${siteConfig.email}?subject=${encode(title)}&body=${encode(url)}`,
       icon: Mail,
     },
   ];

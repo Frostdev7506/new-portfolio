@@ -7,7 +7,7 @@ import { buildPageMetadata, fullUrl } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Engineering Blog and Technical Notes",
   description:
-    "Practical engineering articles on architecture, rendering, APIs, performance, and release quality from real production software projects.",
+    "Practical notes on architecture, rendering, APIs, and release quality from real software projects.",
   path: "/blog",
   keywords: [
     "software engineering blog",
@@ -24,7 +24,7 @@ export default async function BlogPage() {
     "@type": "Blog",
     name: `${siteConfig.name} Blog`,
     description:
-      "Practical engineering articles on architecture, rendering, APIs, performance, and release quality from real production software projects.",
+      "Practical notes on architecture, rendering, APIs, and release quality from real software projects.",
     url: `${siteConfig.url}/blog`,
     inLanguage: siteConfig.language,
     author: {

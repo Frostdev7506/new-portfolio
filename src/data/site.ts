@@ -3,9 +3,9 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "Full-stack MERN and cloud engineer portfolio featuring shipped products, reliable delivery, and clear business outcomes in production.",
+    "Portfolio-first MERN and cloud engineer delivering reliable products with measurable business outcomes.",
   longDescription:
-    "I ship cloud-first MERN products that scale cleanly and deliver measurable outcomes across performance, reliability, and developer experience.",
+    "I build cloud-first MERN products that stay fast, stable, and easy to operate at scale.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.netlify.app",
   locale: "en_US",
   language: "en",

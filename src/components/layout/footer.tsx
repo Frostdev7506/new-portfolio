@@ -32,10 +32,11 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label={social.label}
+                  aria-label={`Visit ${siteConfig.name} on ${social.label}`}
                   className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-slate-900/75 text-slate-300 transition duration-200 hover:border-brand-300/70 hover:text-white"
                 >
                   <Icon className="h-4 w-4" />
+                  <span className="sr-only">{`Visit ${siteConfig.name} on ${social.label}`}</span>
                 </a>
               );
             })}
