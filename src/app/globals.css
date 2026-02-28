@@ -231,14 +231,45 @@ a {
   margin: 0.9em 0;
 }
 
-.prose-custom ul,
+.prose-custom ul {
+  margin: 1em 0;
+  padding-left: 1.5em;
+  list-style-type: square;
+}
+
 .prose-custom ol {
   margin: 1em 0;
-  padding-left: 1.2em;
+  padding-left: 1.5em;
+  list-style-type: decimal;
 }
 
 .prose-custom li {
   margin: 0.35em 0;
+}
+
+.prose-custom li>ul {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  list-style-type: circle;
+}
+
+.prose-custom strong,
+.prose-custom b {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.prose-custom em,
+.prose-custom i {
+  font-style: italic;
+}
+
+.prose-custom img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 2em 0;
+  border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
 }
 
 .prose-custom blockquote {
