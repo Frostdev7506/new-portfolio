@@ -25,6 +25,7 @@ export const siteConfig = {
     { label: "Projects", href: "/#open-source" },
     { label: "Tech", href: "/#tech-stack" },
     { label: "Blog", href: "/blog" },
+    { label: "Resume", href: "/resume" },
     { label: "Contact", href: "/#contact" },
   ],
   skills: [

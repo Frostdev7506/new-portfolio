@@ -1,0 +1,133 @@
+{
+    "personal": {
+        "name": "Neeraj Butola",
+        "github": "https://github.com/Frostdev7506",
+        "linkedIn": "https://www.linkedin.com/in/neeraj-butola",
+        "portfolio": "https://neerajbutola.netlify.app",
+        "email": "neerajbutola8910@gmail.com",
+        "mobile": "+91-8779341486"
+    },
+    "summary": "<strong>Senior Full Stack (MERN) + Cloud Engineer</strong> with 3.9+ years of experience building and scaling product-grade systems for a fintech platform at <strong>Agrow</strong>. Specialized in delivering secure, high-performance microservices using <strong>MongoDB, vue.js, React/React Native, Node.js</strong>, and <strong>Python</strong>. Designed resilient cloud architectures on <strong>AWS</strong> (EC2, ECS/EKS, S3, CloudFront, Lambda) with strong focus on uptime, security, and regulatory compliance. Implemented <strong>Nginx reverse proxy</strong>, rate limiting, security headers, API key auth, and fully automated CI/CD pipelines. Frontend expert in <strong>React, Next.js, Vite</strong> with emphasis on UX, SEO, and Core Web Vitals. Hands-on with <strong>Strapi</strong>, <strong>Redis</strong>, <strong>Kafka</strong>, <strong>NATS</strong>, <strong>Kubernetes</strong>, and event-driven patterns for low-latency fintech workflows.",
+    "experience": [
+        {
+            "title": "<strong>Software Engineer (Neoveda Technologies)</strong>",
+            "date": "JULY 2025 – NOW",
+            "points": [
+                "Led development of an <strong>AI workflow automation platform</strong> (similar to n8n/Make) that increased workflow creation speed by <strong>40%</strong> and enabled <strong>500+ integrations</strong>.",
+                "Integrated <strong>Strapi CMS</strong> with webhooks and ontology metadata, reducing manual CMS–service sync efforts by <strong>50%</strong>.",
+                "Automated <strong>E2E tests</strong> with Playwright and managed CI/CD pipelines on GitHub Actions, cutting deployment errors by <strong>30%</strong> and improving pipeline efficiency by <strong>40%</strong>.",
+                "Built high-performance full-stack apps with <strong>React, Angular, Next.js</strong>, achieving <strong>25–30% faster</strong> load times through optimized REST APIs (caching, pagination, rate limiting, JWT/OAuth2).",
+                "Executed monolith-to-microservices migration, reducing system coupling by <strong>50%</strong>, improving service scalability by <strong>30%</strong>, and standardizing API contracts and observability."
+            ]
+        },
+        {
+            "title": "<strong>Fullstack MERN Developer + AWS + Python + GCP (Oneagrow Fintech)</strong>",
+            "date": "MAY 2023 – JULY 2025",
+            "points": [
+                "Owned end-to-end architecture and delivery for the <strong>Greattr Fintech Suite</strong>: React/React Native apps, Node/Express microservices, PostgreSQL/MSSQL/MongoDB.",
+                "Built complete <strong>AWS infrastructure</strong> (S3 + CloudFront frontend, EC2/ECS backend) with blue/green deployments using Docker and GitHub Actions.",
+                "Integrated large-scale third-party services: <strong>KYC/eKYC (Aadhaar/OKYC), payments, SMS/email, maps, analytics, push notifications (FCM/SES/SNS), fraud detection APIs</strong>.",
+                "Implemented hardened <strong>Nginx edge gateway</strong> with TLS, API keys, strict CORS, security headers, and rate limiting; strengthened Linux host security.",
+                "Delivered pixel-perfect UIs using <strong>React, Next.js, Vite, React Native</strong> with design-system governance, WCAG accessibility, and performance budgets.",
+                "Boosted performance using <strong>raw SQL hot paths</strong> (no ORM), Redis lazy caching, async queues (Bull/BullMQ), and idempotent workflows for reliable transactions."
+            ]
+        },
+        {
+            "title": "<strong>Fullstack Cloud Developer (Accenture)</strong>",
+            "date": "Dec 2021 – Mar 2023",
+            "points": [
+                "Engineered automation workflows that boosted team productivity by <strong>30%+</strong>, reducing repetitive manual effort across deployments and monitoring.",
+                "Supported and enhanced enterprise apps on <strong>Azure & AWS</strong> using React, Node.js, Express, MongoDB for highly available distributed systems.",
+                "Designed and automated <strong>CI/CD pipelines</strong> with GitHub Actions, Docker, Bash & Python, reducing delivery cycle time and lowering project costs by <strong>20%</strong>.",
+                "Refactored and optimized database queries and indexes, reducing DB size by <strong>50%</strong> and improving performance by <strong>20%</strong>.",
+                "Built internal tools and reusable modules that improved code consistency and accelerated development workflows."
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "title": "<strong>Boltic Integrations SEO Platform – NEXT.JS, STRAPI, Eventer,Node.js, Kafka, AWS,NATS</strong>",
+            "links": [
+                {
+                    "text": "Docs & Demo",
+                    "url": "https://docs.boltic.io/"
+                }
+            ],
+            "points": [
+                "Served as DRI for Boltic's automation foundation spanning workflow builder, STRAPI's CMS/data hub, EXPRESS orchestration, and Eventer ingestion so teams can design 500+ integrations without touching infra.",
+                "Productized BRAN as an AI-assisted, no-code composer with prompt-to-workflow scaffolding, reusable templates, and reversible deploys powering the public apps catalog.",
+                "Hardened EXPRESS + Eventer on EKS with Kafka/NATS-backed retries, multi-tenant secret isolation, and autoscaled job orchestration to hit <strong>40% faster workflow creation</strong> and <strong>30% higher throughput</strong>.",
+                "Automated documentation at <a href=\"https://docs.boltic.io/\" class=\"text-[#003399]\">docs.boltic.io</a>, keeping release notes, integration metadata, and workflow samples synchronized with CMS updates without exposing the underlying services."
+            ]
+        },
+        {
+            "title": "<strong>Pupils – Student LMS (PostgreSQL, Node, Express, React, Tailwind)</strong>",
+            "links": [
+                {
+                    "text": "View Demo",
+                    "url": "https://github.com/Frostdev7506/PupilSyncServer"
+                }
+            ],
+            "points": [
+                "Built role-based auth and REST APIs with secure Linux deployments; responsive UI using <strong>React + Vite + Tailwind</strong>.",
+                "Implemented AWS SNS for real-time notifications and modular backend services ready for mobile expansion."
+            ]
+        },
+        {
+            "title": "<strong>Greattr – Fintech & Onboarding Platform (React Native, React, Node, PostgreSQL, Angular, Cypress)</strong>",
+            "links": [
+                {
+                    "text": "App Demo",
+                    "url": "https://github.com/Frostdev7506/Lyriks"
+                },
+                {
+                    "text": "Web Portal",
+                    "url": "https://www.greattr.com"
+                }
+            ],
+            "points": [
+                "<strong>Greenfield AWS build</strong>: S3 + CloudFront frontend, EC2/ECS backend, Docker pipelines, and hardened Linux servers.",
+                "Delivered pixel-perfect UIs with React, Next.js, Vite, React Native; integrated design tokens and theme management.",
+                "Implemented Nginx gateway with TLS, API keys, rate limiting, strict CORS; optimized raw SQL hot paths and Redis caching.",
+                "Added rich integrations: KYC/eKYC, payments, FCM, SMS/email, analytics, maps; dashboards for real-time merchant insights.",
+                "Scaled Angular + Node onboarding flows supporting OKYC Aadhaar eKYC, digital signatures, Cypress E2E suites, and Dockerized CI/CD."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "date": "2017 – 2020",
+            "degree": "<strong>Bachelor of Science in Computer Science</strong>, Mumbai University"
+        }
+    ],
+    "certifications": [
+        "<strong>AWS Certified Cloud Practitioner</strong>",
+        "<strong>Microsoft Certified: Azure Administrator (AZ-104)</strong>",
+        "<strong>Azure Fundamentals (AZ-900)</strong>",
+        "<strong>Azure Security (SC-900)</strong>",
+        "<strong>Azure Data Fundamentals (DP-900)</strong>",
+        "<strong>Azure AI Fundamentals (AI-900)</strong>"
+    ],
+    "technical_skills": [
+        {
+            "category": "<strong>Frontend:</strong>",
+            "skills": "<strong>React</strong>, React Native, Next.js, Vite, Tailwind, Redux, TypeScript, Accessibility (WCAG), SEO (CWV, schema.org)"
+        },
+        {
+            "category": "<strong>Backend:</strong>",
+            "skills": "<strong>Node.js</strong>, Express.js, Python (Flask/FastAPI), REST APIs, Microservices, <strong>Strapi (Headless CMS)</strong>"
+        },
+        {
+            "category": "<strong>Data/Messaging:</strong>",
+            "skills": "<strong>MongoDB</strong>, PostgreSQL, MySQL, MSSQL, <strong>Redis</strong>, <strong>Kafka</strong>, <strong>NATS</strong>"
+        },
+        {
+            "category": "<strong>Cloud/DevOps:</strong>",
+            "skills": "<strong>AWS (EC2, S3, CloudFront, ECS, EKS, Lambda)</strong>, Docker, Kubernetes, Nginx, CI/CD (GitHub Actions), CloudWatch"
+        },
+        {
+            "category": "<strong>Security:</strong>",
+            "skills": "API Keys, TLS/HTTPS, CORS, CSP/HSTS, Rate Limiting, Input Sanitization, SQL Hardening, Linux Hardening"
+        }
+    ]
+}
