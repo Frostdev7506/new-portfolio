@@ -9,7 +9,7 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.netlify.app",
   locale: "en_US",
   language: "en",
-  email: "neeraj.butola.dev@gmail.com",
+  email: "neerajbutola8910@gmail.com",
   location: "India",
   resumeUrl: "/Neeraj_Butola_Resume.pdf",
   image: "/dev-ed-wave.png",
