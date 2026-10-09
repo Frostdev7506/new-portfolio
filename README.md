@@ -1,82 +1,57 @@
-# SEO-First Developer Portfolio (Next.js App Router)
+# Neeraj’s Notebook
 
-This project is a production-ready, SEO-first developer portfolio built with Next.js App Router and Tailwind CSS.
+A developer portfolio and technical blog built with Next.js App Router, React, and Tailwind. The illustrated notebook design has a shared sidebar, responsive navigation, a light/dark theme, and dedicated Home, Projects, Blog, About, and Contact pages.
 
-## Feature Parity Maintained
+## Run locally
 
-- Homepage with:
-- Hero/intro and social links
-- Tech stack section
-- Career aspirations section
-- Achievements section
-- Portfolio projects section
-- Resume preview + download
-- GitHub repositories with language filtering + pagination
-- Contact form (EmailJS)
-- Blog index page (`/blog`)
-- Blog detail pages (`/blog/[slug]`) rendered from Markdown
-- Share buttons on blog posts
-- Existing API parity route (`/api/hello`)
-
-## SEO + Indexing Enhancements
-
-- App Router metadata across pages
-- Canonical URLs and social cards
-- Structured data (WebSite, Person, BlogPosting)
-- Dynamic `sitemap.xml` and `robots.txt`
-- `llms.txt` route for AI discoverability
-- Semantic sectioning and heading hierarchy
-
-## Performance-Oriented Choices
-
-- Server-rendered route structure
-- Optimized Next.js images and font loading
-- Data-driven content model for static generation of blog pages
-- Reduced client-side JS except where interactivity is required
-
-## Setup
-
-1. Install dependencies:
-
-```bash
-npm install
-```
-
-2. Copy environment file and fill values:
-
-```bash
-cp .env.example .env.local
-```
-
-3. Run development server:
-
-```bash
+```sh
+npm ci
 npm run dev
 ```
 
-4. Build for production:
+For a production preview:
 
-```bash
+```sh
 npm run build
 npm run start
 ```
 
-## Content Editing
+Copy `.env.example` to `.env.local` only when configuring integrations. Set `NEXT_PUBLIC_SITE_URL` to the production domain for canonical URLs and the sitemap.
 
-- Blog posts: `content/posts/*.md`
-- Site profile and navigation: `src/data/site.ts`
-- Tech stack: `src/data/tech-stack.ts`
-- Projects: `src/data/projects.ts`
-- Achievements: `src/data/achievements.ts`
-- Aspirations: `src/data/aspirations.ts`
+## Contact
+
+The form keeps the existing EmailJS integration and template variables (`user_name`, `user_email`, `message`, `to_email`). Configure `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` before building to enable direct sending.
+
+Without all three settings, the form validates the enquiry and prepares a mailto draft for the visitor to review and send in their own email app. It never reports a message as sent in this mode. Failed direct sends preserve the message and offer the same email fallback.
+
+## Content and components
+
+- Profile, links, navigation: `src/data/site.ts`
+- About copy, experience, toolkit, education, article artwork: `src/data/notebook.ts`
+- Project content and destinations: `src/data/projects.ts`
+- Markdown articles: `content/posts/*.md`
+- Full résumé: `src/data/resume.json`
+- Shared shell: `src/components/layout/`
+- Page sections: `src/components/about/`, `blog/`, `contact/`, and `projects/`
+- Shared links, introductions, and contact banner: `src/components/shared/`
+- Existing Button primitive: `src/components/ui/button.tsx`
+- Palette, typography, and responsive layout: `src/app/globals.css`
+- Illustration sources and prompts: `docs/illustrations.md`
+
+The former homepage modules in `src/components/home/` remain available as historical components; the new route compositions use the domain components above. Existing content data and API implementations are retained.
 
 ## Routes
 
-- `/`
-- `/blog`
-- `/blog/[slug]`
-- `/api/hello`
-- `/api/github-repos`
-- `/robots.txt`
-- `/sitemap.xml`
-- `/llms.txt`
+`/`, `/projects`, `/blog`, `/blog/[slug]`, `/about`, `/contact`, `/resume`, `/privacy`, and `/editorial-policy`.
+
+Supporting endpoints: `/api/hello`, `/api/github-repos`, `/robots.txt`, `/sitemap.xml`, `/llms.txt`, and `/manifest.webmanifest`.
+
+## Verification
+
+```sh
+npm run lint
+npm test
+npm run build
+```
+
+The small Node test suite checks contact validation and mailto encoding. Tests were run with Node 24 (native TypeScript support). Browser coverage and visual comparison evidence are recorded in `design-qa.md`. Performance benchmarking and live EmailJS delivery are separate follow-up checks.

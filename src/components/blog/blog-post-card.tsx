@@ -1,34 +1,43 @@
+import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
+import { postArtwork } from "@/data/notebook";
 
 export function BlogPostCard({ post }: { post: BlogPost }) {
+  const artwork = postArtwork[post.slug];
   return (
-    <article className="rounded-2xl border border-border bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-900">
-      <Link href={`/blog/${post.slug}`} className="group">
-        <h2 className="text-2xl font-semibold text-slate-900 transition group-hover:text-brand-700 dark:text-slate-100 dark:group-hover:text-brand-300">
-          {post.title}
-        </h2>
+    <article className="archive-post">
+      {artwork && (
+        <Link href={"/blog/" + post.slug} tabIndex={-1} aria-hidden="true">
+          <Image
+            src={artwork.image}
+            alt=""
+            width={340}
+            height={210}
+            className="archive-art"
+          />
+        </Link>
+      )}
+      <div>
+        <h3>
+          <Link href={"/blog/" + post.slug}>{post.title}</Link>
+        </h3>
+        <p>{artwork?.description || post.description}</p>
+        <p className="post-meta">
+          {formatDate(post.date)}
+          <span>·</span>
+          {post.readtime}
+        </p>
+      </div>
+      <Link
+        className="archive-arrow"
+        href={"/blog/" + post.slug}
+        aria-label={"Read " + post.title}
+      >
+        <ArrowRight aria-hidden="true" />
       </Link>
-
-      <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-        <span>{formatDate(post.date)}</span>
-        <span>•</span>
-        <span>{post.readtime}</span>
-      </div>
-
-      <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{post.description}</p>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {post.tags.map((tag) => (
-          <span
-            key={`${post.slug}-${tag}`}
-            className="rounded-full border border-border px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
     </article>
   );
 }

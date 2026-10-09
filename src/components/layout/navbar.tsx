@@ -1,56 +1,85 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
-import { Download } from "lucide-react";
+import { usePathname } from "next/navigation";
+import {
+  ArrowUpRight,
+  FileText,
+  Folder,
+  Github,
+  Linkedin,
+  Mail,
+  Pencil,
+  UserRound,
+} from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { notebook } from "@/data/notebook";
+
+const icons = {
+  Blog: Pencil,
+  Projects: Folder,
+  About: UserRound,
+  Contact: Mail,
+};
 
 export function Navbar() {
+  const pathname = usePathname();
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-[color-mix(in_srgb,var(--surface)_84%,transparent)] backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold tracking-tight sm:text-base">
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[color:var(--accent)] text-xs font-bold text-white">
-            NB
-          </span>
-          {siteConfig.shortName}
-        </Link>
-
-        <nav aria-label="Primary" className="hidden items-center gap-1 rounded-full border border-border bg-white/70 p-1 md:flex dark:bg-slate-900/70">
-          {siteConfig.nav.map((item) => (
+    <aside className="sidebar">
+      <Link href="/" className="identity" aria-label="Neeraj Butola — home">
+        <Image
+          src="/illustrations/brand.png"
+          alt=""
+          width={384}
+          height={256}
+          className="brand-art"
+          priority
+        />
+        <span className="identity-name">{siteConfig.name}</span>
+      </Link>
+      <p className="identity-role mono">{notebook.tagline}</p>
+      <p className="identity-description">{siteConfig.longDescription}</p>
+      <nav className="primary-nav" aria-label="Primary">
+        {siteConfig.nav.map(({ label, href }) => {
+          const Icon = icons[label as keyof typeof icons];
+          const active = pathname === href || pathname.startsWith(href + "/");
+          return (
             <Link
-              key={item.label}
-              href={item.href}
-              className="rounded-full px-3 py-1.5 text-sm text-slate-600 transition hover:bg-[color-mix(in_srgb,var(--brand-100)_65%,transparent)] hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+              href={href}
+              key={href}
+              aria-current={active ? "page" : undefined}
             >
-              {item.label}
+              <Icon size={22} strokeWidth={1.65} aria-hidden="true" />
+              {label}
             </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <a
-            href={siteConfig.resumeUrl}
-            className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3.5 py-2 text-xs font-medium text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:px-4 sm:text-sm"
-          >
-            <Download className="h-4 w-4" />
-            Resume
-          </a>
-        </div>
-      </div>
-
-      <nav aria-label="Mobile" className="border-t border-border px-4 py-2 md:hidden">
-        <div className="mx-auto flex w-full max-w-6xl items-center gap-2 overflow-x-auto">
-          {siteConfig.nav.map((item) => (
-            <Link
-              key={`${item.label}-mobile`}
-              href={item.href}
-              className="shrink-0 rounded-full border border-border bg-white/80 px-3 py-1.5 text-sm text-slate-600 transition hover:text-slate-900 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+          );
+        })}
       </nav>
-    </header>
+      <nav className="social-nav" aria-label="Elsewhere">
+        <a
+          href={siteConfig.social.github}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Github size={22} aria-hidden="true" />
+          GitHub
+        </a>
+        <a
+          href={siteConfig.social.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Linkedin size={22} aria-hidden="true" />
+          LinkedIn
+        </a>
+        <Link href="/resume">
+          <FileText size={21} strokeWidth={1.65} aria-hidden="true" />
+          View résumé <ArrowUpRight size={15} aria-hidden="true" />
+        </Link>
+      </nav>
+      <p className="sidebar-note">{notebook.note}</p>
+    </aside>
   );
 }

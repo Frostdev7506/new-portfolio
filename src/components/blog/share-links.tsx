@@ -43,7 +43,7 @@ export function ShareLinks({ title, url }: ShareLinksProps) {
             href={link.href}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-2 text-sm text-slate-700 transition hover:-translate-y-0.5 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white"
+            className="inline-flex items-center gap-2 rounded border border-border px-3 py-2 text-sm"
           >
             <Icon className="h-4 w-4" />
             {link.label}
