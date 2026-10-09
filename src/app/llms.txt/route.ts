@@ -12,9 +12,6 @@ export async function GET() {
     "## Primary Pages",
     `${siteConfig.url}/`,
     `${siteConfig.url}/blog`,
-    `${siteConfig.url}${siteConfig.resumeUrl}`,
-    `${siteConfig.url}/privacy`,
-    `${siteConfig.url}/editorial-policy`,
     "",
     "## Contact",
     `mailto:${siteConfig.email}`,
@@ -24,7 +21,6 @@ export async function GET() {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=3600",
-      "X-Robots-Tag": "noindex, nofollow",
     },
   });
 }

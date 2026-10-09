@@ -10,15 +10,12 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-[linear-gradient(155deg,rgba(14,165,233,0.1),rgba(2,6,23,0.96),rgba(2,6,23,0.98))] py-10">
+    <footer className="border-t border-border bg-[color-mix(in_srgb,var(--surface)_84%,transparent)] py-10">
       <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-8 px-4 sm:px-6 md:flex-row">
         <div>
-          <p className="text-base font-semibold text-slate-100">{siteConfig.shortName}</p>
-          <p className="mt-2 max-w-md text-sm text-slate-300">
+          <p className="text-base font-semibold">{siteConfig.shortName}</p>
+          <p className="mt-2 max-w-md text-sm text-slate-600 dark:text-slate-300">
             Full-stack portfolio focused on engineering outcomes, speed, and clear product value.
-          </p>
-          <p className="mt-2 max-w-md text-xs text-slate-400">
-            Built and maintained by {siteConfig.name}, {siteConfig.stats[0].value} experience in full-stack and cloud delivery.
           </p>
         </div>
 
@@ -32,27 +29,22 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label={`Visit ${siteConfig.name} on ${social.label}`}
-                  className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-slate-900/75 text-slate-300 transition duration-200 hover:border-brand-300/70 hover:text-white"
+                  aria-label={social.label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/75 text-slate-600 transition hover:-translate-y-0.5 hover:text-slate-900 dark:bg-slate-900/75 dark:text-slate-300 dark:hover:text-white"
                 >
                   <Icon className="h-4 w-4" />
-                  <span className="sr-only">{`Visit ${siteConfig.name} on ${social.label}`}</span>
                 </a>
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 text-sm text-slate-300">
+          <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-300">
             <Link href="/">Home</Link>
             <Link href="/blog">Blog</Link>
-            <Link href="/#contact">Contact</Link>
-            <Link href={siteConfig.resumeUrl}>Resume</Link>
-            <Link href="/llms.txt">LLMS</Link>
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/editorial-policy">Editorial</Link>
+            <a href="#contact">Contact</a>
           </div>
 
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
         </div>

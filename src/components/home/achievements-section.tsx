@@ -1,73 +1,55 @@
 import { achievements } from "@/data/achievements";
+import { SectionHeading } from "@/components/shared/section-heading";
 
 export function AchievementsSection() {
   return (
-    <section className="py-24 lg:py-32 border-b border-border/40">
-      <div className="flex flex-col md:flex-row flex-wrap lg:flex-nowrap gap-16">
+    <section className="space-y-10 rounded-3xl border border-border bg-gradient-to-b from-white to-slate-50 px-6 py-10 dark:from-slate-950 dark:to-slate-900/70 md:px-8">
+      <SectionHeading
+        label="Key Accomplishments"
+        title="Impact that scales with the product"
+        description="Outcomes across cloud architecture, delivery velocity, and platform reliability."
+      />
 
-        <div className="w-full lg:w-1/3">
-          <div className="sticky top-24">
-            <h2 className="text-4xl font-black tracking-tighter sm:text-5xl uppercase mb-4">Execution</h2>
-            <p className="text-muted-foreground/80 font-light tracking-wide mb-12">
-              Proof points from production delivery.
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        {achievements.map((achievement) => (
+          <article
+            key={achievement.title}
+            className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-slate-900"
+          >
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{achievement.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              {achievement.description}
             </p>
-            <div className="hidden lg:block text-[10px] uppercase tracking-[0.4em] font-bold text-muted-foreground/30">
-              04 // Proof
+            <p className="mt-3 rounded-xl border border-border bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+              {achievement.metrics}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {achievement.keywords.map((keyword) => (
+                <span
+                  key={keyword}
+                  className="rounded-full border border-border px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300"
+                >
+                  {keyword}
+                </span>
+              ))}
             </div>
-          </div>
-        </div>
-
-        <div className="w-full lg:w-2/3 flex flex-col gap-px bg-border/40 border border-border/40">
-          {achievements.map((achievement, index) => (
-            <article
-              key={achievement.title}
-              className="group bg-background p-8 md:p-12 hover:bg-muted/5 transition-colors duration-500 relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 p-8 text-8xl font-black text-muted/20 select-none group-hover:text-primary/5 transition-colors duration-500 z-0 leading-none">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-
-              <div className="relative z-10">
-                <h3 className="text-2xl font-bold tracking-tight uppercase group-hover:text-primary transition-colors duration-300 mb-2">
-                  {achievement.title}
-                </h3>
-                <div className="text-[10px] font-mono tracking-[0.2em] text-primary/80 uppercase mb-6">
-                  {achievement.metrics}
-                </div>
-
-                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground/80 font-light mb-8">
-                  {achievement.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {achievement.keywords.map((keyword) => (
-                    <span
-                      key={keyword}
-                      className="text-[9px] uppercase tracking-[0.15em] font-medium border border-border/50 text-muted-foreground/60 px-2 py-1 bg-background group-hover:border-primary/20 transition-colors"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+          </article>
+        ))}
       </div>
 
-      <div className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-px bg-border/40 border border-border/40">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
-          { label: "Years Exp", value: "4+" },
-          { label: "Shipped", value: "50+" },
-          { label: "Teams", value: "15+" },
-          { label: "Tech Stack", value: "25+" },
+          { label: "Years Experience", value: "4+" },
+          { label: "Projects Delivered", value: "50+" },
+          { label: "Teams Collaborated", value: "15+" },
+          { label: "Tech Stack Breadth", value: "25+" },
         ].map((stat) => (
           <div
             key={stat.label}
-            className="bg-background p-8 text-center flex flex-col items-center justify-center hover:bg-muted/5 transition-colors duration-500"
+            className="rounded-2xl border border-border bg-white px-4 py-3 text-center dark:bg-slate-900"
           >
-            <p className="text-4xl font-black tracking-tighter text-foreground mb-2">{stat.value}</p>
-            <p className="text-[10px] uppercase tracking-[0.25em] font-medium text-muted-foreground/50">{stat.label}</p>
+            <p className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{stat.value}</p>
+            <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">{stat.label}</p>
           </div>
         ))}
       </div>

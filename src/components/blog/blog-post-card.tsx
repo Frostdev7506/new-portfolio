@@ -1,36 +1,32 @@
 import Link from "next/link";
 import type { BlogPost } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 
 export function BlogPostCard({ post }: { post: BlogPost }) {
   return (
-    <article className="group relative py-12 border-b border-border/40 transition-colors duration-500 hover:bg-muted/10 flex flex-col">
-      <Link href={`/blog/${post.slug}`} className="flex-1 px-4 lg:px-8">
-        <div className="mb-4 flex flex-wrap items-center gap-4 text-[10px] tracking-[0.2em] uppercase text-muted-foreground/60 font-medium">
-          <span>{formatDate(post.date)}</span>
-          <span className="w-8 h-[1px] bg-primary/20 block"></span>
-          <span>{post.readtime}</span>
-        </div>
-
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tighter text-foreground group-hover:text-primary transition-colors duration-400 mb-4 pr-8">
+    <article className="rounded-2xl border border-border bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-900">
+      <Link href={`/blog/${post.slug}`} className="group">
+        <h2 className="text-2xl font-semibold text-slate-900 transition group-hover:text-brand-700 dark:text-slate-100 dark:group-hover:text-brand-300">
           {post.title}
         </h2>
-
-        <p className="text-base font-light leading-relaxed text-muted-foreground/80 line-clamp-3 max-w-3xl">
-          {post.description}
-        </p>
       </Link>
 
-      <div className="mt-8 px-4 lg:px-8 flex flex-wrap gap-3">
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+        <span>{formatDate(post.date)}</span>
+        <span>•</span>
+        <span>{post.readtime}</span>
+      </div>
+
+      <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{post.description}</p>
+
+      <div className="mt-4 flex flex-wrap gap-2">
         {post.tags.map((tag) => (
-          <Badge
+          <span
             key={`${post.slug}-${tag}`}
-            variant="outline"
-            className="rounded-none px-3 py-1 text-[9px] tracking-[0.2em] uppercase border-border/40 text-muted-foreground bg-transparent font-medium group-hover:border-primary/30 group-hover:text-primary/80 transition-all duration-300"
+            className="rounded-full border border-border px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300"
           >
             {tag}
-          </Badge>
+          </span>
         ))}
       </div>
     </article>

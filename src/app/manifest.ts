@@ -7,12 +7,9 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: siteConfig.shortName,
     description: siteConfig.description,
     start_url: "/",
-    scope: "/",
     display: "standalone",
-    orientation: "portrait",
-    background_color: "#090c10",
-    theme_color: "#090c10",
-    categories: ["portfolio", "developer", "technology"],
+    background_color: "#f7fafc",
+    theme_color: "#0f172a",
     icons: [
       {
         src: "/favicon.png",

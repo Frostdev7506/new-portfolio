@@ -1,8 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { siteConfig } from "@/data/site";
-import { ArrowUpRight, Github } from "lucide-react";
 
 type Repo = {
   id: number;
@@ -12,10 +10,11 @@ type Repo = {
   languages: string[];
 };
 
-const maxVisibleRepos = 6;
+const reposPerPage = 6;
 
 export function GitHubWidget({ repos }: { repos: Repo[] }) {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const technologies = useMemo(() => {
     const set = new Set<string>();
@@ -24,102 +23,123 @@ export function GitHubWidget({ repos }: { repos: Repo[] }) {
   }, [repos]);
 
   const filteredRepos = useMemo(() => {
-    if (!selectedTech) return repos;
+    if (!selectedTech) {
+      return repos;
+    }
+
     return repos.filter((repo) => repo.languages.includes(selectedTech));
   }, [repos, selectedTech]);
 
-  const visibleRepos = useMemo(
-    () => filteredRepos.slice(0, maxVisibleRepos),
-    [filteredRepos],
+  const totalPages = Math.max(1, Math.ceil(filteredRepos.length / reposPerPage));
+  const currentRepos = filteredRepos.slice(
+    (currentPage - 1) * reposPerPage,
+    currentPage * reposPerPage,
   );
 
-  return (
-    <section id="open-source" className="py-24 lg:py-32 border-b border-border/40">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-        <div>
-          <h2 className="text-4xl font-black tracking-tighter sm:text-5xl uppercase mb-4">Open Source</h2>
-          <p className="text-muted-foreground max-w-md font-light tracking-wide leading-relaxed">
-            A curated selection of my public repositories and contributions.
-          </p>
-        </div>
-        <div className="hidden md:block text-xs uppercase tracking-[0.3em] font-medium text-muted-foreground/40 text-right">
-          02 // GitHub
-        </div>
-      </div>
+  const updateTechFilter = (tech: string) => {
+    setCurrentPage(1);
+    setSelectedTech((prev) => (prev === tech ? null : tech));
+  };
 
-      <div className="flex flex-wrap gap-x-8 gap-y-4 mb-16">
-        <button
-          onClick={() => setSelectedTech(null)}
-          className={`text-[10px] tracking-[0.2em] font-bold uppercase transition-all duration-300 pb-2 border-b-2 ${selectedTech === null ? "border-primary text-primary" : "border-transparent text-muted-foreground/60 hover:text-foreground"
-            }`}
-        >
-          All
-        </button>
+  return (
+    <section className="space-y-8">
+      <header className="text-center">
+        <p className="text-xs uppercase tracking-[0.22em] text-brand-700 dark:text-brand-300">Open Source</p>
+        <h2 className="mt-3 text-3xl font-semibold text-slate-900 dark:text-slate-100 md:text-4xl">
+          GitHub Repositories
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-300">
+          Current work, experiments, and learning builds from my public GitHub profile.
+        </p>
+      </header>
+
+      <div className="flex flex-wrap justify-center gap-2">
         {technologies.map((tech) => (
           <button
             key={tech}
-            onClick={() => setSelectedTech(tech)}
-            className={`text-[10px] tracking-[0.2em] font-bold uppercase transition-all duration-300 pb-2 border-b-2 ${selectedTech === tech ? "border-primary text-primary" : "border-transparent text-muted-foreground/60 hover:text-foreground"
-              }`}
+            type="button"
+            onClick={() => updateTechFilter(tech)}
+            className={`rounded-full border px-3 py-1 text-xs font-medium transition sm:text-sm ${
+              selectedTech === tech
+                ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-slate-900"
+                : "border-border bg-white text-slate-600 hover:text-slate-900 dark:bg-slate-900 dark:text-slate-300 dark:hover:text-white"
+            }`}
           >
             {tech}
           </button>
         ))}
       </div>
 
-      <div className="grid gap-px bg-border/40 sm:grid-cols-2 lg:grid-cols-3 border border-border/40">
-        {visibleRepos.map((repo) => (
-          <a
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        {currentRepos.map((repo) => (
+          <article
             key={repo.id}
-            href={repo.html_url}
-            target="_blank"
-            rel="noreferrer"
-            className="group relative bg-background p-8 focus:outline-none hover:bg-muted/5 transition-all duration-500 flex flex-col justify-between min-h-[300px]"
+            className="rounded-2xl border border-border bg-white p-5 shadow-sm dark:bg-slate-900"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{repo.name}</h3>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              {repo.description || "View this repository for implementation details and source code."}
+            </p>
 
-            <div className="relative z-10">
-              <div className="flex items-start justify-between mb-8">
-                <Github className="h-5 w-5 text-muted-foreground/60 group-hover:text-primary transition-colors duration-300" />
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 -translate-y-2 translate-x-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-500" />
-              </div>
-              <h3 className="text-lg font-bold tracking-tight uppercase mb-4 group-hover:text-primary transition-colors duration-300 line-clamp-1">{repo.name}</h3>
-              <p className="text-sm text-muted-foreground/80 font-light leading-relaxed line-clamp-3">
-                {repo.description || "Implementation details and source code."}
-              </p>
-            </div>
-
-            <div className="relative z-10 flex flex-wrap gap-3 mt-10">
-              {(repo.languages.length ? repo.languages : ["GitHub"]).slice(0, 3).map((language) => (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {(repo.languages.length ? repo.languages : ["GitHub"]).map((language) => (
                 <span
                   key={`${repo.id}-${language}`}
-                  className="text-[9px] tracking-[0.2em] uppercase font-mono text-muted-foreground/50 border border-border/50 px-2 py-1 bg-background"
+                  className="rounded-full border border-border px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300"
                 >
                   {language}
                 </span>
               ))}
             </div>
-          </a>
+
+            <a
+              href={repo.html_url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-4 inline-flex rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
+            >
+              View on GitHub
+            </a>
+          </article>
         ))}
       </div>
 
-      {visibleRepos.length === 0 && (
-        <div className="py-32 text-center text-muted-foreground/60 font-mono text-sm tracking-widest uppercase border border-border/40 border-t-0 bg-muted/5">
-          No repositories found for this filter.
-        </div>
-      )}
+      {totalPages > 1 ? (
+        <nav aria-label="Repository pagination" className="flex items-center justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+            disabled={currentPage === 1}
+            className="rounded-full border border-border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Previous
+          </button>
 
-      <div className="mt-16 text-center">
-        <a
-          href={siteConfig.social.github}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground hover:text-primary transition-all duration-300 group"
-        >
-          View full profile
-          <ArrowUpRight className="h-4 w-4 transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-        </a>
-      </div>
+          {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
+            <button
+              key={page}
+              type="button"
+              onClick={() => setCurrentPage(page)}
+              className={`h-10 w-10 rounded-full border text-sm ${
+                page === currentPage
+                  ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-slate-900"
+                  : "border-border"
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            type="button"
+            onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+            disabled={currentPage === totalPages}
+            className="rounded-full border border-border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Next
+          </button>
+        </nav>
+      ) : null}
     </section>
   );
 }

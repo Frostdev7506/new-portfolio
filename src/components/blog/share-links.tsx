@@ -1,5 +1,4 @@
 import { Linkedin, Mail, MessageCircle, Twitter } from "lucide-react";
-import { siteConfig } from "@/data/site";
 
 type ShareLinksProps = {
   title: string;
@@ -29,13 +28,13 @@ export function ShareLinks({ title, url }: ShareLinksProps) {
     },
     {
       label: "Email",
-      href: `mailto:${siteConfig.email}?subject=${encode(title)}&body=${encode(url)}`,
+      href: `mailto:?subject=${encode(title)}&body=${encode(url)}`,
       icon: Mail,
     },
   ];
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-2">
       {links.map((link) => {
         const Icon = link.icon;
         return (
@@ -44,7 +43,7 @@ export function ShareLinks({ title, url }: ShareLinksProps) {
             href={link.href}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-3 rounded-none border border-border/40 px-4 py-2.5 text-[10px] tracking-[0.2em] font-medium uppercase text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary hover:bg-primary/5"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-2 text-sm text-slate-700 transition hover:-translate-y-0.5 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white"
           >
             <Icon className="h-4 w-4" />
             {link.label}

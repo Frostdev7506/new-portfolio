@@ -8,8 +8,6 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-
-
   {
     image: "/lyrics.png",
     altText: "Lyriks music streaming application screenshot",
@@ -18,16 +16,6 @@ export const projects: Project[] = [
     technologies: ["React", "JavaScript", "API", "Express"],
     description:
       "Music streaming app built with React and the Shazam Core API.",
-  },
-
-  {
-    image: "/boltic.png",
-    altText: "Boltic AI workflow automation platform",
-    link: "https://boltic.io",
-    title: "Boltic",
-    technologies: ["AI", "Workflow Automation", "Enterprise", "No-code"],
-    description:
-      "An enterprise-grade AI workflow automation platform that streamlines operations, personalizes experiences, and ensures compliance with intelligent, scalable AI solutions.",
   },
   {
     image: "/bootcamp.png",
@@ -39,21 +27,22 @@ export const projects: Project[] = [
       "Landing page for a web-development bootcamp using React and Mapbox API.",
   },
   {
-    image: "/GreattrLandingPage.png",
-    altText: "Greattr landing page",
-    link: "https://www.greattr.com",
-    title: "Greattr Landing Page",
-    technologies: [
-      "React",
-      "JavaScript",
-      "REST API",
-      "Express",
-      "Node.js",
-      "MSSQL",
-      "Socket.io",
-    ],
+    image: "/image-generator.png",
+    altText: "OpenAI image generator dashboard",
+    link: "https://github.com/Frostdev7506/open-AI-Image-Generator",
+    title: "OpenAI Image Generator",
+    technologies: ["React", "JavaScript", "OpenAI", "Express"],
     description:
-      "Landing experience with merchant registration and OKYC Aadhaar verification flow.",
+      "Node + Express based app that generates images using OpenAI DALL-E.",
+  },
+  {
+    image: "/student.png",
+    altText: "Student management application dashboard",
+    link: "https://github.com/Frostdev7506/mern-crud-student-attendance",
+    title: "Student Management Application",
+    technologies: ["React", "JavaScript", "MySQL", "Express"],
+    description:
+      "Attendance and scheduling application for teachers with student management workflows.",
   },
   {
     image: "/GreattrMerchant.png",
@@ -73,14 +62,20 @@ export const projects: Project[] = [
       "MSME merchant application for transparent customer financing options.",
   },
   {
-    image: "/student.png",
-    altText: "Student management application dashboard",
-    link: "https://github.com/Frostdev7506/mern-crud-student-attendance",
-    title: "Student Management Application",
-    technologies: ["React", "JavaScript", "MySQL", "Express"],
+    image: "/GreattrLandingPage.png",
+    altText: "Greattr landing page",
+    link: "https://www.greattr.com",
+    title: "Greattr Landing Page",
+    technologies: [
+      "React",
+      "JavaScript",
+      "REST API",
+      "Express",
+      "Node.js",
+      "MSSQL",
+      "Socket.io",
+    ],
     description:
-      "Attendance and scheduling application for teachers with student management workflows.",
+      "Landing experience with merchant registration and OKYC Aadhaar verification flow.",
   },
-
-
 ];

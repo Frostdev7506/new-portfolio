@@ -7,7 +7,6 @@ import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
 import { siteConfig } from "@/data/site";
 import { getBlogPostUrl, getPostBySlug, getPostSlugs, getRecentPosts } from "@/lib/posts";
-import { buildPageMetadata, fullUrl } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
 type BlogPostPageProps = {
@@ -26,32 +25,38 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   if (!post) {
     return {
       title: "Post not found",
-      description: "The requested article is unavailable.",
-      robots: {
-        index: false,
-        follow: false,
-      },
     };
   }
 
-  const publishedTime = new Date(post.date).toISOString();
-  const metadata = buildPageMetadata({
+  return {
     title: post.title,
     description: post.description,
-    path: `/blog/${post.slug}`,
     keywords: [...post.tags, siteConfig.name, "engineering blog"],
-    type: "article",
-    publishedTime,
-    modifiedTime: publishedTime,
-    tags: post.tags,
-  });
-
-  return {
-    ...metadata,
-    authors: [{ name: siteConfig.name, url: siteConfig.url }],
-    creator: siteConfig.name,
-    publisher: siteConfig.name,
-    category: "technology",
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url: `/blog/${post.slug}`,
+      publishedTime: new Date(post.date).toISOString(),
+      tags: post.tags,
+      images: [
+        {
+          url: "/dev-ed-wave.png",
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: ["/dev-ed-wave.png"],
+    },
   };
 }
 
@@ -77,25 +82,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     author: {
       "@type": "Person",
       name: siteConfig.name,
-      url: siteConfig.url,
     },
     publisher: {
-      "@type": "Organization",
-      name: siteConfig.shortName,
-      url: siteConfig.url,
-      logo: {
-        "@type": "ImageObject",
-        url: fullUrl(siteConfig.image),
-      },
+      "@type": "Person",
+      name: siteConfig.name,
     },
     mainEntityOfPage: shareUrl,
-    image: [fullUrl(siteConfig.image)],
+    image: [`${siteConfig.url}/dev-ed-wave.png`],
     keywords: post.tags.join(", "),
-    isPartOf: {
-      "@type": "Blog",
-      name: `${siteConfig.name} Blog`,
-      url: `${siteConfig.url}/blog`,
-    },
   };
 
   const breadcrumbJsonLd = {
@@ -124,7 +118,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <article className="pb-32">
+    <article className="space-y-8">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -136,44 +130,38 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <header className="pt-32 pb-16 border-b border-border/40 relative">
-        <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
-
+      <header className="space-y-4">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] font-medium uppercase text-muted-foreground hover:text-primary transition-colors mb-16"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1.5 text-sm text-slate-700 transition hover:text-slate-900 dark:bg-slate-900 dark:text-slate-200"
         >
-          <ArrowLeft className="h-3 w-3" />
-          Back to Writing
+          <ArrowLeft className="h-4 w-4" />
+          Back to Blog
         </Link>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-foreground mb-12 max-w-[15ch]">
+        <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
           {post.title}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-6 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium mb-12">
-          <time dateTime={new Date(post.date).toISOString()}>{formatDate(post.date)}</time>
-          <span className="w-8 h-[1px] bg-primary/20 block"></span>
+        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+          <span>{formatDate(post.date)}</span>
+          <span>•</span>
           <span>{post.readtime}</span>
-          <span className="w-8 h-[1px] bg-primary/20 block"></span>
-          <span>By {siteConfig.name}</span>
         </div>
       </header>
 
-      <div className="py-16 md:py-24 max-w-4xl">
+      <div className="rounded-3xl border border-border bg-white px-6 py-8 shadow-sm dark:bg-slate-900 md:px-8 md:py-10">
         <MarkdownContent content={post.content} />
       </div>
 
-      <section className="py-12 border-t border-border/40">
-        <h2 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-foreground mb-8">Share Article</h2>
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Share This Article</h2>
         <ShareLinks title={post.title} url={shareUrl} />
       </section>
 
-      <section className="pt-24 pb-12 border-t border-border/40 mt-12">
-        <div className="flex items-center justify-between mb-12">
-          <h2 className="text-3xl font-black tracking-tighter uppercase text-foreground">Next Article</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-border/40">
+      <section className="space-y-4 rounded-3xl border border-border bg-white p-6 shadow-sm dark:bg-slate-900">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Recent Articles</h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {recentPosts
             .filter((candidate) => candidate.slug !== post.slug)
             .slice(0, 2)

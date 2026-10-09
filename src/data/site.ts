@@ -3,16 +3,17 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "SEO-first portfolio of Neeraj Butola, a full-stack MERN and cloud engineer shipping reliable web products with measurable performance and business outcomes.",
+    "Production-focused full-stack developer portfolio featuring MERN projects, technical writing, GitHub work, and direct contact options.",
   longDescription:
-    "I build cloud-first MERN products with practical architecture, performance discipline, and release workflows designed for reliability at production scale.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.netlify.app",
+    "I build cloud-first MERN products that ship fast, stay secure, and scale reliably under real-world traffic.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.dev",
   locale: "en_US",
   language: "en",
-  email: "neerajbutola8910@gmail.com",
-  location: "India",
-  resumeUrl: "/Neeraj_Butola_Resume.pdf",
   image: "/dev-ed-wave.png",
+  email: "neeraj.butola.dev@gmail.com",
+  location: "India",
+  resumeUrl:
+    "https://raw.githubusercontent.com/Frostdev7506/Auto-resume/build/Neeraj_Butola_Resume.pdf",
   githubUsername: "Frostdev7506",
   social: {
     github: "https://github.com/Frostdev7506",
@@ -20,13 +21,11 @@ export const siteConfig = {
     twitter: "https://twitter.com/frostdev7506",
   },
   nav: [
-    { label: "About", href: "/#about" },
-    { label: "Portfolio", href: "/#portfolio" },
-    { label: "Projects", href: "/#open-source" },
-    { label: "Tech", href: "/#tech-stack" },
+    { label: "About", href: "#about" },
+    { label: "Tech", href: "#tech-stack" },
+    { label: "Work", href: "#portfolio" },
     { label: "Blog", href: "/blog" },
-    { label: "Resume", href: "/resume" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Contact", href: "#contact" },
   ],
   skills: [
     "AWS",
