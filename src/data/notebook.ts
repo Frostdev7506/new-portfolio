@@ -21,21 +21,23 @@ export const experience = [
     company: "Neoveda Technologies",
     role: "Software Engineer",
     period: "Jul 2025 — Present",
+    current: true,
     description:
-      "Workflow automation, full-stack applications, and service architecture.",
+      "Building workflow automation tools and service integrations, connecting product interfaces with backend systems.",
   },
   {
     company: "Oneagrow Fintech",
     role: "Full-stack Developer",
     period: "May 2023 — Jul 2025",
-    description: "MERN applications, fintech integrations, and AWS delivery.",
+    description:
+      "Built the Greattr fintech suite, connecting web and mobile applications, financial integrations, and AWS infrastructure.",
   },
   {
     company: "Accenture",
     role: "Full-stack Cloud Developer",
     period: "Dec 2021 — Mar 2023",
     description:
-      "Cloud applications, internal tooling, and deployment automation.",
+      "Developed internal tools and automated cloud deployments for enterprise applications on Azure and AWS.",
   },
 ];
 

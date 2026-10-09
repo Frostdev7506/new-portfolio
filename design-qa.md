@@ -4,6 +4,37 @@ final result: passed
 
 Reviewed 2026-10-10 against the selected notebook designs, using the production preview at http://localhost:3107.
 
+## Latest acceptance: annotated homepage revision
+
+The user's four browser annotations supersede the original mockup for the homepage About, toolkit, Experience, and contact banner. The hero, projects, sidebar, and other route compositions retain the prior design. No new image assets or dependencies were needed.
+
+- **About:** replaced the repeated biography and large notebook image with a clear end-to-end capability statement, three concrete work areas grounded in the existing résumé, and an About link.
+- **Toolkit:** added the existing Lucide interface, server, and cloud icons; kept text labels and technology names.
+- **Experience:** separated dates from role details, added work summaries, highlighted the current role, and placed the résumé link beside the heading. The shared work summaries also appear on About.
+- **Contact:** replaced the pale strip with a dark teal panel, larger heading, cream action button, direct email link, and the existing envelope asset.
+
+### Evidence and comparison
+
+Source truth is the user's four annotated screenshots and comments in this conversation. Before captures from the selected local page are saved below. The comments authorize the layout/content differences; matching the rejected sections exactly is not the target.
+
+| Surface | Before | After | Combined comparison |
+| --- | --- | --- | --- |
+| About and toolkit | [Before](docs/screenshots/revision-2/before-about.jpg) | [After](docs/screenshots/revision-2/after-about.jpg) | [Side by side](docs/screenshots/revision-2/comparison-about.jpg) |
+| Experience | [Before](docs/screenshots/revision-2/before-experience.jpg) | [After](docs/screenshots/revision-2/after-experience.jpg) | [Side by side](docs/screenshots/revision-2/comparison-experience.jpg) |
+| Contact banner | [Before, lower section](docs/screenshots/revision-2/before-experience.jpg) | [After](docs/screenshots/revision-2/after-contact.jpg) | [Side by side](docs/screenshots/revision-2/comparison-contact.jpg) |
+
+Desktop before/after captures use the same light theme, route anchors, and browser-reported 1414 × 719 CSS viewport. The browser capture provider returns a 1326 × 719 content image for both; comparison boards display both at the same width and preserve their image aspect ratios. Pixel measurements are not inferred across that provider discrepancy. The full section captures were inspected at readable size for typography, icons, spacing, copy, and the envelope's transparency. The combined boards were then inspected for section composition and hierarchy. This was one revision pass, with no remaining P0/P1/P2 findings.
+
+**Fidelity surfaces:** DM Sans and monospace labels remain consistent with the notebook design. Spacing deliberately expands Experience to accommodate useful work summaries. Cream, teal, and charcoal tokens are retained; the contact panel uses a fixed deep teal surface with readable cream text and focus outline in both themes. Toolkit icons use the existing library; the envelope remains a real raster asset with clean transparency. Copy comes from the existing work history without adding metrics or availability claims.
+
+**Verification:** lint and the production build passed; all three existing contact tests passed. The new About and Contact calls to action were clicked and reached their routes. All four revised sections were checked at 320px, 390px, 768px, 1024px, and the desktop viewport; no horizontal document overflow or broken images was observed. Dark Experience was visually inspected, and the local page was returned to light mode. The final browser console contained no error/warning entries. The About route still renders and has no mobile overflow.
+
+Additional evidence: [phone About](docs/screenshots/revision-2/mobile-about.jpg), [phone toolkit](docs/screenshots/revision-2/mobile-tech-stack.jpg), [phone Experience](docs/screenshots/revision-2/mobile-experience.jpg), [phone banner](docs/screenshots/revision-2/mobile-contact.jpg), [320px banner](docs/screenshots/revision-2/contact-320.jpg), [dark Experience](docs/screenshots/revision-2/experience-dark.jpg).
+
+No new integration work was included. Live EmailJS delivery and performance benchmarking remain outside this revision's verification scope. The earlier report below records the initial design implementation; its homepage images are historical evidence.
+
+---
+
 ## Findings
 
 No actionable P0/P1/P2 findings remain in the five implemented page designs. This is a visual and functional acceptance pass, not a claim of pixel identity or a performance audit.
@@ -18,7 +49,7 @@ Source visual truth:
 - About: `/Users/neeraj/neeraj/portfolio/page-designs-2026-10-10/about-desktop-v1.png` — 992 × 1586 pixels.
 - Contact: `/Users/neeraj/neeraj/portfolio/page-designs-2026-10-10/contact-desktop-v1.png` — 1487 × 1058 pixels.
 
-These raster mockups do not encode a browser CSS viewport or device scale. They depict desktop layouts despite differing export widths. Implementation captures use a 1440 × 1000 CSS viewport, devicePixelRatio 1, with 1440 × 1000 PNG output. Both sides are scaled to equal display widths in the comparison boards, without stretching either image. The smaller mockup export widths are not treated as mobile breakpoints.
+These raster mockups do not encode a browser CSS viewport or device scale. They depict desktop layouts despite differing export widths. Implementation captures use a 1440 × 1000 CSS viewport, devicePixelRatio 1, with 1440 × 1000 image output. Both sides are scaled to equal display widths in the comparison boards, without stretching either image. The smaller mockup export widths are not treated as mobile breakpoints.
 
 State: light theme, matching route, initial/default content; Contact has empty fields. The contact action differs intentionally because the local build lacks EmailJS configuration. Dark mode and narrower widths are additional resilience checks because the source does not provide those states.
 

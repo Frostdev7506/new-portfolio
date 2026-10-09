@@ -6,26 +6,37 @@ export function Experience({ detailed = false }: { detailed?: boolean }) {
     <section
       id="experience"
       className={
-        "section-block experience" + (detailed ? " detailed-experience" : "")
+        "section-block experience" +
+        (detailed ? " detailed-experience" : " work-history")
       }
     >
       <p className="eyebrow">
         {detailed ? "The journey." : "Where I’ve worked."}
       </p>
-      <h2>{detailed ? "Where I’ve worked" : "Experience"}</h2>
+      <div className="section-heading-row">
+        <h2>{detailed ? "Where I’ve worked" : "Experience"}</h2>
+        {!detailed && <TextLink href="/resume">Full résumé</TextLink>}
+      </div>
       <ol className="experience-list">
         {experience.map((job) => (
           <li key={job.company}>
+            {!detailed && (
+              <div className="job-dates">
+                <span className="job-period">{job.period}</span>
+                {job.current && (
+                  <span className="current-role">Current role</span>
+                )}
+              </div>
+            )}
             <div>
               <h3>{job.company}</h3>
-              <p>{job.role}</p>
-              {detailed && <p className="job-description">{job.description}</p>}
+              <p className="job-role">{job.role}</p>
+              <p className="job-description">{job.description}</p>
             </div>
-            <span className="job-period">{job.period}</span>
+            {detailed && <span className="job-period">{job.period}</span>}
           </li>
         ))}
       </ol>
-      {!detailed && <TextLink href="/resume">View full résumé</TextLink>}
     </section>
   );
 }

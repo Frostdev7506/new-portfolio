@@ -6,7 +6,10 @@ import { siteConfig } from "@/data/site";
 
 export function ContactBanner({ compact = false }: { compact?: boolean }) {
   return (
-    <section id="contact" className="contact-banner">
+    <section
+      id="contact"
+      className={"contact-banner" + (compact ? "" : " contact-banner-feature")}
+    >
       <Image
         src={
           compact
@@ -14,20 +17,27 @@ export function ContactBanner({ compact = false }: { compact?: boolean }) {
             : "/illustrations/envelope.png"
         }
         alt=""
-        width={250}
-        height={170}
+        width={360}
+        height={250}
+        sizes="(max-width: 900px) 145px, 250px"
       />
       <div>
+        {!compact && <p className="eyebrow">Let’s talk.</p>}
         <h2>
           {compact
             ? "Let’s build something useful."
-            : "Have something in mind?"}
+            : "Good things start with a conversation."}
         </h2>
-        {!compact && <p>I’d love to hear about it.</p>}
+        {!compact && (
+          <p className="banner-description">
+            A project to build, a problem to untangle, or an idea to explore —
+            I’d love to hear about it.
+          </p>
+        )}
         <div className="banner-actions">
           <Button asChild size="lg" className="primary-button">
             <Link href="/contact">
-              {compact ? "Get in touch" : "Say hello"}
+              {compact ? "Get in touch" : "Let’s talk about it"}
               <ArrowRight aria-hidden="true" />
             </Link>
           </Button>

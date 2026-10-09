@@ -23,9 +23,11 @@ export function Toolkit({ compact = false }: { compact?: boolean }) {
             const Icon = icons[toolkit.indexOf(group)];
             return (
               <div key={group.title} className="toolkit-item">
-                {!compact && (
-                  <Icon size={42} strokeWidth={1.25} aria-hidden="true" />
-                )}
+                <Icon
+                  size={compact ? 32 : 42}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
                 <div>
                   <h3>{group.title}</h3>
                   <p>{group.skills}</p>
