@@ -734,43 +734,75 @@ img {
   max-width: 560px;
 }
 .work-history {
-  padding: 42px 0;
+  --timeline-axis: 176px;
+  padding: 42px 0 48px;
+}
+.work-history .section-heading-row {
+  margin-bottom: 38px;
 }
 .work-history .experience-list {
   margin: 0;
 }
 .work-history .experience-list li {
+  position: relative;
   display: grid;
-  grid-template-columns: 165px minmax(0, 1fr);
+  grid-template-columns: 140px minmax(0, 1fr);
   align-items: start;
-  gap: 28px;
-  padding: 26px 24px;
-}
-.work-history .experience-list li:first-child {
-  background: var(--brand-100);
+  column-gap: 72px;
+  padding: 0 0 44px;
   border: 0;
-  border-left: 3px solid var(--brand-700);
-  padding-left: 21px;
+}
+.work-history .experience-list li::before {
+  content: "";
+  position: absolute;
+  left: var(--timeline-axis);
+  top: 17px;
+  bottom: -17px;
+  border-left: 1px solid var(--brand-700);
+  opacity: 0.35;
 }
 .work-history .experience-list li:last-child {
-  border-bottom: 0;
   padding-bottom: 0;
+}
+.work-history .experience-list li:last-child::before {
+  display: none;
+}
+.job-milestone {
+  position: absolute;
+  left: calc(var(--timeline-axis) - 11px);
+  top: 6px;
+  display: flex;
+  background: var(--page-bg);
+  color: var(--brand-700);
+}
+.job-milestone svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.5;
+}
+[data-current="true"] > .job-milestone {
+  color: var(--accent);
 }
 .job-dates {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding-top: 5px;
+  align-items: flex-end;
+  gap: 7px;
+  padding-top: 7px;
 }
 .work-history .job-period {
-  font-size: 13px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
 }
 .current-role {
-  color: var(--brand-900);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  font-family: var(--font-note), cursive;
+  font-size: 28px;
+  line-height: 1;
+  transform: rotate(-6deg);
 }
 .work-history .experience-list h3 {
   font-size: 24px;
@@ -1604,20 +1636,27 @@ img {
     padding: 0;
     overflow-wrap: anywhere;
   }
-  .work-history .experience-list li {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 24px 0;
+  .work-history {
+    --timeline-axis: 11px;
   }
-  .work-history .experience-list li:first-child {
-    padding: 24px 20px;
+  .work-history .experience-list li {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 12px;
+    padding: 0 0 38px 44px;
   }
   .work-history .job-dates {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+    min-height: 28px;
     padding: 0;
+  }
+  .work-history .current-role {
+    font-size: 25px;
+  }
+  .work-history .current-role svg {
+    display: none;
   }
   .work-history .experience-list h3 {
     font-size: 23px;

@@ -1,3 +1,4 @@
+import { ArrowUpRight, Circle, CircleDot } from "lucide-react";
 import { experience } from "@/data/notebook";
 import { TextLink } from "@/components/shared/text-link";
 
@@ -17,16 +18,25 @@ export function Experience({ detailed = false }: { detailed?: boolean }) {
         <h2>{detailed ? "Where I’ve worked" : "Experience"}</h2>
         {!detailed && <TextLink href="/resume">Full résumé</TextLink>}
       </div>
-      <ol className="experience-list">
+      <ol className="experience-list" aria-label="Career timeline">
         {experience.map((job) => (
-          <li key={job.company}>
+          <li key={job.company} data-current={job.current}>
             {!detailed && (
-              <div className="job-dates">
-                <span className="job-period">{job.period}</span>
-                {job.current && (
-                  <span className="current-role">Current role</span>
-                )}
-              </div>
+              <>
+                <div className="job-dates">
+                  <span className="job-period">{job.period}</span>
+                  {job.current && (
+                    <span className="current-role">
+                      <span className="sr-only">Current role</span>
+                      <span aria-hidden="true">now</span>
+                      <ArrowUpRight size={22} aria-hidden="true" />
+                    </span>
+                  )}
+                </div>
+                <span className="job-milestone" aria-hidden="true">
+                  {job.current ? <CircleDot /> : <Circle />}
+                </span>
+              </>
             )}
             <div>
               <h3>{job.company}</h3>

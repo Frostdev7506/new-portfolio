@@ -4,7 +4,21 @@ final result: passed
 
 Reviewed 2026-10-10 against the selected notebook designs, using the production preview at http://localhost:3107.
 
-## Latest acceptance: annotated homepage revision
+## Latest acceptance: Experience timeline
+
+The user's Experience annotation requests a timeline and rejects the boxed current-role treatment. This revision changes only the homepage work-history presentation: a continuous fine teal line connects three Lucide milestones, the current position uses an orange marker and a Caveat “now” note, and dates align to the left on desktop. Mobile places the dates above each role beside the timeline. The role names, dates, descriptions, résumé destination, and About-page layout are retained.
+
+Source evidence: the user's annotated screenshot in this conversation and the [before capture](docs/screenshots/revision-3/before.jpg). [Combined composition and focused comparison](docs/screenshots/revision-3/comparison.jpg) shows the old and new layouts side by side, including readable current-role typography and marker details. [Desktop result](docs/screenshots/revision-3/desktop.jpg), [phone result](docs/screenshots/revision-3/mobile.jpg), [320px result](docs/screenshots/revision-3/width-320.jpg), [dark result](docs/screenshots/revision-3/dark.jpg).
+
+The desktop source and revised captures use the same light state, section anchor, and browser-reported 1414 × 719 CSS viewport; both capture files are 1326 × 719 content images from the browser provider. The board scales both equally and preserves their aspect ratios. Its focused detail uses the actual captures at native image size. The original annotation is a change brief, so the requested removal of boxes and addition of the connecting line are intentional differences.
+
+Fidelity review: DM Sans company/role text remains; dates use the existing monospace family and the current marker uses the existing handwritten font. Spacing separates chapters without card surfaces or row dividers. Teal and orange match the notebook palette in both themes. Milestones and the small arrow are library icons, not raster or custom SVG substitutes. All work-history copy is unchanged. Full and focused comparisons were inspected; no actionable P0/P1/P2 finding remains.
+
+Verification: lint, production build, and whitespace checks passed. At 320px, 390px, 768px, 1024px, and desktop widths the document had no horizontal overflow; all three milestones shared the same horizontal position at each tested width. Desktop, phone, and dark captures were inspected. The résumé link was clicked and reached `/resume`; no console warnings or errors were captured. The timeline remains an ordered list, decorative markers are hidden from assistive technology, and the visual “now” note has explicit screen-reader text. No new test was added for this presentation-only change. Performance benchmarking remains deferred.
+
+---
+
+## Previous acceptance: annotated homepage revision
 
 The user's four browser annotations supersede the original mockup for the homepage About, toolkit, Experience, and contact banner. The hero, projects, sidebar, and other route compositions retain the prior design. No new image assets or dependencies were needed.
 
