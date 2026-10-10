@@ -4,6 +4,8 @@ A developer portfolio and technical blog built with Next.js App Router, React, a
 
 ## Run locally
 
+Use Node.js 24, matching CI and the test suite's native TypeScript support.
+
 ```sh
 npm ci
 npm run dev
@@ -75,3 +77,17 @@ npm run build
 ```
 
 The small Node test suite checks contact validation and mailto encoding. Tests were run with Node 24 (native TypeScript support). Browser coverage and visual comparison evidence are recorded in `design-qa.md`. Performance benchmarking and live EmailJS delivery are separate follow-up checks.
+
+## GitHub Actions
+
+`.github/workflows/ci.yml` runs `npm ci`, lint, tests, and a production build for pull requests targeting `main` and pushes to `main`. It uses Node.js 24, caches npm downloads, and cancels superseded runs. No repository secrets are required. Netlify continues to handle deployments.
+
+## CodeRabbit
+
+Enable reviews through the GitHub App using the [official setup guide](https://docs.coderabbit.ai/platforms/github-com):
+
+1. Sign in to [CodeRabbit](https://app.coderabbit.ai/login) with GitHub and choose `Frostdev7506`.
+2. Install the app with **Only select repositories**, select `new-portfolio`, review the requested permissions, and authorize it.
+3. On an existing PR, comment `@coderabbitai full review` to request a review of the entire diff. New PRs and subsequent commits are reviewed automatically by default. See the [review commands](https://docs.coderabbit.ai/guides/commands).
+
+The app installation is separate from this workflow; no CodeRabbit API key or extra workflow is needed for GitHub PR reviews.
