@@ -2,14 +2,7 @@ import Image from "next/image";
 import type { Project } from "@/data/projects";
 import { TextLink } from "@/components/shared/text-link";
 
-export function ProjectCard({
-  project,
-  headingLevel = "h2",
-}: {
-  project: Project;
-  headingLevel?: "h2" | "h3";
-}) {
-  const Heading = headingLevel;
+export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="project-card">
       <a
@@ -29,11 +22,11 @@ export function ProjectCard({
         />
       </a>
       <div className="project-copy">
-        <Heading>
+        <h2>
           <a href={project.link} target="_blank" rel="noopener noreferrer">
             {project.title}
           </a>
-        </Heading>
+        </h2>
         <p>{project.description}</p>
         <p className="project-technologies">
           {project.technologies.join(" · ")}

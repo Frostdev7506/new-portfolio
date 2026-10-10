@@ -38,7 +38,13 @@ Without all three settings, the form validates the enquiry and prepares a mailto
 - Palette, typography, and responsive layout: `src/app/globals.css`
 - Illustration sources and prompts: `docs/illustrations.md`
 
-The former homepage modules in `src/components/home/` remain available as historical components; the new route compositions use the domain components above. Existing content data and API implementations are retained.
+The homepage uses `NotebookHero`, `ProjectIndex`, the compact About introduction, the existing toolkit and career timeline, and `ContactPostcard`. Homepage styles live in `src/app/home.css`; other routes keep their shared styles. Unused legacy homepage modules and their private helpers have been removed; Git history retains earlier implementations.
+
+### Replacing projects
+
+Edit `src/data/projects.ts`. Each entry supplies `title`, `summary` (the short index label), `description`, `image`, `altText`, `technologies`, `link`, and `linkLabel`. Keep titles unique. Place screenshots in `public/` and use their root-relative paths (for example, `/my-project.png`). The preview uses a consistent 16:9 image area.
+
+The first three entries appear in the homepage selector; all entries appear on `/projects`. Replace or reorder entries in this one array to update both views—no per-project component or CSS changes are needed. Project selection supports mouse, touch, arrow keys, Home, and End through the existing Radix library. Source links open in a new tab. The postcard opens the visitor’s email app; the full contact form remains at `/contact`.
 
 ## Routes
 

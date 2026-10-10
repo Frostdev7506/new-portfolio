@@ -45,7 +45,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <ContactBanner compact />
+      <ContactBanner />
     </>
   );
 }

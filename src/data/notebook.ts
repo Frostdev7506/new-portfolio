@@ -74,3 +74,12 @@ export const postArtwork: Record<
     description: "A short follow-up written in MDX.",
   },
 };
+
+export const homeNotebook = {
+  title: ["I build for the web.", "And write things down."],
+  description: "I’m Neeraj, a full-stack developer in India. Here you’ll find the things I build and the notes I keep along the way.",
+  about: [
+    "At Neoveda, I work on workflow automation and service integrations. Before that, I built web and mobile products for Greattr at Oneagrow Fintech.",
+    "This notebook is where I share projects and explain what I learn about building for the web.",
+  ],
+};

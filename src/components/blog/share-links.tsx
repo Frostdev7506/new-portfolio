@@ -5,30 +5,26 @@ type ShareLinksProps = {
   url: string;
 };
 
-function encode(value: string) {
-  return encodeURIComponent(value);
-}
-
 export function ShareLinks({ title, url }: ShareLinksProps) {
   const links = [
     {
       label: "Twitter/X",
-      href: `https://twitter.com/intent/tweet?text=${encode(title)}&url=${encode(url)}`,
+      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
       icon: Twitter,
     },
     {
       label: "LinkedIn",
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encode(url)}`,
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
       icon: Linkedin,
     },
     {
       label: "WhatsApp",
-      href: `https://wa.me/?text=${encode(`${title} ${url}`)}`,
+      href: `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`,
       icon: MessageCircle,
     },
     {
       label: "Email",
-      href: `mailto:?subject=${encode(title)}&body=${encode(url)}`,
+      href: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`,
       icon: Mail,
     },
   ];

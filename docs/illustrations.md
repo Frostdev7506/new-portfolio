@@ -19,3 +19,14 @@ Generated with the built-in imagegen tool from the user-approved notebook mockup
 - `public/illustrations/paper-plane.png`: Cream paper airplane pointing upper-right, fine ink folds, teal cable, and orange emphasis strokes.
 
 The Lyriks and Greattr website screenshots reuse the original repository assets. Project illustration alt text explicitly identifies them as illustrations.
+
+## Correspondence Notebook revision
+
+Generated from the approved Correspondence Notebook reference with transparent backgrounds, using the same pen, paper, teal cable, and restrained orange palette:
+
+- `public/illustrations/home-workbench.png` (1254 × 1254): browser, charcoal server, and open notebook linked by a teal cable; small handwritten interface/server notes. Used beside the identity-first hero.
+- `public/illustrations/about-connections.png` (1470 × 1070): web app → APIs → cloud, with the “parts in between” note. Used in the compact About section.
+- `public/illustrations/postcard-paper.png` (1774 × 887): blank cream postcard with fine border, lower-left leaf, and curled lower-right corner. The heading, message, address, and button are HTML rather than embedded text.
+- `public/illustrations/postcard-stamp.png` (1493 × 1054): small N/B India stamp with postal cancellation waves. Decorative, with empty alt text.
+
+Original generated PNGs are retained. The layout does not require a bespoke illustration for replacement projects; update their image paths and content in `src/data/projects.ts`.

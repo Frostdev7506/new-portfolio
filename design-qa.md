@@ -4,7 +4,53 @@ final result: passed
 
 Reviewed 2026-10-10 against the selected notebook designs, using the production preview at http://localhost:3107.
 
-## Latest acceptance: Experience timeline
+## Latest acceptance: Correspondence Notebook and reusable project index
+
+The homepage implements the selected Correspondence Notebook direction, with the later approved project-index design. The hero introduces Neeraj and offers direct paths to projects and writing; the featured article is a secondary strip. A selectable project list controls one shared preview, About supplies work context, and the contact area is a postcard with real text and email links. The existing experience timeline is unchanged.
+
+### Source and capture evidence
+
+- [Approved full-page revision](docs/screenshots/revision-4/reference-page.png): 834 × 1886 pixels, generated source `exec-5956b0b3-28ea-4ee5-a1b0-86535a323991.png`.
+- [Approved project index](docs/screenshots/revision-4/reference-projects.png): 1467 × 1072 pixels, generated source `exec-5d04f743-233b-40b3-8053-1ad43b711287.png`. This supersedes the project rows in the full-page mockup.
+- Desktop captures: [hero](docs/screenshots/revision-4/hero.jpg), [projects](docs/screenshots/revision-4/projects.jpg), [About and timeline](docs/screenshots/revision-4/about-experience.jpg), [postcard](docs/screenshots/revision-4/contact.jpg).
+- Source and implementation were opened together and visually inspected in [hero](docs/screenshots/revision-4/compare-hero.jpg), [projects](docs/screenshots/revision-4/compare-projects.jpg), [About](docs/screenshots/revision-4/compare-about.jpg), and [postcard](docs/screenshots/revision-4/compare-contact.jpg) comparisons. The [HTML board](docs/screenshots/revision-4/comparison.html) preserves the paired source files.
+- Responsive evidence: [390px project selection](docs/screenshots/revision-4/mobile-projects.jpg), [390px postcard](docs/screenshots/revision-4/mobile-contact.jpg), [dark hero](docs/screenshots/revision-4/dark.jpg).
+
+Desktop captures use a 1440 × 1024 CSS viewport and produce 1440 × 1024 images at devicePixelRatio 1. Mobile captures use 390 × 844; the dark capture uses 1024 × 844. The source raster exports do not specify a CSS viewport or density. Comparison boards scale each source and capture to the same display width, preserve aspect ratios, and crop only to bring corresponding sections together. A temporary browser capture scaling issue was resolved by resetting the viewport before the final About comparison. No pixel-identity claim is made.
+
+### Findings and corrections
+
+1. Hero copy wrapped the second sentence onto the first line. Separate block spans and a wider copy column restore the intended two-part heading.
+2. Shared heading rules muted the project eyebrow. A scoped selector restores the teal hierarchy.
+3. At phone widths, the project archive link wrapped and the postcard leaf overlapped the email address. The link stays on one line; the mobile paper background aligns to the right to keep the address clear.
+4. The project preview initially cropped the application screenshot. Contain sizing now preserves the full image within a consistent 16:9 area.
+5. Project names used as tab values created space-containing ARIA IDs. Numeric tab values now produce valid matching trigger/panel references. Arrow keys, Home, and End were exercised after the correction.
+
+No remaining P0/P1/P2 findings were observed in the reviewed states. P3 differences: the existing sidebar and utility header remain, the postcard is taller to accommodate readable HTML content, and generated strokes differ from the raster mockups. The small “pick a build” annotation is omitted; the labeled tab controls provide the instruction through their interaction and accessible name.
+
+### Fidelity surfaces
+
+- **Typography:** existing DM Sans body/display, monospace labels, and Caveat handwriting are retained. Heading wraps and readable phone sizes were inspected.
+- **Spacing:** identity-first hero, compact article strip, two-column project selector, contextual About section, and divided postcard follow the selected compositions. The project selector and postcard stack on phones.
+- **Colors:** warm paper, charcoal, teal, and orange remain consistent. Dark mode retains light illustration grounds so handwritten ink stays legible; the postcard remains a cream paper object.
+- **Assets:** four transparent PNG assets follow the approved notebook style. Actual project screenshots and the existing project artwork are reused. Next Image provides responsive delivery; no new runtime dependency was added.
+- **Content:** project destinations, article content, résumé, and contact integrations remain. New copy uses existing work history without invented metrics or availability promises. Postcard copy and address are selectable HTML, separate from the decorative art.
+
+### Verification and Ponytail cleanup
+
+- `npm run lint`, all 3 contact tests, and `npm run build` passed after the final cleanup. TypeScript passed and Next generated 20 routes. The existing non-failing Node module-type warning remains.
+- Mouse/touch selection updates project image, description, stack, and destination together. Keyboard ArrowDown, Home, and End select the expected project. Trigger/panel ARIA references resolve. The hero anchor lands on projects and the archive link reaches `/projects`.
+- Widths 320, 390, 768, 1024, and 1440 were checked for horizontal document overflow and offscreen controls. Mobile and dark captures were inspected. Final homepage console checks returned no warnings or errors.
+- Home, Projects, Blog, About, Contact, Résumé, `/api/hello`, and `/api/github-repos` returned HTTP 200. The featured article also returned 200 in the markup comparison.
+- A TypeScript import traversal identified 19 source files unreachable from App Router entrypoints and tests. Removed those legacy modules and their private helpers, removed the unused Framer Motion dependency, simplified the remaining contact banner and project-card options, and removed obsolete banner CSS. The live contact validation, error handling, email fallback, APIs, and reusable Button/Radix primitives remain.
+- Captured and compared normalized main HTML before and after cleanup for Home, Projects, Blog, the featured article, About, Contact, and Résumé. All seven match, including text, links, classes, IDs, and accessibility attributes. The temporary comparison script ignores script payloads and insignificant text whitespace.
+- Explicit assertions confirm the experience component, every timeline CSS rule, and the career data block are unchanged from commit `a1c3e1a`.
+
+Performance benchmarking and live EmailJS delivery remain deferred. Mailto destinations were inspected without sending an email. This is a design and behavior-preservation check, not a complete accessibility or cross-browser audit.
+
+---
+
+## Previous acceptance: Experience timeline
 
 The user's Experience annotation requests a timeline and rejects the boxed current-role treatment. This revision changes only the homepage work-history presentation: a continuous fine teal line connects three Lucide milestones, the current position uses an orange marker and a Caveat “now” note, and dates align to the left on desktop. Mobile places the dates above each role beside the timeline. The role names, dates, descriptions, résumé destination, and About-page layout are retained.
 

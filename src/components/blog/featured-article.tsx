@@ -12,8 +12,7 @@ export function FeaturedArticle({
   post: BlogPost;
   home?: boolean;
 }) {
-  const Heading = home ? "h1" : "h2";
-
+  const href = "/blog/" + post.slug;
   return (
     <article
       className={
@@ -21,30 +20,27 @@ export function FeaturedArticle({
       }
     >
       <div className="feature-copy">
-        <p className="eyebrow">{home ? "Open notebook." : "Featured"}</p>
-        <Heading>
-          <Link href={"/blog/" + post.slug}>{post.title}</Link>
-        </Heading>
-        <p className="feature-description">{notebook.featuredDescription}</p>
+        <p className="eyebrow">{home ? "From the notebook" : "Featured"}</p>
+        <h2>
+          <Link href={href}>{post.title}</Link>
+        </h2>
         {!home && (
-          <p className="post-meta">
-            {formatDate(post.date)}
-            <span>·</span>
-            {post.readtime}
-            <span className="meta-tags">{post.tags.join(" · ")}</span>
-          </p>
+          <>
+            <p className="feature-description">{notebook.featuredDescription}</p>
+            <p className="post-meta">
+              {formatDate(post.date)}
+              <span>·</span>
+              {post.readtime}
+              <span className="meta-tags">{post.tags.join(" · ")}</span>
+            </p>
+          </>
         )}
         <div className="feature-links">
-          <TextLink href={"/blog/" + post.slug}>Read article</TextLink>
-          {home && (
-            <TextLink href="/blog" className="quiet-link">
-              All writing
-            </TextLink>
-          )}
+          <TextLink href={href}>Read article</TextLink>
         </div>
       </div>
       <Link
-        href={"/blog/" + post.slug}
+        href={href}
         className="feature-art-link"
         aria-label={"Read " + post.title}
       >
@@ -54,8 +50,8 @@ export function FeaturedArticle({
           width={1942}
           height={809}
           className="feature-art"
-          sizes="(max-width: 900px) 100vw, (max-width: 1200px) 70vw, 1040px"
-          priority
+          sizes="(max-width: 600px) 100vw, 480px"
+          priority={!home}
         />
       </Link>
     </article>

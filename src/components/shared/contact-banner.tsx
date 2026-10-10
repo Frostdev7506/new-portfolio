@@ -2,50 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/data/site";
 
-export function ContactBanner({ compact = false }: { compact?: boolean }) {
+export function ContactBanner() {
   return (
-    <section
-      id="contact"
-      className={"contact-banner" + (compact ? "" : " contact-banner-feature")}
-    >
+    <section id="contact" className="contact-banner">
       <Image
-        src={
-          compact
-            ? "/illustrations/paper-plane.png"
-            : "/illustrations/envelope.png"
-        }
+        src="/illustrations/paper-plane.png"
         alt=""
         width={360}
         height={250}
         sizes="(max-width: 900px) 145px, 250px"
       />
       <div>
-        {!compact && <p className="eyebrow">Let’s talk.</p>}
-        <h2>
-          {compact
-            ? "Let’s build something useful."
-            : "Good things start with a conversation."}
-        </h2>
-        {!compact && (
-          <p className="banner-description">
-            A project to build, a problem to untangle, or an idea to explore —
-            I’d love to hear about it.
-          </p>
-        )}
+        <h2>Let’s build something useful.</h2>
         <div className="banner-actions">
           <Button asChild size="lg" className="primary-button">
             <Link href="/contact">
-              {compact ? "Get in touch" : "Let’s talk about it"}
+              Get in touch
               <ArrowRight aria-hidden="true" />
             </Link>
           </Button>
-          {!compact && (
-            <a className="banner-email" href={"mailto:" + siteConfig.email}>
-              {siteConfig.email}
-            </a>
-          )}
         </div>
       </div>
     </section>
