@@ -5,7 +5,7 @@ import { projects } from "@/data/projects";
 import { FeaturedArticle } from "@/components/blog/featured-article";
 import { NotebookHero } from "@/components/home/notebook-hero";
 import { ProjectIndex } from "@/components/projects/project-index";
-import { AboutIntro } from "@/components/about/about-intro";
+import { AboutSummary } from "@/components/home/about-summary";
 import { Experience } from "@/components/about/experience";
 import { Toolkit } from "@/components/about/toolkit";
 import { ContactPostcard } from "@/components/shared/contact-postcard";
@@ -22,7 +22,7 @@ export default async function HomePage() {
       <NotebookHero />
       {featured && <FeaturedArticle post={featured} home />}
       <ProjectIndex projects={projects.slice(0, 3)} />
-      <AboutIntro compact />
+      <AboutSummary />
       <Toolkit compact />
       <Experience />
       <ContactPostcard />

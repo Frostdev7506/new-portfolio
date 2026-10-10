@@ -1,0 +1,259 @@
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 24px;
+  align-items: center;
+  padding-bottom: 42px;
+}
+.about-intro h2 {
+  font-size: 33px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.about-intro p:not(.eyebrow) {
+  color: var(--text-muted);
+  margin-top: 20px;
+  font-size: 19px;
+  line-height: 1.6;
+}
+.about-intro .text-link {
+  margin-top: 24px;
+}
+.notebook-art {
+  width: 100%;
+  height: auto;
+}
+
+.toolkit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.toolkit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 12px 0;
+}
+.toolkit-item svg {
+  flex-shrink: 0;
+  color: var(--brand-700);
+}
+.toolkit-item h3 {
+  font-size: 21px;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.toolkit-item p {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+.compact-toolkit {
+  padding: 28px 0 34px;
+  border-top: 1px solid var(--border);
+}
+.compact-toolkit .toolkit-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.compact-toolkit .toolkit-item {
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px 0 0;
+  border-right: 1px solid var(--border);
+}
+.compact-toolkit .toolkit-item:last-child {
+  border: 0;
+  padding-right: 0;
+}
+.compact-toolkit h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.compact-toolkit p {
+  font-size: 14px;
+}
+.experience-list {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+}
+.experience-list li {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+.experience-list li:first-child {
+  border-top: 1px solid var(--border);
+}
+.experience-list h3 {
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+.experience-list p {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+.job-period {
+  font-size: 15px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.detailed-experience .experience-list {
+  margin-bottom: 0;
+  border-left: 1px solid var(--brand-700);
+  margin-left: 12px;
+}
+.detailed-experience .experience-list li {
+  position: relative;
+  padding: 0 0 32px 35px;
+  border: 0;
+  align-items: start;
+}
+.detailed-experience .experience-list li:last-child {
+  padding-bottom: 0;
+}
+.detailed-experience .experience-list li::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 6px;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--brand-700);
+  background: var(--page-bg);
+  border-radius: 100%;
+}
+.detailed-experience .job-period {
+  border-left: 1px solid var(--border);
+  padding-left: 30px;
+  margin-top: 5px;
+}
+.job-description {
+  margin-top: 6px;
+  max-width: 560px;
+}
+.work-history {
+  --timeline-axis: 176px;
+  padding: 42px 0 48px;
+}
+.work-history .section-heading-row {
+  margin-bottom: 38px;
+}
+.work-history .experience-list {
+  margin: 0;
+}
+.work-history .experience-list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 72px;
+  padding: 0 0 44px;
+  border: 0;
+}
+.work-history .experience-list li::before {
+  content: "";
+  position: absolute;
+  left: var(--timeline-axis);
+  top: 17px;
+  bottom: -17px;
+  border-left: 1px solid var(--brand-700);
+  opacity: 0.35;
+}
+.work-history .experience-list li:last-child {
+  padding-bottom: 0;
+}
+.work-history .experience-list li:last-child::before {
+  display: none;
+}
+.job-milestone {
+  position: absolute;
+  left: calc(var(--timeline-axis) - 11px);
+  top: 6px;
+  display: flex;
+  background: var(--page-bg);
+  color: var(--brand-700);
+}
+.job-milestone svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.5;
+}
+[data-current="true"] > .job-milestone {
+  color: var(--accent);
+}
+.job-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  padding-top: 7px;
+}
+.work-history .job-period {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+}
+.current-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  font-family: var(--font-note), cursive;
+  font-size: 28px;
+  line-height: 1;
+  transform: rotate(-6deg);
+}
+.work-history .experience-list h3 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+.work-history .experience-list .job-role {
+  color: var(--brand-700);
+  font-size: 15px;
+  font-weight: 500;
+}
+.work-history .job-description {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 59ch;
+}
+.education-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  margin-top: 25px;
+}
+.education-grid > div {
+  display: flex;
+  gap: 25px;
+}
+.education-grid > div + div {
+  padding-left: 30px;
+  border-left: 1px solid var(--border);
+}
+.education-grid svg {
+  flex-shrink: 0;
+}
+.education h2 {
+  font-size: 23px;
+  margin-bottom: 10px;
+}
+.education p,
+.education li {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.education ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

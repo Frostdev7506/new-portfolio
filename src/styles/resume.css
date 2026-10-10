@@ -1,0 +1,21 @@
+.resume-document {
+  margin-top: 28px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+.resume-document > div {
+  background: var(--surface-soft);
+}
+.resume-document > div > div {
+  min-width: 650px;
+}
+
+@media (max-width: 360px) {
+  .primary-nav svg {
+    display: none;
+  }
+  .primary-nav a {
+    justify-content: center;
+    flex: 1;
+  }
+}

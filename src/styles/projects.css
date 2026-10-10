@@ -1,0 +1,55 @@
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 34px;
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+}
+.project-card {
+  min-width: 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.project-cover-link {
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface-soft);
+}
+.project-cover {
+  display: block;
+  aspect-ratio: 16/9;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+.project-cover-link:hover .project-cover {
+  transform: scale(1.025);
+}
+.project-copy :is(h2, h3) {
+  margin: 20px 0 10px;
+  font-size: clamp(23px, 2.1vw, 29px);
+}
+.project-copy > p {
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.project-copy .project-technologies {
+  font-size: 14px;
+  margin-top: 19px;
+}
+.project-copy .text-link {
+  margin-top: 17px;
+  font-size: 17px;
+}
+
+.closing-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 25px 0 0;
+  font-size: 16px;
+  color: var(--text-muted);
+}

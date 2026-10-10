@@ -27,7 +27,8 @@ Without all three settings, the form validates the enquiry and prepares a mailto
 ## Content and components
 
 - Profile, links, navigation: `src/data/site.ts`
-- About copy, experience, toolkit, education, article artwork: `src/data/notebook.ts`
+- About copy, experience, education, article artwork: `src/data/notebook.ts`
+- Toolkit skills, icons, and homepage selection: `src/data/toolkit.ts`
 - Project content and destinations: `src/data/projects.ts`
 - Markdown articles: `content/posts/*.md`
 - Full résumé: `src/data/resume.json`
@@ -35,10 +36,23 @@ Without all three settings, the form validates the enquiry and prepares a mailto
 - Page sections: `src/components/about/`, `blog/`, `contact/`, and `projects/`
 - Shared links, introductions, and contact banner: `src/components/shared/`
 - Existing Button primitive: `src/components/ui/button.tsx`
-- Palette, typography, and responsive layout: `src/app/globals.css`
+- Style entrypoint and import order: `src/app/globals.css`
+- Theme, layout, page sections, and responsive rules: `src/styles/`
 - Illustration sources and prompts: `docs/illustrations.md`
 
-The homepage uses `NotebookHero`, `ProjectIndex`, the compact About introduction, the existing toolkit and career timeline, and `ContactPostcard`. Homepage styles live in `src/app/home.css`; other routes keep their shared styles. Unused legacy homepage modules and their private helpers have been removed; Git history retains earlier implementations.
+The homepage uses `NotebookHero`, `ProjectIndex`, `AboutSummary`, the existing toolkit and career timeline, and `ContactPostcard`. Homepage styles live in `src/styles/home.css`; other routes keep their shared styles. Unused legacy homepage modules and their private helpers have been removed; Git history retains earlier implementations.
+
+### Where changes belong
+
+- `src/app/` composes pages and declares route metadata.
+- `src/data/` holds editable content; components render it without duplicating it.
+- `projects/project-index.tsx` renders the section heading; `project-tabs.tsx` owns Radix selection; `project-preview.tsx` renders the selected project.
+- `contact/contact-form.tsx` renders the fields and feedback; `use-contact-form.ts` owns validation, submission, and fallback state. Pure validation and mailto encoding stay in `src/lib/contact.ts`.
+- `home/about-summary.tsx` is the homepage introduction; `about/about-intro.tsx` is the separate About-page composition.
+- `resume/resume-viewer.tsx` composes the document from its header, experience, projects, and shared section heading. Content remains in `src/data/resume.json`.
+- Styles are split by purpose in `src/styles/`. Preserve the import order in `src/app/globals.css`: it preserves the existing cascade, including responsive overrides.
+
+Component paths above are relative to `src/components/`. The existing experience timeline and integration contracts are retained.
 
 ### Replacing projects
 

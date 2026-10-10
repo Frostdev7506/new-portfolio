@@ -4,6 +4,25 @@ final result: passed
 
 Reviewed 2026-10-10 against the selected notebook designs, using the production preview at http://localhost:3107.
 
+## Latest verification: modular, behavior-preserving refactor
+
+This pass reorganizes the approved implementation without changing its design or content. `ProjectIndex` now composes a section heading, interactive `ProjectTabs`, and `ProjectPreview`. Contact markup and `useContactForm` submission state are separate. The homepage uses a named `AboutSummary` instead of a different composition hidden behind an About flag. Résumé header, experience, projects, and section headings have focused components. Toolkit icons and homepage inclusion are explicit content fields rather than array-position lookups.
+
+The former global stylesheet is split into named files under `src/styles/`, with `src/app/globals.css` retaining an ordered list of imports. A PostCSS-based comparison recursively expanded local imports and confirmed that every selector, declaration, media query, and rule order matched the pre-refactor baseline. No styles, breakpoints, content, or timeline presentation were changed.
+
+Verification after the final code changes:
+
+- Lint, all 3 contact tests, TypeScript, and the production build passed. The existing non-failing Node module-type warning remains.
+- Normalized main HTML matched before/after on Home, Projects, Blog, the featured article, About, Contact, and Résumé, including text, element structure, classes, IDs, links, and accessibility attributes. Script payloads and insignificant text whitespace were excluded.
+- In the browser, submitting an empty contact form focused Name; after filling Name it focused Email; after filling Email it focused Message. A valid enquiry produced an encoded email draft with the entered values retained. Editing the draft cleared the stale email link and status. No email was sent.
+- Project End/Home/ArrowDown navigation selected the expected project, preview, and destination. All tab/panel references resolved after extraction.
+- The desktop and 390px project layout were inspected; no horizontal overflow or broken images were observed in the mobile check. The final console contained no warning or error entries.
+- [Desktop evidence](docs/screenshots/modular-refactor/desktop.jpg) uses 1440 × 1024; [mobile selection](docs/screenshots/modular-refactor/mobile-projects.jpg) uses 390 × 844. The existing design comparisons below remain applicable because the rendered markup and complete stylesheet rule sequence are unchanged.
+
+No new dependencies or configuration were introduced. Performance benchmarking, actual EmailJS delivery, and cross-browser certification remain outside this pass.
+
+---
+
 ## Latest acceptance: Correspondence Notebook and reusable project index
 
 The homepage implements the selected Correspondence Notebook direction, with the later approved project-index design. The hero introduces Neeraj and offers direct paths to projects and writing; the featured article is a secondary strip. A selectable project list controls one shared preview, About supplies work context, and the contact area is a postcard with real text and email links. The existing experience timeline is unchanged.

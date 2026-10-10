@@ -41,13 +41,6 @@ export const experience = [
   },
 ];
 
-export const toolkit = [
-  { title: "Interfaces", skills: "React · Next.js · TypeScript" },
-  { title: "APIs & services", skills: "Node.js · Express · Python" },
-  { title: "Data & messaging", skills: "SQL · MongoDB · Redis · Kafka" },
-  { title: "Cloud & delivery", skills: "AWS · Docker · Kubernetes · CI/CD" },
-];
-
 export const education = {
   degree: "B.Sc. Computer Science",
   institution: "Mumbai University · 2017–2020",
