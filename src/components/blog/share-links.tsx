@@ -1,4 +1,7 @@
-import { Linkedin, Mail, MessageCircle, Twitter } from "lucide-react";
+import { Mail } from "lucide-react";
+import { LinkedinIcon, WhatsappIcon, XIcon } from "@/components/shared/brand-icons";
+
+import { CopyButton } from "./copy-button";
 
 type ShareLinksProps = {
   title: string;
@@ -8,19 +11,19 @@ type ShareLinksProps = {
 export function ShareLinks({ title, url }: ShareLinksProps) {
   const links = [
     {
-      label: "Twitter/X",
+      label: "X",
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
-      icon: Twitter,
+      icon: XIcon,
     },
     {
       label: "LinkedIn",
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-      icon: Linkedin,
+      icon: LinkedinIcon,
     },
     {
       label: "WhatsApp",
       href: `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`,
-      icon: MessageCircle,
+      icon: WhatsappIcon,
     },
     {
       label: "Email",
@@ -30,7 +33,8 @@ export function ShareLinks({ title, url }: ShareLinksProps) {
   ];
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="share-links">
+      <CopyButton text={url} label="Copy link" />
       {links.map((link) => {
         const Icon = link.icon;
         return (
@@ -39,10 +43,13 @@ export function ShareLinks({ title, url }: ShareLinksProps) {
             href={link.href}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 rounded border border-border px-3 py-2 text-sm"
+            className="share-link"
+            title={link.label}
+            aria-label={
+              link.label === "Email" ? "Share by email" : `Share on ${link.label}`
+            }
           >
-            <Icon className="h-4 w-4" />
-            {link.label}
+            <Icon className="share-icon" aria-hidden="true" />
           </a>
         );
       })}

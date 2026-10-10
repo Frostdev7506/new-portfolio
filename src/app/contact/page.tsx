@@ -1,5 +1,6 @@
+import { GithubIcon as Github, LinkedinIcon as Linkedin } from "@/components/shared/brand-icons";
 import Image from "next/image";
-import { ArrowUpRight, Github, Linkedin, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/contact/contact-form";
 import { CopyEmail } from "@/components/contact/copy-email";
 import { PageIntro } from "@/components/shared/page-intro";

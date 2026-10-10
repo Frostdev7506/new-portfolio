@@ -13,7 +13,7 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label="Toggle color theme"
       className="theme-toggle"
     >
       <Sun className="theme-sun size-6" strokeWidth={1.5} aria-hidden="true" />

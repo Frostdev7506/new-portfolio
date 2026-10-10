@@ -1,5 +1,6 @@
+import { GithubIcon as Github, LinkedinIcon as Linkedin } from "@/components/shared/brand-icons";
 import { Fragment } from "react";
-import { Github, Linkedin, Globe, Mail, Smartphone } from "lucide-react";
+import { Globe, Mail, Smartphone } from "lucide-react";
 import resumeData from "@/data/resume.json";
 
 const { personal } = resumeData;

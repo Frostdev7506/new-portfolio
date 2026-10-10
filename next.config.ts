@@ -7,6 +7,20 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/blog/my-first-blog-post",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/blog/my-second-blog-post",
+        destination: "/blog",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     const csp = [
       "default-src 'self'",

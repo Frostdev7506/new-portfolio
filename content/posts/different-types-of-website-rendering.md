@@ -1,9 +1,12 @@
 ---
-title: Exploring Different Types of Website Rendering
-date: 2023-08-01
-slug: different-types-of-website-rendering
-readtime: 1 minute
-tags: Tech,React,Server
+title: "Exploring Different Types of Website Rendering"
+description: "A closer look at how the web turns code into pages."
+date: "2023-08-01"
+category: "Web engineering"
+tags: ["Tech", "React", "Server"]
+cover: "/illustrations/web-rendering.png"
+coverAlt: "A browser, static page, and server connected by teal cables in a notebook sketch."
+takeaway: "Choose a rendering method based on what each page needs from the server and browser."
 ---
 
 ## **Website Rendering Types**
