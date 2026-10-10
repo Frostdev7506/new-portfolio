@@ -3,9 +3,9 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "Production-focused full-stack developer portfolio featuring MERN projects, technical writing, GitHub work, and direct contact options.",
+    "Neeraj Butola’s open notebook: web applications, cloud systems, projects, and notes on what I learn along the way.",
   longDescription:
-    "I build cloud-first MERN products that ship fast, stay secure, and scale reliably under real-world traffic.",
+    "I build web applications and cloud systems, and write about what I learn along the way.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.dev",
   locale: "en_US",
   language: "en",
@@ -21,11 +21,10 @@ export const siteConfig = {
     twitter: "https://twitter.com/frostdev7506",
   },
   nav: [
-    { label: "About", href: "#about" },
-    { label: "Tech", href: "#tech-stack" },
-    { label: "Work", href: "#portfolio" },
     { label: "Blog", href: "/blog" },
-    { label: "Contact", href: "#contact" },
+    { label: "Projects", href: "/projects" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
   skills: [
     "AWS",

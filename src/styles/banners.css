@@ -1,0 +1,41 @@
+.contact-banner,
+.explore-banner {
+  background: var(--brand-100);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding: 22px 30px;
+  margin: 12px 0 0;
+}
+.contact-banner > img {
+  width: 23%;
+  max-width: 220px;
+  height: 145px;
+  object-fit: contain;
+}
+.contact-banner h2 {
+  font-size: 30px;
+  margin-bottom: 7px;
+}
+.banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  margin-top: 16px;
+}
+.primary-button {
+  height: 48px;
+  min-width: 160px;
+  background: #cf4327;
+  color: white;
+  border: 1px solid #bd391f;
+  border-radius: 5px;
+  padding: 0 26px;
+  font-size: 16px;
+}
+.primary-button:hover {
+  background: #b9381d;
+  color: white;
+}

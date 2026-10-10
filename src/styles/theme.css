@@ -1,0 +1,50 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --page-bg: #f8f6f0;
+  --surface: #fffdf8;
+  --surface-soft: #edeae1;
+  --text: #20231f;
+  --text-muted: #62645f;
+  --border: #d9d5cb;
+  --brand-100: #e9f2ed;
+  --brand-300: #6bbcb1;
+  --brand-700: #087f7c;
+  --brand-900: #16625b;
+  --accent: #c94023;
+  --sidebar-width: clamp(248px, 22.5vw, 320px);
+}
+
+.dark {
+  --page-bg: #191e1c;
+  --surface: #222925;
+  --surface-soft: #303830;
+  --text: #f5f2e9;
+  --text-muted: #b5beb6;
+  --border: #3d4740;
+  --brand-100: #263e36;
+  --brand-300: #85cbbd;
+  --brand-700: #88d2c7;
+  --brand-900: #afe5d6;
+  --accent: #ff9b7a;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --color-page: var(--page-bg);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-border: var(--border);
+  --color-brand-100: var(--brand-100);
+  --color-brand-300: var(--brand-300);
+  --color-brand-700: var(--brand-700);
+  --color-brand-900: var(--brand-900);
+  --color-primary: var(--accent);
+  --color-primary-foreground: #ffffff;
+  --color-ring: var(--brand-700);
+  --color-background: var(--page-bg);
+  --color-muted-foreground: var(--text-muted);
+  --color-accent: var(--surface-soft);
+  --color-accent-foreground: var(--text);
+  --color-destructive: #ba3020;
+}

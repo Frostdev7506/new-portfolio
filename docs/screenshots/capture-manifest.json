@@ -1,0 +1,98 @@
+{
+  "home": {
+    "height": 3436,
+    "viewport": 1000,
+    "width": 1440,
+    "y": 0,
+    "frames": [
+      {
+        "y": 0,
+        "file": "home-final-0.png"
+      },
+      {
+        "y": 1000,
+        "file": "home-final-1.png"
+      },
+      {
+        "y": 2000,
+        "file": "home-final-2.png"
+      },
+      {
+        "y": 2436,
+        "file": "home-final-3.png"
+      }
+    ]
+  },
+  "projects": {
+    "height": 2161,
+    "viewport": 1000,
+    "width": 1440,
+    "y": 0,
+    "frames": [
+      {
+        "y": 0,
+        "file": "projects-final-0.png"
+      },
+      {
+        "y": 1000,
+        "file": "projects-final-1.png"
+      },
+      {
+        "y": 1161.5,
+        "file": "projects-final-2.png"
+      }
+    ]
+  },
+  "blog": {
+    "height": 1331,
+    "viewport": 1000,
+    "width": 1440,
+    "y": 0,
+    "frames": [
+      {
+        "y": 0,
+        "file": "blog-final-0.png"
+      },
+      {
+        "y": 331.5,
+        "file": "blog-final-1.png"
+      }
+    ]
+  },
+  "about": {
+    "height": 2160,
+    "viewport": 1000,
+    "width": 1440,
+    "y": 0,
+    "frames": [
+      {
+        "y": 0,
+        "file": "about-final-0.png"
+      },
+      {
+        "y": 1000,
+        "file": "about-final-1.png"
+      },
+      {
+        "y": 1160,
+        "file": "about-final-2.png"
+      }
+    ]
+  },
+  "contact": {
+    "height": 1108,
+    "viewport": 1000,
+    "width": 1440,
+    "y": 0,
+    "frames": [
+      {
+        "y": 0,
+        "file": "contact-final-0.png"
+      },
+      {
+        "y": 108,
+        "file": "contact-final-1.png"
+      }
+    ]
+  }
+}

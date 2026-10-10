@@ -6,7 +6,12 @@ import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
 import { siteConfig } from "@/data/site";
-import { getBlogPostUrl, getPostBySlug, getPostSlugs, getRecentPosts } from "@/lib/posts";
+import {
+  getBlogPostUrl,
+  getPostBySlug,
+  getPostSlugs,
+  getRecentPosts,
+} from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
 
 type BlogPostPageProps = {
@@ -18,7 +23,9 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
@@ -68,7 +75,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const recentPosts = await getRecentPosts(2);
+  const recentPosts = await getRecentPosts(3);
 
   const shareUrl = getBlogPostUrl(post.slug);
 
@@ -118,7 +125,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <article className="space-y-8">
+    <article className="article-page">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -130,38 +137,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <header className="space-y-4">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1.5 text-sm text-slate-700 transition hover:text-slate-900 dark:bg-slate-900 dark:text-slate-200"
-        >
+      <header>
+        <Link href="/blog" className="text-link">
           <ArrowLeft className="h-4 w-4" />
           Back to Blog
         </Link>
 
-        <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-          {post.title}
-        </h1>
+        <h1>{post.title}</h1>
 
-        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+        <div className="post-meta">
           <span>{formatDate(post.date)}</span>
           <span>•</span>
           <span>{post.readtime}</span>
         </div>
       </header>
 
-      <div className="rounded-3xl border border-border bg-white px-6 py-8 shadow-sm dark:bg-slate-900 md:px-8 md:py-10">
+      <div className="article-body">
         <MarkdownContent content={post.content} />
       </div>
 
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">Share This Article</h2>
+      <section className="article-section">
+        <h2>Share This Article</h2>
         <ShareLinks title={post.title} url={shareUrl} />
       </section>
 
-      <section className="space-y-4 rounded-3xl border border-border bg-white p-6 shadow-sm dark:bg-slate-900">
-        <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Recent Articles</h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <section className="article-section">
+        <h2>Recent Articles</h2>
+        <div>
           {recentPosts
             .filter((candidate) => candidate.slug !== post.slug)
             .slice(0, 2)

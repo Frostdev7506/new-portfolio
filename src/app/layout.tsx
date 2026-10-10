@@ -1,55 +1,53 @@
 import type { Metadata } from "next";
-import { Manrope, Space_Grotesk } from "next/font/google";
+import { Caveat, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
+import { PageHeader } from "@/components/layout/page-header";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { BackToTop } from "@/components/shared/back-to-top";
 import { baseMetadata, websiteJsonLd } from "@/lib/seo";
 
-const bodyFont = Manrope({
+const bodyFont = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const headingFont = Space_Grotesk({
+const noteFont = Caveat({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-note",
   display: "swap",
+  weight: "400",
 });
 
 export const metadata: Metadata = baseMetadata();
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${bodyFont.variable} ${headingFont.variable} antialiased`}>
+      <body
+        className={bodyFont.variable + " " + noteFont.variable + " antialiased"}
+      >
         <ThemeProvider>
           <script
             type="application/ld+json"
-            suppressHydrationWarning
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(websiteJsonLd()),
+            }}
           />
-          <div className="relative min-h-screen bg-page text-slate-900 dark:text-slate-100">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_5%,rgba(222,111,73,0.15),transparent_30%),radial-gradient(circle_at_92%_10%,rgba(14,118,105,0.2),transparent_28%),radial-gradient(circle_at_50%_95%,rgba(15,23,42,0.07),transparent_38%)]" />
-            <div className="relative z-10 flex min-h-screen flex-col">
-              <a
-                href="#main-content"
-                className="sr-only left-4 top-4 z-50 rounded-full bg-slate-900 px-4 py-2 text-sm text-white focus:not-sr-only focus:absolute"
-              >
-                Skip to content
-              </a>
-              <Navbar />
-              <main id="main-content" className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-12">
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <div className="site-shell">
+            <Navbar />
+            <div className="page-column">
+              <PageHeader />
+              <main id="main-content" tabIndex={-1}>
                 {children}
               </main>
               <Footer />
-              <BackToTop />
             </div>
           </div>
         </ThemeProvider>
