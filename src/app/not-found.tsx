@@ -8,7 +8,7 @@ export default function NotFound() {
       <p className="my-6">
         This page may have moved, or the link may have taken a wrong turn.
       </p>
-      <TextLink href="/">Back to the notebook</TextLink>
+      <TextLink href="/">Back home</TextLink>
     </section>
   );
 }

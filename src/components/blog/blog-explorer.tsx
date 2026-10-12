@@ -29,7 +29,7 @@ export function BlogExplorer({ posts }: { posts: PostSummary[] }) {
     <section className="blog-library" aria-labelledby="library-heading">
       <div className="library-heading">
         <div>
-          <p className="eyebrow">The notebook index</p>
+          <p className="eyebrow">Blog index</p>
           <h2 id="library-heading">Find your next idea.</h2>
         </div>
         <a className="rss-link" href="/feed.xml">
@@ -75,8 +75,8 @@ export function BlogExplorer({ posts }: { posts: PostSummary[] }) {
       </div>
       {!filtered.length && (
         <div className="blog-empty">
-          <h3>No pages turned up.</h3>
-          <p>Try a broader term, or browse the whole notebook.</p>
+          <h3>No articles found.</h3>
+          <p>Try a broader term, or browse all articles.</p>
           <Button
             variant="outline"
             onClick={() => {

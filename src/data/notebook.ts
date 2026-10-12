@@ -9,7 +9,7 @@ export const notebook = {
   about: [
     "I’m Neeraj Butola, a full-stack developer based in India. I build web applications, APIs, and the cloud systems that connect them.",
     "My work spans fintech products, workflow automation, and full-stack applications. I enjoy turning complex requirements into software people can use.",
-    "This notebook brings together my projects, technical writing, and what I learn along the way.",
+    "This site brings together my projects, blog, and what I learn along the way.",
   ],
   contactDescription:
     "A project, a question, or a conversation — I’d love to hear from you.",
@@ -59,12 +59,12 @@ export const homeNotebook = {
   description:
     "I’m a full-stack developer in India, building web applications and cloud systems. Here’s the work, and what I learn along the way.",
   projectsLink: "Explore projects",
-  blogLink: "Read the notebook",
+  blogLink: "Read the blog",
   aboutLabel: "A little context",
   aboutTitle: ["The work.", "And the person."],
   about: [
     "At Neoveda, I work on workflow automation and service integrations. Before that, I built web and mobile products for Greattr at Oneagrow Fintech.",
-    "This notebook is where I share projects and explain what I learn about building for the web.",
+    "I share projects here and use the blog to explain what I learn about building for the web.",
   ],
   aboutLink: "More about me",
   contact: {

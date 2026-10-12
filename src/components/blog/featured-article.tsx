@@ -20,7 +20,7 @@ export function FeaturedArticle({
     >
       <div className="feature-copy">
         <p className="eyebrow">
-          {home ? "From the notebook" : "Start here · Featured article"}
+          {home ? "From the blog" : "Start here · Featured article"}
         </p>
         <h2>
           <Link href={href}>{post.title}</Link>

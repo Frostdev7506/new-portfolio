@@ -17,7 +17,7 @@ export const metadata = buildPageMetadata({
 export default function AboutPage() {
   return (
     <>
-      <PageIntro eyebrow="Behind the notebook." title="About me" />
+      <PageIntro eyebrow="The person behind the work." title="About me" />
       <AboutIntro />
       <Experience detailed />
       <Toolkit />

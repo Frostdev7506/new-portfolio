@@ -45,7 +45,7 @@ export default async function BlogPage() {
       />
       <PageIntro
         className="blog-intro"
-        eyebrow="Open notebook."
+        eyebrow="Blog"
         title="Things worth writing down."
         description={notebook.blogDescription}
         image="/illustrations/blog-notebooks.png"
