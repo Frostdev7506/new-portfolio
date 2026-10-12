@@ -16,8 +16,8 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function EditorialPolicyPage() {
   const pageUrl = `${siteConfig.url}/editorial-policy`;
-  const lastUpdatedIso = "2026-02-28";
-  const lastUpdatedText = "February 28, 2026";
+  const lastUpdatedIso = "2026-10-10";
+  const lastUpdatedText = "October 10, 2026";
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -64,15 +64,16 @@ export default function EditorialPolicyPage() {
       </p>
       <p className="leading-relaxed">
         This publication is written for software engineers, founders, and hiring
-        teams who want implementation-level guidance. Articles are educational
-        and experience-based; they are not legal, financial, or medical advice.
+        teams who want implementation-level guidance. Articles combine
+        educational explanations, personal notes, and clearly labeled worked
+        examples; they are not legal, financial, or medical advice.
       </p>
 
       <h2 className="text-2xl font-semibold">How articles are written</h2>
       <ul className="list-disc space-y-2 pl-6 leading-relaxed">
         <li>
-          Posts start from real delivery work across full-stack and cloud
-          projects.
+          Posts start from engineering questions, personal notes, and LinkedIn
+          discussions. Expanded posts link to their original source.
         </li>
         <li>
           Each topic is scoped around a concrete problem, constraints, and
@@ -162,8 +163,8 @@ export default function EditorialPolicyPage() {
       <h2 className="text-2xl font-semibold">Corrections and updates</h2>
       <p className="leading-relaxed">
         Corrections are applied when errors are verified. Substantive revisions
-        update this page date and the article publication metadata so readers
-        can evaluate freshness.
+        update the article’s modification date while preserving its original
+        publication date, so readers can evaluate freshness.
       </p>
 
       <p className="leading-relaxed">

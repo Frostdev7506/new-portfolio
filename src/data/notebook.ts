@@ -1,10 +1,9 @@
 export const notebook = {
   tagline: "Full-stack developer · India",
   note: "A place for things I build and learn.",
-  featuredSlug: "different-types-of-website-rendering",
-  featuredDescription: "A closer look at how the web turns code into pages.",
+  featuredSlug: "optimistic-uploads",
   blogDescription:
-    "Notes on web development, rendering, and things learned while building.",
+    "Practical notes on faster web apps, useful AI, and the systems behind them. Ideas explored with examples, diagrams, and a little curiosity.",
   projectsDescription:
     "Web applications, experiments, and the things I’ve built along the way.",
   about: [
@@ -53,20 +52,6 @@ export const certifications = [
   "Azure Data Fundamentals · DP-900",
   "Azure AI Fundamentals · AI-900",
 ];
-
-export const postArtwork: Record<
-  string,
-  { image: string; description: string }
-> = {
-  "my-first-blog-post": {
-    image: "/illustrations/first-post.png",
-    description: "A first entry exploring Markdown formatting and examples.",
-  },
-  "my-second-blog-post": {
-    image: "/illustrations/second-post.png",
-    description: "A short follow-up written in MDX.",
-  },
-};
 
 export const homeNotebook = {
   title: ["I build for the web.", "And write things down."],

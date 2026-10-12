@@ -1,5 +1,6 @@
 "use client";
 
+import { GithubIcon as Github, LinkedinIcon as Linkedin } from "@/components/shared/brand-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,8 +8,6 @@ import {
   ArrowUpRight,
   FileText,
   Folder,
-  Github,
-  Linkedin,
   Mail,
   Pencil,
   UserRound,
@@ -63,7 +62,9 @@ export function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Github size={22} aria-hidden="true" />
+          <span className="social-mark">
+            <Github size={18} />
+          </span>
           GitHub
         </a>
         <a
@@ -71,11 +72,15 @@ export function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Linkedin size={22} aria-hidden="true" />
+          <span className="social-mark">
+            <Linkedin size={18} />
+          </span>
           LinkedIn
         </a>
         <Link href="/resume">
-          <FileText size={21} strokeWidth={1.65} aria-hidden="true" />
+          <span className="social-mark">
+            <FileText size={19} strokeWidth={1.65} aria-hidden="true" />
+          </span>
           View résumé <ArrowUpRight size={15} aria-hidden="true" />
         </Link>
       </nav>

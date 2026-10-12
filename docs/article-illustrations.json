@@ -1,0 +1,63 @@
+{
+  "created": "2026-10-10",
+  "tool": "image_gen.imagegen",
+  "transparent_background": true,
+  "style_references": [
+    "public/illustrations/web-rendering.png",
+    "public/illustrations/home-workbench.png"
+  ],
+  "style_brief": "Cream paper objects, fine charcoal outlines, colored-pencil/watercolor texture, teal cables, small orange and mustard accents. Transparent landscape notebook vignettes.",
+  "exact_common_prompt_for_final_four": "Create a polished editorial cover illustration for a personal engineering notebook blog. Match the attached existing site's illustration style: fine charcoal pen outlines, soft colored-pencil and watercolor texture, cream paper objects, muted teal cables and small orange/mustard accents. Warm thoughtful handmade technical desk vignette, clean legibility at card size, balanced landscape 3:2 composition. Absolutely transparent background, no border, no full-page paper rectangle, no glow. Sparse small handwritten labels only where specified. No logos, no decorative gibberish, no huge headings. ",
+  "assets": [
+    {
+      "slug": "optimistic-uploads",
+      "file": "public/illustrations/articles/optimistic-uploads.png",
+      "subject": "A cream browser compose window with a small mountain photo selected, a pencil mid-writing on a caption notepad, and a charcoal storage server joined by a teal cable. The photo travels on the cable while the caption is still being written. A small orange clock and teal check express work overlapping. Two tiny cream labels only: 'Upload early' and 'Publish later'. Make the distinction between uploading and publishing visually clear; no brand UI."
+    },
+    {
+      "slug": "llm-token-costs",
+      "file": "public/illustrations/articles/llm-token-costs.png",
+      "subject": "A cream prompt card fans out into several small teal token tiles entering a charcoal inference machine together on the left. On the right an orderly single-file string of orange token tiles leaves the machine one after another onto a paper response. A small notebook records a cost calculation. Exactly two small labels: 'Prefill' on the grouped input and 'Decode' on the sequential output. Attractive clear metaphor, generous whitespace."
+    },
+    {
+      "slug": "llm-quantization",
+      "file": "public/illustrations/articles/llm-quantization.png",
+      "subject": "Two cream trays of model-weight blocks sit on a developer desk, the left tray has larger teal blocks, the right has compact orange blocks fitting beside a little cream laptop with a charcoal screen and teal checkmark. A magnifying glass studies one block; a little yellow ruler suggests precision. Small handwritten labels '16-bit' and '4-bit' on the respective trays. Show same idea stored more compactly, not a magic compression machine."
+    },
+    {
+      "slug": "choosing-an-llm",
+      "file": "public/illustrations/articles/choosing-an-llm.png",
+      "subject": "An open cream engineering notebook has three neat hand-drawn checklist columns titled 'Quality', 'Latency', 'Cost'. Beside it are two small charcoal inference machines, one compact and one taller, connected to the same cream application window by a branching teal cable. Orange pencil points at the checklist. Thoughtful choosing the right tool metaphor, no invented numbers."
+    },
+    {
+      "slug": "latency-before-scaling",
+      "file": "public/illustrations/articles/latency-before-scaling.png",
+      "subject": "A cream browser request card is connected by a short teal cable to a small open cache drawer with index cards and an orange stopwatch. A longer thin teal cable loops behind to a charcoal database cabinet. Short route and long route are easy to distinguish. Only labels 'Cache' and 'Database'. Notebook desk objects with pen linework, soft pencil texture."
+    },
+    {
+      "slug": "inference-capacity-and-rate-limits",
+      "file": "public/illustrations/articles/inference-capacity-and-rate-limits.png",
+      "subject": "A tidy queue of cream request cards feeding into three small charcoal processing slots on a server, with one orange timer and a notebook showing a simple capacity bar. Teal cable links the queue to a cream output page. Labels 'Queue', 'Work', 'Reply'. Calm illustration about bounded capacity and waiting, not exponential growth, no graphs with invented numbers."
+    },
+    {
+      "slug": "ai-agents-that-finish-work",
+      "file": "public/illustrations/articles/ai-agents-that-finish-work.png",
+      "subject": "A cream desktop browser showing a short task checklist, with a teal looping path connecting an observation magnifying glass, a small charcoal mechanical helper, and a completed output document with an orange tick. A modest orange stop button at the loop edge. Labels 'Observe', 'Act', 'Check'. Express a bounded agent loop and verifiable finished work."
+    },
+    {
+      "slug": "oauth-and-supply-chain-security",
+      "file": "public/illustrations/articles/oauth-and-supply-chain-security.png",
+      "subject": "A cream application window and a small charcoal service cabinet linked by a teal cable through a small brass key on a ring. A notebook permission checklist sits alongside, with one orange checked box and two empty boxes. A tiny closed padlock protects a separate credential drawer. Label 'Limited access' on the notebook. Explain narrow permissions and trust boundaries without scary hacker imagery."
+    },
+    {
+      "slug": "smaller-models-better-systems",
+      "file": "public/illustrations/articles/smaller-models-better-systems.png",
+      "subject": "A compact charcoal inference machine fits neatly between a cream reference-card drawer and a cream answer page. A larger muted outline machine sits in the background. Teal cables connect the compact machine to relevant reference cards; an orange pencil checks the final answer. Labels 'Context', 'Model', 'Result'. Express a small capable component inside a thoughtful system, not a race or false benchmark."
+    },
+    {
+      "slug": "evaluating-ai-beyond-the-demo",
+      "file": "public/illustrations/articles/evaluating-ai-beyond-the-demo.png",
+      "subject": "A cream lab notebook on a developer desk with three neat rows labeled 'Cases', 'Checks', 'Results'. Beside it a small charcoal computer displays an orange and teal chart of simple unlabeled bars, a magnifying glass examines a single output card with a small teal check and orange question mark. Thoughtful repeatable testing, no numerical claims, no trophies."
+    }
+  ]
+}

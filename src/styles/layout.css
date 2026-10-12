@@ -75,6 +75,23 @@
 .social-nav a {
   color: var(--text-muted);
   font-size: 15px;
+  gap: 12px;
+}
+.social-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text);
+}
+.social-nav a:hover .social-mark {
+  border-color: var(--brand-300);
+  background: var(--brand-100);
+  color: var(--brand-700);
 }
 .social-nav a:hover {
   color: var(--accent);
