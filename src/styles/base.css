@@ -2,15 +2,16 @@
   box-sizing: border-box;
 }
 html {
-  scroll-padding-top: 24px;
+  scroll-padding-top: 108px;
 }
 body {
   margin: 0;
   font-family: var(--font-body), sans-serif;
   background: var(--page-bg);
   color: var(--text);
-  font-size: 18px;
-  line-height: 1.55;
+  font-size: 17px;
+  line-height: 1.6;
+  font-optical-sizing: auto;
 }
 ::selection {
   background: var(--brand-100);
@@ -25,16 +26,16 @@ p {
 h1,
 h2,
 h3 {
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
   line-height: 1.13;
-  font-weight: 700;
+  font-weight: 650;
   text-wrap: balance;
 }
 h1 {
-  font-size: clamp(48px, 5.1vw, 76px);
+  font-size: clamp(44px, 5.5vw, 72px);
 }
 h2 {
-  font-size: clamp(30px, 3vw, 42px);
+  font-size: clamp(30px, 3.5vw, 46px);
 }
 h3 {
   font-size: 27px;
@@ -73,17 +74,16 @@ button:disabled {
 img {
   max-width: 100%;
 }
-.mono,
-.eyebrow {
+.mono {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 .eyebrow {
-  color: var(--brand-700);
-  font-size: 14px;
+  color: var(--text-muted);
+  font-size: 13px;
   line-height: 1.5;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.075em;
+  letter-spacing: 0.08em;
   margin-bottom: 12px;
 }
 .skip-link {

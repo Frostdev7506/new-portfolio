@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight } from "lucide-react";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { siteConfig } from "@/data/site";
+import { ChevronRight } from "lucide-react";
 
 const pageNames: Record<string, string> = {
   blog: "Blog",
@@ -17,33 +15,20 @@ const pageNames: Record<string, string> = {
 };
 
 export function PageHeader() {
-  const segment = usePathname().split("/")[1];
+  const [, segment, child] = usePathname().split("/");
   const name = pageNames[segment];
 
+  if (!name) return null;
+
   return (
-    <header className="page-header mono">
-      <nav aria-label="Breadcrumb">
-        <Link href="/">Notebook</Link>
-        {name && (
-          <>
-            <span className="breadcrumb-divider" aria-hidden="true">
-              /
-            </span>
-            <span aria-current="page">{name}</span>
-          </>
-        )}
-      </nav>
-      <div className="header-actions">
-        <ThemeToggle />
-        <a
-          href={siteConfig.resumeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="resume-link"
-        >
-          Résumé <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
-      </div>
-    </header>
+    <nav className="site-breadcrumb" aria-label="Breadcrumb">
+      <Link href="/">Home</Link>
+      <ChevronRight size={14} aria-hidden="true" />
+      {child ? (
+        <Link href={`/${segment}`}>{name}</Link>
+      ) : (
+        <span aria-current="page">{name}</span>
+      )}
+    </nav>
   );
 }

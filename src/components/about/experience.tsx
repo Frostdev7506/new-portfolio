@@ -1,4 +1,4 @@
-import { ArrowUpRight, Circle, CircleDot } from "lucide-react";
+import { Circle, CircleDot } from "lucide-react";
 import { experience } from "@/data/notebook";
 import { TextLink } from "@/components/shared/text-link";
 
@@ -27,9 +27,7 @@ export function Experience({ detailed = false }: { detailed?: boolean }) {
                   <span className="job-period">{job.period}</span>
                   {job.current && (
                     <span className="current-role">
-                      <span className="sr-only">Current role</span>
-                      <span aria-hidden="true">now</span>
-                      <ArrowUpRight size={22} aria-hidden="true" />
+                      Current role
                     </span>
                   )}
                 </div>

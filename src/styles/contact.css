@@ -8,7 +8,7 @@
   margin-bottom: 34px;
 }
 .contact-details {
-  margin-top: -130px;
+  min-width: 0;
 }
 .contact-grid {
   display: grid;
@@ -42,8 +42,8 @@
 .form-field input,
 .form-field textarea {
   width: 100%;
-  border: 1px solid #bfbdb5;
-  border-radius: 5px;
+  border: 1px solid var(--text-muted);
+  border-radius: 12px;
   background: var(--surface);
   color: var(--text);
   padding: 13px 17px;
@@ -61,7 +61,7 @@
   opacity: 0.8;
 }
 .form-field [aria-invalid="true"] {
-  border-color: var(--accent);
+  border-color: var(--error);
 }
 .field-hint {
   font-size: 14px;
@@ -69,7 +69,7 @@
   margin: 10px 0 18px;
 }
 .field-error {
-  color: var(--accent);
+  color: var(--error);
   font-size: 14px;
   margin-top: 7px;
 }

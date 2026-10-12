@@ -3,7 +3,7 @@ import { siteConfig } from "@/data/site";
 
 export function Footer() {
   return (
-    <footer className="site-footer">
+    <footer className="portfolio-footer">
       <p>
         © {new Date().getFullYear()} {siteConfig.name}
       </p>

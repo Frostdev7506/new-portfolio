@@ -16,10 +16,10 @@ export function ThemeToggle() {
       aria-label="Toggle color theme"
       className="theme-toggle"
     >
-      <Sun className="theme-sun size-6" strokeWidth={1.5} aria-hidden="true" />
+      <Sun className="theme-sun size-5" strokeWidth={1.6} aria-hidden="true" />
       <Moon
-        className="theme-moon size-6"
-        strokeWidth={1.5}
+        className="theme-moon size-5"
+        strokeWidth={1.6}
         aria-hidden="true"
       />
     </Button>

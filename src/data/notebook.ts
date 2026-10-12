@@ -54,10 +54,25 @@ export const certifications = [
 ];
 
 export const homeNotebook = {
+  eyebrow: "Neeraj Butola · Developer & writer",
   title: ["I build for the web.", "And write things down."],
-  description: "I’m Neeraj, a full-stack developer in India. Here you’ll find the things I build and the notes I keep along the way.",
+  description:
+    "I’m a full-stack developer in India, building web applications and cloud systems. Here’s the work, and what I learn along the way.",
+  projectsLink: "Explore projects",
+  blogLink: "Read the notebook",
+  aboutLabel: "A little context",
+  aboutTitle: ["The work.", "And the person."],
   about: [
     "At Neoveda, I work on workflow automation and service integrations. Before that, I built web and mobile products for Greattr at Oneagrow Fintech.",
     "This notebook is where I share projects and explain what I learn about building for the web.",
   ],
+  aboutLink: "More about me",
+  contact: {
+    label: "Let’s connect",
+    title: "Have something in mind?",
+    description:
+      "A project, a question, or something you read here — my inbox is open.",
+    emailLink: "Write to me",
+    detailsLink: "More ways to connect",
+  },
 };

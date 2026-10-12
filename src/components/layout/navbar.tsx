@@ -1,90 +1,85 @@
 "use client";
 
-import { GithubIcon as Github, LinkedinIcon as Linkedin } from "@/components/shared/brand-icons";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  ArrowUpRight,
-  FileText,
-  Folder,
-  Mail,
-  Pencil,
-  UserRound,
-} from "lucide-react";
+import { ArrowUpRight, Menu } from "lucide-react";
+import { DropdownMenu } from "radix-ui";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { siteConfig } from "@/data/site";
-import { notebook } from "@/data/notebook";
-
-const icons = {
-  Blog: Pencil,
-  Projects: Folder,
-  About: UserRound,
-  Contact: Mail,
-};
 
 export function Navbar() {
   const pathname = usePathname();
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <aside className="sidebar">
-      <Link href="/" className="identity" aria-label="Neeraj Butola — home">
-        <Image
-          src="/illustrations/brand.png"
-          alt=""
-          width={384}
-          height={256}
-          className="brand-art"
-          priority
-        />
-        <span className="identity-name">{siteConfig.name}</span>
+    <header className="site-navigation">
+      <Link
+        href="/"
+        className="nav-identity"
+        aria-label={`${siteConfig.name} — home`}
+      >
+        <span className="nav-monogram" aria-hidden="true">nb.</span>
+        <span>{siteConfig.name}</span>
       </Link>
-      <p className="identity-role mono">{notebook.tagline}</p>
-      <p className="identity-description">{siteConfig.longDescription}</p>
-      <nav className="primary-nav" aria-label="Primary">
-        {siteConfig.nav.map(({ label, href }) => {
-          const Icon = icons[label as keyof typeof icons];
-          const active = pathname === href || pathname.startsWith(href + "/");
-          return (
-            <Link
-              href={href}
-              key={href}
-              aria-current={active ? "page" : undefined}
+      <nav className="nav-links" aria-label="Primary">
+        {siteConfig.nav.map(({ label, href }) => (
+          <Link
+            href={href}
+            key={href}
+            aria-current={isActive(href) ? "page" : undefined}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
+      <div className="nav-actions">
+        <ThemeToggle />
+        <Button asChild variant="ghost" className="nav-resume">
+          <Link href="/resume">
+            Résumé <ArrowUpRight size={15} aria-hidden="true" />
+          </Link>
+        </Button>
+        <DropdownMenu.Root modal={false}>
+          <DropdownMenu.Trigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="mobile-nav-trigger"
+              aria-label="Open navigation menu"
             >
-              <Icon size={22} strokeWidth={1.65} aria-hidden="true" />
-              {label}
-            </Link>
-          );
-        })}
-      </nav>
-      <nav className="social-nav" aria-label="Elsewhere">
-        <a
-          href={siteConfig.social.github}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="social-mark">
-            <Github size={18} />
-          </span>
-          GitHub
-        </a>
-        <a
-          href={siteConfig.social.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="social-mark">
-            <Linkedin size={18} />
-          </span>
-          LinkedIn
-        </a>
-        <Link href="/resume">
-          <span className="social-mark">
-            <FileText size={19} strokeWidth={1.65} aria-hidden="true" />
-          </span>
-          View résumé <ArrowUpRight size={15} aria-hidden="true" />
-        </Link>
-      </nav>
-      <p className="sidebar-note">{notebook.note}</p>
-    </aside>
+              <Menu className="size-5" aria-hidden="true" />
+            </Button>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content
+              className="mobile-nav-menu"
+              align="end"
+              sideOffset={12}
+              collisionPadding={20}
+              aria-label="Primary navigation"
+            >
+              {siteConfig.nav.map(({ label, href }) => (
+                <DropdownMenu.Item asChild key={href}>
+                  <Link
+                    href={href}
+                    aria-current={isActive(href) ? "page" : undefined}
+                  >
+                    {label}
+                  </Link>
+                </DropdownMenu.Item>
+              ))}
+              <DropdownMenu.Separator className="mobile-nav-separator" />
+              <DropdownMenu.Item asChild>
+                <Link href="/resume">
+                  Résumé <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
+        </DropdownMenu.Root>
+      </div>
+    </header>
   );
 }

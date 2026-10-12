@@ -30,7 +30,7 @@
   align-items: center;
   gap: 12px;
   border: 1px solid var(--border);
-  border-radius: 5px;
+  border-radius: 16px;
   padding: 0 16px;
   background: var(--surface);
 }
@@ -60,9 +60,9 @@
 }
 .blog-topics .topic-button {
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 999px;
   height: auto;
-  min-height: 40px;
+  min-height: 44px;
   padding: 8px 12px;
   color: var(--text-muted);
 }
@@ -90,6 +90,8 @@
 }
 .post-art-link {
   display: block;
+  border-radius: 16px;
+  overflow: hidden;
 }
 .post-art {
   width: 100%;
