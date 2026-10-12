@@ -1,71 +1,73 @@
 ---
-title: "Prefill vs decode: why an LLM pauses before it replies"
-description: "Prefill processes your prompt and produces the first token. Decode generates the rest of the reply. Learn how each stage affects response speed."
+title: "Prefill vs decode: how an LLM builds a reply"
+description: "Prefill processes your prompt and starts the reply. Decode continues it one token at a time. See how both stages work through a simple email example."
 date: "2026-10-12"
 category: "Practical AI"
-tags: ["LLMs", "Inference", "AI Engineering", "Performance"]
+tags: ["LLMs", "Inference", "AI Engineering"]
 cover: "/illustrations/articles/prefill-vs-decode.png"
 coverAlt: "A group of prompt tokens passes through prefill before individual reply tokens advance through decode."
-takeaway: "Prefill processes the available prompt and produces the first reply token. Decode continues the reply using the KV cache, with different latency and hardware constraints."
+takeaway: "Prefill processes the prompt and produces the first reply token. Decode uses each new token to generate the next one until the reply is complete."
 ---
-An AI assistant can take a while to start answering, then write quickly. Another request can start immediately and continue slowly. Calling both experiences “a slow model” hides the part you need to investigate.
+An LLM builds a reply in two stages. **Prefill** processes the prompt and produces the first reply token. **Decode** continues the reply, generating one new token at each step.
 
-For a typical autoregressive transformer, inference has two phases: **prefill** processes the prompt, and **decode** continues the answer. They do different amounts of work and put different pressure on the hardware.
+A token is a small piece of text. It can be a word, part of a word, or punctuation. We'll use familiar words to show the steps, although a real tokenizer may split them differently.
 
-This is Part 2 of the AI Engineering Interview Series. [Part 1 explains the KV cache](/blog/kv-caching) that connects these phases.
+This is Part 2 of the AI Engineering Interview Series.
 
 > **Watch:** [Prefill vs decode on YouTube](https://www.youtube.com/shorts/5rKn3R9MxU8) · **Discuss:** [The Day 2 LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7515313280635084801/)
 
-## Prefill processes the request you already have
+## Start with one email
 
 Suppose your request is:
 
 > Reply politely to this email: “Can we meet tomorrow?”
 
-The input includes the instruction and the email, plus any other context supplied to the model. After tokenization, the whole input sequence is available. The model can therefore perform operations across many prompt positions together, instead of waiting for another input token to be generated.
+The instruction and the email together form the prompt. Both are available before generation begins. The model needs the instruction to know that it should write a polite reply, and the email to know what that reply should address.
 
-It processes the prompt through its layers and stores keys and values for those positions in the KV cache. The output at the final prompt position provides scores for the next token. The generation procedure selects one, starting the reply. For this example, imagine it selects “Yes.” [NVIDIA's inference guide](https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/) describes this division between prompt processing and subsequent generation.
+Suppose the final answer will be:
 
-Tokens don't always correspond to whole words. “Yes” and the later reply pieces here illustrate the sequence, rather than claiming a particular tokenizer splits the sentence this way.
+> Yes, tomorrow works for me.
 
-## Parallel positions still respect word order
+That sentence is built through prefill followed by repeated decode steps. Follow what is available at each stage: first the prompt, then the prompt plus a growing reply.
 
-Within each layer, prompt positions can be processed together. A **causal mask** lets each position attend only to itself and earlier positions. Position information preserves order, and later layers depend on earlier layers' outputs. The original [Transformer paper](https://arxiv.org/html/1706.03762v7) explains these constraints: parallel prompt processing doesn't make tokens independent or run every layer simultaneously.
+## Prefill processes the prompt and starts the reply
 
-## Decode feeds the new token back in
+During prefill, the model processes the instruction and the email. Because all the prompt tokens are already available, it can process multiple positions together. It still respects the text's order.
 
-Once “Yes” appears, another model pass determines what comes next. In ordinary single-token decoding, “Yes” supplies the new position to process. Its attention still consults the earlier context. PyTorch's [Flash-Decoding explanation](https://pytorch.org/blog/flash-decoding/) describes why attention remains necessary during cached generation: a single new query position uses the earlier keys and values.
+At the end of prompt processing, the model produces scores for possible next tokens. One token is selected to begin the reply. Suppose it is “Yes”.
 
-At each layer, the newest token's keys and values are added to the cache alongside the earlier ones. Hugging Face's [cache explanation](https://huggingface.co/docs/transformers/cache_explanation) describes that update.
+At this point, the model has processed the request and started answering. It hasn't produced the complete sentence. The next stage continues from that first token. [NVIDIA's explanation of LLM inference](https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/) describes this split between prompt processing and subsequent token generation.
 
-For our email, imagine the next selected piece continues the reply toward “tomorrow.” That selection becomes the input to the following step. Keep feeding the selected output back in until the model reaches a stopping condition. The sentence grows through repeated passes; it wasn't already waiting as a finished answer in the cache.
+## Decode continues the reply one token at a time
 
-```diagram
-{"title":"The next output becomes the next input","layout":"flow","steps":[{"label":"Prefill","detail":"Process the instruction and email; cache their keys and values; select “Yes”."},{"label":"First decode step","detail":"Process “Yes” with the cached context; add its keys and values; select the next token."},{"label":"Continue decoding","detail":"Feed each selected token into the following step until the reply is complete."}],"caption":"The reply becomes “Yes, tomorrow works for me.” The visible words illustrate the flow; actual token boundaries depend on the tokenizer."}
+The first decode step takes “Yes” as the new input. Using the earlier prompt as context, the model works out which token should follow it.
+
+Suppose the next token is a comma. The reply now reads “Yes,”. That comma becomes the new input for the following step, which chooses the next token. Each selected token is fed back into the model so it can continue the answer.
+
+At each step, the model uses both the original request and the reply generated so far. This is why the continuation can stay relevant to the email and fit the words that precede it. It isn't choosing each word in isolation.
+
+The reply gradually grows:
+
+```text
+Yes
+Yes,
+Yes, tomorrow
+Yes, tomorrow works
+Yes, tomorrow works for me.
 ```
 
-The important dependency is between generated tokens: the following step needs the token selected by the previous step. The earlier context remains available through the cache. It isn't thrown away when “Yes” becomes the new input.
+These lines show progress rather than exact tokenizer boundaries. Several decode steps may be needed to produce one displayed word. The model continues until it reaches a stopping condition, such as an end-of-answer token or a configured output limit.
 
-## Why the hardware bottleneck changes
+The dependency is what matters: the next step uses the token selected by the previous step. The reply therefore develops in sequence. PyTorch's [explanation of decoding](https://pytorch.org/blog/flash-decoding/) describes this repeated generation process.
 
-Prefill often has enough prompt positions to perform large matrix operations efficiently. Reusing weights across those positions gives the accelerator substantial arithmetic work, so **compute capacity** is often the limiting factor.
+## Compare what each stage does
 
-During decode, a small batch supplies relatively few new tokens per step. The accelerator still needs model weights and cached context. Moving those values through the memory system can take longer than the arithmetic, making **memory bandwidth** a frequent bottleneck.
+| | Prefill | Decode |
+| --- | --- | --- |
+| What does it process? | The supplied prompt. | The newest generated token, using earlier context. |
+| What does it produce? | The first reply token. | The next reply token at each step. |
+| How does it proceed? | The prompt tokens are already available to process together. | Each step needs the token generated by the previous step. |
 
-These are tendencies, not definitions. Prompt length, batch size, architecture, precision, hardware and serving choices change the result. The [JAX scaling book's inference analysis](https://jax-ml.github.io/scaling-book/inference/) derives how the balance changes with the workload.
-
-Memory bandwidth and memory capacity are also different constraints. Bandwidth concerns how quickly data can be read; capacity concerns how much fits. A growing full-attention KV cache uses more capacity and gives attention more cached data to read. Cache strategies and attention architectures can change that growth.
-
-## Measure the first wait and the later gaps
-
-| Metric | What it tells you |
-| --- | --- |
-| Time to first token, or TTFT | How long the user waits before the first output arrives. |
-| Inter-token latency, or ITL | The gaps between subsequent output tokens. |
-| End-to-end latency | How long the complete request takes. |
-
-Prefill contributes to TTFT, but client-observed TTFT also includes network travel, queueing and other processing. Decode affects the later gaps. Check the measurement boundary: some systems record gaps between streamed output events, which can contain multiple tokens. [vLLM's metrics documentation](https://docs.vllm.ai/en/latest/design/metrics/) distinguishes these measurements.
-
-For a practical investigation, compare similar requests while changing one variable. Try a longer prompt with a similarly short answer, then a longer answer with the original prompt. Record the first wait and subsequent gaps separately. That gives you a useful hypothesis to test against server metrics instead of blaming every delay on generation speed.
-
-When explaining this in an interview, connect the mechanism to the symptom: prompt processing helps explain the wait before output; sequential generation helps explain the pace afterwards. [Part 3 covers prompt caching](/blog/prompt-caching), which can reuse work when different requests begin with the same context.
+```diagram
+{"title":"From the email to a complete reply","layout":"flow","steps":[{"label":"Prefill","detail":"Process the instruction and email. Produce the first reply token: “Yes”."},{"label":"Decode","detail":"Process “Yes” using the earlier context. Produce the next token."},{"label":"Repeat decode","detail":"Use each new token to generate the following one until the reply finishes."}],"caption":"One prompt-processing stage starts the answer. Repeated decode steps continue it."}
+```
