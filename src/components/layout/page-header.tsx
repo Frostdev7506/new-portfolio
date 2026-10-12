@@ -39,11 +39,19 @@ export function PageHeader() {
           </li>
           {name && (
             <li>
-              <ChevronRight className="breadcrumb-divider" size={14} aria-hidden="true" />
+              <ChevronRight
+                className="breadcrumb-divider"
+                size={14}
+                aria-hidden="true"
+              />
               {isArticle ? (
                 <Link href="/blog">{name}</Link>
               ) : (
-                <span className="breadcrumb-current" aria-current="page" title={name}>
+                <span
+                  className="breadcrumb-current"
+                  aria-current="page"
+                  title={name}
+                >
                   {name}
                 </span>
               )}
@@ -51,8 +59,14 @@ export function PageHeader() {
           )}
           {isArticle && (
             <li>
-              <ChevronRight className="breadcrumb-divider" size={14} aria-hidden="true" />
-              <span className="breadcrumb-current" aria-current="page">Article</span>
+              <ChevronRight
+                className="breadcrumb-divider"
+                size={14}
+                aria-hidden="true"
+              />
+              <span className="breadcrumb-current" aria-current="page">
+                Article
+              </span>
             </li>
           )}
         </ol>
@@ -60,8 +74,17 @@ export function PageHeader() {
       <div className="header-actions">
         <ThemeToggle />
         <Button asChild variant="ghost" className="resume-link">
-          <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer">
-            Résumé <ArrowUpRight className="size-4" strokeWidth={1.75} aria-hidden="true" />
+          <a
+            href={siteConfig.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Résumé
+            <ArrowUpRight
+              className="size-4"
+              strokeWidth={1.75}
+              aria-hidden="true"
+            />
           </a>
         </Button>
       </div>
