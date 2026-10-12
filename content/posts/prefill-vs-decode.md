@@ -14,7 +14,7 @@ For a typical autoregressive transformer, inference has two phases: **prefill** 
 
 This is Part 2 of the AI Engineering Interview Series. [Part 1 explains the KV cache](/blog/kv-caching) that connects these phases.
 
-> **Watch:** [Prefill vs decode on YouTube](https://www.youtube.com/shorts/5rKn3R9MxU8) · **Follow the series:** [Neeraj on LinkedIn](https://www.linkedin.com/in/neeraj-butola/)
+> **Watch:** [Prefill vs decode on YouTube](https://www.youtube.com/shorts/5rKn3R9MxU8) · **Discuss:** [The Day 2 LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7515313280635084801/)
 
 ## Prefill processes the request you already have
 
