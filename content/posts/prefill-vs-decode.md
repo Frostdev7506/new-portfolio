@@ -1,6 +1,6 @@
 ---
 title: "Prefill vs decode: why an LLM pauses before it replies"
-description: "Follow one email through prefill and decode, then connect the two inference phases to first-token latency, generation speed, and GPU memory."
+description: "Prefill processes your prompt and produces the first token. Decode generates the rest of the reply. Learn how each stage affects response speed."
 date: "2026-10-12"
 category: "Practical AI"
 tags: ["LLMs", "Inference", "AI Engineering", "Performance"]
