@@ -1,9 +1,9 @@
 export const notebook = {
   tagline: "Full-stack developer · India",
   note: "A place for things I build and learn.",
-  featuredSlug: "different-types-of-website-rendering",
+  featuredSlug: "optimistic-uploads",
   blogDescription:
-    "Notes on web development, rendering, and things learned while building.",
+    "Practical notes on faster web apps, useful AI, and the systems behind them. Ideas explored with examples, diagrams, and a little curiosity.",
   projectsDescription:
     "Web applications, experiments, and the things I’ve built along the way.",
   about: [

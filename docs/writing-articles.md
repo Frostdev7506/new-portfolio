@@ -40,12 +40,14 @@ Use a `diagram` code fence containing JSON for an accessible, responsive content
 
 ## Content and images
 
-Use a unique local cover that follows `docs/illustrations.md`. Keep original images in `public/illustrations`; Next Image serves responsive AVIF/WebP variants. Do not reuse one stock diagram or cover for unrelated subjects.
+Use a unique local cover that follows `docs/illustrations.md`. The ten new cover briefs and output locations are in `docs/article-illustrations.json`. Their transparent PNG originals stay in `public/illustrations/articles`; Next Image serves responsive AVIF/WebP variants. The existing rendering illustration is reused for the revised rendering article. Do not reuse one stock diagram or cover for unrelated subjects.
 
-Link expanded posts to their original source, include a concrete example, and cite relevant primary documentation. Label hypothetical figures clearly and preserve the original publication date when revising an article.
+Each LinkedIn expansion links to its original post, makes a complete argument, includes a concrete example, and cites relevant primary documentation. Worked figures are explicitly hypothetical. Avoid turning short-post opinions into benchmark claims or inventing personal production experience. The caching article credits Sameer Bhardwaj's original observation. The security article is an evergreen explanation, not a current incident bulletin.
+
+All ten expansions were written on October 10, 2026; that is their publication date, separate from the original LinkedIn post dates. The original rendering article retains August 1, 2023 and shows its revision date. The two former sample-post URLs redirect to the blog index.
 
 ## Validate before publishing
 
-Run `npm test`, `npm run lint`, and `npm run build`. The tests cover metadata validation, diagrams, heading IDs, reading-time calculation, related content, and escaped RSS output. They do not replace editorial review.
+Run `npm test`, `npm run lint`, and `npm run build`. The content checks cover metadata, original links, unique local covers, diagrams, internal article links, heading IDs, reading-time calculation, related content, and escaped RSS output. A length check catches accidental stub publication; it does not replace editorial review.
 
 Review the index and changed articles at desktop and phone widths, including dark mode, TOC navigation, overflow, images, and any interactive code examples. Set `NEXT_PUBLIC_SITE_URL` to the deployment's public origin so canonical/share URLs, RSS, and structured data agree. Rebuild and deploy to publish changes; editing Markdown alone only updates the local development server.
