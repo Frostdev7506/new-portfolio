@@ -1,46 +1,36 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
-import { BlogPostCard } from "@/components/blog/blog-post-card";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
+import { ArticleNavigation } from "@/components/blog/article-navigation";
 import { siteConfig } from "@/data/site";
 import {
+  getAllPosts,
   getBlogPostUrl,
   getPostBySlug,
   getPostSlugs,
-  getRecentPosts,
+  selectRelatedPosts,
+  toPostSummary,
 } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
 
-type BlogPostPageProps = {
-  params: Promise<{ slug: string }>;
-};
-
+type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() {
-  const slugs = await getPostSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return (await getPostSlugs()).map((slug) => ({ slug }));
 }
-
-export async function generateMetadata({
-  params,
-}: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
-
-  if (!post) {
-    return {
-      title: "Post not found",
-    };
-  }
-
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPostBySlug((await params).slug);
+  if (!post) return { title: "Post not found" };
   return {
     title: post.title,
     description: post.description,
-    keywords: [...post.tags, siteConfig.name, "engineering blog"],
+    keywords: [...post.tags, siteConfig.name],
     alternates: {
       canonical: `/blog/${post.slug}`,
+      types: { "application/rss+xml": "/feed.xml" },
     },
     openGraph: {
       type: "article",
@@ -48,130 +38,144 @@ export async function generateMetadata({
       description: post.description,
       url: `/blog/${post.slug}`,
       publishedTime: new Date(post.date).toISOString(),
+      modifiedTime: new Date(post.updated).toISOString(),
+      authors: [siteConfig.name],
       tags: post.tags,
-      images: [
-        {
-          url: "/dev-ed-wave.png",
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
+      images: [{ url: post.cover, alt: post.coverAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: ["/dev-ed-wave.png"],
+      images: [post.cover],
     },
   };
 }
-
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  const recentPosts = await getRecentPosts(3);
-
+export default async function BlogPostPage({ params }: Props) {
+  const post = await getPostBySlug((await params).slug);
+  if (!post) notFound();
+  const related = selectRelatedPosts(
+    (await getAllPosts()).map(toPostSummary),
+    toPostSummary(post),
+  );
   const shareUrl = getBlogPostUrl(post.slug);
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    datePublished: new Date(post.date).toISOString(),
-    dateModified: new Date(post.date).toISOString(),
-    author: {
-      "@type": "Person",
-      name: siteConfig.name,
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      datePublished: new Date(post.date).toISOString(),
+      dateModified: new Date(post.updated).toISOString(),
+      author: {
+        "@type": "Person",
+        name: siteConfig.name,
+        url: `${siteConfig.url}/about`,
+      },
+      mainEntityOfPage: shareUrl,
+      image: [`${siteConfig.url}${post.cover}`],
+      keywords: post.tags.join(", "),
+      wordCount: post.wordCount,
+      articleSection: post.category,
     },
-    publisher: {
-      "@type": "Person",
-      name: siteConfig.name,
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteConfig.url,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: `${siteConfig.url}/blog`,
+        },
+        { "@type": "ListItem", position: 3, name: post.title, item: shareUrl },
+      ],
     },
-    mainEntityOfPage: shareUrl,
-    image: [`${siteConfig.url}/dev-ed-wave.png`],
-    keywords: post.tags.join(", "),
-  };
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteConfig.url,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: `${siteConfig.url}/blog`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: post.title,
-        item: shareUrl,
-      },
-    ],
-  };
-
+  ];
   return (
-    <article className="article-page">
+    <article className="article-page" id="article-top">
       <script
         type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
       />
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-
-      <header>
-        <Link href="/blog" className="text-link">
-          <ArrowLeft className="h-4 w-4" />
-          Back to Blog
+      <header className="article-header">
+        <Link href="/blog" className="article-back">
+          <ArrowLeft aria-hidden="true" /> All articles
         </Link>
-
+        <p className="article-category">{post.category}</p>
         <h1>{post.title}</h1>
-
-        <div className="post-meta">
-          <span>{formatDate(post.date)}</span>
-          <span>•</span>
+        <p className="article-deck">{post.description}</p>
+        <div className="article-byline">
+          <Link href="/about">{siteConfig.name}</Link>
+          <span aria-hidden="true">·</span>
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <span aria-hidden="true">·</span>
           <span>{post.readtime}</span>
         </div>
+        {post.updated !== post.date && (
+          <p className="article-updated">
+            Updated{" "}
+            <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+          </p>
+        )}
+        <figure className="article-cover">
+          <Image
+            src={post.cover}
+            alt={post.coverAlt}
+            width={1536}
+            height={1024}
+            sizes="(max-width: 480px) 100vw, 420px"
+            priority
+          />
+        </figure>
       </header>
-
-      <div className="article-body">
-        <MarkdownContent content={post.content} />
-      </div>
-
-      <section className="article-section">
-        <h2>Share This Article</h2>
-        <ShareLinks title={post.title} url={shareUrl} />
-      </section>
-
-      <section className="article-section">
-        <h2>Recent Articles</h2>
-        <div>
-          {recentPosts
-            .filter((candidate) => candidate.slug !== post.slug)
-            .slice(0, 2)
-            .map((candidate) => (
-              <BlogPostCard key={candidate.slug} post={candidate} />
-            ))}
+      <div className="article-reading-layout">
+        <ArticleNavigation headings={post.headings} />
+        <div className="article-body">
+          <div id="article-content">
+            <MarkdownContent content={post.content} />
+          </div>
+          {post.source && (
+            <p className="article-origin">
+              Adapted from my{" "}
+              <a href={post.source} target="_blank" rel="noreferrer noopener">
+                original LinkedIn post <ArrowUpRight aria-hidden="true" />
+              </a>
+              .
+            </p>
+          )}
+          <section className="article-share" aria-label="Share this article">
+            <p>Share</p>
+            <ShareLinks title={post.title} url={shareUrl} />
+          </section>
+          {!!related.length && (
+            <section className="article-related" aria-labelledby="related-title">
+              <h2 id="related-title">More to read</h2>
+              <ul>
+                {related.map((candidate) => (
+                  <li key={candidate.slug}>
+                    <Link href={`/blog/${candidate.slug}`}>
+                      {candidate.title}
+                      <ArrowUpRight aria-hidden="true" />
+                    </Link>
+                    <p>
+                      {candidate.category} · {candidate.readtime}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
-      </section>
+      </div>
     </article>
   );
 }

@@ -1,43 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import type { BlogPost } from "@/lib/posts";
+import { ArrowUpRight } from "lucide-react";
+import type { PostSummary } from "@/lib/post-content";
 import { formatDate } from "@/lib/utils";
-import { postArtwork } from "@/data/notebook";
 
-export function BlogPostCard({ post }: { post: BlogPost }) {
-  const artwork = postArtwork[post.slug];
+export function BlogPostCard({ post }: { post: PostSummary }) {
   return (
-    <article className="archive-post">
-      {artwork && (
-        <Link href={"/blog/" + post.slug} tabIndex={-1} aria-hidden="true">
-          <Image
-            src={artwork.image}
-            alt=""
-            width={340}
-            height={210}
-            className="archive-art"
-          />
-        </Link>
-      )}
-      <div>
+    <article className="notebook-post">
+      <Link
+        href={`/blog/${post.slug}`}
+        className="post-art-link"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        <Image
+          src={post.cover}
+          alt=""
+          width={1536}
+          height={1024}
+          sizes="(max-width: 600px) 100vw, 240px"
+          className="post-art"
+        />
+      </Link>
+      <div className="post-card-copy">
+        <p className="eyebrow">{post.category}</p>
         <h3>
-          <Link href={"/blog/" + post.slug}>{post.title}</Link>
+          <Link href={`/blog/${post.slug}`}>
+            {post.title}
+            <ArrowUpRight aria-hidden="true" />
+          </Link>
         </h3>
-        <p>{artwork?.description || post.description}</p>
+        <p className="post-card-description">{post.description}</p>
         <p className="post-meta">
-          {formatDate(post.date)}
-          <span>·</span>
-          {post.readtime}
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{post.readtime}</span>
         </p>
       </div>
-      <Link
-        className="archive-arrow"
-        href={"/blog/" + post.slug}
-        aria-label={"Read " + post.title}
-      >
-        <ArrowRight aria-hidden="true" />
-      </Link>
     </article>
   );
 }

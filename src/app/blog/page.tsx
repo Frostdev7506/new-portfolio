@@ -1,23 +1,28 @@
-import Image from "next/image";
 import { FeaturedArticle } from "@/components/blog/featured-article";
-import { BlogPostCard } from "@/components/blog/blog-post-card";
+import { BlogExplorer } from "@/components/blog/blog-explorer";
 import { PageIntro } from "@/components/shared/page-intro";
-import { TextLink } from "@/components/shared/text-link";
-import { getAllPosts } from "@/lib/posts";
+import { getAllPosts, toPostSummary } from "@/lib/posts";
 import { buildPageMetadata } from "@/lib/seo";
 import { notebook } from "@/data/notebook";
 import { siteConfig } from "@/data/site";
 
-export const metadata = buildPageMetadata({
-  title: "Blog",
-  description: notebook.blogDescription,
-  path: "/blog",
-});
+export const metadata = {
+  ...buildPageMetadata({
+    title: "Blog",
+    description: notebook.blogDescription,
+    path: "/blog",
+  }),
+  alternates: {
+    canonical: "/blog",
+    types: { "application/rss+xml": "/feed.xml" },
+  },
+};
 
 export default async function BlogPage() {
-  const posts = await getAllPosts();
-  const featured = posts.find((post) => post.slug === notebook.featuredSlug);
-  const breadcrumbJsonLd = {
+  const posts = (await getAllPosts()).map(toPostSummary);
+  const featured =
+    posts.find((post) => post.slug === notebook.featuredSlug) ?? posts[0];
+  const breadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -30,41 +35,29 @@ export default async function BlogPage() {
       },
     ],
   };
-
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumb).replace(/</g, "\\u003c"),
+        }}
       />
       <PageIntro
         className="blog-intro"
         eyebrow="Open notebook."
-        title="Blog"
+        title="Things worth writing down."
         description={notebook.blogDescription}
         image="/illustrations/blog-notebooks.png"
       />
       {featured && <FeaturedArticle post={featured} />}
-      <section className="blog-archive section-block">
-        <h2 className="eyebrow">From the archive.</h2>
-        {posts
-          .filter((post) => post.slug !== featured?.slug)
-          .map((post) => (
-            <BlogPostCard post={post} key={post.slug} />
-          ))}
-      </section>
-      <section className="explore-banner">
-        <Image
-          src="/illustrations/build-learn.png"
-          alt=""
-          width={170}
-          height={130}
-        />
-        <div>
-          <h2>Looking for what I’ve built?</h2>
-          <TextLink href="/projects">Explore projects</TextLink>
-        </div>
-      </section>
+      <BlogExplorer posts={posts} />
+      <div className="notebook-end">
+        <span className="handwritten">
+          Always learning. Still taking notes.
+        </span>
+        <a href={siteConfig.social.linkedin}>More notes on LinkedIn ↗</a>
+      </div>
     </>
   );
 }
