@@ -5,16 +5,16 @@
   font-size: clamp(30px, 3.2vw, 44px);
 }
 .contact-lead {
-  margin-bottom: 34px;
+  margin-bottom: 32px;
 }
 .contact-details {
-  min-width: 0;
+  margin-top: 0;
 }
 .contact-grid {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   gap: 48px;
-  padding-bottom: 25px;
+  padding-bottom: 24px;
 }
 
 .contact-description {
@@ -42,8 +42,8 @@
 .form-field input,
 .form-field textarea {
   width: 100%;
-  border: 1px solid var(--text-muted);
-  border-radius: 12px;
+  border: 1px solid #bfbdb5;
+  border-radius: 5px;
   background: var(--surface);
   color: var(--text);
   padding: 13px 17px;
@@ -61,7 +61,7 @@
   opacity: 0.8;
 }
 .form-field [aria-invalid="true"] {
-  border-color: var(--error);
+  border-color: var(--accent);
 }
 .field-hint {
   font-size: 14px;
@@ -69,7 +69,7 @@
   margin: 10px 0 18px;
 }
 .field-error {
-  color: var(--error);
+  color: var(--accent);
   font-size: 14px;
   margin-top: 7px;
 }

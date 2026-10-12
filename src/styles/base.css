@@ -2,15 +2,15 @@
   box-sizing: border-box;
 }
 html {
-  scroll-padding-top: 108px;
+  scroll-padding-top: 24px;
 }
 body {
   margin: 0;
   font-family: var(--font-body), sans-serif;
   background: var(--page-bg);
   color: var(--text);
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: var(--text-body);
+  line-height: 1.55;
   font-optical-sizing: auto;
 }
 ::selection {
@@ -26,19 +26,23 @@ p {
 h1,
 h2,
 h3 {
-  letter-spacing: -0.035em;
-  line-height: 1.13;
-  font-weight: 650;
+  font-weight: 700;
   text-wrap: balance;
 }
 h1 {
-  font-size: clamp(44px, 5.5vw, 72px);
+  font-size: clamp(2.125rem, 1.5rem + 2.7vw, 4rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
 }
 h2 {
-  font-size: clamp(30px, 3.5vw, 46px);
+  font-size: var(--text-section);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 h3 {
-  font-size: 27px;
+  font-size: 1.375rem;
+  line-height: 1.27;
+  letter-spacing: -0.02em;
 }
 a {
   color: inherit;
@@ -74,16 +78,21 @@ button:disabled {
 img {
   max-width: 100%;
 }
-.mono {
+.lucide {
+  flex-shrink: 0;
+  stroke-width: 1.75;
+}
+.mono,
+.eyebrow {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 .eyebrow {
-  color: var(--text-muted);
-  font-size: 13px;
+  color: var(--brand-700);
+  font-size: var(--text-small);
   line-height: 1.5;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.075em;
   margin-bottom: 12px;
 }
 .skip-link {

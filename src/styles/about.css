@@ -50,7 +50,8 @@
   color: var(--text-muted);
 }
 .compact-toolkit {
-  padding: 32px 0 64px;
+  padding: 28px 0 34px;
+  border-top: 1px solid var(--border);
 }
 .compact-toolkit .toolkit-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -99,6 +100,33 @@
   font-size: 16px;
   color: var(--text-muted);
 }
+.job-copy {
+  min-width: 0;
+  flex: 1;
+}
+.job-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.job-heading > div {
+  min-width: 0;
+}
+.job-logo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  object-fit: contain;
+}
+.experience-list .job-details {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
 .job-period {
   font-size: 15px;
   color: var(--text-muted);
@@ -140,10 +168,10 @@
 }
 .work-history {
   --timeline-axis: 176px;
-  padding: 64px 0;
+  padding: 42px 0 48px;
 }
 .work-history .section-heading-row {
-  margin-bottom: 38px;
+  margin-bottom: 32px;
 }
 .work-history .experience-list {
   margin: 0;
@@ -185,9 +213,6 @@
   height: 22px;
   stroke-width: 1.5;
 }
-[data-current="true"] > .job-milestone {
-  color: var(--accent);
-}
 .job-dates {
   display: flex;
   flex-direction: column;
@@ -197,31 +222,20 @@
 }
 .work-history .job-period {
   font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 12px;
-}
-.current-role {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--text-muted);
-  font-size: 12px;
-  line-height: 1.5;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--surface-soft);
+  font-size: var(--text-caption);
 }
 .work-history .experience-list h3 {
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-bottom: 4px;
 }
 .work-history .experience-list .job-role {
   color: var(--brand-700);
-  font-size: 15px;
+  font-size: var(--text-small);
   font-weight: 500;
 }
 .work-history .job-description {
   margin-top: 12px;
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.65;
   max-width: 59ch;
 }

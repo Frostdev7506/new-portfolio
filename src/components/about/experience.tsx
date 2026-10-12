@@ -1,4 +1,5 @@
-import { Circle, CircleDot } from "lucide-react";
+import Image from "next/image";
+import { Circle } from "lucide-react";
 import { experience } from "@/data/notebook";
 import { TextLink } from "@/components/shared/text-link";
 
@@ -20,26 +21,35 @@ export function Experience({ detailed = false }: { detailed?: boolean }) {
       </div>
       <ol className="experience-list" aria-label="Career timeline">
         {experience.map((job) => (
-          <li key={job.company} data-current={job.current}>
+          <li key={job.company}>
             {!detailed && (
               <>
                 <div className="job-dates">
                   <span className="job-period">{job.period}</span>
-                  {job.current && (
-                    <span className="current-role">
-                      Current role
-                    </span>
-                  )}
                 </div>
                 <span className="job-milestone" aria-hidden="true">
-                  {job.current ? <CircleDot /> : <Circle />}
+                  <Circle />
                 </span>
               </>
             )}
-            <div>
-              <h3>{job.company}</h3>
-              <p className="job-role">{job.role}</p>
-              <p className="job-description">{job.description}</p>
+            <div className="job-copy">
+              <div className="job-heading">
+                <Image
+                  src={job.logo}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="job-logo"
+                />
+                <div>
+                  <h3>{job.company}</h3>
+                  <p className="job-role">{job.role}</p>
+                </div>
+              </div>
+              <p className="job-details">{job.details}</p>
+              {job.description && (
+                <p className="job-description">{job.description}</p>
+              )}
             </div>
             {detailed && <span className="job-period">{job.period}</span>}
           </li>

@@ -10,8 +10,15 @@
     "summary": "<strong>Senior Full Stack (MERN) + Cloud Engineer</strong> with 3.9+ years of experience building and scaling product-grade systems for a fintech platform at <strong>Agrow</strong>. Specialized in delivering secure, high-performance microservices using <strong>MongoDB, vue.js, React/React Native, Node.js</strong>, and <strong>Python</strong>. Designed resilient cloud architectures on <strong>AWS</strong> (EC2, ECS/EKS, S3, CloudFront, Lambda) with strong focus on uptime, security, and regulatory compliance. Implemented <strong>Nginx reverse proxy</strong>, rate limiting, security headers, API key auth, and fully automated CI/CD pipelines. Frontend expert in <strong>React, Next.js, Vite</strong> with emphasis on UX, SEO, and Core Web Vitals. Hands-on with <strong>Strapi</strong>, <strong>Redis</strong>, <strong>Kafka</strong>, <strong>NATS</strong>, <strong>Kubernetes</strong>, and event-driven patterns for low-latency fintech workflows.",
     "experience": [
         {
-            "title": "<strong>Software Engineer (Neoveda Technologies)</strong>",
-            "date": "JULY 2025 – NOW",
+            "title": "<strong>Full Stack Engineer (Toadster Technologies)</strong>",
+            "date": "JAN 2026 – JULY 2026",
+            "points": [
+                "Full-time, on-site role in Mumbai, Maharashtra, India."
+            ]
+        },
+        {
+            "title": "<strong>Full Stack Engineer (Neoveda Technologies)</strong>",
+            "date": "AUG 2025 – JAN 2026",
             "points": [
                 "Led development of an <strong>AI workflow automation platform</strong> (similar to n8n/Make) that increased workflow creation speed by <strong>40%</strong> and enabled <strong>500+ integrations</strong>.",
                 "Integrated <strong>Strapi CMS</strong> with webhooks and ontology metadata, reducing manual CMS–service sync efforts by <strong>50%</strong>.",
@@ -21,7 +28,7 @@
             ]
         },
         {
-            "title": "<strong>Fullstack MERN Developer + AWS + Python + GCP (Oneagrow Fintech)</strong>",
+            "title": "<strong>Full Stack Engineer (Greattr / Oneagrow Fintech)</strong>",
             "date": "MAY 2023 – JULY 2025",
             "points": [
                 "Owned end-to-end architecture and delivery for the <strong>Greattr Fintech Suite</strong>: React/React Native apps, Node/Express microservices, PostgreSQL/MSSQL/MongoDB.",
@@ -33,7 +40,7 @@
             ]
         },
         {
-            "title": "<strong>Fullstack Cloud Developer (Accenture)</strong>",
+            "title": "<strong>Business Process Associate (Accenture)</strong>",
             "date": "Dec 2021 – Mar 2023",
             "points": [
                 "Engineered automation workflows that boosted team productivity by <strong>30%+</strong>, reducing repetitive manual effort across deployments and monitoring.",

@@ -290,8 +290,8 @@
   grid-column: 2;
   grid-row: 1;
   position: sticky;
-  top: 108px;
-  max-height: calc(100dvh - 140px);
+  top: 32px;
+  max-height: calc(100vh - 64px);
   overflow-y: auto;
   border-left: 1px solid var(--border);
   padding: 0 0 0 18px;

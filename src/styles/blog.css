@@ -10,7 +10,7 @@
   margin-bottom: 24px;
 }
 .library-heading h2 {
-  font-size: clamp(27px, 3vw, 36px);
+  font-size: var(--text-section);
 }
 .rss-link {
   display: inline-flex;
@@ -30,7 +30,7 @@
   align-items: center;
   gap: 12px;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 5px;
   padding: 0 16px;
   background: var(--surface);
 }
@@ -60,7 +60,7 @@
 }
 .blog-topics .topic-button {
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 4px;
   height: auto;
   min-height: 44px;
   padding: 8px 12px;
@@ -90,8 +90,6 @@
 }
 .post-art-link {
   display: block;
-  border-radius: 16px;
-  overflow: hidden;
 }
 .post-art {
   width: 100%;
@@ -105,7 +103,7 @@
   color: var(--brand-700);
 }
 .notebook-post h3 {
-  font-size: clamp(22px, 2.4vw, 29px);
+  font-size: var(--text-card);
   line-height: 1.25;
 }
 .notebook-post h3 a {
@@ -125,7 +123,7 @@
 }
 .post-card-description {
   margin-top: 10px;
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.65;
   color: var(--text-muted);
 }
@@ -139,7 +137,7 @@
   border-bottom: 1px solid var(--border);
 }
 .blog-empty h3 {
-  font-size: 27px;
+  font-size: var(--text-card);
 }
 .blog-empty p {
   color: var(--text-muted);
@@ -162,7 +160,7 @@
     font-size: 10px;
   }
   .library-heading h2 {
-    font-size: 27px;
+    font-size: var(--text-section);
   }
   .rss-link {
     font-size: 12px;
@@ -178,7 +176,7 @@
     margin: auto;
   }
   .notebook-post h3 {
-    font-size: 27px;
+    font-size: 1.5rem;
   }
   .blog-topics {
     gap: 6px;

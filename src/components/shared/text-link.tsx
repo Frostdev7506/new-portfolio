@@ -16,15 +16,15 @@ export function TextLink({
     <>
       {children}
       {external ? (
-        <ArrowUpRight size={19} aria-hidden="true" />
+        <ArrowUpRight size={20} strokeWidth={1.75} aria-hidden="true" />
       ) : (
-        <ArrowRight size={21} aria-hidden="true" />
+        <ArrowRight size={20} strokeWidth={1.75} aria-hidden="true" />
       )}
     </>
   );
   return external ? (
     <a
-      className={"text-link " + className}
+      className={"text-link min-h-11 " + className}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -32,7 +32,7 @@ export function TextLink({
       {content}
     </a>
   ) : (
-    <Link className={"text-link " + className} href={href}>
+    <Link className={"text-link min-h-11 " + className} href={href}>
       {content}
     </Link>
   );

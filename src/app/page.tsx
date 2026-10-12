@@ -20,8 +20,8 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
       />
       <NotebookHero />
-      <ProjectIndex projects={projects.slice(0, 3)} />
       {featured && <FeaturedArticle post={featured} home />}
+      <ProjectIndex projects={projects.slice(0, 3)} />
       <AboutSummary />
       <Toolkit compact />
       <Experience />
