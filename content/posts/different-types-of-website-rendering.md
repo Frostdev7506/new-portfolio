@@ -39,7 +39,7 @@ Static generation produces pages ahead of requests, commonly during a build. The
 
 Content freshness then becomes a publishing concern. A rebuild can update the site, or a framework can regenerate or revalidate selected content. The exact mechanisms vary, so check your framework's behavior rather than assuming “static” means either permanently frozen or instantly refreshed.
 
-For this notebook, articles live in Markdown and their routes are generated during the build. Editing a file updates the development preview; the deployed static pages need a new deployment to reflect that edit. That is a simple publishing model with a clear freshness boundary.
+For this blog, articles live in Markdown and their routes are generated during the build. Editing a file updates the development preview; the deployed static pages need a new deployment to reflect that edit. That is a simple publishing model with a clear freshness boundary.
 
 The [web.dev rendering guide](https://web.dev/articles/rendering-on-the-web) explains the wider tradeoffs among rendering approaches, including hydration and the cost of client-side work.
 

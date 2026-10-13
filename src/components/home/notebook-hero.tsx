@@ -8,7 +8,7 @@ export function NotebookHero() {
   return (
     <section className="notebook-hero" aria-labelledby="notebook-title">
       <div className="notebook-hero-copy">
-        <p className="eyebrow">Neeraj’s notebook</p>
+        <p className="eyebrow">{homeNotebook.eyebrow}</p>
         <h1 id="notebook-title">
           {homeNotebook.title.map((line) => <span key={line}>{line}</span>)}
         </h1>
@@ -19,7 +19,7 @@ export function NotebookHero() {
               Explore projects <ArrowRight aria-hidden="true" />
             </a>
           </Button>
-          <TextLink href="/blog" className="quiet-link">Read the notebook</TextLink>
+          <TextLink href="/blog" className="quiet-link">{homeNotebook.blogLink}</TextLink>
         </div>
       </div>
       <Image

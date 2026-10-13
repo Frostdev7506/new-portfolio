@@ -9,7 +9,7 @@ export const notebook = {
   about: [
     "I’m Neeraj Butola, a full-stack developer based in India. I build web applications, APIs, and the cloud systems that connect them.",
     "My work spans fintech products, workflow automation, and full-stack applications. I enjoy turning complex requirements into software people can use.",
-    "This notebook brings together my projects, technical writing, and what I learn along the way.",
+    "This site brings together my projects, blog, and what I learn along the way.",
   ],
   contactDescription:
     "A project, a question, or a conversation — I’d love to hear from you.",
@@ -17,24 +17,36 @@ export const notebook = {
 
 export const experience = [
   {
-    company: "Neoveda Technologies",
-    role: "Software Engineer",
-    period: "Jul 2025 — Present",
-    current: true,
-    description:
-      "Building workflow automation tools and service integrations, connecting product interfaces with backend systems.",
+    company: "Toadster Technologies",
+    logo: "/companies/toadster.jpg",
+    role: "Full Stack Engineer",
+    period: "Jan 2026 — Jul 2026",
+    details: "Full-time · Mumbai, Maharashtra, India · On-site",
   },
   {
-    company: "Oneagrow Fintech",
-    role: "Full-stack Developer",
+    company: "Neoveda Technologies",
+    logo: "/companies/neoveda.jpg",
+    role: "Full Stack Engineer",
+    period: "Aug 2025 — Jan 2026",
+    details: "Full-time · Mumbai, Maharashtra, India · On-site",
+    description:
+      "Built workflow automation tools and service integrations, connecting product interfaces with backend systems.",
+  },
+  {
+    company: "Greattr",
+    logo: "/companies/greattr.jpg",
+    role: "Full Stack Engineer",
     period: "May 2023 — Jul 2025",
+    details: "Full-time · India · On-site",
     description:
       "Built the Greattr fintech suite, connecting web and mobile applications, financial integrations, and AWS infrastructure.",
   },
   {
     company: "Accenture",
-    role: "Full-stack Cloud Developer",
+    logo: "/companies/accenture.jpg",
+    role: "Business Process Associate",
     period: "Dec 2021 — Mar 2023",
+    details: "Full-time · Navi Mumbai, Maharashtra, India · Remote",
     description:
       "Developed internal tools and automated cloud deployments for enterprise applications on Azure and AWS.",
   },
@@ -54,10 +66,12 @@ export const certifications = [
 ];
 
 export const homeNotebook = {
+  eyebrow: "Neeraj’s portfolio & blog",
   title: ["I build for the web.", "And write things down."],
   description: "I’m Neeraj, a full-stack developer in India. Here you’ll find the things I build and the notes I keep along the way.",
+  blogLink: "Read the blog",
   about: [
-    "At Neoveda, I work on workflow automation and service integrations. Before that, I built web and mobile products for Greattr at Oneagrow Fintech.",
-    "This notebook is where I share projects and explain what I learn about building for the web.",
+    "Most recently, I worked as a Full Stack Engineer at Toadster Technologies. Before that, I built workflow automation and service integrations at Neoveda, and web and mobile products for Greattr at Oneagrow Fintech.",
+    "I share projects here and use the blog to explain what I learn about building for the web.",
   ],
 };

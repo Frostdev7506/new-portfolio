@@ -50,7 +50,7 @@ export function Navbar() {
               key={href}
               aria-current={active ? "page" : undefined}
             >
-              <Icon size={22} strokeWidth={1.65} aria-hidden="true" />
+              <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
               {label}
             </Link>
           );
@@ -79,9 +79,9 @@ export function Navbar() {
         </a>
         <Link href="/resume">
           <span className="social-mark">
-            <FileText size={19} strokeWidth={1.65} aria-hidden="true" />
+            <FileText size={20} strokeWidth={1.75} aria-hidden="true" />
           </span>
-          View résumé <ArrowUpRight size={15} aria-hidden="true" />
+          View résumé <ArrowUpRight size={20} strokeWidth={1.75} aria-hidden="true" />
         </Link>
       </nav>
       <p className="sidebar-note">{notebook.note}</p>

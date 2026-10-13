@@ -5,16 +5,16 @@
   font-size: clamp(30px, 3.2vw, 44px);
 }
 .contact-lead {
-  margin-bottom: 34px;
+  margin-bottom: 32px;
 }
 .contact-details {
-  margin-top: -130px;
+  margin-top: 0;
 }
 .contact-grid {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   gap: 48px;
-  padding-bottom: 25px;
+  padding-bottom: 24px;
 }
 
 .contact-description {

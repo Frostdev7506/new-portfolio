@@ -1,14 +1,23 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 34px;
   border-top: 1px solid var(--border);
-  padding-top: 28px;
+}
+#main-content > .projects-grid {
+  padding-inline: 0;
 }
 .project-card {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
-  padding-bottom: 24px;
+  padding-block: 32px;
   border-bottom: 1px solid var(--border);
+}
+.project-card:nth-child(odd) {
+  padding-inline: var(--page-gutter) 16px;
+}
+.project-card:nth-child(even) {
+  padding-inline: 16px var(--page-gutter);
 }
 .project-cover-link {
   display: block;
@@ -27,29 +36,38 @@
 .project-cover-link:hover .project-cover {
   transform: scale(1.025);
 }
+.project-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
 .project-copy :is(h2, h3) {
-  margin: 20px 0 10px;
-  font-size: clamp(23px, 2.1vw, 29px);
+  margin: 24px 0 12px;
+  font-size: var(--text-card);
 }
 .project-copy > p {
   color: var(--text-muted);
-  font-size: 17px;
+  font-size: var(--text-body);
   line-height: 1.5;
 }
+.project-copy > p:not(.project-technologies) {
+  flex: 1;
+}
 .project-copy .project-technologies {
-  font-size: 14px;
-  margin-top: 19px;
+  font-size: var(--text-small);
+  margin-top: 16px;
 }
 .project-copy .text-link {
-  margin-top: 17px;
-  font-size: 17px;
+  align-self: flex-start;
+  margin-top: 16px;
+  font-size: var(--text-body);
 }
 
 .closing-line {
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  padding: 25px 0 0;
+  padding: 24px 0 0;
   font-size: 16px;
   color: var(--text-muted);
 }

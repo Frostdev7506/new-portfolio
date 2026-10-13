@@ -12,7 +12,7 @@
     padding-right: 24px;
   }
   .page-column {
-    padding: 0 30px;
+    --page-gutter: 30px;
   }
   .identity-role {
     font-size: 10px;
@@ -38,21 +38,19 @@
   }
 
   .project-copy > p {
-    font-size: 15px;
+    font-size: 1rem;
   }
   .project-copy .project-technologies {
-    font-size: 12px;
-    margin-top: 12px;
+    font-size: var(--text-caption);
   }
   .project-copy .text-link {
-    margin-top: 12px;
     font-size: 15px;
   }
   .project-copy :is(h2, h3) {
-    font-size: 22px;
+    font-size: var(--text-card);
   }
   .feature-description {
-    font-size: 21px;
+    font-size: var(--text-lead);
   }
   .contact-grid {
     gap: 28px;
@@ -105,9 +103,6 @@
   }
 }
 @media (max-width: 900px) {
-  body {
-    font-size: 16px;
-  }
   .site-shell {
     display: block;
   }
@@ -132,7 +127,7 @@
     margin: 0;
   }
   .identity-name {
-    font-size: 27px;
+    font-size: 1.5rem;
   }
   .identity-role {
     font-size: 11px;
@@ -145,94 +140,86 @@
   }
   .primary-nav {
     flex-direction: row;
-    margin-top: 22px;
+    margin-top: 24px;
     gap: 0;
     justify-content: space-between;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 7px;
+    padding-bottom: 8px;
   }
   .primary-nav a {
-    gap: 7px;
+    gap: 8px;
     min-height: 44px;
     font-size: 14px;
   }
   .primary-nav svg {
-    width: 17px;
-    height: 17px;
+    width: 20px;
+    height: 20px;
   }
   .page-column {
-    padding: 0 22px;
+    --page-gutter: 22px;
     min-height: calc(100dvh - 145px);
   }
   .page-header {
     min-height: 60px;
-    font-size: 12px;
     gap: 12px;
+    padding-block: 8px;
   }
-  .page-header nav {
-    gap: 12px;
+  .header-breadcrumb {
+    flex: 1;
   }
   .header-actions {
-    gap: 10px;
-  }
-  .resume-link {
-    padding-left: 13px;
+    margin-left: auto;
   }
   .site-footer {
-    padding-bottom: 24px;
-    font-size: 12px;
-    gap: 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
-  .site-footer nav {
-    gap: 17px;
-  }
-  .site-footer nav a:nth-child(3) {
-    padding-left: 17px;
+  .footer-links {
+    column-gap: 24px;
   }
   .eyebrow {
-    font-size: 12px;
+    font-size: var(--text-caption);
     margin-bottom: 12px;
   }
   h1 {
-    font-size: 48px;
+    font-size: clamp(2.125rem, 1.5rem + 3vw, 3rem);
   }
   h2 {
-    font-size: 29px;
+    font-size: var(--text-section);
   }
 
   .feature-description {
-    font-size: 19px;
-    margin-top: 18px;
+    font-size: var(--text-body);
+    margin-top: 16px;
   }
   .feature-links {
-    font-size: 18px;
+    font-size: var(--text-body);
     margin-top: 20px;
     gap: 24px;
   }
   .quiet-link {
-    font-size: 14px;
+    font-size: var(--text-small);
   }
 
   .section-block {
-    padding: 26px 0;
+    padding: 24px 0;
   }
   .section-heading-row {
-    margin-bottom: 23px;
-    gap: 14px;
+    margin-bottom: 24px;
+    gap: 16px;
   }
   .section-heading-row > .text-link {
-    font-size: 13px;
+    font-size: var(--text-caption);
   }
 
   .project-copy > p {
     font-size: 16px;
   }
   .project-copy .project-technologies {
-    margin-top: 13px;
-    font-size: 13px;
+    font-size: var(--text-caption);
   }
   .project-copy .text-link {
-    margin-top: 13px;
     font-size: 16px;
   }
   .about-intro {
@@ -301,7 +288,7 @@
   .work-history .experience-list li {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 12px;
-    padding: 0 0 38px 44px;
+    padding: 0 0 32px 40px;
   }
   .work-history .job-dates {
     flex-direction: row;
@@ -311,14 +298,8 @@
     min-height: 28px;
     padding: 0;
   }
-  .work-history .current-role {
-    font-size: 25px;
-  }
-  .work-history .current-role svg {
-    display: none;
-  }
   .work-history .experience-list h3 {
-    font-size: 23px;
+    font-size: 1.375rem;
   }
   .work-history .section-heading-row {
     align-items: center;
@@ -334,8 +315,8 @@
     gap: 12px;
   }
   .page-intro .page-description {
-    font-size: 20px;
-    margin-top: 14px;
+    font-size: var(--text-body);
+    margin-top: 16px;
   }
   .intro-art {
     height: 180px;
@@ -344,11 +325,12 @@
   }
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding-top: 22px;
+  }
+  .project-card:nth-child(n) {
+    padding: 24px var(--page-gutter);
   }
   .project-copy :is(h2, h3) {
-    font-size: 27px;
+    font-size: 1.5rem;
   }
   .closing-line {
     flex-direction: column;
@@ -360,16 +342,16 @@
     padding-top: 0;
   }
   .blog-feature h2 {
-    font-size: 33px;
+    font-size: var(--text-section);
   }
   .blog-feature .feature-description {
-    font-size: 17px;
+    font-size: var(--text-body);
   }
   .blog-feature .feature-art-link {
     margin-top: 3px;
   }
   .post-meta {
-    font-size: 13px;
+    font-size: var(--text-caption);
     gap: 9px;
   }
   .meta-tags {
@@ -503,6 +485,26 @@
   }
   .document-page h1 {
     font-size: 38px;
+  }
+}
+@media (max-width: 600px) {
+  .header-breadcrumb ol,
+  .header-breadcrumb li {
+    gap: 4px;
+  }
+  .breadcrumb-home {
+    justify-content: center;
+    margin-left: -12px;
+  }
+  .breadcrumb-home span {
+    display: none;
+  }
+  .resume-link {
+    padding-inline: 10px;
+    font-size: var(--text-small);
+  }
+  .header-breadcrumb li:last-child {
+    flex: 1;
   }
 }
 @media (prefers-reduced-motion: reduce) {

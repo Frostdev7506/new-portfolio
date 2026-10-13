@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "DevelopedByNeeraj",
   role: "Full-Stack MERN + Cloud Engineer",
   description:
-    "Neeraj Butola’s open notebook: web applications, cloud systems, projects, and notes on what I learn along the way.",
+    "Neeraj Butola’s portfolio and blog: web applications, cloud systems, projects, and what I learn along the way.",
   longDescription:
     "I build web applications and cloud systems, and write about what I learn along the way.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.dev",
