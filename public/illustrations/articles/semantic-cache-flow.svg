@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1680" viewBox="0 0 1080 1680" role="img" aria-labelledby="title desc">
+  <title id="title">Semantic cache lookup: reuse an eligible answer or generate a new one</title>
+  <desc id="desc">Explain binary search passes through an embedding model and similarity lookup. An eligible hit returns a saved answer. A miss calls the LLM and produces a new answer. Reuse requires the same access scope and current data.</desc>
+  <defs>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#b3ac97" opacity="0.36"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="1680" fill="#f5efdf"/>
+  <rect width="1080" height="1680" fill="url(#dots)"/>
+  <rect x="30" y="30" width="1020" height="1620" rx="22" fill="none" stroke="#bcb7a5" stroke-width="2"/>
+
+  <g fill="none" stroke="#293a35" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 540 285 V 348 M 521 328 L 540 348 L 559 328"/>
+    <path d="M 540 484 V 553 M 521 533 L 540 553 L 559 533"/>
+    <path d="M 540 727 V 823 M 521 803 L 540 823 L 559 803"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#293a35" font-weight="700">
+    <path d="M 215 72 H 865 Q 890 72 890 97 V 235 Q 890 260 865 260 H 577 L 540 285 L 503 260 H 215 Q 190 260 190 235 V 97 Q 190 72 215 72 Z" fill="#fffaf0" stroke="#293a35" stroke-width="5" stroke-linejoin="round"/>
+    <text x="540" y="151" text-anchor="middle" font-size="62">Explain</text>
+    <text x="540" y="225" text-anchor="middle" font-size="62">binary search.</text>
+
+    <rect x="190" y="350" width="700" height="132" rx="24" fill="#fffaf0" stroke="#293a35" stroke-width="5"/>
+    <g fill="none" stroke="#287e72" stroke-width="5" stroke-linecap="round">
+      <path d="M 253 372 V 388 M 278 372 V 388 M 303 372 V 388 M 253 444 V 460 M 278 444 V 460 M 303 444 V 460 M 232 402 H 248 M 232 430 H 248 M 308 402 H 324 M 308 430 H 324"/>
+      <rect x="248" y="388" width="60" height="56" rx="9" fill="#d5e8df"/>
+      <rect x="260" y="400" width="36" height="32" rx="4" fill="#287e72"/>
+    </g>
+    <text x="369" y="435" font-size="52">Embed question</text>
+
+    <rect x="160" y="555" width="760" height="170" rx="24" fill="#d5e8df" stroke="#287e72" stroke-width="5"/>
+    <g fill="none" stroke="#287e72" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="219" y="597" width="75" height="89" rx="10" fill="#fffaf0"/>
+      <path d="M 236 617 H 276 M 236 639 H 265"/>
+      <circle cx="290" cy="640" r="36" fill="#d5e8df"/>
+      <path d="M 316 666 L 340 690" stroke-width="10"/>
+    </g>
+    <text x="379" y="632" font-size="52">Similarity</text>
+    <text x="379" y="691" font-size="52">lookup</text>
+
+    <path d="M 540 825 L 775 930 L 540 1035 L 305 930 Z" fill="#fffaf0" stroke="#293a35" stroke-width="5" stroke-linejoin="round"/>
+    <text x="540" y="918" text-anchor="middle" font-size="54">Eligible</text>
+    <text x="540" y="978" text-anchor="middle" font-size="54">hit?</text>
+
+    <g fill="none" stroke="#287e72" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 305 930 H 270 V 1138 M 251 1118 L 270 1138 L 289 1118"/>
+    </g>
+    <text x="215" y="1089" text-anchor="end" fill="#287e72" font-size="54">Hit</text>
+
+    <path d="M 85 1140 H 432 L 480 1188 V 1350 Q 480 1380 450 1380 H 90 Q 60 1380 60 1350 V 1165 Q 60 1140 85 1140 Z" fill="#fffaf0" stroke="#287e72" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M 432 1140 V 1188 H 480" fill="#d5e8df" stroke="#287e72" stroke-width="5" stroke-linejoin="round"/>
+    <text x="270" y="1231" text-anchor="middle" font-size="51">Return saved</text>
+    <text x="270" y="1290" text-anchor="middle" font-size="51">answer</text>
+    <path d="M 109 1326 H 396 M 109 1350 H 336" fill="none" stroke="#287e72" stroke-width="7" stroke-linecap="round"/>
+
+    <g fill="none" stroke="#d47846" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 775 930 H 820 V 1138 M 801 1118 L 820 1138 L 839 1118"/>
+      <path d="M 820 1287 V 1348 M 801 1328 L 820 1348 L 839 1328"/>
+    </g>
+    <text x="862" y="1089" fill="#a9572b" font-size="54">Miss</text>
+
+    <rect x="620" y="1140" width="400" height="145" rx="24" fill="#f1d4be" stroke="#d47846" stroke-width="5"/>
+    <g fill="none" stroke="#a9572b" stroke-width="5" stroke-linecap="round">
+      <path d="M 666 1178 V 1191 M 688 1178 V 1191 M 710 1178 V 1191 M 666 1232 V 1245 M 688 1232 V 1245 M 710 1232 V 1245 M 645 1200 H 658 M 645 1221 H 658 M 719 1200 H 732 M 719 1221 H 732"/>
+      <rect x="658" y="1191" width="61" height="41" rx="7" fill="#fffaf0"/>
+    </g>
+    <text x="761" y="1230" font-size="50">Call LLM</text>
+
+    <path d="M 645 1350 H 972 L 1020 1398 V 1510 Q 1020 1540 990 1540 H 650 Q 620 1540 620 1510 V 1375 Q 620 1350 645 1350 Z" fill="#fffaf0" stroke="#d47846" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M 972 1350 V 1398 H 1020" fill="#f1d4be" stroke="#d47846" stroke-width="5" stroke-linejoin="round"/>
+    <text x="818" y="1444" text-anchor="middle" font-size="50">New answer</text>
+    <path d="M 665 1482 H 963 M 665 1508 H 899" fill="none" stroke="#d47846" stroke-width="7" stroke-linecap="round"/>
+
+    <text x="540" y="1608" text-anchor="middle" fill="#6b7366" font-size="44" font-weight="500">Same access scope · current data</text>
+  </g>
+</svg>

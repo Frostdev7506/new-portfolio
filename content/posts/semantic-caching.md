@@ -1,71 +1,52 @@
 ---
-title: "Semantic caching: reuse answers to similar LLM questions"
-description: "Learn how semantic caching reuses LLM responses, how it differs from prompt caching, and how to tune matching and avoid stale answers."
+title: "Semantic Caching"
+description: "Semantic caching reuses LLM answers to similar questions. See how it works, how it differs from prompt caching, and where it can go wrong."
 date: "2026-10-14"
 category: "Practical AI"
 tags: ["Semantic Caching", "LLMs", "Caching", "AI Engineering"]
 cover: "/illustrations/articles/semantic-caching.png"
 coverAlt: "Two differently worded binary-search questions pass an eligibility check and share one saved answer."
-takeaway: "Semantic caching can reuse a saved answer when a similar request belongs to the same allowed context. Check eligibility and freshness before treating similarity as a cache hit."
+takeaway: "Prompt caching reuses input processing. Semantic caching reuses an answer. Check meaning, permissions and freshness before serving it."
 ---
-“What is binary search?” and “Explain binary search” can use the same explanation. Calling an LLM again for each wording repeats work when you already have a suitable answer.
+Three people ask the same question differently. Why generate the same answer three times?
 
-**Semantic caching stores previous responses and looks them up by meaning.** If a new question is sufficiently similar and the saved response is still appropriate for its context, the application can return that answer without generating it again.
+**Semantic caching matches meaning and reuses a saved answer.** A valid hit skips the LLM call.
 
-This is Day 4 of the AI Engineering Interview Series, following [prompt caching](/blog/prompt-caching). The difference is what gets reused: a complete answer, rather than only processing for shared input.
+Day 4 of the AI Engineering Interview Series. [Watch the Short](https://www.youtube.com/shorts/o20J-96a9RY).
 
-> **Watch:** [Semantic caching explained on YouTube](https://www.youtube.com/shorts/o20J-96a9RY).
+## One answer, three questions
 
-## One answer, different wording
+“What is binary search?” “Explain binary search.” “How does binary search work?”
 
-Imagine a beginner programming assistant. It has already answered:
+An exact response cache treats these as different keys. A semantic cache can reuse one explanation for all three, provided it fits each request.
 
-> What is binary search?
-
-The saved response explains that binary search checks the middle of a sorted search range, keeps the half that could contain the target, and repeats until it finds the target or the range is empty.
-
-Later, another learner asks “Explain binary search.” An exact response cache keyed by the full question would treat the two strings as different. A semantic cache can identify them as candidates for the same answer.
-
-That reuse has a boundary. “Show binary search in Python” needs code, while “Does binary search work on an unsorted list?” asks about a condition. Related vocabulary does not guarantee that the saved explanation satisfies either request.
+```diagram
+{"title":"Same topic does not always mean the same request","layout":"comparison","steps":[{"label":"“Explain binary search.”","detail":"A saved explanation may answer this."},{"label":"“Write binary search in Python.”","detail":"Needs code. The explanation alone is not enough."}],"caption":"Reuse an answer only when it satisfies the new request."}
+```
 
 ## How semantic caching works
 
-A typical lookup has three stages:
+1. **Embed:** turn the question into a vector representing its meaning.
+2. **Compare:** search cached vectors within the allowed context, using a metric such as cosine similarity.
+3. **Decide:** if the match passes your threshold and freshness checks, return the saved answer. Otherwise, call the LLM and cache an eligible new response.
 
-1. **Embed the request.** An embedding model converts the text into a vector: a numerical representation used to compare meaning. Use the same embedding model for incoming requests and stored entries.
-2. **Find an eligible candidate.** Search stored vectors within the right context, then apply a matching threshold. The entry also needs its saved response and metadata, such as source version and expiry.
-3. **Reuse or generate.** If the candidate passes the application's checks, return its saved answer. Otherwise, call the LLM and store an eligible new response for later requests.
+![A question becomes an embedding, then searches the cache. A valid hit returns the saved answer; a miss sends the request to the LLM for a new answer.](/illustrations/articles/semantic-cache-flow.png)
 
-```diagram
-{"title":"A paraphrase can reuse an eligible answer","layout":"flow","steps":[{"label":"New question","detail":"Embed “Explain binary search.”"},{"label":"Check candidate","detail":"Compare meaning, allowed context and freshness."},{"label":"Choose the response","detail":"Valid hit: reuse the answer. Miss: generate a new one."}],"caption":"Similarity proposes a match. The application decides whether the saved response is suitable to serve."}
-```
+Large caches can use approximate nearest-neighbor search to find candidates. [Redis's guide](https://redis.io/docs/latest/develop/ai/redisvl/user_guide/how_to_guides/llmcache/) shows a working implementation.
 
-Cosine similarity is one possible comparison metric. Some tools expose distance instead, so their threshold runs in the opposite direction: a smaller distance means a closer match. Follow the chosen implementation's definition. [Redis's semantic-cache guide](https://redis.io/docs/latest/develop/ai/redisvl/user_guide/how_to_guides/llmcache/) documents embedding-based lookup, distance thresholds and entry expiration.
+## Prompt caching vs semantic caching
 
-Large collections may benefit from approximate nearest-neighbor search. A vector database can provide that search, but it is a component of the cache, not the whole correctness policy.
+**Prompt caching reuses processing for a matching input prefix. The LLM still generates an answer. Semantic caching reuses the answer itself.**
 
-## Semantic caching vs prompt caching
+![Prompt caching reuses shared input processing before the LLM generates a new answer. Semantic caching returns an eligible saved answer without running generation again.](/illustrations/articles/caching-comparison.png)
 
-| Approach | What must match? | What is reused? |
-| --- | --- | --- |
-| Exact response caching | The application's exact cache key, including relevant context. | A previously generated answer. |
-| Prompt or prefix caching | A compatible, matching input prefix under the provider's rules. | Processing state for that prefix; a fresh answer is still generated. |
-| Semantic caching | Similar meaning plus the application's eligibility checks. | A previously generated answer. |
+A changed question can still benefit from an unchanged prefix, as [OpenAI documents](https://developers.openai.com/api/docs/guides/prompt-caching). Both techniques can work together. See [Day 3: prompt caching](/blog/prompt-caching).
 
-A changed question can still benefit from prompt caching when it follows the same eligible prefix. It does not automatically invalidate all cached input. [OpenAI's prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching) explains matching-prefix reuse.
+## What can go wrong?
 
-The techniques can work together: try a semantic response lookup first, then use prompt caching on an LLM call when no suitable saved answer exists. [KV caching](/blog/kv-caching) and [prefill versus decode](/blog/prefill-vs-decode) explain the model-side work behind that second path.
+- **Wrong matches:** a permissive threshold can return the wrong answer; a strict one misses useful hits. Tune on real questions. There is no universal “0.7.”
+- **Wrong context:** keep tenants, permissions and conversation context separate. Similar wording does not grant access.
+- **Stale answers:** invalidate entries when source data changes. For critical responses, check the source of truth or bypass the cache.
+- **Extra overhead:** embeddings and vector search add infrastructure, cost and latency. Measure the full request, including misses.
 
-## Choose a threshold and protect freshness
-
-There is no universally correct threshold such as 0.7. Build an evaluation set from real questions, including paraphrases that should share an answer and near matches that must not. Adjust the threshold while measuring both incorrect reuse and missed opportunities. A more permissive setting can increase hits while admitting wrong answers.
-
-Match within the right scope. Relevant differences can include conversation history, language, tenant, permissions, model configuration and policy version. For example, two customers asking the same refund question may have different entitlements. Do not allow vector similarity to bypass access control or rely on it to infer permission.
-
-Expire or invalidate entries when the source changes. A time-to-live limits how long an answer remains cached; it does not guarantee that the answer is current before that time expires. [Redis's LangCache API](https://redis.io/docs/latest/develop/ai/context-engine/langcache/api-examples/) supports attribute-filtered lookups and deletion by entry or attributes. For consequential or rapidly changing information, validate against the source of truth or bypass response caching.
-
-## Measure the whole request path
-
-A cache hit can avoid generation, but embedding and lookup still cost time and money. Misses pay that overhead before the LLM call. Measure valid-hit rate, incorrect-answer rate, hit and miss latency, end-to-end tail latency, and total cost on representative traffic. Do not assume a particular latency saving or hit percentage.
-
-For an interview, the concise answer is: **semantic caching reuses answers across similar questions; prompt caching reuses processing across matching prefixes.** The engineering challenge is deciding when a saved answer is still appropriate. Start with repeated, stable questions and prove that reuse preserves correctness before optimizing for more hits.
+Use semantic caching for repeated questions with stable answers. Start with correctness; then measure the savings.
