@@ -2,6 +2,7 @@
 title: "Prompt caching: reuse the prompt, generate a new answer"
 description: "How prompt caching reuses a shared prefix across LLM requests, with a support-assistant example, cache misses, and the tradeoffs to measure."
 date: "2026-10-12"
+updated: "2026-10-14"
 category: "Practical AI"
 tags: ["LLMs", "Inference", "Caching", "AI Engineering"]
 cover: "/illustrations/articles/prompt-caching.png"
@@ -14,7 +15,7 @@ Your support assistant receives a different question each time, but you send the
 
 This is Part 3 of the AI Engineering Interview Series. [Part 1 covers KV caching](/blog/kv-caching) within generation, and [Part 2 explains prefill and decode](/blog/prefill-vs-decode). Prompt caching connects them across requests.
 
-> **Follow the series:** [Neeraj on LinkedIn](https://www.linkedin.com/in/neeraj-butola/)
+> **Watch:** [Prompt caching on YouTube](https://www.youtube.com/shorts/vNJjm7b1QDU) · **Follow the series:** [Neeraj on LinkedIn](https://www.linkedin.com/in/neeraj-butola/)
 
 ## Two customers, the same policy
 
@@ -87,3 +88,5 @@ For that experiment, record time to first token, total response time, cached inp
 Track cache creation and reads separately where the provider exposes them. Some services charge differently for writes, reads, or storage. A rarely reused document may offer little benefit after those costs. Use the current provider rates rather than assuming a universal discount. The broader [token cost model](/blog/llm-token-costs) still includes output and uncached input.
 
 In an interview, ground the explanation in the shop example: both customers need the same policy, but they need different answers. Prompt caching lets the system keep the reusable processing for that policy and spend new work on each question. The next engineering decision is whether real traffic repeats enough eligible context to make that reuse worthwhile.
+
+Next, [Day 4: semantic caching](/blog/semantic-caching) explains when differently worded questions can reuse a complete saved answer, and how to prevent incorrect or stale responses.
