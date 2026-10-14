@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { parsePost } from "./post-content.ts";
+import nextConfig from "../../next.config.ts";
 
 const files = (await readdir("content/posts")).filter((file) =>
   file.endsWith(".md"),
@@ -17,6 +18,28 @@ const posts = await Promise.all(
     parsePost(await readFile(`content/posts/${file}`, "utf8"), file),
   ),
 );
+
+test("series URLs redirect permanently to articles with the matching video and short SEO title", async () => {
+  const redirects = await nextConfig.redirects();
+  for (const [oldSlug, slug, youtubeId] of [
+    ["kv-caching", "kv-cache-explained", "fdulpDUOA_E"],
+    ["prefill-vs-decode", "prefill-vs-decode-explained", "5rKn3R9MxU8"],
+    ["prompt-caching", "prompt-caching-explained", "vNJjm7b1QDU"],
+    ["semantic-caching", "semantic-caching-explained", "o20J-96a9RY"],
+  ]) {
+    const post = posts.find((candidate) => candidate.slug === slug);
+    assert.ok(post && !post.draft, `${slug}: missing published article`);
+    assert.equal(post.youtubeId, youtubeId);
+    assert.equal(post.seoTitle, post.title);
+    assert.ok(post.seoTitle.split(/\s+/).length <= 4);
+    assert.deepEqual(redirects.find((rule) => rule.source === `/blog/${oldSlug}`), {
+      source: `/blog/${oldSlug}`,
+      destination: `/blog/${slug}`,
+      permanent: true,
+    });
+    assert.ok(!posts.some((candidate) => candidate.slug === oldSlug));
+  }
+});
 
 test("the published collection has ten LinkedIn expansions plus the revised rendering article", async () => {
   const published = posts.filter((post) => !post.draft);

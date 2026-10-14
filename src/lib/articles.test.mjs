@@ -97,6 +97,61 @@ test("bad dates, absent metadata, external covers, and broken diagrams fail earl
   assert.throws(() => parseDiagram("not json"));
 });
 
+test("optional YouTube IDs accept the four series videos and reject unsafe values", () => {
+  assert.equal(examplePost.youtubeId, undefined);
+  for (const id of [
+    "fdulpDUOA_E",
+    "5rKn3R9MxU8",
+    "vNJjm7b1QDU",
+    "o20J-96a9RY",
+  ]) {
+    const post = parsePost(
+      fixture.replace("---\n", `---\nyoutubeId: " ${id} "\n`),
+      "example.md",
+    );
+    assert.equal(post.youtubeId, id);
+    assert.equal(toPostSummary(post).youtubeId, id);
+  }
+  for (const value of [
+    '""',
+    '"short"',
+    '"fdulpDUOA_E/"',
+    '"https://youtube.com/shorts/fdulpDUOA_E"',
+    '"abcdefghij?"',
+    "null",
+    "12345678901",
+  ]) {
+    assert.throws(
+      () =>
+        parsePost(
+          fixture.replace("---\n", `---\nyoutubeId: ${value}\n`),
+          "example.md",
+        ),
+      /youtubeId/,
+    );
+  }
+});
+
+test("optional SEO titles are trimmed and reject blank or non-string overrides", () => {
+  assert.equal(examplePost.seoTitle, undefined);
+  const post = parsePost(
+    fixture.replace("---\n", '---\nseoTitle: " Semantic Caching "\n'),
+    "example.md",
+  );
+  assert.equal(post.seoTitle, "Semantic Caching");
+  assert.equal(toPostSummary(post).seoTitle, "Semantic Caching");
+  for (const value of ['" "', "null", "123", "false"]) {
+    assert.throws(
+      () =>
+        parsePost(
+          fixture.replace("---\n", `---\nseoTitle: ${value}\n`),
+          "example.md",
+        ),
+      /seoTitle/,
+    );
+  }
+});
+
 test("related articles favor shared topics and exclude current article and drafts", () => {
   const base = toPostSummary(examplePost);
   const current = {

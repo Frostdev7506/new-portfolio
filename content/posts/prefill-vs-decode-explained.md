@@ -1,11 +1,14 @@
 ---
-title: "Prefill vs decode: how an LLM builds a reply"
-description: "Prefill processes your prompt and starts the reply. Decode continues it one token at a time. See how both stages work through a simple email example."
+title: "Prefill vs Decode Explained"
+seoTitle: "Prefill vs Decode Explained"
+youtubeId: "5rKn3R9MxU8"
+description: "Prefill processes the prompt; decode generates the reply token by token. See the difference with a simple example, diagram and short video."
 date: "2026-10-12"
+updated: "2026-10-14"
 category: "Practical AI"
-tags: ["LLMs", "Inference", "AI Engineering"]
+tags: ["Prefill", "Decode", "LLMs", "LLM Inference", "AI Engineering"]
 cover: "/illustrations/articles/prefill-vs-decode.png"
-coverAlt: "A group of prompt tokens passes through prefill before individual reply tokens advance through decode."
+coverAlt: "Prefill processes the prompt and produces the first reply token; decode uses that token to generate subsequent tokens one at a time."
 takeaway: "Prefill processes the prompt and produces the first reply token. Decode uses each new token to generate the next one until the reply is complete."
 ---
 An LLM builds a reply in two stages. **Prefill** processes the prompt and produces the first reply token. **Decode** continues the reply, generating one new token at each step.
@@ -14,7 +17,7 @@ A token is a small piece of text. It can be a word, part of a word, or punctuati
 
 This is Part 2 of the AI Engineering Interview Series.
 
-> **Watch:** [Prefill vs decode on YouTube](https://www.youtube.com/shorts/5rKn3R9MxU8) · **Discuss:** [The Day 2 LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7515313280635084801/)
+> **Discuss:** [The Day 2 LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7515313280635084801/)
 
 ## Start with one email
 

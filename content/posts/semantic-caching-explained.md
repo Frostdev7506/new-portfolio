@@ -1,5 +1,7 @@
 ---
-title: "Semantic Caching"
+title: "Semantic Caching Explained"
+seoTitle: "Semantic Caching Explained"
+youtubeId: "o20J-96a9RY"
 description: "Semantic caching reuses LLM answers to similar questions. See how it works, how it differs from prompt caching, and where it can go wrong."
 date: "2026-10-14"
 category: "Practical AI"
@@ -12,7 +14,7 @@ Three people ask the same question differently. Why generate the same answer thr
 
 **Semantic caching matches meaning and reuses a saved answer.** A valid hit skips the LLM call.
 
-Day 4 of the AI Engineering Interview Series. [Watch the Short](https://www.youtube.com/shorts/o20J-96a9RY).
+Day 4 of the AI Engineering Interview Series.
 
 ## One answer, three questions
 
@@ -40,7 +42,7 @@ Large caches can use approximate nearest-neighbor search to find candidates. [Re
 
 ![Prompt caching reuses shared input processing before the LLM generates a new answer. Semantic caching returns an eligible saved answer without running generation again.](/illustrations/articles/caching-comparison.png)
 
-A changed question can still benefit from an unchanged prefix, as [OpenAI documents](https://developers.openai.com/api/docs/guides/prompt-caching). Both techniques can work together. See [Day 3: prompt caching](/blog/prompt-caching).
+A changed question can still benefit from an unchanged prefix, as [OpenAI documents](https://developers.openai.com/api/docs/guides/prompt-caching). Both techniques can work together. See [Day 3: prompt caching](/blog/prompt-caching-explained).
 
 ## What can go wrong?
 

@@ -6,9 +6,37 @@ const nextConfig: NextConfig = {
   compress: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+        search: "",
+      },
+    ],
   },
   async redirects() {
     return [
+      {
+        source: "/blog/kv-caching",
+        destination: "/blog/kv-cache-explained",
+        permanent: true,
+      },
+      {
+        source: "/blog/prefill-vs-decode",
+        destination: "/blog/prefill-vs-decode-explained",
+        permanent: true,
+      },
+      {
+        source: "/blog/prompt-caching",
+        destination: "/blog/prompt-caching-explained",
+        permanent: true,
+      },
+      {
+        source: "/blog/semantic-caching",
+        destination: "/blog/semantic-caching-explained",
+        permanent: true,
+      },
       {
         source: "/blog/my-first-blog-post",
         destination: "/blog",
@@ -32,7 +60,7 @@ const nextConfig: NextConfig = {
       "img-src 'self' data: blob: https:",
       "font-src 'self' data:",
       "connect-src 'self' https://api.github.com https://api.emailjs.com https://*.emailjs.com",
-      "frame-src https://drive.google.com https://docs.google.com",
+      "frame-src https://drive.google.com https://docs.google.com https://www.youtube-nocookie.com",
       "form-action 'self'",
       "upgrade-insecure-requests",
     ].join("; ");

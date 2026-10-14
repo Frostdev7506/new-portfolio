@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
 import { ArticleNavigation } from "@/components/blog/article-navigation";
+import { YouTubeVideo } from "@/components/blog/youtube-video";
 import { siteConfig } from "@/data/site";
 import {
   getAllPosts,
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);
   if (!post) return { title: "Post not found" };
   return {
-    title: post.title,
+    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
     description: post.description,
     keywords: [...post.tags, siteConfig.name],
     alternates: {
@@ -126,16 +127,24 @@ export default async function BlogPostPage({ params }: Props) {
             <time dateTime={post.updated}>{formatDate(post.updated)}</time>
           </p>
         )}
-        <figure className="article-cover">
-          <Image
-            src={post.cover}
-            alt={post.coverAlt}
-            width={1536}
-            height={1024}
-            sizes="(max-width: 480px) 100vw, 420px"
-            priority
+        {post.youtubeId ? (
+          <YouTubeVideo
+            key={post.youtubeId}
+            videoId={post.youtubeId}
+            title={post.title}
           />
-        </figure>
+        ) : (
+          <figure className="article-cover">
+            <Image
+              src={post.cover}
+              alt={post.coverAlt}
+              width={1536}
+              height={1024}
+              sizes="(max-width: 480px) 100vw, 420px"
+              priority
+            />
+          </figure>
+        )}
       </header>
       <div className="article-reading-layout">
         <ArticleNavigation headings={post.headings} />
