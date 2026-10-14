@@ -1,9 +1,12 @@
 ---
-title: "KV caching: how an LLM reuses earlier work"
-description: "Follow an email reply token by token to understand what a KV cache stores, how attention reuses it, and why faster generation needs more memory."
+title: "KV Cache Explained"
+seoTitle: "KV Cache Explained"
+youtubeId: "fdulpDUOA_E"
+description: "KV cache speeds up LLM generation by reusing earlier keys and values. See how it works, what gets cached, and the memory tradeoff."
 date: "2026-10-12"
+updated: "2026-10-14"
 category: "Practical AI"
-tags: ["LLMs", "Inference", "AI Engineering", "Caching"]
+tags: ["KV Cache", "LLMs", "LLM Inference", "Caching", "AI Engineering"]
 cover: "/illustrations/articles/kv-caching.png"
 coverAlt: "Earlier key and value blocks are reused during a model step, with new keys and values added as the reply continues."
 takeaway: "A KV cache keeps the keys and values of processed tokens, including the prompt. Each new decoding step reuses that context, trading memory for less repeated computation."
@@ -12,7 +15,7 @@ An LLM has already processed your email. Why should it redo that work every time
 
 This is Part 1 of the AI Engineering Interview Series. The important question is what gets reused, because “the model remembers the previous words” leaves out the mechanism.
 
-> **Watch:** [KV caching on YouTube](https://www.youtube.com/shorts/fdulpDUOA_E) · **Discuss:** [The Day 1 LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7515070112203354112/)
+> **Discuss:** [The Day 1 LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7515070112203354112/)
 
 ## Start with one unfinished reply
 
@@ -24,7 +27,7 @@ The model processes the prompt and produces a distribution for the first output 
 
 Next, the model needs to continue from the prompt plus “Yes”. Later, it might finish with “Yes, tomorrow works for me.” Each selected token becomes input for the following generation step.
 
-The initial prompt processing is called **prefill**. The subsequent generation steps are **decode**. NVIDIA’s [inference guide](https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/) describes how the prompt’s intermediate results carry forward into decoding. We’ll examine their different performance characteristics in [Part 2: prefill vs decode](/blog/prefill-vs-decode).
+The initial prompt processing is called **prefill**. The subsequent generation steps are **decode**. NVIDIA’s [inference guide](https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/) describes how the prompt’s intermediate results carry forward into decoding. We’ll examine their different performance characteristics in [Part 2: prefill vs decode](/blog/prefill-vs-decode-explained).
 
 ## What keys and values contribute
 
@@ -64,4 +67,4 @@ Explain one step before naming optimizations: the prompt’s KV is already avail
 
 If asked whether doubling the context doubles latency, don’t infer that from cache size alone. Hardware, batching, attention implementation and memory traffic affect generation speed. A useful evaluation compares the same model and workload while recording generation latency, memory consumption and concurrency.
 
-Next, [prefill vs decode](/blog/prefill-vs-decode) separates the initial prompt processing from the token generation loop. [Part 3: prompt caching](/blog/prompt-caching) builds on this mechanism to explain when processed context can be reused across requests.
+Next, [prefill vs decode](/blog/prefill-vs-decode-explained) separates the initial prompt processing from the token generation loop. [Part 3: prompt caching](/blog/prompt-caching-explained) builds on this mechanism to explain when processed context can be reused across requests.

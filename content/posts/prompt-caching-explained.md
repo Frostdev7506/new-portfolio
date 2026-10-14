@@ -1,9 +1,12 @@
 ---
-title: "Prompt caching: reuse the prompt, generate a new answer"
-description: "How prompt caching reuses a shared prefix across LLM requests, with a support-assistant example, cache misses, and the tradeoffs to measure."
+title: "Prompt Caching Explained"
+seoTitle: "Prompt Caching Explained"
+youtubeId: "vNJjm7b1QDU"
+description: "Prompt caching reuses a matching input prefix across LLM requests. Learn what gets reused, why misses happen, and when each request needs a new answer."
 date: "2026-10-12"
+updated: "2026-10-14"
 category: "Practical AI"
-tags: ["LLMs", "Inference", "Caching", "AI Engineering"]
+tags: ["Prompt Caching", "LLMs", "Caching", "AI Engineering"]
 cover: "/illustrations/articles/prompt-caching.png"
 coverAlt: "Two requests reuse processing for the same instructions and reference prefix, followed by a different question in each request."
 takeaway: "Prompt caching reuses processing for a matching prompt prefix. Keep stable context first, verify cache hits, and remember that every answer still needs generation."
@@ -12,7 +15,7 @@ Your support assistant receives a different question each time, but you send the
 
 **Prompt caching saves reusable processing results for a shared prompt prefix.** When another request starts with matching content and an eligible cache entry is available, the system can reuse those results and process the new material. It still generates an answer for the current question. [OpenAI's prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching) describes this as retaining the prefix's key-value state.
 
-This is Part 3 of the AI Engineering Interview Series. [Part 1 covers KV caching](/blog/kv-caching) within generation, and [Part 2 explains prefill and decode](/blog/prefill-vs-decode). Prompt caching connects them across requests.
+This is Part 3 of the AI Engineering Interview Series. [Part 1 covers KV caching](/blog/kv-cache-explained) within generation, and [Part 2 explains prefill and decode](/blog/prefill-vs-decode-explained). Prompt caching connects them across requests.
 
 > **Follow the series:** [Neeraj on LinkedIn](https://www.linkedin.com/in/neeraj-butola/)
 
@@ -87,3 +90,5 @@ For that experiment, record time to first token, total response time, cached inp
 Track cache creation and reads separately where the provider exposes them. Some services charge differently for writes, reads, or storage. A rarely reused document may offer little benefit after those costs. Use the current provider rates rather than assuming a universal discount. The broader [token cost model](/blog/llm-token-costs) still includes output and uncached input.
 
 In an interview, ground the explanation in the shop example: both customers need the same policy, but they need different answers. Prompt caching lets the system keep the reusable processing for that policy and spend new work on each question. The next engineering decision is whether real traffic repeats enough eligible context to make that reuse worthwhile.
+
+Next, [Day 4: semantic caching](/blog/semantic-caching-explained) explains when differently worded questions can reuse a complete saved answer, and how to prevent incorrect or stale responses.

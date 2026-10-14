@@ -48,9 +48,17 @@ export function parsePost(source: string, fileName: string) {
   const updated = data.updated ? dateField("updated") : date;
   if (updated < date)
     throw new Error(`${fileName}: updated precedes publication`);
+  const youtubeId =
+    data.youtubeId === undefined ? undefined : required("youtubeId");
+  if (youtubeId && !/^[A-Za-z0-9_-]{11}$/.test(youtubeId))
+    throw new Error(`${fileName}: invalid youtubeId`);
+  const seoTitle =
+    data.seoTitle === undefined ? undefined : required("seoTitle");
   return {
     slug,
     title: required("title"),
+    seoTitle,
+    youtubeId,
     description: required("description"),
     category: required("category"),
     takeaway: required("takeaway"),

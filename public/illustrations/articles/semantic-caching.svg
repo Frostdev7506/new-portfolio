@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Semantic caching: differently worded questions reuse one eligible saved answer</title>
+  <desc id="desc">What is binary search and Explain binary search converge through an eligible-match check on one saved answer. Similarity alone does not make every cached answer safe to reuse.</desc>
+  <defs>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#b3ac97" opacity="0.36"/></pattern>
+  </defs>
+  <rect width="1536" height="1024" fill="#f5efdf"/>
+  <rect width="1536" height="1024" fill="url(#dots)"/>
+  <rect x="38" y="38" width="1460" height="948" rx="22" fill="none" stroke="#bcb7a5" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="102" y="117" fill="#6b7366" font-size="29" font-weight="700">AI ENGINEERING</text>
+    <text x="1430" y="117" fill="#6b7366" font-size="29" font-weight="700" text-anchor="end">04</text>
+    <text x="102" y="218" fill="#293a35" font-size="70" font-weight="700">Different words. One saved answer.</text>
+    <rect x="104" y="343" width="632" height="190" rx="24" fill="#fffaf0" stroke="#293a35" stroke-width="4"/>
+    <path d="M 610 531 V 568 L 660 531" fill="#fffaf0" stroke="#293a35" stroke-width="4" stroke-linejoin="round"/>
+    <text x="148" y="417" fill="#293a35" font-size="52" font-weight="700">What is</text>
+    <text x="148" y="486" fill="#293a35" font-size="52" font-weight="700">binary search?</text>
+    <rect x="104" y="661" width="632" height="190" rx="24" fill="#d5e8df" stroke="#287e72" stroke-width="4"/>
+    <path d="M 610 849 V 886 L 660 849" fill="#d5e8df" stroke="#287e72" stroke-width="4" stroke-linejoin="round"/>
+    <text x="148" y="735" fill="#287e72" font-size="52" font-weight="700">Explain</text>
+    <text x="148" y="804" fill="#293a35" font-size="52" font-weight="700">binary search.</text>
+    <path d="M 736 438 H 800 Q 826 438 826 464 V 571 Q 826 597 852 597 H 875 M 736 756 H 800 Q 826 756 826 730 V 623 Q 826 597 852 597" fill="none" stroke="#287e72" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="923" y="482" fill="#287e72" font-size="39" font-weight="700" text-anchor="middle">Eligible</text>
+    <text x="923" y="529" fill="#287e72" font-size="39" font-weight="700" text-anchor="middle">match</text>
+    <circle cx="923" cy="597" r="48" fill="#d5e8df" stroke="#287e72" stroke-width="5"/>
+    <path d="M 899 595 L 916 613 L 946 580" fill="none" stroke="#287e72" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 971 597 H 1077 M 1053 579 L 1077 597 L 1053 615" fill="none" stroke="#287e72" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="1080" y="363" width="350" height="488" rx="26" fill="#fffaf0" stroke="#287e72" stroke-width="5"/>
+    <text x="1255" y="436" fill="#293a35" font-size="43" font-weight="700" text-anchor="middle">Saved answer</text>
+    <rect x="1118" y="484" width="274" height="274" rx="18" fill="#d5e8df"/>
+    <path d="M 1150 548 H 1360 M 1150 611 H 1318 M 1150 674 H 1342" fill="none" stroke="#287e72" stroke-width="13" stroke-linecap="round"/>
+  </g>
+</svg>
