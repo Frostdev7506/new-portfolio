@@ -2,7 +2,7 @@
 
 15 October 2026. The Day 5 video is [public on YouTube](https://youtube.com/shorts/vXV51kD1LW0). The companion article is prepared for review; this record does not claim production publication.
 
-- Article: `content/posts/llm-model-routing.md`, **LLM Model Routing Explained** (576 readable words; four-word SEO title).
+- Article: `content/posts/llm-model-routing.md`, **LLM Model Routing Explained** (598 readable words; four-word SEO title).
 - Existing article components provide the portrait YouTube thumbnail/player, canonical URL, Open Graph/Twitter metadata, BlogPosting/BreadcrumbList schema, sitemap and RSS entry. The description is 145 characters. Day 4 links forward to Day 5.
 - Original cover plus pre-call and bounded-cascade diagrams are under `public/illustrations/articles/model-routing*`, in editable SVG and PNG formats. Alt text describes the flow.
 - [LinkedIn copy](linkedin-draft.txt): 198 words, saved as an unpublished draft on Neeraj Butola's LinkedIn account. The composer displayed “Draft successfully saved.” Reopening confirmed the copy and matching Day 5 video preview; LinkedIn shortened the displayed URL. No post was published. No unpublished blog URL is advertised in the draft.
@@ -28,3 +28,11 @@ The intended production URL is https://neerajbutola.in/blog/llm-model-routing. I
 The cover's verified 1200×630 dimensions are emitted in Open Graph and BlogPosting ImageObject metadata. Twitter receives image alt text. Article language and the author's `/about` URL are explicit; older posts may omit dimensions. The production HTML, redirect, title/H1, canonical, social metadata, schema, table-of-contents targets, Day 4 link, sitemap and RSS passed runtime assertions. Homepage, blog and existing API routes returned HTTP 200. Desktop and 390px phone title/description layout were inspected without horizontal overflow.
 
 The user subsequently edited the LinkedIn text. Their revised text was preserved locally before the media picker opened. Image attachment was not completed; the user chose to add the images manually. The three original PNGs were copied and hash-verified in `/Users/neeraj/Downloads/Day-5-LinkedIn-Images`, numbered cover, pre-call, then cascade. No LinkedIn post was published by this work. The historical linked copy above is the initial saved draft, not the user's latest revision.
+
+## Shared diagram and table refinement
+
+The user flagged the plain text-column diagram and table presentation, including its reuse in other articles. The shared renderer now distinguishes numbered process steps with directional arrows from unordered comparison panels. It adapts to narrow article containers and long processes. Day 5's comparison has an explicit shared test set and shared scoring criteria, with validated optional input/output nodes included in reading-time counts. Other article wording is preserved.
+
+Tables now have contained rounded borders, tinted column headers, stronger first-column labels and smaller, consistent typography. Wider tables scroll within the article; their first column stays visible and the scroll region supports keyboard access. Header cells explicitly use column scope. Both features follow the existing light/dark theme tokens.
+
+Fresh lint, 17 tests and a production build passed before the final table sticky-column CSS refinement; lint/build were rerun for that final CSS change. An independent source review covered the 16 existing article diagrams. Browser checks covered Day 5, the Day 1 process, a three-way comparison and a four-step process, plus two-column and three-column tables at phone width. Two-column content fits at 390px without page overflow; the three-column table scrolls internally. Screenshot evidence is in the local publication folder. This is a scoped component review, not a full accessibility audit.

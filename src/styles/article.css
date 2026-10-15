@@ -86,24 +86,6 @@
   padding: 0;
   overflow-wrap: normal;
 }
-.prose-custom table {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
-  border-collapse: collapse;
-  margin: 1.2em 0;
-  border: 1px solid var(--border);
-}
-.prose-custom th,
-.prose-custom td {
-  border-bottom: 1px solid var(--border);
-  padding: 0.55rem 0.7rem;
-  text-align: left;
-}
-.prose-custom th {
-  color: var(--text);
-  background: var(--surface-soft);
-}
 .prose-custom a {
   color: var(--brand-700);
   text-decoration: underline;
@@ -329,31 +311,72 @@
   max-width: 100%;
   overflow-x: auto;
   margin: 32px 0;
-  border-block: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  overscroll-behavior-x: contain;
+}
+.prose-custom .article-table:focus-visible {
+  outline: 2px solid var(--brand-700);
+  outline-offset: 4px;
 }
 .prose-custom table {
-  display: table;
-  border: 0;
   width: 100%;
   margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
   font-family: var(--font-body), sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
 }
 .prose-custom th,
 .prose-custom td {
-  padding: 14px 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
   vertical-align: top;
+  overflow-wrap: break-word;
 }
-.prose-custom th {
+.prose-custom thead th {
+  background: var(--brand-100);
+  color: var(--text);
+  font-size: 14px;
   font-weight: 600;
-  background: transparent;
+  line-height: 1.45;
 }
-.prose-custom td {
-  min-width: 130px;
+.prose-custom :is(th, td):first-child {
+  width: 36%;
 }
-.prose-custom tr:last-child td {
+.prose-custom tbody td:first-child {
+  background: color-mix(in srgb, var(--surface-soft) 35%, var(--surface));
+  color: var(--text);
+  font-weight: 600;
+}
+.prose-custom tbody tr:last-child td {
   border-bottom: 0;
+}
+.prose-custom table:has(th:nth-child(3)) {
+  min-width: 600px;
+}
+.prose-custom table:has(th:nth-child(3)) :is(th, td) {
+  min-width: 170px;
+}
+.prose-custom table:has(th:nth-child(3)) :is(th, td):first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: 28%;
+  box-shadow: 1px 0 var(--border);
+}
+@media (max-width: 700px) {
+  .prose-custom table {
+    font-size: 14px;
+  }
+  .prose-custom th,
+  .prose-custom td {
+    padding: 12px;
+  }
 }
 .article-navigation {
   grid-column: 2;
@@ -494,39 +517,79 @@
   font-family: var(--font-body), sans-serif;
 }
 .prose-custom .article-diagram {
-  border-block: 1px solid var(--border);
+  container: article-diagram / inline-size;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface-soft) 40%, var(--page-bg));
   margin: 36px 0;
-  padding: 28px 0;
+  padding: 24px;
   font-family: var(--font-body), sans-serif;
+  color: var(--text);
+}
+.article-diagram figcaption {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.article-diagram figcaption > svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 3px;
+  color: var(--brand-900);
 }
 .article-diagram figcaption > strong {
-  display: block;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-wrap: pretty;
 }
-.prose-custom .article-diagram ol {
+.prose-custom .article-diagram .diagram-steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 32px;
-  margin: 24px 0;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 28px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
-.prose-custom .article-diagram li {
+.prose-custom .article-diagram .diagram-steps > li {
   position: relative;
+  min-width: 0;
   margin: 0;
-  padding: 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
   font-size: 14px;
 }
-.article-diagram li > strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.5;
+.diagram-step-marker {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 16px;
+  border: 1px solid color-mix(in srgb, var(--brand-700) 25%, var(--border));
+  border-radius: 7px;
+  background: var(--brand-100);
   color: var(--brand-900);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
-.prose-custom .article-diagram li p {
+.diagram-step-content > strong,
+.diagram-endpoint strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.4;
+  color: var(--text);
+  text-wrap: pretty;
+}
+.prose-custom .article-diagram .diagram-step-content p,
+.prose-custom .article-diagram .diagram-endpoint p {
+  font-size: 14px;
   line-height: 1.6;
   margin: 8px 0 0;
   color: var(--text-muted);
@@ -534,21 +597,162 @@
 .diagram-connector {
   position: absolute;
   right: -25px;
-  top: 3px;
-  color: var(--text-muted);
+  top: 22px;
+  color: var(--brand-900);
 }
 .diagram-connector svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 .diagram-connector svg:last-child {
   display: none;
 }
-.prose-custom .diagram-caption {
+.prose-custom .diagram-vertical .diagram-steps {
+  grid-auto-flow: row;
+}
+.prose-custom .diagram-vertical .diagram-steps > li {
+  display: flex;
+  gap: 16px;
+}
+.diagram-vertical .diagram-step-marker {
+  flex: none;
+  margin-bottom: 0;
+}
+.diagram-vertical .diagram-connector {
+  right: auto;
+  left: 22px;
+  top: auto;
+  bottom: -25px;
+}
+.diagram-vertical .diagram-connector svg:first-child {
+  display: none;
+}
+.diagram-vertical .diagram-connector svg:last-child {
+  display: block;
+}
+.diagram-endpoint {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  background: var(--brand-100);
+}
+.diagram-endpoint > svg {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  color: var(--brand-900);
+}
+.diagram-input {
+  margin-bottom: 28px;
+}
+.diagram-output {
+  margin-top: 28px;
+}
+.diagram-input::after,
+.diagram-output::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 14px;
+  background: var(--brand-700);
+}
+.diagram-input::after {
+  top: 100%;
+}
+.diagram-output::before {
+  bottom: 100%;
+}
+.diagram-has-input .diagram-steps > li::before,
+.diagram-has-output .diagram-steps > li::after {
+  content: "";
+  position: absolute;
+  left: -15px;
+  right: -15px;
+  height: 14px;
+  border-inline: 0 solid var(--brand-700);
+}
+.diagram-has-input .diagram-steps > li::before {
+  bottom: 100%;
+  border-top: 1px solid var(--brand-700);
+  background: linear-gradient(var(--brand-700), var(--brand-700)) center / 1px 100% no-repeat;
+}
+.diagram-has-output .diagram-steps > li::after {
+  top: 100%;
+  border-bottom: 1px solid var(--brand-700);
+  background: linear-gradient(var(--brand-700), var(--brand-700)) center / 1px 100% no-repeat;
+}
+.diagram-steps > li:first-child::before,
+.diagram-steps > li:first-child::after {
+  left: 50%;
+  background-position: left;
+}
+.diagram-steps > li:last-child::before,
+.diagram-steps > li:last-child::after {
+  right: 50%;
+  background-position: right;
+}
+.prose-custom .article-diagram .diagram-caption {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin: 20px 0 0;
   font-size: 14px;
   line-height: 1.65;
-  margin: 0;
   color: var(--text-muted);
+}
+@container article-diagram (max-width: 540px) {
+  .prose-custom .article-diagram .diagram-steps {
+    grid-auto-flow: row;
+    gap: 24px;
+  }
+  .prose-custom .article-diagram .diagram-steps > li {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+  }
+  .diagram-step-marker {
+    flex: none;
+    margin-bottom: 0;
+  }
+  .diagram-connector {
+    right: auto;
+    left: 20px;
+    top: auto;
+    bottom: -23px;
+  }
+  .diagram-connector svg:first-child {
+    display: none;
+  }
+  .diagram-connector svg:last-child {
+    display: block;
+  }
+  .prose-custom .diagram-has-input .diagram-steps,
+  .prose-custom .diagram-has-output .diagram-steps {
+    border-left: 1px solid var(--brand-700);
+    padding-left: 16px;
+  }
+  .diagram-input::after,
+  .diagram-output::before {
+    left: -1px;
+    height: 28px;
+  }
+  .diagram-has-input .diagram-steps > li::before {
+    display: block;
+    top: 50%;
+    bottom: auto;
+    left: -17px;
+    right: auto;
+    width: 16px;
+    height: 0;
+    background: none;
+  }
+  .diagram-has-output .diagram-steps > li::after {
+    display: none;
+  }
 }
 .article-origin {
   margin-top: 40px;
@@ -735,21 +939,8 @@
   .article-body .prose-custom blockquote {
     padding-left: 18px;
   }
-  .prose-custom .article-diagram ol {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .diagram-connector {
-    left: 0;
-    right: auto;
-    top: auto;
-    bottom: -24px;
-  }
-  .diagram-connector svg:first-child {
-    display: none;
-  }
-  .diagram-connector svg:last-child {
-    display: block;
+  .prose-custom .article-diagram {
+    padding: 18px;
   }
   .article-share {
     display: block;

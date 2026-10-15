@@ -70,6 +70,77 @@ test("reading time follows content length and diagram prose, not frontmatter est
   assert.throws(() => getArticleStructure("# Duplicate page heading"), /h2/);
 });
 
+test("diagrams accept optional input/output nodes and count their readable text", () => {
+  const diagram = {
+    title: "Two stages",
+    caption: "Read then write",
+    steps: [
+      { label: "Read", detail: "Get data" },
+      { label: "Write", detail: "Save data" },
+    ],
+  };
+  const input = {
+    label: "Same held-out requests",
+    detail: "Used by both policies",
+  };
+  const output = {
+    label: "Shared scoring",
+    detail: "Compare cost and quality",
+  };
+  for (const layout of ["flow", "comparison"]) {
+    for (const [nodes, expectedWords] of [
+      [{}, 11],
+      [{ input }, 18],
+      [{ output }, 17],
+      [{ input, output }, 24],
+    ]) {
+      const data = { ...diagram, layout, ...nodes };
+      const source = JSON.stringify(data);
+      assert.deepEqual(parseDiagram(source), data);
+      const content = `\`\`\`diagram\n${source}\n\`\`\``;
+      assert.equal(getArticleStructure(content).wordCount, expectedWords);
+      assert.equal(getArticleStructure(content).diagramCount, 1);
+      assert.equal(
+        getArticleStructure(`\n${"word ".repeat(180)}\n\n${content}`).readingMinutes,
+        expectedWords === 24 ? 2 : 1,
+      );
+    }
+  }
+});
+
+test("supplied diagram input/output nodes must be objects with nonempty label and detail strings", () => {
+  const diagram = {
+    title: "Two policies",
+    caption: "Compare their outputs",
+    layout: "comparison",
+    steps: [
+      { label: "A", detail: "Router" },
+      { label: "B", detail: "Baseline" },
+    ],
+  };
+  for (const key of ["input", "output"]) {
+    for (const node of [
+      null,
+      false,
+      42,
+      "Request",
+      [],
+      {},
+      { label: "Request" },
+      { detail: "Same traffic" },
+      { label: " ", detail: "Same traffic" },
+      { label: "Request", detail: "" },
+      { label: 1, detail: "Same traffic" },
+      { label: "Request", detail: null },
+    ]) {
+      assert.throws(
+        () => parseDiagram(JSON.stringify({ ...diagram, [key]: node })),
+        new RegExp(`diagram ${key} needs a nonempty label and detail`),
+      );
+    }
+  }
+});
+
 test("bad dates, absent metadata, external covers, and broken diagrams fail early", () => {
   assert.throws(
     () => parsePost(fixture.replace('"2026-10-10"', '"2026-02-30"'), "post.md"),

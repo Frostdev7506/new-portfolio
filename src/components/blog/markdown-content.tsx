@@ -88,6 +88,11 @@ export function MarkdownContent({ content }: { content: string }) {
               <table>{children}</table>
             </div>
           ),
+          th: ({ children, style }) => (
+            <th scope="col" style={style}>
+              {children}
+            </th>
+          ),
           img: ({ src, alt, title }) =>
             typeof src === "string" ? (
               <span className="article-inline-image">

@@ -47,7 +47,7 @@ For payment debugging, run tests against the proposed fix. If they fail, escalat
 Define success before tuning. For coding, use relevant tests plus review. Keep test requests separate from router training and threshold tuning.
 
 ```diagram
-{"title":"Use the same held-out requests","layout":"comparison","steps":[{"label":"Routing policy","detail":"Choose a model; include any validation and escalation."},{"label":"Capable baseline","detail":"Always use the more capable model for these tasks."}],"caption":"Score both against the same success criteria. The baseline can fail too."}
+{"title":"Compare the whole system","layout":"comparison","input":{"label":"Same held-out requests","detail":"Run every test case through both policies."},"steps":[{"label":"Routing policy","detail":"Select a model. Include checks and any escalation."},{"label":"Capable baseline","detail":"Use the more capable model for every request."}],"output":{"label":"Same scoring criteria","detail":"Quality · Cost per successful task · End-to-end latency"},"caption":"Offline evaluation, not a live traffic split. Either policy can produce a wrong answer."}
 ```
 
 Start with offline evaluation on representative production requests. An online A/B test is a separate step: randomly assign live traffic to policies and compare outcomes.
