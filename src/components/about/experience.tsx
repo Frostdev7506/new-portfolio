@@ -44,12 +44,12 @@ export function Experience({ detailed = false }: { detailed?: boolean }) {
                 <div>
                   <h3>{job.company}</h3>
                   <p className="job-role">{job.role}</p>
+                  <p className="job-details">{job.details}</p>
+                  {job.description && (
+                    <p className="job-description">{job.description}</p>
+                  )}
                 </div>
               </div>
-              <p className="job-details">{job.details}</p>
-              {job.description && (
-                <p className="job-description">{job.description}</p>
-              )}
             </div>
             {detailed && <span className="job-period">{job.period}</span>}
           </li>

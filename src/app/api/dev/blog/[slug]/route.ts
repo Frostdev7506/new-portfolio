@@ -1,16 +1,12 @@
-import {
-  assertEditorRequest,
-  editorErrorResponse,
-  getEditorDocument,
-  readEditorJson,
-  saveEditorDocument,
-} from "@/lib/blog-editor";
-
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 type RouteContext = { params: Promise<{ slug: string }> };
 
 export async function GET(request: Request, context: RouteContext) {
+  if (process.env.NODE_ENV !== "development") {
+    return Response.json({ error: "Not found." }, { status: 404, headers: { "Cache-Control": "no-store" } });
+  }
+  const { assertEditorRequest, editorErrorResponse, getEditorDocument } = await import("@/lib/blog-editor");
   try {
     assertEditorRequest(request);
     const { slug } = await context.params;
@@ -21,6 +17,10 @@ export async function GET(request: Request, context: RouteContext) {
 }
 
 export async function PUT(request: Request, context: RouteContext) {
+  if (process.env.NODE_ENV !== "development") {
+    return Response.json({ error: "Not found." }, { status: 404, headers: { "Cache-Control": "no-store" } });
+  }
+  const { assertEditorRequest, editorErrorResponse, readEditorJson, saveEditorDocument } = await import("@/lib/blog-editor");
   try {
     assertEditorRequest(request, true);
     const { slug } = await context.params;

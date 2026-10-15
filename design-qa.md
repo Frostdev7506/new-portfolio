@@ -4,6 +4,25 @@ final result: passed
 
 Reviewed 2026-10-10 against the selected notebook designs, using the production preview at http://localhost:3107.
 
+## Homepage cleanup — 15 October 2026
+
+Removed the homepage featured-article strip and the email postcard. The hero now leads directly to projects; `/blog` keeps its featured article. Removed the unused homepage feature variants and postcard component/styles.
+
+Company names, roles, employment details, and descriptions share one text column next to top-aligned logos. The date column now fits its text and the timeline axis follows that column. The shared content alignment also applies on `/about`.
+
+The replacement updates section offers RSS by default. Configuring `NEXT_PUBLIC_NEWSLETTER_URL` adds a hosted email-signup link and changes the description to email updates. No provider account or signup URL exists yet; email subscriptions and delivery have not been activated. The other site email destinations still need a verified replacement address.
+
+Verification:
+- Lint, all 80 tests, and the production build passed.
+- Browser assertions at 320, 390, 768, 901, 1024, and 1440px confirmed no horizontal document overflow, aligned timeline text, dates inside their columns, removal of both homepage sections, and the RSS destination.
+- Desktop and 320/390px timeline screenshots were visually inspected; `/about` was checked on mobile and `/blog` retained its feature.
+- Built with a temporary example signup URL to verify the configured link, then rebuilt without it to confirm the final output is RSS-only and contains no placeholder signup URL.
+- `/feed.xml` parsed as valid RSS containing all 16 published articles. No email was sent and no subscriber was registered.
+
+Evidence: [homepage](docs/screenshots/home-layout-desktop.png), [desktop timeline](docs/screenshots/home-timeline-desktop.png), [mobile timeline](docs/screenshots/home-timeline-mobile.png), [updates section](docs/screenshots/home-updates-mobile.png).
+
+---
+
 ## Latest verification: modular, behavior-preserving refactor
 
 This pass reorganizes the approved implementation without changing its design or content. `ProjectIndex` now composes a section heading, interactive `ProjectTabs`, and `ProjectPreview`. Contact markup and `useContactForm` submission state are separate. The homepage uses a named `AboutSummary` instead of a different composition hidden behind an About flag. Résumé header, experience, projects, and section headings have focused components. Toolkit icons and homepage inclusion are explicit content fields rather than array-position lookups.

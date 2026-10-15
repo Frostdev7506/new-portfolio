@@ -32,27 +32,6 @@
   width: 100%;
   height: auto;
 }
-.home-feature {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 36px;
-  align-items: center;
-  padding: 30px 0;
-  border-top: 1px solid var(--border);
-}
-.home-feature .feature-art-link {
-  order: -1;
-}
-.home-feature h2 {
-  font-size: var(--text-card);
-}
-.home-feature .feature-links {
-  margin-top: 18px;
-  font-size: var(--text-body);
-}
-.home-feature .eyebrow {
-  font-size: var(--text-caption);
-}
 .project-index.section-block {
   padding: 42px 0 48px;
 }
@@ -214,89 +193,27 @@
   width: 100%;
   height: auto;
 }
-.contact-postcard {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  padding: 40px;
-  gap: 36px;
-  margin-top: 12px;
-  border: 1px solid #d9cdbb;
-  border-radius: 24px 24px 40px 24px;
-  background: #faf6ed;
-  color: #20231f;
-  overflow: hidden;
+.article-updates {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
 }
-.postcard-paper {
-  object-fit: cover;
-  object-position: left bottom;
+.article-updates h2 {
+  font-size: var(--text-section);
 }
-.postcard-message, .postcard-recipient {
-  position: relative;
-}
-.postcard-message {
-  padding: 20px 0 0 22px;
-}
-.postcard-message h2 {
-  font: 600 clamp(2.875rem, 4.6vw, 4.25rem)/0.95 var(--font-note), cursive;
-  letter-spacing: 0;
-  color: #bd432a;
-  transform: rotate(-5deg);
-  margin-bottom: 30px;
-}
-.postcard-message > p:not(.postcard-signature) {
-  max-width: 26ch;
-  font-size: var(--text-body);
+.updates-description {
+  max-width: 48ch;
+  margin-top: 16px;
+  color: var(--text-muted);
   line-height: 1.6;
 }
-.postcard-signature {
-  font: 2.125rem/1.3 var(--font-note), cursive;
-  margin-top: 24px;
-  text-align: right;
-  padding-right: 18px;
-}
-.postcard-recipient {
-  border-left: 1px solid #d9cdbb;
-  padding-left: 36px;
-  min-width: 0;
-}
-.postcard-stamp {
-  display: block;
-  width: 225px;
-  height: 155px;
-  object-fit: contain;
-  margin-left: auto;
-  margin-bottom: 10px;
-}
-.postcard-recipient address {
-  font-style: normal;
+.updates-actions {
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
-  gap: 10px;
-}
-.postcard-to {
-  font-size: 0.9375rem;
-}
-.postcard-name {
-  font: 1.875rem/1.2 var(--font-note), cursive;
-}
-.postcard-recipient address a {
-  font: 1.5rem/1.4 var(--font-note), cursive;
-  overflow-wrap: anywhere;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #d9cdbb;
-}
-.postcard-recipient .primary-button {
-  margin-top: 26px;
-}
-.contact-postcard a:focus-visible {
-  outline-color: #087f7c;
-}
-.contact-postcard a:hover {
-  color: #bd432a;
-}
-.contact-postcard .primary-button:hover {
-  color: white;
+  align-items: flex-start;
+  gap: 16px;
 }
 @media (max-width: 1100px) and (min-width: 901px) {
   .notebook-hero {
@@ -308,16 +225,6 @@
   }
   .project-choice {
     padding-left: 12px;
-  }
-  .contact-postcard {
-    padding: 28px;
-    gap: 24px;
-  }
-  .postcard-recipient {
-    padding-left: 24px;
-  }
-  .postcard-message {
-    padding-left: 0;
   }
 }
 @media (max-width: 600px) {
@@ -342,14 +249,6 @@
   .hero-workbench {
     max-width: 350px;
     margin: 0 auto;
-  }
-  .home-feature {
-    gap: 20px;
-    grid-template-columns: 1fr;
-    padding: 26px 0;
-  }
-  .home-feature .feature-art-link {
-    max-width: 380px;
   }
   .project-index.section-block {
     padding: 30px 0;
@@ -390,38 +289,10 @@
     max-width: 340px;
     margin: 0 auto;
   }
-  .contact-postcard {
-    grid-template-columns: 1fr;
-    gap: 26px;
-    padding: 28px 24px;
-  }
-  .postcard-paper {
-    object-position: right bottom;
-  }
-  .postcard-message {
-    padding: 0;
-  }
-  .postcard-message h2 {
-    font-size: 3.625rem;
-  }
-  .postcard-message > p:not(.postcard-signature) {
-    max-width: 100%;
-  }
-  .postcard-signature {
-    margin-top: 15px;
-  }
-  .postcard-recipient {
-    border-left: 0;
-    border-top: 1px solid #d9cdbb;
-    padding: 18px 0 0;
-  }
-  .postcard-stamp {
-    width: 180px;
-    height: 120px;
-    margin-bottom: 0;
-  }
-  .postcard-recipient address a {
-    font-size: 1.4375rem;
+  .article-updates {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
   }
 }
 
