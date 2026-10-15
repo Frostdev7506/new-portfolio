@@ -44,6 +44,18 @@ test("article metadata and structured data agree with published content and real
     assert.ok(cover.length > 0, `${post.slug}: missing social image`);
     assert.equal(image.url, `${siteConfig.url}${post.cover}`);
     assert.equal(article.image.url, image.url);
+    assert.equal(article.image.description, post.coverAlt);
+    for (const target of [image, metadata.twitter.images[0], article.image]) {
+      if (post.coverWidth !== undefined) {
+        assert.equal(target.width, post.coverWidth);
+        assert.equal(target.height, post.coverHeight);
+        assert.equal(target.width, cover.readUInt32BE(16));
+        assert.equal(target.height, cover.readUInt32BE(20));
+      } else {
+        assert.equal("width" in target, false);
+        assert.equal("height" in target, false);
+      }
+    }
   }
   // PNG dimensions in IHDR: prevent metadata drifting from the default image.
   const defaultImage = baseMetadata().openGraph.images[0];

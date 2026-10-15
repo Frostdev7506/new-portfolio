@@ -26,6 +26,7 @@ test("series URLs redirect permanently to articles with the matching video and s
     ["prefill-vs-decode", "prefill-vs-decode-explained", "5rKn3R9MxU8"],
     ["prompt-caching", "prompt-caching-explained", "vNJjm7b1QDU"],
     ["semantic-caching", "semantic-caching-explained", "o20J-96a9RY"],
+    ["llm-model-routing-explained", "llm-model-routing", "vXV51kD1LW0"],
   ]) {
     const post = posts.find((candidate) => candidate.slug === slug);
     assert.ok(post && !post.draft, `${slug}: missing published article`);

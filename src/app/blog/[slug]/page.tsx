@@ -97,8 +97,8 @@ export default async function BlogPostPage({ params }: Props) {
             <Image
               src={post.cover}
               alt={post.coverAlt}
-              width={1536}
-              height={1024}
+              width={post.coverWidth ?? 1536}
+              height={post.coverHeight ?? 1024}
               sizes="(max-width: 480px) 100vw, 420px"
               priority
             />

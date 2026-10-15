@@ -66,3 +66,7 @@ Bypass it when an answer depends on live state, missing conversation context, or
 ### How do you know whether semantic caching saves money?
 
 Include misses. In a simple cost model, let `L` be the generation cost, `E` the embedding and lookup cost on every request, and `h` the valid-hit fraction. Expected cost is `E + (1 - h) × L`, before writes and storage. It saves money only when `h × L > E` plus those costs. Measure correctness, hit rate and end-to-end latency separately; a cheaper system that serves wrong answers fails the requirement.
+
+Use semantic caching for repeated questions with stable answers. Start with correctness; then measure the savings.
+
+Next: [Day 5 — LLM model routing](/blog/llm-model-routing) explains how to choose a model when a request needs a new answer.

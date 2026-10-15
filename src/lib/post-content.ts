@@ -38,6 +38,20 @@ export function parsePost(source: string, fileName: string) {
   const cover = required("cover");
   if (!cover.startsWith("/illustrations/") || cover.includes(".."))
     throw new Error(`${fileName}: cover must be a local illustration`);
+  const coverWidth: unknown = data.coverWidth;
+  const coverHeight: unknown = data.coverHeight;
+  if (
+    (coverWidth !== undefined || coverHeight !== undefined) &&
+    (typeof coverWidth !== "number" ||
+      !Number.isSafeInteger(coverWidth) ||
+      coverWidth <= 0 ||
+      typeof coverHeight !== "number" ||
+      !Number.isSafeInteger(coverHeight) ||
+      coverHeight <= 0)
+  )
+    throw new Error(
+      `${fileName}: coverWidth and coverHeight must be positive integers supplied together`,
+    );
   const sourceUrl = data.source ? required("source") : undefined;
   if (
     sourceUrl &&
@@ -64,6 +78,9 @@ export function parsePost(source: string, fileName: string) {
     takeaway: required("takeaway"),
     cover,
     coverAlt: required("coverAlt"),
+    ...(typeof coverWidth === "number" && typeof coverHeight === "number"
+      ? { coverWidth, coverHeight }
+      : {}),
     date,
     updated,
     tags: tags.map((tag: string) => tag.trim()),

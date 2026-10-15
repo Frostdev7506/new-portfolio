@@ -192,6 +192,9 @@ export function buildPostMetadata(post: BlogPost): Metadata {
   const image = {
     url: fullUrl(post.cover),
     alt: post.coverAlt,
+    ...(post.coverWidth !== undefined && post.coverHeight !== undefined
+      ? { width: post.coverWidth, height: post.coverHeight }
+      : {}),
   };
   return {
     title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
@@ -247,7 +250,10 @@ export function blogPostJsonLd(post: BlogPost) {
     image: {
       "@type": "ImageObject",
       url: fullUrl(post.cover),
-      caption: post.coverAlt,
+      description: post.coverAlt,
+      ...(post.coverWidth !== undefined && post.coverHeight !== undefined
+        ? { width: post.coverWidth, height: post.coverHeight }
+        : {}),
     },
     inLanguage: siteConfig.language,
     isAccessibleForFree: true,
