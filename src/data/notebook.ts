@@ -1,6 +1,5 @@
 export const notebook = {
   tagline: "Full-stack developer · India",
-  note: "A place for things I build and learn.",
   featuredSlug: "optimistic-uploads",
   blogDescription:
     "Practical guides to web development and AI engineering, with diagrams, worked examples, and interview questions on LLM inference and caching.",

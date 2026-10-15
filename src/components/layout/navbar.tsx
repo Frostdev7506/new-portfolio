@@ -84,7 +84,6 @@ export function Navbar() {
           View résumé <ArrowUpRight size={20} strokeWidth={1.75} aria-hidden="true" />
         </Link>
       </nav>
-      <p className="sidebar-note">{notebook.note}</p>
     </aside>
   );
 }

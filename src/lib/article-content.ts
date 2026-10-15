@@ -59,13 +59,23 @@ export function parseDiagram(source: string): ArticleDiagramData {
   return data;
 }
 
+export function getArticleImageSource(source: unknown): string | null {
+  if (typeof source !== "string" || !source || /[\\\u0000-\u0020\u007f]/.test(source)) return null;
+  if (source.startsWith("/") && !source.startsWith("//")) return source;
+  try {
+    const url = new URL(source);
+    return url.protocol === "https:" && !url.username && !url.password ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 export function getArticleStructure(content: string) {
   const tree = unified().use(remarkParse).use(remarkGfm).parse(content) as Root;
   const slugger = new GithubSlugger();
   const headings: ArticleHeading[] = [];
   let diagramCount = 0;
-  const text: string[] = [];
-  for (const node of tree.children) {
+  function visit(node: Root | RootContent): string {
     if (node.type === "heading") {
       const label = toString(node);
       const id = slugger.slug(label);
@@ -76,21 +86,25 @@ export function getArticleStructure(content: string) {
     }
     if (node.type === "code" && node.lang === "diagram") {
       const diagram = parseDiagram(node.value);
-      text.push(
+      const text = [
         diagram.title,
         diagram.caption,
         ...(diagram.input ? [diagram.input.label, diagram.input.detail] : []),
         ...diagram.steps.flatMap((step) => [step.label, step.detail]),
         ...(diagram.output ? [diagram.output.label, diagram.output.detail] : []),
-      );
+      ];
       diagramCount++;
-    } else {
-      text.push(
-        node.type === "code" ? node.value : toString(node as RootContent),
-      );
+      return text.join(" ");
     }
+    if (node.type === "code") return node.value;
+    if (node.type === "break") return " ";
+    if ("children" in node) {
+      const separator = ["root", "blockquote", "list", "listItem", "table", "tableRow"].includes(node.type) ? " " : "";
+      return node.children.map(visit).join(separator);
+    }
+    return toString(node);
   }
-  const wordCount = text.join(" ").trim().split(/\s+/).filter(Boolean).length;
+  const wordCount = visit(tree).trim().split(/\s+/).filter(Boolean).length;
   const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
   return {
     headings,

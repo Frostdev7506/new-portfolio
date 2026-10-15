@@ -188,3 +188,44 @@ Performance benchmarking is deferred as requested. This pass does not claim a Li
 - [x] Verify primary navigation, theme, contact draft/error states, and retained routes.
 - [x] Pass lint, contact tests, production build, and diff whitespace checks.
 - [x] Save visual evidence and document remaining integration/performance limits.
+
+## Blog Studio SEO — 15 October 2026
+
+- Added a dedicated SEO tab with search/social overrides, canonical and noindex controls, live previews, and generated BlogPosting/BreadcrumbList JSON-LD. The public page and preview share the metadata generator and URL/date validation.
+- Browser-verified save and reload of search title/description, social title/description/image/alt, canonical URL, and noindex using a temporary article. Verified the resulting public HTML head and JSON-LD, including visible article facts remaining separate from search/social overrides.
+- HTTP checks confirmed alternate canonical alone excludes the local URL from the sitemap without emitting noindex; noindex alone excludes it while the article remains accessible; clearing both restores sitemap inclusion. Blog listing visibility remains unchanged for noindex posts.
+- Invalid relative canonical and blank custom social alt text display validation messages and suppress generated output. Blank canonical restores the default article URL.
+- Inspected desktop light and 390px mobile dark layouts; mobile document width stayed at 390px with no horizontal overflow. Search/social preview layouts are illustrative, not guarantees of search-engine or social-platform presentation.
+- Final validation: lint, all 43 Node tests, production build, and production smoke test passed. Smoke coverage checks editor page/API operations return 404, public pages lack editor links, and production search/social metadata plus article JSON-LD are present.
+- Removed the temporary QA article and confirmed all 15 original article files retain their original hashes. No deployment or external indexing/rich-results verification was performed.
+
+### Extended SEO controls and compatibility follow-up
+
+- Added nofollow/nosnippet, text/video snippet limits and image-preview size; separate X/Twitter text, image, alt text and card layout; creator attribution from the existing site profile. The output panel shows the exact resolved directives and factual schema inputs.
+- Added editorial checks for heading sequence, unsupported/missing-description images, unresolved Markdown references, unknown or draft article links, duplicate search text, and social image format. These checks do not fetch external URLs or assign a ranking score.
+- Fixed exports containing cleared optional SEO fields, retained numeric zero/boolean values, synchronized the index after loads/reloads, and aligned date formatting across UTC, Los Angeles, Honolulu and Kolkata. Article preview includes author, reading time and updated date.
+- Browser tests on a temporary article verified independent X settings, summary-card preview, advanced settings, nosnippet precedence and disabled limits, save/reload, valid Markdown download after clearing a title, and malformed canonical behavior. Search/social previews remain available while generated page output is paused. External title changes were reloaded into both the editor and article list.
+- A deliberately problematic temporary body displayed all four expected findings: skipped heading level, renderer-unsupported image, unresolved reference, and unknown article URL. No application alert or horizontal overflow appeared.
+- Reviewed desktop light mode and 390px mobile dark mode, including the open Radix select and X summary card. Keyboard focus/activation worked; mobile document width remained 390px. This is Chromium-based browser coverage, not certification of every browser or social platform.
+- Final checks: lint, all 67 tests, build, and production smoke passed. The production smoke compares exact title/description, OG/X tags, robots, canonical, JSON-LD and sitemap inclusion for every article. It passed with the advanced-settings QA fixture (16 articles), then again after cleanup (15 original articles); editor page/read/write/upload stayed 404 in production.
+- Removed the QA fixture and confirmed every original article hash unchanged. External indexing and live social crawler behavior require a deployed URL and were not tested; no deployment was performed.
+
+
+### Latest main compatibility — 15 October 2026
+
+- Fast-forwarded `feature/dev-blog-editor` to `origin/main` at `183c1ad`, then reapplied the existing Studio work. Preserved the Day 5 article, revised interview answers, linked site schema, table/diagram rendering and sidebar-note removal.
+- Added cover width/height controls with paired positive-integer validation across reads, saves, recovery and export. Changing the cover clears stale dimensions; preview uses the public article’s dimensions/default ratio. Added optional diagram input/output forms with add/remove support and endpoint-specific validation.
+- Unified the article SEO entry points. Studio and public pages retain main’s shared Person/Blog IDs, publisher, language and ImageObject dimensions. Alternate social images do not inherit unrelated cover dimensions. Generic robots and Googlebot receive the same article policy.
+- Browser verification used a temporary copy of the Day 5 article: edited both endpoints and dimensions, saved/reloaded them, checked rendered table headers and preview image dimensions, removed/re-added an input and downloaded a valid Markdown export. Changing the cover cleared both dimensions. Original article files were not modified.
+- Found public table styles leaking into MDXEditor’s control columns. Removed that style coupling and allowed wide editor tables to scroll within their existing wrapper. Checked desktop and 390px layouts for article settings, diagram forms, tables and expanded schema; no document overflow or captured browser errors after the fix.
+- Final checks: lint, 79 tests, production build (34 generated routes), production smoke and diff whitespace checks passed. Production metadata/schema parity passed for all 16 articles; editor page/read/write/upload returned 404. A separate build with a temporary 17th article verified custom canonical, social image, noindex/nofollow/nosnippet and Googlebot output, then the fixture was removed and the final build repeated.
+- All 16 upstream article hashes stayed unchanged. This is local Chromium and production-server coverage; no deployment, external indexing test or cross-browser certification was performed.
+
+
+### Ponytail review and dead-code cleanup — 15 October 2026
+
+- Reviewed the uncommitted `feature/dev-blog-editor` diff against main; no PR is currently associated with this branch. Assumed one local editor, including concurrent tabs and external file edits.
+- Removed unused `buildPostMetadata`/`blogPostJsonLd` compatibility wrappers, the duplicate blog JSON-LD serializer, unused helper fields/exports/class names, and a redundant wrapper-parity test. Tests now call the live metadata/schema functions. Cleanup-only files are 39 lines shorter; the correctness fixes and regression tests add separate code.
+- Fixed a confirmed library failure: one malformed Markdown draft previously rejected the whole index. The index now returns valid articles and per-file errors. A temporary malformed-file browser check displayed the filename/reason while loading a healthy article, and a regression verifies the files remain untouched.
+- Fixed confirmed recovery loss across tabs: a clean tab reloading an article previously removed another tab’s draft. Cleanup now compares the exact stored copy before removal. Browser checks covered clean-tab reload, stale discard preserving a newer copy, and normal save/reload/discard removing the matching copy. Recovery still keeps one latest copy per article; browser Back relies on recovery rather than a confirmation prompt.
+- Final checks passed: lint, 80 tests, production build, production smoke, strict TypeScript unused-local/parameter checks, and diff whitespace checks. All editor endpoints remained 404 in production and all 16 articles matched generated SEO metadata/schema. Removed temporary fixtures and confirmed every original article hash unchanged. No live deployment or remote PR checks were performed.

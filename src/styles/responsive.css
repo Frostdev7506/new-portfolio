@@ -26,10 +26,6 @@
   .primary-nav a {
     font-size: 16px;
   }
-  .sidebar-note {
-    margin-top: 44px;
-    font-size: 18px;
-  }
   .page-intro .page-description {
     font-size: 20px;
   }
@@ -134,8 +130,7 @@
     margin: -4px 0 0 85px;
   }
   .identity-description,
-  .social-nav,
-  .sidebar-note {
+  .social-nav {
     display: none;
   }
   .primary-nav {
