@@ -2,9 +2,9 @@
 title: "Prompt Caching Explained"
 seoTitle: "Prompt Caching Explained"
 youtubeId: "vNJjm7b1QDU"
-description: "Prompt caching reuses a matching input prefix across LLM requests. Learn what gets reused, why misses happen, and when each request needs a new answer."
+description: "Learn prompt caching with a support-bot example and interview answers on prefix matching, cache misses, policy updates, latency and cost trade-offs."
 date: "2026-10-12"
-updated: "2026-10-14"
+updated: "2026-10-15"
 category: "Practical AI"
 tags: ["Prompt Caching", "LLMs", "Caching", "AI Engineering"]
 cover: "/illustrations/articles/prompt-caching.png"
@@ -89,6 +89,26 @@ For that experiment, record time to first token, total response time, cached inp
 
 Track cache creation and reads separately where the provider exposes them. Some services charge differently for writes, reads, or storage. A rarely reused document may offer little benefit after those costs. Use the current provider rates rather than assuming a universal discount. The broader [token cost model](/blog/llm-token-costs) still includes output and uncached input.
 
-In an interview, ground the explanation in the shop example: both customers need the same policy, but they need different answers. Prompt caching lets the system keep the reusable processing for that policy and spend new work on each question. The next engineering decision is whether real traffic repeats enough eligible context to make that reuse worthwhile.
+## Interview questions and answers
+
+### Why can a timestamp at the start of a prompt destroy cache reuse?
+
+Prefix reuse depends on the sequence from the beginning, not on finding identical paragraphs anywhere in the request. A changing timestamp before the handbook breaks that shared beginning. Put stable instructions and reference material first, then changing details, while preserving instruction priority. Stable tool definitions matter too: [Anthropic documents](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#what-invalidates-the-cache) that changing tools can invalidate subsequent cached content.
+
+### The prefix is identical. Why am I still getting cache misses?
+
+Check eligibility and availability separately. Is the model supported, is the shared prefix long enough, and was a cache entry written at a reusable boundary? Then check expiry and routing. A stored prefix that includes the first customer's question may not match the second request. [OpenAI's guide](https://developers.openai.com/api/docs/guides/prompt-caching) explains model-dependent boundaries. Inspect reported cached tokens instead of inferring a hit from one fast response.
+
+### Does a prompt-cache hit return the same answer as before?
+
+No. It reuses input processing, then generates a response for the current request. The opened-headphones question and the proof-of-purchase question should receive different answers despite sharing the handbook. Even identical complete inputs don't become a response-cache guarantee: generation still runs. To return a saved answer without generation, you need a response cache and separate checks that the answer still fits.
+
+### What happens when the cached policy changes?
+
+Send the new policy, even if that reduces reuse. Content at and after the change needs fresh processing; an eligible unchanged prefix before it may still be reusable. Update explicit cached-context references if your provider uses them. Version the source document and test a question whose answer changed, such as a return window changing from 30 days to 14. Keeping old text to preserve hits creates a correctness bug.
+
+### Why might a high cache-hit rate barely improve total latency?
+
+Prompt caching primarily saves prefill work; it doesn't eliminate decode. In a simplified example, reducing prefill from 200 ms to 100 ms while decode stays at 1,800 ms changes total model time from 2,000 ms to 1,900 ms: a 5% reduction. [vLLM describes this limitation](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/#limits). Compare first-token latency, full response latency and billed cost separately, including cache writes or storage where charged.
 
 Next, [Day 4: semantic caching](/blog/semantic-caching-explained) explains when differently worded questions can reuse a complete saved answer, and how to prevent incorrect or stale responses.

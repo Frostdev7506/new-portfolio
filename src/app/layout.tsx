@@ -5,7 +5,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { PageHeader } from "@/components/layout/page-header";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { baseMetadata, websiteJsonLd } from "@/lib/seo";
+import { baseMetadata, personJsonLd, serializeJsonLd, websiteJsonLd } from "@/lib/seo";
 
 const noteFont = Caveat({
   subsets: ["latin"],
@@ -26,7 +26,7 @@ export default function RootLayout({
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify(websiteJsonLd()),
+              __html: serializeJsonLd([websiteJsonLd(), personJsonLd()]),
             }}
           />
           <a href="#main-content" className="skip-link">

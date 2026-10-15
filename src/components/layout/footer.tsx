@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Youtube } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/shared/brand-icons";
 import { siteConfig } from "@/data/site";
 
@@ -25,6 +26,14 @@ export function Footer() {
           >
             <LinkedinIcon size={16} />
             LinkedIn
+          </a>
+          <a
+            href={siteConfig.social.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Youtube size={16} aria-hidden="true" />
+            YouTube
           </a>
         </div>
         <div className="footer-legal">

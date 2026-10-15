@@ -5,7 +5,7 @@ import { Toolkit } from "@/components/about/toolkit";
 import { ContactBanner } from "@/components/shared/contact-banner";
 import { PageIntro } from "@/components/shared/page-intro";
 import { education, certifications } from "@/data/notebook";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, profilePageJsonLd, serializeJsonLd } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
   title: "About",
@@ -17,6 +17,10 @@ export const metadata = buildPageMetadata({
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(profilePageJsonLd()) }}
+      />
       <PageIntro eyebrow="The person behind the work." title="About me" />
       <AboutIntro />
       <Experience detailed />

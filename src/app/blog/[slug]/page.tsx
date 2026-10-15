@@ -8,7 +8,6 @@ import { ShareLinks } from "@/components/blog/share-links";
 import { ArticleNavigation } from "@/components/blog/article-navigation";
 import { YouTubeVideo } from "@/components/blog/youtube-video";
 import { siteConfig } from "@/data/site";
-import { fullUrl } from "@/lib/seo";
 import {
   getAllPosts,
   getBlogPostUrl,
@@ -18,51 +17,16 @@ import {
   toPostSummary,
 } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
+import { blogPostJsonLd, buildPostMetadata, serializeJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
-const authorUrl = fullUrl("/about");
 export async function generateStaticParams() {
   return (await getPostSlugs()).map((slug) => ({ slug }));
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);
   if (!post) return { title: "Post not found" };
-  const coverImage = {
-    url: fullUrl(post.cover),
-    alt: post.coverAlt,
-    ...(post.coverWidth !== undefined && post.coverHeight !== undefined
-      ? { width: post.coverWidth, height: post.coverHeight }
-      : {}),
-  };
-  return {
-    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
-    description: post.description,
-    authors: [{ name: siteConfig.name, url: authorUrl }],
-    keywords: [...post.tags, siteConfig.name],
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-      types: { "application/rss+xml": "/feed.xml" },
-    },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.description,
-      url: `/blog/${post.slug}`,
-      siteName: siteConfig.shortName,
-      locale: siteConfig.locale,
-      publishedTime: new Date(post.date).toISOString(),
-      modifiedTime: new Date(post.updated).toISOString(),
-      authors: [authorUrl],
-      tags: post.tags,
-      images: [coverImage],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [coverImage],
-    },
-  };
+  return buildPostMetadata(post);
 }
 export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug((await params).slug);
@@ -73,32 +37,7 @@ export default async function BlogPostPage({ params }: Props) {
   );
   const shareUrl = getBlogPostUrl(post.slug);
   const structuredData = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.description,
-      datePublished: new Date(post.date).toISOString(),
-      dateModified: new Date(post.updated).toISOString(),
-      author: {
-        "@type": "Person",
-        name: siteConfig.name,
-        url: authorUrl,
-      },
-      mainEntityOfPage: shareUrl,
-      image: {
-        "@type": "ImageObject",
-        url: fullUrl(post.cover),
-        description: post.coverAlt,
-        ...(post.coverWidth !== undefined && post.coverHeight !== undefined
-          ? { width: post.coverWidth, height: post.coverHeight }
-          : {}),
-      },
-      inLanguage: siteConfig.language,
-      keywords: post.tags.join(", "),
-      wordCount: post.wordCount,
-      articleSection: post.category,
-    },
+    blogPostJsonLd(post),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -124,7 +63,7 @@ export default async function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          __html: serializeJsonLd(structuredData),
         }}
       />
       <header className="article-header">

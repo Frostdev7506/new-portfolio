@@ -2,8 +2,9 @@
 title: "Semantic Caching Explained"
 seoTitle: "Semantic Caching Explained"
 youtubeId: "o20J-96a9RY"
-description: "Semantic caching reuses LLM answers to similar questions. See how it works, how it differs from prompt caching, and where it can go wrong."
+description: "Learn semantic caching with interview answers on false matches, similarity thresholds, tenant isolation, stale answers and when caching is worth the cost."
 date: "2026-10-14"
+updated: "2026-10-15"
 category: "Practical AI"
 tags: ["Semantic Caching", "LLMs", "Caching", "AI Engineering"]
 cover: "/illustrations/articles/semantic-caching.png"
@@ -44,12 +45,27 @@ Large caches can use approximate nearest-neighbor search to find candidates. [Re
 
 A changed question can still benefit from an unchanged prefix, as [OpenAI documents](https://developers.openai.com/api/docs/guides/prompt-caching). Both techniques can work together. See [Day 3: prompt caching](/blog/prompt-caching-explained).
 
-## What can go wrong?
+## Interview questions and answers
 
-- **Wrong matches:** a permissive threshold can return the wrong answer; a strict one misses useful hits. Tune on real questions. There is no universal “0.7.”
-- **Wrong context:** keep tenants, permissions and conversation context separate. Similar wording does not grant access.
-- **Stale answers:** invalidate entries when source data changes. For critical responses, check the source of truth or bypass the cache.
-- **Extra overhead:** embeddings and vector search add infrastructure, cost and latency. Measure the full request, including misses.
+### How do you choose a similarity threshold without returning wrong answers?
+
+Build a labeled set of requests and cached answers, including near-misses: “find any occurrence” and “find the first occurrence” in binary search need different handling of duplicates. Choose a threshold against an acceptable false-hit rate, then evaluate on held-out examples. Understand the metric: higher cosine similarity means closer, while lower cosine distance means closer. [RedisVL uses distance](https://redis.io/docs/latest/develop/ai/redisvl/api/cache/). Recalibrate when the embedding model or query mix changes.
+
+### Can two users share a semantic cache safely?
+
+Yes, if the cached answer is valid for both and both may access its data. Apply exact filters for tenant, access scope and relevant context before accepting a semantic match. “What is my leave balance?” cannot reuse another employee's answer. Derive scope from authenticated identity, not request text, and recheck current permissions. [Azure's policy](https://learn.microsoft.com/en-us/azure/api-management/llm-semantic-cache-lookup-policy) supports partitioning by user or group. Similarity is never an authorization check.
+
+### Is a TTL enough to prevent stale answers?
+
+No. A one-hour TTL can serve an outdated policy for nearly an hour after it changes. Store source or knowledge-base versions with entries and reject old versions when reading, or invalidate affected entries on updates. Keep a TTL as a fallback. Version answer-generating instructions too. A changed embedding model requires compatible new embeddings, usually through a separate index or a rebuild, before similarity scores are meaningful.
+
+### When should you bypass semantic caching?
+
+Bypass it when an answer depends on live state, missing conversation context, or a fresh action. “Cancel my order” must execute the authorized cancellation workflow; replaying a saved success message would falsely claim the action happened. A follow-up such as “What about tomorrow?” needs its earlier context. Stable explanations are better candidates. If you cannot establish that a saved answer satisfies the current request, treat it as a miss.
+
+### How do you know whether semantic caching saves money?
+
+Include misses. In a simple cost model, let `L` be the generation cost, `E` the embedding and lookup cost on every request, and `h` the valid-hit fraction. Expected cost is `E + (1 - h) × L`, before writes and storage. It saves money only when `h × L > E` plus those costs. Measure correctness, hit rate and end-to-end latency separately; a cheaper system that serves wrong answers fails the requirement.
 
 Use semantic caching for repeated questions with stable answers. Start with correctness; then measure the savings.
 
