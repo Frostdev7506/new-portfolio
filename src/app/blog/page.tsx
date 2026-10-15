@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FeaturedArticle } from "@/components/blog/featured-article";
 import { BlogExplorer } from "@/components/blog/blog-explorer";
 import { PageIntro } from "@/components/shared/page-intro";
+import { ArticleUpdates } from "@/components/shared/article-updates";
 import { getAllPosts, toPostSummary } from "@/lib/posts";
 import { blogJsonLd, buildPageMetadata, serializeJsonLd } from "@/lib/seo";
 import { notebook } from "@/data/notebook";
@@ -57,6 +58,7 @@ export default async function BlogPage() {
       )}
       {featured && <FeaturedArticle post={featured} />}
       <BlogExplorer posts={posts} />
+      <ArticleUpdates />
       <div className="notebook-end">
         <span className="handwritten">
           Always learning. Still taking notes.

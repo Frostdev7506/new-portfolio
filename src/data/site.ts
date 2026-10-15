@@ -1,3 +1,5 @@
+import { getNewsletterUrl } from "../lib/newsletter.ts";
+
 export const siteConfig = {
   name: "Neeraj Butola",
   shortName: "DevelopedByNeeraj",
@@ -11,7 +13,7 @@ export const siteConfig = {
   language: "en",
   image: "/dev-ed-wave.png",
   email: "neeraj.butola.dev@gmail.com",
-  newsletterUrl: process.env.NEXT_PUBLIC_NEWSLETTER_URL?.trim() || "",
+  newsletterUrl: getNewsletterUrl(process.env.NEXT_PUBLIC_NEWSLETTER_URL),
   location: "India",
   resumeUrl:
     "https://raw.githubusercontent.com/Frostdev7506/Auto-resume/build/Neeraj_Butola_Resume.pdf",

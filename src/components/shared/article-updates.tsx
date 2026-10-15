@@ -1,6 +1,6 @@
 import { ArrowUpRight, Rss } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { homeNotebook } from "@/data/notebook";
+import { articleUpdates } from "@/data/notebook";
 import { siteConfig } from "@/data/site";
 
 export function ArticleUpdates() {
@@ -14,12 +14,17 @@ export function ArticleUpdates() {
     >
       <div>
         <p className="eyebrow">Stay in the loop.</p>
-        <h2 id="updates-title">{homeNotebook.updates.title}</h2>
+        <h2 id="updates-title">{articleUpdates.title}</h2>
         <p className="updates-description">
           {newsletterUrl
-            ? homeNotebook.updates.description
-            : homeNotebook.updates.feedDescription}
+            ? articleUpdates.description
+            : articleUpdates.feedDescription}
         </p>
+        {newsletterUrl && (
+          <p className="updates-note">
+            {articleUpdates.note} <a href="/privacy">Privacy</a>
+          </p>
+        )}
       </div>
       <div className="updates-actions">
         {newsletterUrl && (

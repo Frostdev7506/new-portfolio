@@ -4,7 +4,7 @@ import { ProjectIndex } from "@/components/projects/project-index";
 import { AboutSummary } from "@/components/home/about-summary";
 import { Experience } from "@/components/about/experience";
 import { Toolkit } from "@/components/about/toolkit";
-import { ArticleUpdates } from "@/components/home/article-updates";
+import { ArticleUpdates } from "@/components/shared/article-updates";
 
 export default function HomePage() {
   return (

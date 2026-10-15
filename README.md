@@ -47,9 +47,17 @@ The Page output panel displays exact resolved robots, canonical, social, author,
 
 ## Newsletter
 
-The homepage uses a compact updates section. Set `NEXT_PUBLIC_NEWSLETTER_URL` to your newsletter provider’s full HTTPS hosted signup URL before building to show **Subscribe by email**. The provider handles signup, confirmation, subscriber storage, and unsubscribe links; no API key is embedded in the site. This link does not automatically send new posts: publish broadcasts through the provider or configure its RSS automation separately.
+The homepage, blog index, and article endings share an updates section. Newsletter emails are reviewed and sent manually through **Kit**; publishing a blog post does not send an email.
 
-Until a signup URL is configured, the section offers the working `/feed.xml` feed and describes RSS only. It does not collect emails or claim anyone has subscribed.
+1. Create a [Kit Free account](https://kit.com/pricing) and verify a working sender email. Do not reuse the retired contact address from the site profile.
+2. Create a hosted landing page named **Neeraj’s Notebook**. Suggested description: “Occasional emails about building for the web, working with AI, and what I learn along the way.” Start with an email-only signup and the button **Subscribe by email**.
+3. Keep the confirmation email enabled and **Auto-confirm new subscribers** unchecked. Suggested subject: “Confirm your subscription to Neeraj’s Notebook”. Keep Kit’s confirmation button and unsubscribe footer intact.
+4. Publish the landing page and copy its public HTTPS signup URL. Set `NEXT_PUBLIC_NEWSLETTER_URL` in `.env.local` for local development and in Netlify’s build environment for deployment, then rebuild. No Kit API key is needed. A blank, invalid, non-HTTPS, or credential-containing URL keeps the section in RSS-only mode.
+5. Verify the public site opens the intended Kit signup page. Use your own test email to check signup, confirmation, and unsubscribe before announcing the newsletter.
+
+Kit handles subscriber storage, confirmation, and unsubscribe links. The website loads no Kit scripts and collects no newsletter addresses itself. Until the signup URL is configured, the section describes and offers only the working `/feed.xml` feed.
+
+For each issue, create a broadcast in Kit with a short introduction, one useful takeaway, and a link to the published article. Review the recipients, links, and preview before sending. A simple first issue can introduce the notebook and link to a favorite existing post. The free plan’s current limits and automation availability are documented in [Kit’s Free plan guide](https://help.kit.com/en/articles/16627071-the-kit-free-plan).
 
 ## Contact
 
