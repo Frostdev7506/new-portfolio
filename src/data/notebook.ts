@@ -76,8 +76,9 @@ export const homeNotebook = {
 };
 
 export const articleUpdates = {
-  title: "Notes from my notebook.",
-  description: "Occasional emails about building for the web, working with AI, and what I learn along the way.",
+  title: "Newsletter",
+  description: "Practical notes on web development, AI, and the lessons I learn while building. Get new articles and occasional updates by email.",
+  feedTitle: "Article updates",
   feedDescription: "Follow new articles on web development and AI in your favorite feed reader.",
   note: "Subscribe through Kit. Unsubscribe anytime.",
 };

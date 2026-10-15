@@ -106,7 +106,7 @@ export default function PrivacyPage() {
           <p className="leading-relaxed">
             Newsletter signups are handled on Kit’s website. Kit stores the
             details you provide there and manages confirmation, email delivery,
-            and unsubscribe requests for Neeraj’s Notebook. You can stop
+            and unsubscribe requests for this newsletter. You can stop
             receiving the newsletter using the unsubscribe link in any issue.
             This website does not maintain a separate subscriber database.
           </p>

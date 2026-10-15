@@ -14,7 +14,9 @@ export function ArticleUpdates() {
     >
       <div>
         <p className="eyebrow">Stay in the loop.</p>
-        <h2 id="updates-title">{articleUpdates.title}</h2>
+        <h2 id="updates-title">
+          {newsletterUrl ? articleUpdates.title : articleUpdates.feedTitle}
+        </h2>
         <p className="updates-description">
           {newsletterUrl
             ? articleUpdates.description
