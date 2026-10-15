@@ -38,6 +38,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/llm-model-routing-explained",
+        destination: "/blog/llm-model-routing",
+        permanent: true,
+      },
+      {
         source: "/blog/my-first-blog-post",
         destination: "/blog",
         permanent: true,

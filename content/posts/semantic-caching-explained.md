@@ -52,3 +52,5 @@ A changed question can still benefit from an unchanged prefix, as [OpenAI docume
 - **Extra overhead:** embeddings and vector search add infrastructure, cost and latency. Measure the full request, including misses.
 
 Use semantic caching for repeated questions with stable answers. Start with correctness; then measure the savings.
+
+Next: [Day 5 — LLM model routing](/blog/llm-model-routing) explains how to choose a model when a request needs a new answer.

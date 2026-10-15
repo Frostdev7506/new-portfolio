@@ -6,11 +6,14 @@ import { toString } from "mdast-util-to-string";
 import type { Root, RootContent } from "mdast";
 
 export type ArticleHeading = { id: string; text: string; depth: number };
+type DiagramNode = { label: string; detail: string };
 export type ArticleDiagramData = {
   title: string;
   caption: string;
   layout: "flow" | "comparison";
-  steps: { label: string; detail: string }[];
+  steps: DiagramNode[];
+  input?: DiagramNode;
+  output?: DiagramNode;
 };
 
 export function parseDiagram(source: string): ArticleDiagramData {
@@ -38,6 +41,21 @@ export function parseDiagram(source: string): ArticleDiagramData {
       "A diagram needs a title, caption, flow/comparison layout, and 2–5 labeled steps.",
     );
   }
+  for (const key of ["input", "output"]) {
+    const node = data[key];
+    if (
+      node !== undefined &&
+      (!node ||
+        typeof node !== "object" ||
+        Array.isArray(node) ||
+        typeof node.label !== "string" ||
+        !node.label.trim() ||
+        typeof node.detail !== "string" ||
+        !node.detail.trim())
+    ) {
+      throw new Error(`A diagram ${key} needs a nonempty label and detail.`);
+    }
+  }
   return data;
 }
 
@@ -61,7 +79,9 @@ export function getArticleStructure(content: string) {
       text.push(
         diagram.title,
         diagram.caption,
+        ...(diagram.input ? [diagram.input.label, diagram.input.detail] : []),
         ...diagram.steps.flatMap((step) => [step.label, step.detail]),
+        ...(diagram.output ? [diagram.output.label, diagram.output.detail] : []),
       );
       diagramCount++;
     } else {
