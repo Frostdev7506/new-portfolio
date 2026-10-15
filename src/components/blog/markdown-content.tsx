@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import { toString } from "hast-util-to-string";
 import type { ComponentPropsWithoutRef } from "react";
-import { parseDiagram } from "@/lib/article-content";
+import { getArticleImageSource, parseDiagram } from "@/lib/article-content";
 import { ArticleDiagram } from "./article-diagram";
 import { CopyButton } from "./copy-button";
 
@@ -93,19 +93,22 @@ export function MarkdownContent({ content }: { content: string }) {
               {children}
             </th>
           ),
-          img: ({ src, alt, title }) =>
-            typeof src === "string" ? (
+          img: ({ src, alt, title }) => {
+            const imageSource = getArticleImageSource(src);
+            return imageSource ? (
               <span className="article-inline-image">
                 <Image
-                  src={src}
+                  src={imageSource}
                   alt={alt || ""}
                   width={1200}
                   height={800}
                   sizes="(max-width: 900px) 100vw, 760px"
+                  unoptimized={imageSource.startsWith("https://")}
                 />
                 {title && <span>{title}</span>}
               </span>
-            ) : null,
+            ) : alt ? <span>{alt}</span> : null;
+          },
         }}
       >
         {content}

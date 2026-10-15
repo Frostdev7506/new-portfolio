@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test src/lib/*.test.mjs"
+    "test": "node --test src/lib/*.test.mjs",
+    "test:editor-production": "node scripts/check-blog-editor-production.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@mdxeditor/editor": "^4.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "github-slugger": "^2.0.0",

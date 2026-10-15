@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { FeaturedArticle } from "@/components/blog/featured-article";
 import { BlogExplorer } from "@/components/blog/blog-explorer";
 import { PageIntro } from "@/components/shared/page-intro";
@@ -50,6 +52,9 @@ export default async function BlogPage() {
         description={notebook.blogDescription}
         image="/illustrations/blog-notebooks.png"
       />
+      {process.env.NODE_ENV === "development" && (
+        <div className="py-4"><Button asChild variant="outline"><Link href="/dev/blog">Open Blog Studio ↗</Link></Button></div>
+      )}
       {featured && <FeaturedArticle post={featured} />}
       <BlogExplorer posts={posts} />
       <div className="notebook-end">

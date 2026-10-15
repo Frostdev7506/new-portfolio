@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
 import { ArticleNavigation } from "@/components/blog/article-navigation";
@@ -17,7 +18,8 @@ import {
   toPostSummary,
 } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
-import { blogPostJsonLd, buildPostMetadata, serializeJsonLd } from "@/lib/seo";
+import { buildBlogMetadata, resolveBlogSeo } from "@/lib/blog-seo";
+import { serializeJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() {
@@ -26,7 +28,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);
   if (!post) return { title: "Post not found" };
-  return buildPostMetadata(post);
+  return buildBlogMetadata(post, siteConfig);
 }
 export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug((await params).slug);
@@ -36,36 +38,18 @@ export default async function BlogPostPage({ params }: Props) {
     toPostSummary(post),
   );
   const shareUrl = getBlogPostUrl(post.slug);
-  const structuredData = [
-    blogPostJsonLd(post),
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: siteConfig.url,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Blog",
-          item: `${siteConfig.url}/blog`,
-        },
-        { "@type": "ListItem", position: 3, name: post.title, item: shareUrl },
-      ],
-    },
-  ];
+  const { jsonLd } = resolveBlogSeo(post, siteConfig);
   return (
     <article className="article-page" id="article-top">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: serializeJsonLd(structuredData),
+          __html: serializeJsonLd(jsonLd),
         }}
       />
+      {process.env.NODE_ENV === "development" && (
+        <div className="pt-5"><Button asChild variant="outline"><Link href={`/dev/blog?article=${post.slug}`}>Edit article ↗</Link></Button></div>
+      )}
       <header className="article-header">
         <Link href="/blog" className="article-back">
           <ArrowLeft aria-hidden="true" /> All articles

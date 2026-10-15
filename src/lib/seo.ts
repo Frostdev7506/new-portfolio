@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { defaultKeywords, siteConfig } from "../data/site.ts";
-import type { BlogPost, PostSummary } from "./post-content.ts";
+import type { PostSummary } from "./post-content.ts";
 
 export const fullUrl = (pathName = "") => {
   const base = siteConfig.url.replace(/\/$/, "");
@@ -185,81 +185,6 @@ export function websiteJsonLd() {
     inLanguage: siteConfig.language,
     author,
     publisher: author,
-  };
-}
-
-export function buildPostMetadata(post: BlogPost): Metadata {
-  const image = {
-    url: fullUrl(post.cover),
-    alt: post.coverAlt,
-    ...(post.coverWidth !== undefined && post.coverHeight !== undefined
-      ? { width: post.coverWidth, height: post.coverHeight }
-      : {}),
-  };
-  return {
-    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
-    description: post.description,
-    authors: [{ name: author.name, url: author.url }],
-    creator: author.name,
-    publisher: author.name,
-    category: post.category,
-    keywords: post.tags,
-    alternates: {
-      canonical: fullUrl(`/blog/${post.slug}`),
-      types: { "application/rss+xml": "/feed.xml" },
-    },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.description,
-      url: fullUrl(`/blog/${post.slug}`),
-      siteName: siteConfig.name,
-      locale: siteConfig.locale,
-      publishedTime: new Date(post.date).toISOString(),
-      modifiedTime: new Date(post.updated).toISOString(),
-      authors: [author.url],
-      section: post.category,
-      tags: post.tags,
-      images: [image],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      creator: twitterHandle,
-      images: [image],
-    },
-  };
-}
-
-export function blogPostJsonLd(post: BlogPost) {
-  const url = fullUrl(`/blog/${post.slug}`);
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": `${url}#article`,
-    url,
-    headline: post.title,
-    description: post.description,
-    datePublished: new Date(post.date).toISOString(),
-    dateModified: new Date(post.updated).toISOString(),
-    author,
-    publisher: author,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    isPartOf: { "@type": "Blog", "@id": fullUrl("/blog#blog") },
-    image: {
-      "@type": "ImageObject",
-      url: fullUrl(post.cover),
-      description: post.coverAlt,
-      ...(post.coverWidth !== undefined && post.coverHeight !== undefined
-        ? { width: post.coverWidth, height: post.coverHeight }
-        : {}),
-    },
-    inLanguage: siteConfig.language,
-    isAccessibleForFree: true,
-    keywords: post.tags.join(", "),
-    wordCount: post.wordCount,
-    articleSection: post.category,
   };
 }
 

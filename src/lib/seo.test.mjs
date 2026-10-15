@@ -3,11 +3,10 @@ import { readFile, readdir } from "node:fs/promises";
 import { test } from "node:test";
 import { siteConfig } from "../data/site.ts";
 import { parsePost, toPostSummary } from "./post-content.ts";
+import { buildBlogMetadata, resolveBlogSeo } from "./blog-seo.ts";
 import {
   baseMetadata,
   blogJsonLd,
-  blogPostJsonLd,
-  buildPostMetadata,
   personJsonLd,
   profilePageJsonLd,
   serializeJsonLd,
@@ -22,35 +21,46 @@ const posts = await Promise.all(
 
 test("article metadata and structured data agree with published content and real images", async () => {
   for (const post of posts.filter((post) => !post.draft)) {
-    const metadata = buildPostMetadata(post);
-    const article = blogPostJsonLd(post);
-    const canonical = `${siteConfig.url}/blog/${post.slug}`;
+    const metadata = buildBlogMetadata(post, siteConfig);
+    const article = resolveBlogSeo(post, siteConfig).jsonLd[0];
+    const canonical = post.canonicalUrl || `${siteConfig.url}/blog/${post.slug}`;
     assert.equal(metadata.alternates.canonical, canonical);
     assert.equal(metadata.openGraph.url, canonical);
     assert.equal(article.url, canonical);
     assert.equal(article.mainEntityOfPage["@id"], canonical);
     assert.equal(article.headline, post.title);
-    assert.equal(metadata.description, post.description);
+    assert.equal(metadata.description, post.seoDescription || post.description);
     assert.equal(article.description, post.description);
     assert.equal(article.wordCount, post.wordCount);
+    assert.equal(article.inLanguage, siteConfig.language);
+    assert.equal(metadata.creator, siteConfig.name);
+    assert.equal(metadata.publisher, siteConfig.name);
+    assert.equal(metadata.category, post.category);
+    assert.equal(metadata.openGraph.siteName, siteConfig.name);
     assert.equal(article.datePublished, metadata.openGraph.publishedTime);
     assert.equal(article.dateModified, metadata.openGraph.modifiedTime);
     assert.equal(article.dateModified, new Date(post.updated).toISOString());
     assert.deepEqual(metadata.openGraph.authors, [article.author.url]);
-    assert.equal(metadata.twitter.images[0].alt, post.coverAlt);
+    assert.equal(metadata.openGraph.images[0].alt, post.ogImageAlt || post.coverAlt);
+    assert.equal(metadata.twitter.images[0].alt, post.twitterImageAlt || post.ogImageAlt || post.coverAlt);
 
     const cover = await readFile(`public${post.cover}`);
     const image = metadata.openGraph.images[0];
+    const coverUrl = `${siteConfig.url}${post.cover}`;
     assert.ok(cover.length > 0, `${post.slug}: missing social image`);
-    assert.equal(image.url, `${siteConfig.url}${post.cover}`);
-    assert.equal(article.image.url, image.url);
+    assert.equal(image.url, new URL(post.ogImage || post.cover, siteConfig.url).href);
+    assert.equal(metadata.twitter.images[0].url, new URL(post.twitterImage || post.ogImage || post.cover, siteConfig.url).href);
+    assert.equal(article.image.url, coverUrl);
     assert.equal(article.image.description, post.coverAlt);
     for (const target of [image, metadata.twitter.images[0], article.image]) {
-      if (post.coverWidth !== undefined) {
+      if (target.url === coverUrl && post.coverWidth !== undefined) {
         assert.equal(target.width, post.coverWidth);
         assert.equal(target.height, post.coverHeight);
-        assert.equal(target.width, cover.readUInt32BE(16));
-        assert.equal(target.height, cover.readUInt32BE(20));
+        // Existing PNG covers expose their real dimensions in IHDR.
+        if (cover.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
+          assert.equal(target.width, cover.readUInt32BE(16));
+          assert.equal(target.height, cover.readUInt32BE(20));
+        }
       } else {
         assert.equal("width" in target, false);
         assert.equal("height" in target, false);
@@ -78,7 +88,7 @@ test("the site, profile, blog and articles refer to the same author and canonica
   assert.deepEqual(person.sameAs, Object.values(siteConfig.social));
   assert.ok(!website.potentialAction, "Do not advertise unsupported site search");
   for (const post of posts) {
-    const article = blogPostJsonLd(post);
+    const article = resolveBlogSeo(post, siteConfig).jsonLd[0];
     assert.equal(article.author["@id"], person["@id"]);
     assert.equal(article.publisher["@id"], person["@id"]);
     assert.equal(article.isPartOf["@id"], blog["@id"]);
