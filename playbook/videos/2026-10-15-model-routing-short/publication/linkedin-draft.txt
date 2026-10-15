@@ -1,0 +1,25 @@
+Sending every coding task to your most expensive model can waste money.
+
+A README typo may fit a cheaper model. Investigating a payment that sometimes runs twice may need a model evaluated for that work. Price alone does not establish capability.
+
+Day 5 of my AI Engineering Interview Series covers model routing.
+
+Two common designs:
+
+Pre-call routing chooses a model before generation, using rules or a trained router.
+
+Cascading generates with a cheaper model, checks the output, then escalates if the check fails.
+
+For interviews, explain how you would evaluate that decision:
+
+Start with offline evaluation on representative requests held out from training and tuning. Compare the router with a baseline that always uses the more capable model. An online A/B test is a separate experiment with live traffic.
+
+Measure answer quality, cost per successful task, and end-to-end latency. Include routing, validation and retries in the accounting. Define success before comparing costs.
+
+A validator can accept a wrong answer. That missed error may be served; it does not automatically trigger another call. Retries depend on the application's policy.
+
+The goal is to meet quality and latency targets while controlling total cost.
+
+Watch Day 5: https://youtube.com/shorts/vXV51kD1LW0
+
+#AIEngineering #LLM #ModelRouting

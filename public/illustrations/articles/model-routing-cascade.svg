@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="2000" viewBox="0 0 1080 2000" role="img" aria-labelledby="title desc">
+  <title id="title">A bounded model cascade checks each answer before returning it</title>
+  <desc id="desc">A request goes to a cheap model, then its output is checked. A pass returns an answer. A fail goes to a more capable model and another check. A second pass returns an answer; a second fail stops for review. Checks can miss mistakes. There is no retry loop.</desc>
+  <defs>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#b3ac97" opacity="0.36"/></pattern>
+  </defs>
+  <rect width="1080" height="2000" fill="#f5efdf"/>
+  <rect width="1080" height="2000" fill="url(#dots)"/>
+  <rect x="30" y="30" width="1020" height="1940" rx="22" fill="none" stroke="#bcb7a5" stroke-width="2"/>
+
+  <g fill="none" stroke="#293a35" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 390 255 V 328 M 371 308 L 390 328 L 409 308"/>
+    <path d="M 390 492 V 573 M 371 553 L 390 573 L 409 553"/>
+    <path d="M 390 1127 V 1228 M 371 1208 L 390 1228 L 409 1208"/>
+  </g>
+  <g fill="none" stroke="#287e72" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 595 690 H 738 M 718 671 L 738 690 L 718 709"/>
+    <path d="M 595 1345 H 738 M 718 1326 L 738 1345 L 718 1364"/>
+  </g>
+  <g fill="none" stroke="#d47846" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 390 805 V 943 M 371 923 L 390 943 L 409 923"/>
+    <path d="M 390 1460 V 1618 M 371 1598 L 390 1618 L 409 1598"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#293a35">
+    <path d="M 165 80 H 615 Q 640 80 640 105 V 205 Q 640 230 615 230 H 427 L 390 255 L 353 230 H 165 Q 140 230 140 205 V 105 Q 140 80 165 80 Z" fill="#fffaf0" stroke="#293a35" stroke-width="5" stroke-linejoin="round"/>
+    <text x="390" y="177" font-size="58" text-anchor="middle">Request</text>
+
+    <rect x="130" y="330" width="520" height="160" rx="24" fill="#fffaf0" stroke="#293a35" stroke-width="5"/>
+    <g fill="none" stroke="#287e72" stroke-width="5" stroke-linecap="round">
+      <path d="M 193 367 V 383 M 218 367 V 383 M 243 367 V 383 M 193 439 V 455 M 218 439 V 455 M 243 439 V 455 M 172 397 H 188 M 172 425 H 188 M 248 397 H 264 M 248 425 H 264"/>
+      <rect x="188" y="383" width="60" height="56" rx="9" fill="#d5e8df"/>
+      <rect x="200" y="395" width="36" height="32" rx="4" fill="#287e72"/>
+    </g>
+    <text x="296" y="430" font-size="54">Cheap model</text>
+
+    <path d="M 390 575 L 595 690 L 390 805 L 185 690 Z" fill="#fffaf0" stroke="#293a35" stroke-width="5" stroke-linejoin="round"/>
+    <text x="390" y="680" font-size="54" text-anchor="middle">Check</text>
+    <text x="390" y="742" font-size="54" text-anchor="middle">output</text>
+    <text x="666" y="650" font-size="48" text-anchor="middle" fill="#287e72">PASS</text>
+    <text x="433" y="887" font-size="48" fill="#a9572b">FAIL</text>
+
+    <path d="M 765 610 H 972 L 1020 658 V 790 Q 1020 820 990 820 H 770 Q 740 820 740 790 V 635 Q 740 610 765 610 Z" fill="#fffaf0" stroke="#287e72" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M 972 610 V 658 H 1020" fill="#d5e8df" stroke="#287e72" stroke-width="5" stroke-linejoin="round"/>
+    <text x="880" y="713" font-size="54" text-anchor="middle">Answer</text>
+    <path d="M 780 753 H 978 M 780 784 H 944" fill="none" stroke="#287e72" stroke-width="7" stroke-linecap="round"/>
+
+    <rect x="130" y="945" width="520" height="180" rx="24" fill="#fffaf0" stroke="#293a35" stroke-width="5"/>
+    <g fill="none" stroke="#287e72" stroke-width="5" stroke-linecap="round">
+      <path d="M 193 990 V 1006 M 218 990 V 1006 M 243 990 V 1006 M 193 1062 V 1078 M 218 1062 V 1078 M 243 1062 V 1078 M 172 1020 H 188 M 172 1048 H 188 M 248 1020 H 264 M 248 1048 H 264"/>
+      <rect x="188" y="1006" width="60" height="56" rx="9" fill="#d5e8df"/>
+      <rect x="200" y="1018" width="36" height="32" rx="4" fill="#287e72"/>
+    </g>
+    <text x="296" y="1020" font-size="52">More capable</text>
+    <text x="296" y="1081" font-size="52">model</text>
+
+    <path d="M 390 1230 L 595 1345 L 390 1460 L 185 1345 Z" fill="#fffaf0" stroke="#293a35" stroke-width="5" stroke-linejoin="round"/>
+    <text x="390" y="1335" font-size="54" text-anchor="middle">Check</text>
+    <text x="390" y="1397" font-size="54" text-anchor="middle">again</text>
+    <text x="666" y="1305" font-size="48" text-anchor="middle" fill="#287e72">PASS</text>
+    <text x="433" y="1552" font-size="48" fill="#a9572b">FAIL</text>
+
+    <path d="M 765 1265 H 972 L 1020 1313 V 1445 Q 1020 1475 990 1475 H 770 Q 740 1475 740 1445 V 1290 Q 740 1265 765 1265 Z" fill="#fffaf0" stroke="#287e72" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M 972 1265 V 1313 H 1020" fill="#d5e8df" stroke="#287e72" stroke-width="5" stroke-linejoin="round"/>
+    <text x="880" y="1368" font-size="54" text-anchor="middle">Answer</text>
+    <path d="M 780 1408 H 978 M 780 1439 H 944" fill="none" stroke="#287e72" stroke-width="7" stroke-linecap="round"/>
+
+    <rect x="130" y="1620" width="520" height="160" rx="44" fill="#fffaf0" stroke="#d47846" stroke-width="5"/>
+    <text x="390" y="1719" font-size="54" text-anchor="middle">Stop / review</text>
+    <text x="540" y="1920" font-size="46" font-weight="500" text-anchor="middle" fill="#6b7366">Checks can miss mistakes.</text>
+  </g>
+</svg>
