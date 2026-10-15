@@ -11,6 +11,7 @@ export const siteConfig = {
   language: "en",
   image: "/dev-ed-wave.png",
   email: "neeraj.butola.dev@gmail.com",
+  newsletterUrl: process.env.NEXT_PUBLIC_NEWSLETTER_URL?.trim() || "",
   location: "India",
   resumeUrl:
     "https://raw.githubusercontent.com/Frostdev7506/Auto-resume/build/Neeraj_Butola_Resume.pdf",

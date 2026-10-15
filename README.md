@@ -45,6 +45,12 @@ Advanced search controls support booleans `nofollow` and `nosnippet`, optional i
 
 The Page output panel displays exact resolved robots, canonical, social, author, language, and date settings. Search/social appearance remains available while an unrelated date/canonical/content error pauses schema output. Content checks use the local article index; they do not fetch external pages or confirm remote image availability. Image previews expose loaded dimensions and loading failures. Dates use UTC so date-only publication values agree across server and editor time zones. Markdown export omits cleared optional overrides and preserves numeric/boolean settings; additional unknown frontmatter is preserved by Save, but is not included in Export.
 
+## Newsletter
+
+The homepage uses a compact updates section. Set `NEXT_PUBLIC_NEWSLETTER_URL` to your newsletter provider’s full HTTPS hosted signup URL before building to show **Subscribe by email**. The provider handles signup, confirmation, subscriber storage, and unsubscribe links; no API key is embedded in the site. This link does not automatically send new posts: publish broadcasts through the provider or configure its RSS automation separately.
+
+Until a signup URL is configured, the section offers the working `/feed.xml` feed and describes RSS only. It does not collect emails or claim anyone has subscribed.
+
 ## Contact
 
 The form keeps the existing EmailJS integration and template variables (`user_name`, `user_email`, `message`, `to_email`). Configure `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` before building to enable direct sending.
@@ -67,7 +73,7 @@ Without all three settings, the form validates the enquiry and prepares a mailto
 - Theme, layout, page sections, and responsive rules: `src/styles/`
 - Illustration sources and prompts: `docs/illustrations.md`
 
-The homepage uses `NotebookHero`, `ProjectIndex`, `AboutSummary`, the existing toolkit and career timeline, and `ContactPostcard`. Homepage styles live in `src/styles/home.css`; other routes keep their shared styles. Unused legacy homepage modules and their private helpers have been removed; Git history retains earlier implementations.
+The homepage uses `NotebookHero`, `ProjectIndex`, `AboutSummary`, the existing toolkit and career timeline, and `ArticleUpdates`. Homepage styles live in `src/styles/home.css`; other routes keep their shared styles. Unused legacy homepage modules and their private helpers have been removed; Git history retains earlier implementations.
 
 ### Where changes belong
 
@@ -85,7 +91,7 @@ Component paths above are relative to `src/components/`. The existing experience
 
 Edit `src/data/projects.ts`. Each entry supplies `title`, `summary` (the short index label), `description`, `image`, `altText`, `technologies`, `link`, and `linkLabel`. Keep titles unique. Place screenshots in `public/` and use their root-relative paths (for example, `/my-project.png`). The preview uses a consistent 16:9 image area.
 
-The first three entries appear in the homepage selector; all entries appear on `/projects`. Replace or reorder entries in this one array to update both views—no per-project component or CSS changes are needed. Project selection supports mouse, touch, arrow keys, Home, and End through the existing Radix library. Source links open in a new tab. The postcard opens the visitor’s email app; the full contact form remains at `/contact`.
+The first three entries appear in the homepage selector; all entries appear on `/projects`. Replace or reorder entries in this one array to update both views—no per-project component or CSS changes are needed. Project selection supports mouse, touch, arrow keys, Home, and End through the existing Radix library. Source links open in a new tab. The homepage updates section replaces the former contact postcard; the full contact form remains at `/contact`.
 
 ## Routes
 
