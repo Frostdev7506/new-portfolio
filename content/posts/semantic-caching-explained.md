@@ -53,4 +53,4 @@ A changed question can still benefit from an unchanged prefix, as [OpenAI docume
 
 Use semantic caching for repeated questions with stable answers. Start with correctness; then measure the savings.
 
-Next: [Day 5 — LLM model routing](/blog/llm-model-routing-explained) explains how to choose a model when a request needs a new answer.
+Next: [Day 5 — LLM model routing](/blog/llm-model-routing) explains how to choose a model when a request needs a new answer.

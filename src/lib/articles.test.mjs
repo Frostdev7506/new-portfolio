@@ -152,6 +152,55 @@ test("optional SEO titles are trimmed and reject blank or non-string overrides",
   }
 });
 
+test("cover dimensions are omitted for older posts and retained as a positive integer pair", () => {
+  for (const post of [examplePost, toPostSummary(examplePost)]) {
+    assert.equal("coverWidth" in post, false);
+    assert.equal("coverHeight" in post, false);
+  }
+  for (const [width, height] of [[1200, 630], [1, 1]]) {
+    const post = parsePost(
+      fixture.replace(
+        "---\n",
+        `---\ncoverWidth: ${width}\ncoverHeight: ${height}\n`,
+      ),
+      "example.md",
+    );
+    assert.equal(post.coverWidth, width);
+    assert.equal(post.coverHeight, height);
+    assert.equal(toPostSummary(post).coverWidth, width);
+    assert.equal(toPostSummary(post).coverHeight, height);
+  }
+});
+
+test("cover dimensions reject lone values, non-numbers, and invalid integers", () => {
+  for (const fields of [
+    "coverWidth: 1200",
+    "coverHeight: 630",
+    "coverWidth: 0\ncoverHeight: 630",
+    "coverWidth: 1200\ncoverHeight: -1",
+    "coverWidth: 1200.5\ncoverHeight: 630",
+    "coverWidth: 1200\ncoverHeight: 630.5",
+    'coverWidth: "1200"\ncoverHeight: 630',
+    'coverWidth: 1200\ncoverHeight: "630"',
+    "coverWidth: null\ncoverHeight: 630",
+    "coverWidth: 1200\ncoverHeight: false",
+    "coverWidth: []\ncoverHeight: 630",
+    "coverWidth: .inf\ncoverHeight: 630",
+    "coverWidth: 1200\ncoverHeight: .nan",
+    "coverWidth: 9007199254740992\ncoverHeight: 630",
+  ]) {
+    assert.throws(
+      () =>
+        parsePost(
+          fixture.replace("---\n", `---\n${fields}\n`),
+          "example.md",
+        ),
+      /example\.md: coverWidth and coverHeight must be positive integers supplied together/,
+      fields,
+    );
+  }
+});
+
 test("related articles favor shared topics and exclude current article and drafts", () => {
   const base = toPostSummary(examplePost);
   const current = {

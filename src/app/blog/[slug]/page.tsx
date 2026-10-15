@@ -8,6 +8,7 @@ import { ShareLinks } from "@/components/blog/share-links";
 import { ArticleNavigation } from "@/components/blog/article-navigation";
 import { YouTubeVideo } from "@/components/blog/youtube-video";
 import { siteConfig } from "@/data/site";
+import { fullUrl } from "@/lib/seo";
 import {
   getAllPosts,
   getBlogPostUrl,
@@ -19,15 +20,24 @@ import {
 import { formatDate } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
+const authorUrl = fullUrl("/about");
 export async function generateStaticParams() {
   return (await getPostSlugs()).map((slug) => ({ slug }));
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);
   if (!post) return { title: "Post not found" };
+  const coverImage = {
+    url: fullUrl(post.cover),
+    alt: post.coverAlt,
+    ...(post.coverWidth !== undefined && post.coverHeight !== undefined
+      ? { width: post.coverWidth, height: post.coverHeight }
+      : {}),
+  };
   return {
     title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
     description: post.description,
+    authors: [{ name: siteConfig.name, url: authorUrl }],
     keywords: [...post.tags, siteConfig.name],
     alternates: {
       canonical: `/blog/${post.slug}`,
@@ -38,17 +48,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.description,
       url: `/blog/${post.slug}`,
+      siteName: siteConfig.shortName,
+      locale: siteConfig.locale,
       publishedTime: new Date(post.date).toISOString(),
       modifiedTime: new Date(post.updated).toISOString(),
-      authors: [siteConfig.name],
+      authors: [authorUrl],
       tags: post.tags,
-      images: [{ url: post.cover, alt: post.coverAlt }],
+      images: [coverImage],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: [post.cover],
+      images: [coverImage],
     },
   };
 }
@@ -71,10 +83,18 @@ export default async function BlogPostPage({ params }: Props) {
       author: {
         "@type": "Person",
         name: siteConfig.name,
-        url: `${siteConfig.url}/about`,
+        url: authorUrl,
       },
       mainEntityOfPage: shareUrl,
-      image: [`${siteConfig.url}${post.cover}`],
+      image: {
+        "@type": "ImageObject",
+        url: fullUrl(post.cover),
+        description: post.coverAlt,
+        ...(post.coverWidth !== undefined && post.coverHeight !== undefined
+          ? { width: post.coverWidth, height: post.coverHeight }
+          : {}),
+      },
+      inLanguage: siteConfig.language,
       keywords: post.tags.join(", "),
       wordCount: post.wordCount,
       articleSection: post.category,
@@ -138,8 +158,8 @@ export default async function BlogPostPage({ params }: Props) {
             <Image
               src={post.cover}
               alt={post.coverAlt}
-              width={1536}
-              height={1024}
+              width={post.coverWidth ?? 1536}
+              height={post.coverHeight ?? 1024}
               sizes="(max-width: 480px) 100vw, 420px"
               priority
             />
