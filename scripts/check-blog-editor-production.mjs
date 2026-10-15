@@ -3,6 +3,7 @@ import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { createServer } from "node:net";
+import path from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { parsePost } from "../src/lib/post-content.ts";
 import { resolveBlogSeo, isBlogPostInSitemap } from "../src/lib/blog-seo.ts";
@@ -10,6 +11,19 @@ import nextEnv from "@next/env";
 
 nextEnv.loadEnvConfig(process.cwd());
 const { siteConfig } = await import("../src/data/site.ts");
+
+for (const route of ["blog", "blog/[slug]", "blog/assets"]) {
+  const trace = path.resolve(`.next/server/app/api/dev/${route}/route.js.nft.json`);
+  const { files } = JSON.parse(await readFile(trace, "utf8"));
+  for (const file of files) {
+    const relative = path.relative(process.cwd(), path.resolve(path.dirname(trace), file)).split(path.sep).join("/");
+    assert.ok(
+      relative === "package.json" || relative.startsWith(".next/") || relative.startsWith("node_modules/"),
+      `Production editor API must not bundle repository files: ${relative}`,
+    );
+  }
+}
+console.log("PASS production editor API traces exclude repository content and assets");
 
 // Run after npm run build. A fresh production server must fail closed even on localhost.
 const portReservation = createServer();
