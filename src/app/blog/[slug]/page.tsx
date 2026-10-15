@@ -17,6 +17,7 @@ import {
   toPostSummary,
 } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
+import { blogPostJsonLd, buildPostMetadata, serializeJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() {
@@ -25,32 +26,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);
   if (!post) return { title: "Post not found" };
-  return {
-    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
-    description: post.description,
-    keywords: [...post.tags, siteConfig.name],
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-      types: { "application/rss+xml": "/feed.xml" },
-    },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.description,
-      url: `/blog/${post.slug}`,
-      publishedTime: new Date(post.date).toISOString(),
-      modifiedTime: new Date(post.updated).toISOString(),
-      authors: [siteConfig.name],
-      tags: post.tags,
-      images: [{ url: post.cover, alt: post.coverAlt }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [post.cover],
-    },
-  };
+  return buildPostMetadata(post);
 }
 export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug((await params).slug);
@@ -61,24 +37,7 @@ export default async function BlogPostPage({ params }: Props) {
   );
   const shareUrl = getBlogPostUrl(post.slug);
   const structuredData = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.description,
-      datePublished: new Date(post.date).toISOString(),
-      dateModified: new Date(post.updated).toISOString(),
-      author: {
-        "@type": "Person",
-        name: siteConfig.name,
-        url: `${siteConfig.url}/about`,
-      },
-      mainEntityOfPage: shareUrl,
-      image: [`${siteConfig.url}${post.cover}`],
-      keywords: post.tags.join(", "),
-      wordCount: post.wordCount,
-      articleSection: post.category,
-    },
+    blogPostJsonLd(post),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -104,7 +63,7 @@ export default async function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          __html: serializeJsonLd(structuredData),
         }}
       />
       <header className="article-header">

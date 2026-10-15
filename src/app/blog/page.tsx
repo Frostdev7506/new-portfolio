@@ -2,7 +2,7 @@ import { FeaturedArticle } from "@/components/blog/featured-article";
 import { BlogExplorer } from "@/components/blog/blog-explorer";
 import { PageIntro } from "@/components/shared/page-intro";
 import { getAllPosts, toPostSummary } from "@/lib/posts";
-import { buildPageMetadata } from "@/lib/seo";
+import { blogJsonLd, buildPageMetadata, serializeJsonLd } from "@/lib/seo";
 import { notebook } from "@/data/notebook";
 import { siteConfig } from "@/data/site";
 
@@ -40,7 +40,7 @@ export default async function BlogPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumb).replace(/</g, "\\u003c"),
+          __html: serializeJsonLd([blogJsonLd(posts, notebook.blogDescription), breadcrumb]),
         }}
       />
       <PageIntro

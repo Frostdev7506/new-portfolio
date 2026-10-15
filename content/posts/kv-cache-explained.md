@@ -2,9 +2,9 @@
 title: "KV Cache Explained"
 seoTitle: "KV Cache Explained"
 youtubeId: "fdulpDUOA_E"
-description: "KV cache speeds up LLM generation by reusing earlier keys and values. See how it works, what gets cached, and the memory tradeoff."
+description: "Learn how KV caching works, then practice interview questions on queries, GQA memory estimates, context length, cache invalidation and concurrency."
 date: "2026-10-12"
-updated: "2026-10-14"
+updated: "2026-10-15"
 category: "Practical AI"
 tags: ["KV Cache", "LLMs", "LLM Inference", "Caching", "AI Engineering"]
 cover: "/illustrations/articles/kv-caching.png"
@@ -61,10 +61,28 @@ Cache implementation changes the details. A dynamic cache can grow during genera
 
 Allocation also matters at serving scale. The [PagedAttention research](https://arxiv.org/abs/2309.06180) addresses fragmentation and wasted KV-cache memory through block-based management. That improves how cache space is used; it doesn’t make long contexts free.
 
-## A useful interview answer goes beyond “it is faster”
+## Interview questions and answers
 
-Explain one step before naming optimizations: the prompt’s KV is already available, the newest token is processed, and its query attends over the relevant keys and values. Then describe the tradeoff: less repeated computation, more retained state.
+### Why cache keys and values, but not earlier queries?
 
-If asked whether doubling the context doubles latency, don’t infer that from cache size alone. Hardware, batching, attention implementation and memory traffic affect generation speed. A useful evaluation compares the same model and workload while recording generation latency, memory consumption and concurrency.
+Earlier queries have already served their purpose: computing earlier positions’ attention outputs. The current position needs its own query and the context’s keys and values. Saving old queries wouldn't avoid the work this step needs. For the email example, processing “Yes” creates its query while reusing the email’s KV at each layer.
+
+### How would you estimate KV-cache memory for a GQA model?
+
+For uniform full-attention layers with equal key/value head dimensions, raw bytes per sequence are approximately `2 × L × T × Hkv × D × b`: two tensors, layer count, retained tokens, KV heads, head dimension and bytes per value.
+
+With 32 layers, 4,096 retained tokens, 8 KV heads, head dimension 128 and two-byte values, that is `2 × 32 × 4096 × 8 × 128 × 2` = 512 MiB. Use KV heads, not query heads: [grouped-query attention](https://arxiv.org/abs/2305.13245) lets several query heads share KV. This excludes weights, workspaces, allocation overhead and extra reserved capacity.
+
+### Does KV caching make each decoding step constant-time?
+
+No. With dense full attention, the newest query still interacts with the retained context. That attention work grows with context length even though earlier KV projections aren't recomputed. A 16,000-token conversation can therefore decode more slowly than a 1,000-token one. Total latency won't necessarily scale by the same factor because other model operations, batching and memory traffic also contribute.
+
+### Can you keep the cache after editing an earlier message?
+
+Only the unchanged prefix remains reusable, assuming the same model and positional setup. Changing a token changes that position’s state and can change every later position that attends to it. Recompute from the first changed position onward. Reusing the old suffix could produce a continuation conditioned on the previous wording.
+
+### The model fits, but concurrent requests run out of memory. What do you check?
+
+Check the total retained token count across active sequences, including growing outputs. Sixteen independent sequences at the 512 MiB example size need 8 GiB of raw KV storage before other allocations. Budget active tokens as well as request count. Measure peak memory at realistic lengths, then adjust concurrency or context limits; offloading and cache quantization add their own latency or accuracy tradeoffs.
 
 Next, [prefill vs decode](/blog/prefill-vs-decode-explained) separates the initial prompt processing from the token generation loop. [Part 3: prompt caching](/blog/prompt-caching-explained) builds on this mechanism to explain when processed context can be reused across requests.

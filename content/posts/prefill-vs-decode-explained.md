@@ -2,9 +2,9 @@
 title: "Prefill vs Decode Explained"
 seoTitle: "Prefill vs Decode Explained"
 youtubeId: "5rKn3R9MxU8"
-description: "Prefill processes the prompt; decode generates the reply token by token. See the difference with a simple example, diagram and short video."
+description: "Understand prefill and decode, with interview questions on first-token latency, slow generation, GPU bottlenecks, streaming and speculative decoding."
 date: "2026-10-12"
-updated: "2026-10-14"
+updated: "2026-10-15"
 category: "Practical AI"
 tags: ["Prefill", "Decode", "LLMs", "LLM Inference", "AI Engineering"]
 cover: "/illustrations/articles/prefill-vs-decode.png"
@@ -74,3 +74,25 @@ The dependency is what matters: the next step uses the token selected by the pre
 ```diagram
 {"title":"From the email to a complete reply","layout":"flow","steps":[{"label":"Prefill","detail":"Process the instruction and email. Produce the first reply token: “Yes”."},{"label":"Decode","detail":"Process “Yes” using the earlier context. Produce the next token."},{"label":"Repeat decode","detail":"Use each new token to generate the following one until the reply finishes."}],"caption":"One prompt-processing stage starts the answer. Repeated decode steps continue it."}
 ```
+
+## Interview questions and answers
+
+### The first token is slow, but the rest arrive quickly. What do you investigate?
+
+Separate request preparation, queueing, prefill and network time. A long prompt may explain slow prefill, while an overloaded server may spend most of the delay waiting to run. Time to first token (TTFT) measures the wait until output arrives, so it isn't a pure prefill measurement. [NVIDIA’s metric definitions](https://docs.nvidia.com/nim/benchmarking/llm/metrics) distinguish it from inter-token latency. Compare prompt lengths and server timings before choosing an optimization.
+
+### The first token arrives quickly, but the complete answer is slow. Why?
+
+Look at output length and average inter-token latency (ITL). For 200 output tokens, a two-second TTFT and 40 ms average gap give about `2 + 199 × 0.04` = 9.96 seconds to the final token. A healthy start doesn't guarantee a fast finish. Check decode performance and whether the requested answer needs that many tokens; shortening it helps only if it still completes the task.
+
+### Is prefill always compute-bound and decode always memory-bound?
+
+Those are useful tendencies, not universal classifications. Processing many prompt positions together can use GPU compute effectively. Low-batch decoding often spends much of its time reading weights and KV state. Larger batches reuse weights across more sequences, while long contexts increase attention work and cache traffic. Model architecture, kernels and hardware change the balance. Profile the actual workload rather than diagnosing every slow decode as insufficient bandwidth.
+
+### Does streaming make the model generate faster?
+
+Streaming exposes partial output while generation continues. It can reduce the wait before reading starts, but doesn't by itself remove prefill or decode work. Check buffering too: a server or proxy might collect several tokens before sending a chunk. Measure first visible output, gaps between updates and final-token arrival separately; one network chunk isn't necessarily one model token.
+
+### How can speculative decoding produce several tokens per target-model pass?
+
+A cheaper draft model proposes a continuation. The target model evaluates the known candidate positions in parallel, then the algorithm accepts a prefix and handles any rejection. The dependency on earlier tokens remains. The [original speculative-decoding algorithm](https://arxiv.org/abs/2211.17192) preserves the target’s output distribution through its acceptance and correction rules. Its speedup depends on accepted draft length and drafting overhead; frequent rejection can erase the benefit.

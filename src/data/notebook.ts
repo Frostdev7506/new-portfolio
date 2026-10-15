@@ -3,7 +3,7 @@ export const notebook = {
   note: "A place for things I build and learn.",
   featuredSlug: "optimistic-uploads",
   blogDescription:
-    "Practical notes on faster web apps, useful AI, and the systems behind them. Ideas explored with examples, diagrams, and a little curiosity.",
+    "Practical guides to web development and AI engineering, with diagrams, worked examples, and interview questions on LLM inference and caching.",
   projectsDescription:
     "Web applications, experiments, and the things I’ve built along the way.",
   about: [

@@ -1,5 +1,4 @@
 import { getPostBySlug } from "@/lib/posts";
-import { personJsonLd } from "@/lib/seo";
 import { notebook } from "@/data/notebook";
 import { projects } from "@/data/projects";
 import { FeaturedArticle } from "@/components/blog/featured-article";
@@ -15,10 +14,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
-      />
       <NotebookHero />
       {featured && <FeaturedArticle post={featured} home />}
       <ProjectIndex projects={projects.slice(0, 3)} />

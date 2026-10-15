@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { defaultKeywords, siteConfig } from "@/data/site";
+import { defaultKeywords, siteConfig } from "../data/site.ts";
+import type { BlogPost, PostSummary } from "./post-content.ts";
 
 export const fullUrl = (pathName = "") => {
   const base = siteConfig.url.replace(/\/$/, "");
@@ -10,6 +11,15 @@ export const fullUrl = (pathName = "") => {
 const defaultOgImageUrl = fullUrl(siteConfig.image);
 const twitterUsername = siteConfig.social.twitter.split("/").filter(Boolean).pop();
 const twitterHandle = twitterUsername ? `@${twitterUsername.replace(/^@/, "")}` : undefined;
+const author = {
+  "@type": "Person",
+  "@id": fullUrl("/#person"),
+  name: siteConfig.name,
+  url: fullUrl("/about"),
+};
+
+export const serializeJsonLd = (data: unknown) =>
+  JSON.stringify(data).replace(/</g, "\\u003c");
 
 const mergeKeywords = (keywords: string[] = []) => {
   return Array.from(
@@ -33,19 +43,27 @@ export function baseMetadata(overrides?: Partial<Metadata>): Metadata {
     keywords: defaultKeywords,
     category: "technology",
     creator: siteConfig.name,
-    authors: [{ name: siteConfig.name }],
+    authors: [{ name: siteConfig.name, url: fullUrl("/about") }],
+    publisher: siteConfig.name,
+    robots: {
+      googleBot: {
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
       title: `${siteConfig.name} | ${siteConfig.role}`,
       description: siteConfig.description,
       url: siteConfig.url,
-      siteName: siteConfig.shortName,
+      siteName: siteConfig.name,
       locale: siteConfig.locale,
       type: "website",
       images: [
         {
-          url: "/dev-ed-wave.png",
-          width: 1200,
-          height: 630,
+          url: defaultOgImageUrl,
+          width: 1000,
+          height: 750,
           alt: `${siteConfig.name} portfolio preview`,
         },
       ],
@@ -54,7 +72,8 @@ export function baseMetadata(overrides?: Partial<Metadata>): Metadata {
       card: "summary_large_image",
       title: `${siteConfig.name} | ${siteConfig.role}`,
       description: siteConfig.description,
-      images: ["/dev-ed-wave.png"],
+      images: [defaultOgImageUrl],
+      creator: twitterHandle,
     },
     alternates: {
       canonical: "/",
@@ -98,13 +117,13 @@ export function buildPageMetadata({
     title,
     description,
     url: canonicalUrl,
-    siteName: siteConfig.shortName,
+    siteName: siteConfig.name,
     locale: siteConfig.locale,
     images: [
       {
         url: defaultOgImageUrl,
-        width: 1200,
-        height: 630,
+        width: 1000,
+        height: 750,
         alt: `${siteConfig.name} portfolio preview`,
       },
     ],
@@ -145,17 +164,12 @@ export function buildPageMetadata({
 export function personJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.name,
+    ...author,
     jobTitle: siteConfig.role,
+    description: siteConfig.longDescription,
     email: siteConfig.email,
-    url: siteConfig.url,
-    sameAs: [
-      siteConfig.social.github,
-      siteConfig.social.linkedin,
-      siteConfig.social.twitter,
-    ],
-    knowsAbout: defaultKeywords,
+    sameAs: Object.values(siteConfig.social),
+    knowsAbout: siteConfig.skills,
   };
 }
 
@@ -163,22 +177,115 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteConfig.shortName,
+    "@id": fullUrl("/#website"),
+    name: siteConfig.name,
+    alternateName: siteConfig.shortName,
     description: siteConfig.description,
     url: siteConfig.url,
-    inLanguage: "en",
-    author: {
-      "@type": "Person",
-      name: siteConfig.name,
+    inLanguage: siteConfig.language,
+    author,
+    publisher: author,
+  };
+}
+
+export function buildPostMetadata(post: BlogPost): Metadata {
+  const image = {
+    url: fullUrl(post.cover),
+    alt: post.coverAlt,
+  };
+  return {
+    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
+    description: post.description,
+    authors: [{ name: author.name, url: author.url }],
+    creator: author.name,
+    publisher: author.name,
+    category: post.category,
+    keywords: post.tags,
+    alternates: {
+      canonical: fullUrl(`/blog/${post.slug}`),
+      types: { "application/rss+xml": "/feed.xml" },
     },
-    publisher: {
-      "@type": "Person",
-      name: siteConfig.name,
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url: fullUrl(`/blog/${post.slug}`),
+      siteName: siteConfig.name,
+      locale: siteConfig.locale,
+      publishedTime: new Date(post.date).toISOString(),
+      modifiedTime: new Date(post.updated).toISOString(),
+      authors: [author.url],
+      section: post.category,
+      tags: post.tags,
+      images: [image],
     },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${siteConfig.url}/blog?query={search_term_string}`,
-      "query-input": "required name=search_term_string",
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      creator: twitterHandle,
+      images: [image],
     },
+  };
+}
+
+export function blogPostJsonLd(post: BlogPost) {
+  const url = fullUrl(`/blog/${post.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    url,
+    headline: post.title,
+    description: post.description,
+    datePublished: new Date(post.date).toISOString(),
+    dateModified: new Date(post.updated).toISOString(),
+    author,
+    publisher: author,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    isPartOf: { "@type": "Blog", "@id": fullUrl("/blog#blog") },
+    image: {
+      "@type": "ImageObject",
+      url: fullUrl(post.cover),
+      caption: post.coverAlt,
+    },
+    inLanguage: siteConfig.language,
+    isAccessibleForFree: true,
+    keywords: post.tags.join(", "),
+    wordCount: post.wordCount,
+    articleSection: post.category,
+  };
+}
+
+export function blogJsonLd(posts: PostSummary[], description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": fullUrl("/blog#blog"),
+    url: fullUrl("/blog"),
+    name: `${siteConfig.name}’s blog`,
+    description,
+    inLanguage: siteConfig.language,
+    isPartOf: { "@id": fullUrl("/#website") },
+    author,
+    publisher: author,
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      "@id": fullUrl(`/blog/${post.slug}#article`),
+      url: fullUrl(`/blog/${post.slug}`),
+      headline: post.title,
+    })),
+  };
+}
+
+export function profilePageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": fullUrl("/about#profile"),
+    url: fullUrl("/about"),
+    name: `About ${siteConfig.name}`,
+    isPartOf: { "@id": fullUrl("/#website") },
+    mainEntity: author,
   };
 }
