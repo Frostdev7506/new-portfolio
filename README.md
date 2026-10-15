@@ -49,13 +49,11 @@ The Page output panel displays exact resolved robots, canonical, social, author,
 
 The homepage, blog index, and article endings share an updates section. Newsletter emails are reviewed and sent manually through **Kit**; publishing a blog post does not send an email.
 
-1. Create a [Kit Free account](https://kit.com/pricing) and verify a working sender email. Do not reuse the retired contact address from the site profile.
-2. Create a hosted landing page named **Neeraj’s Notebook**. Suggested description: “Occasional emails about building for the web, working with AI, and what I learn along the way.” Start with an email-only signup and the button **Subscribe by email**.
-3. Keep the confirmation email enabled and **Auto-confirm new subscribers** unchecked. Suggested subject: “Confirm your subscription to Neeraj’s Notebook”. Keep Kit’s confirmation button and unsubscribe footer intact.
-4. Publish the landing page and copy its public HTTPS signup URL. Set `NEXT_PUBLIC_NEWSLETTER_URL` in `.env.local` for local development and in Netlify’s build environment for deployment, then rebuild. No Kit API key is needed. A blank, invalid, non-HTTPS, or credential-containing URL keeps the section in RSS-only mode.
-5. Verify the public site opens the intended Kit signup page. Use your own test email to check signup, confirmation, and unsubscribe before announcing the newsletter.
+The published signup page is [Neeraj’s Notebook](https://neeraj-butola.kit.com/92676d5ac2). The site uses this public URL by default, with no API key or Netlify setting required. **Require double opt-in** is enabled in Kit, so subscribers confirm their email address before joining the newsletter.
 
-Kit handles subscriber storage, confirmation, and unsubscribe links. The website loads no Kit scripts and collects no newsletter addresses itself. Until the signup URL is configured, the section describes and offers only the working `/feed.xml` feed.
+To override the signup destination, set `NEXT_PUBLIC_NEWSLETTER_URL` in `.env.local` for local development or Netlify’s build environment for deployment, then rebuild. Leave it unset to use the published page. An explicitly blank, invalid, non-HTTPS, or credential-containing value switches the updates section to RSS only. `.env.example` leaves this optional override commented out.
+
+Kit handles subscriber storage, confirmation, and unsubscribe links. The website loads no Kit scripts and collects no newsletter addresses itself. The working `/feed.xml` feed remains available alongside email signup. Keep Kit’s confirmation button and unsubscribe footer intact. Verify a working sender email in Kit; do not reuse the retired contact address from the site profile. Use your own test email to check signup, confirmation, and unsubscribe before announcing the newsletter.
 
 For each issue, create a broadcast in Kit with a short introduction, one useful takeaway, and a link to the published article. Review the recipients, links, and preview before sending. A simple first issue can introduce the notebook and link to a favorite existing post. The free plan’s current limits and automation availability are documented in [Kit’s Free plan guide](https://help.kit.com/en/articles/16627071-the-kit-free-plan).
 
