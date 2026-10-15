@@ -8,6 +8,7 @@ import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
 import { ArticleNavigation } from "@/components/blog/article-navigation";
 import { YouTubeVideo } from "@/components/blog/youtube-video";
+import { ArticleUpdates } from "@/components/shared/article-updates";
 import { siteConfig } from "@/data/site";
 import {
   getAllPosts,
@@ -108,6 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
             <p>Share</p>
             <ShareLinks title={post.title} url={shareUrl} />
           </section>
+          <ArticleUpdates />
           {!!related.length && (
             <section className="article-related" aria-labelledby="related-title">
               <h2 id="related-title">More to read</h2>

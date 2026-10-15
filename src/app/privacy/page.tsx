@@ -12,8 +12,8 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function PrivacyPage() {
   const pageUrl = `${siteConfig.url}/privacy`;
-  const lastUpdatedIso = "2026-02-28";
-  const lastUpdatedText = "February 28, 2026";
+  const lastUpdatedIso = "2026-10-15";
+  const lastUpdatedText = "October 15, 2026";
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -99,6 +99,19 @@ export default function PrivacyPage() {
         are limited to service reliability, fraud prevention, and legal
         compliance where required.
       </p>
+
+      {siteConfig.newsletterUrl && (
+        <>
+          <h2 className="text-2xl font-semibold">Newsletter subscriptions</h2>
+          <p className="leading-relaxed">
+            Newsletter signups are handled on Kit’s website. Kit stores the
+            details you provide there and manages confirmation, email delivery,
+            and unsubscribe requests for this newsletter. You can stop
+            receiving the newsletter using the unsubscribe link in any issue.
+            This website does not maintain a separate subscriber database.
+          </p>
+        </>
+      )}
 
       <h2 className="text-2xl font-semibold">Third-party services</h2>
       <p className="leading-relaxed">
