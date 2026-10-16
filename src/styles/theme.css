@@ -1,39 +1,61 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  color-scheme: light;
   --font-body: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
   --text-body: 1.0625rem;
   --text-lead: 1.25rem;
+  --text-action: 0.9375rem;
   --text-small: 0.875rem;
   --text-caption: 0.8125rem;
-  --text-section: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  --text-section: clamp(1.875rem, 1.45rem + 1.2vw, 2.5rem);
   --text-card: clamp(1.375rem, 1.1rem + 0.6vw, 1.75rem);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --section-space: clamp(40px, 4vw, 64px);
+  --reading-width: 66ch;
+  --radius-control: 8px;
   --page-bg: #f8f6f0;
   --surface: #fffdf8;
   --surface-soft: #edeae1;
   --text: #20231f;
   --text-muted: #62645f;
   --border: #d9d5cb;
+  --input-border: #85877d;
   --brand-100: #e9f2ed;
   --brand-300: #6bbcb1;
   --brand-700: #087f7c;
   --brand-900: #16625b;
-  --accent: #c94023;
-  --sidebar-width: clamp(248px, 22.5vw, 320px);
+  --accent: #b9381f;
+  --action-bg: #c94023;
+  --action-hover: #a9321c;
+  --action-text: #ffffff;
+  --sidebar-width: clamp(248px, 21vw, 300px);
 }
 
 .dark {
+  color-scheme: dark;
   --page-bg: #191e1c;
   --surface: #222925;
   --surface-soft: #303830;
   --text: #f5f2e9;
   --text-muted: #b5beb6;
   --border: #3d4740;
+  --input-border: #78847b;
   --brand-100: #263e36;
   --brand-300: #85cbbd;
   --brand-700: #88d2c7;
   --brand-900: #afe5d6;
   --accent: #ff9b7a;
+  --action-bg: #b5d8cd;
+  --action-hover: #c7e3d9;
+  --action-text: #20332c;
 }
 
 @theme inline {
@@ -42,16 +64,21 @@
   --color-surface: var(--surface);
   --color-surface-soft: var(--surface-soft);
   --color-border: var(--border);
+  --color-input: var(--input-border);
   --color-brand-100: var(--brand-100);
   --color-brand-300: var(--brand-300);
   --color-brand-700: var(--brand-700);
   --color-brand-900: var(--brand-900);
-  --color-primary: var(--accent);
-  --color-primary-foreground: #ffffff;
+  --color-primary: var(--action-bg);
+  --color-primary-foreground: var(--action-text);
+  --color-secondary: var(--surface-soft);
+  --color-secondary-foreground: var(--text);
   --color-ring: var(--brand-700);
   --color-background: var(--page-bg);
+  --color-foreground: var(--text);
+  --color-muted: var(--surface-soft);
   --color-muted-foreground: var(--text-muted);
   --color-accent: var(--surface-soft);
   --color-accent-foreground: var(--text);
-  --color-destructive: #ba3020;
+  --color-destructive: #b52c25;
 }

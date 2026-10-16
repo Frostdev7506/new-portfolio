@@ -43,27 +43,42 @@ export default async function BlogPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: serializeJsonLd([blogJsonLd(posts, notebook.blogDescription), breadcrumb]),
+          __html: serializeJsonLd([
+            blogJsonLd(posts, notebook.blogDescription),
+            breadcrumb,
+          ]),
         }}
       />
       <PageIntro
         className="blog-intro"
-        eyebrow="Blog"
         title="Things worth writing down."
         description={notebook.blogDescription}
         image="/illustrations/blog-notebooks.png"
       />
       {process.env.NODE_ENV === "development" && (
-        <div className="py-4"><Button asChild variant="outline"><Link href="/dev/blog">Open Blog Studio ↗</Link></Button></div>
+        <div className="py-4">
+          <Button asChild variant="outline">
+            <Link href="/dev/blog">Open Blog Studio</Link>
+          </Button>
+        </div>
       )}
-      {featured && <FeaturedArticle post={featured} />}
+      {featured && (
+        <FeaturedArticle
+          post={featured}
+          summary={
+            featured.slug === notebook.featuredSlug
+              ? notebook.featuredSummary
+              : undefined
+          }
+        />
+      )}
       <BlogExplorer posts={posts} />
       <ArticleUpdates />
       <div className="notebook-end">
         <span className="handwritten">
           Always learning. Still taking notes.
         </span>
-        <a href={siteConfig.social.linkedin}>More notes on LinkedIn ↗</a>
+        <a href={siteConfig.social.linkedin}>More notes on LinkedIn</a>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TextLink } from "@/components/shared/text-link";
 import { homeNotebook } from "@/data/notebook";
 
 export function NotebookHero() {
@@ -14,12 +14,11 @@ export function NotebookHero() {
         </h1>
         <p className="hero-description">{homeNotebook.description}</p>
         <div className="hero-actions">
-          <Button asChild size="lg" className="primary-button">
-            <a href="#portfolio">
-              Explore projects <ArrowRight aria-hidden="true" />
-            </a>
+          <Button asChild size="lg" className="hero-action hero-action-primary">
+            <Link href="/blog">
+              {homeNotebook.actions.blog} <ArrowRight aria-hidden="true" />
+            </Link>
           </Button>
-          <TextLink href="/blog" className="quiet-link">{homeNotebook.blogLink}</TextLink>
         </div>
       </div>
       <Image

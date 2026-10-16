@@ -7,7 +7,7 @@ export function PageIntro({
   image,
   className = "",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   image?: string;
@@ -16,7 +16,7 @@ export function PageIntro({
   return (
     <header className={"page-intro " + className + (image ? " has-art" : "")}>
       <div>
-        <p className="eyebrow">{eyebrow}</p>
+        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
         {description && <p className="page-description">{description}</p>}
       </div>

@@ -34,6 +34,15 @@
 *   *Stack:* Modern (React/Vue/Svelte), Tailwind/Custom CSS, semantic HTML5.
 *   *Visuals:* Focus on micro-interactions, perfect spacing, and "invisible" UX.
 
+### Repository-local frontend skills
+
+Use these copies from this repository's `.codex/skills` directory, rather than global installations:
+
+- For frontend implementation or visual redesign, read [frontend-design](.codex/skills/frontend-design/SKILL.md) for creative direction, typography, and layout.
+- Before delivering frontend changes, review the changed UI with [web-design-guidelines](.codex/skills/web-design-guidelines/SKILL.md) for accessibility, interaction, and visual consistency. This skill fetches the current upstream guidelines when reviewing.
+
+Apply these alongside the relevant `mattpocock/skills` engineering guidance. The user's approved design and explicit requirements take precedence over stylistic defaults.
+
 ## 5. RESPONSE FORMAT
 
 *IF NORMAL:*

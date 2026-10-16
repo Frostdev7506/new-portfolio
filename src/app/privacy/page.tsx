@@ -5,15 +5,15 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Privacy Policy",
   description:
-    "Privacy policy for this portfolio covering contact form data, storage scope, third-party services, and deletion requests.",
+    "I do not collect or store personal data from browsing this website. Learn about optional contact messages and newsletter subscriptions, browser preferences, and hosting services.",
   path: "/privacy",
   keywords: ["privacy policy", "data handling", "portfolio site privacy"],
 });
 
 export default function PrivacyPage() {
   const pageUrl = `${siteConfig.url}/privacy`;
-  const lastUpdatedIso = "2026-10-15";
-  const lastUpdatedText = "October 15, 2026";
+  const lastUpdatedIso = "2026-10-16";
+  const lastUpdatedText = "October 16, 2026";
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -33,13 +33,13 @@ export default function PrivacyPage() {
     "@type": "WebPage",
     name: "Privacy Policy",
     description:
-      "Privacy policy for this portfolio covering contact form data, storage scope, third-party services, and deletion requests.",
+      "I do not collect or store personal data from browsing this website. Learn about optional contact messages and newsletter subscriptions, browser preferences, and hosting services.",
     url: pageUrl,
     inLanguage: siteConfig.language,
   };
 
   return (
-    <section className="document-page space-y-6">
+    <section className="document-page policy-page">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -50,60 +50,36 @@ export default function PrivacyPage() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <h1 className="text-3xl font-semibold">Privacy Policy</h1>
-      <p className="text-sm">
+      <h1>Privacy Policy</h1>
+      <p className="document-updated">
         Last updated: <time dateTime={lastUpdatedIso}>{lastUpdatedText}</time>
       </p>
-      <p className="leading-relaxed">
-        Privacy policy for this portfolio covering contact form data, storage
-        scope, third-party services, and deletion requests.
+      <p>
+        I do not collect or store personal data about you when you browse this
+        website. I do not sell your data or use it to build advertising profiles.
       </p>
-      <p className="leading-relaxed">
-        This website is designed to minimize personal details collection.
-        Messages shared through the contact form are processed only for
-        legitimate inquiries, project discussions, and direct follow-up
-        requested by the sender.
+      <p>
+        This website has no user accounts or personal-data database. Your light
+        or dark theme preference is saved locally in your browser and is not
+        sent to me.
       </p>
 
-      <h2 className="text-2xl font-semibold">What details are collected</h2>
-      <ul className="list-disc space-y-2 pl-6 leading-relaxed">
-        <li>
-          Contact details you submit directly, such as name, email address, and
-          message body.
-        </li>
-        <li>
-          Basic hosting diagnostics (for example IP, user-agent, and timestamps)
-          for reliability and abuse prevention.
-        </li>
-        <li>
-          Optional technical metadata required by third-party delivery services
-          that power this site.
-        </li>
-        <li>
-          No behavioral advertising profiles and no sale of personal details.
-        </li>
-      </ul>
-
-      <h2 className="text-2xl font-semibold">
-        How requests are handled and retained
-      </h2>
-      <p className="leading-relaxed">
-        Submitted messages are reviewed to respond to inquiries, evaluate
-        collaboration requests, and maintain direct communication related to the
-        original request. Records are retained only as long as operationally
-        necessary for communication, security, and audit needs.
+      <h2>If you choose to contact me</h2>
+      <p>
+        If you send an email or submit the contact form, you voluntarily share
+        your name, email address, and message. I use these details only to respond
+        to your inquiry and any follow-up you request.
       </p>
-      <p className="leading-relaxed">
-        If a request is resolved and no further communication is needed, related
-        records are periodically removed from active workflows. Retained logs
-        are limited to service reliability, fraud prevention, and legal
-        compliance where required.
+      <p>
+        The form uses EmailJS when configured, or prepares a draft for you to
+        send from your own email app. Sent messages may be retained by the email
+        services and in my inbox; they are not saved in a website database.
       </p>
 
       {siteConfig.newsletterUrl && (
         <>
-          <h2 className="text-2xl font-semibold">Newsletter subscriptions</h2>
-          <p className="leading-relaxed">
+          <h2>Newsletter subscriptions</h2>
+          <p>
             Newsletter signups are handled on Kit’s website. Kit stores the
             details you provide there and manages confirmation, email delivery,
             and unsubscribe requests for this newsletter. You can stop
@@ -113,17 +89,16 @@ export default function PrivacyPage() {
         </>
       )}
 
-      <h2 className="text-2xl font-semibold">Third-party services</h2>
-      <p className="leading-relaxed">
-        This site may use managed providers for hosting, analytics, and
-        contact-form delivery. These providers process limited technical data as
-        part of delivering the service. Their handling practices are governed by
-        their own policies, including:
+      <h2>Third-party services</h2>
+      <p>
+        Hosting and email providers may process technical information, such as
+        IP addresses, browser details, and timestamps, to deliver and secure
+        their services. Their handling of that information is governed by their
+        own privacy policies:
       </p>
-      <ul className="list-disc space-y-2 pl-6 leading-relaxed">
+      <ul>
         <li>
           <a
-            className="underline decoration-slate-500 underline-offset-2"
             href="https://www.netlify.com/privacy/"
             target="_blank"
             rel="noreferrer noopener"
@@ -133,7 +108,6 @@ export default function PrivacyPage() {
         </li>
         <li>
           <a
-            className="underline decoration-slate-500 underline-offset-2"
             href="https://www.emailjs.com/legal/privacy-policy/"
             target="_blank"
             rel="noreferrer noopener"
@@ -143,29 +117,14 @@ export default function PrivacyPage() {
         </li>
       </ul>
 
-      <h2 className="text-2xl font-semibold">
-        Your rights and deletion requests
-      </h2>
-      <p className="leading-relaxed">
+      <h2>Questions or deletion requests</h2>
+      <p>
         You can request review, correction, or deletion of submitted personal
         information by emailing{" "}
-        <a
-          className="underline decoration-slate-500 underline-offset-2"
-          href={`mailto:${siteConfig.email}`}
-        >
+        <a href={`mailto:${siteConfig.email}`}>
           {siteConfig.email}
         </a>
-        . Reasonable verified inquiries are processed as soon as practical.
-      </p>
-      <p className="leading-relaxed">
-        Requests may require identity confirmation before account-related
-        actions are completed. This step helps prevent unauthorized disclosure
-        and protects both sender privacy and platform integrity.
-      </p>
-      <p className="leading-relaxed">
-        This policy is reviewed periodically to reflect operational or legal
-        changes. When significant updates are made, the last-updated date on
-        this page is revised.
+        .
       </p>
     </section>
   );

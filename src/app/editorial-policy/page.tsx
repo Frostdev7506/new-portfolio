@@ -43,7 +43,7 @@ export default function EditorialPolicyPage() {
   };
 
   return (
-    <section className="document-page space-y-6">
+    <section className="document-page policy-page">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -54,23 +54,23 @@ export default function EditorialPolicyPage() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <h1 className="text-3xl font-semibold">Editorial Policy</h1>
-      <p className="text-sm">
+      <h1>Editorial Policy</h1>
+      <p className="document-updated">
         Last updated: <time dateTime={lastUpdatedIso}>{lastUpdatedText}</time>
       </p>
-      <p className="leading-relaxed">
+      <p>
         Editorial policy describing how technical articles are planned,
         reviewed, updated, and corrected on this engineering blog.
       </p>
-      <p className="leading-relaxed">
+      <p>
         This publication is written for software engineers, founders, and hiring
         teams who want implementation-level guidance. Articles combine
         educational explanations, personal notes, and clearly labeled worked
         examples; they are not legal, financial, or medical advice.
       </p>
 
-      <h2 className="text-2xl font-semibold">How articles are written</h2>
-      <ul className="list-disc space-y-2 pl-6 leading-relaxed">
+      <h2>How articles are written</h2>
+      <ul>
         <li>
           Posts start from engineering questions, personal notes, and LinkedIn
           discussions. Expanded posts link to their original source.
@@ -89,8 +89,8 @@ export default function EditorialPolicyPage() {
         </li>
       </ul>
 
-      <h2 className="text-2xl font-semibold">Review process</h2>
-      <ul className="list-disc space-y-2 pl-6 leading-relaxed">
+      <h2>Review process</h2>
+      <ul>
         <li>
           Drafts are checked for technical consistency, terminology, and
           operational accuracy.
@@ -108,7 +108,7 @@ export default function EditorialPolicyPage() {
           defaults change.
         </li>
       </ul>
-      <p className="leading-relaxed">
+      <p>
         Before publication, each article is reviewed for production relevance:
         deployment impact, failure modes, rollback strategy, and observability
         implications. This quality gate ensures recommendations are practical
@@ -117,17 +117,16 @@ export default function EditorialPolicyPage() {
         help readers execute with confidence, not copy vague checklists.
       </p>
 
-      <h2 className="text-2xl font-semibold">Sources and trust model</h2>
-      <p className="leading-relaxed">
+      <h2>Sources and trust model</h2>
+      <p>
         When external references are needed, preference is given to primary
         documentation and recognized standards. Typical source categories
         include runtime/framework docs, browser platform references, and
         security guidance.
       </p>
-      <ul className="list-disc space-y-2 pl-6 leading-relaxed">
+      <ul>
         <li>
           <a
-            className="underline decoration-slate-500 underline-offset-2"
             href="https://developer.mozilla.org/"
             target="_blank"
             rel="noreferrer noopener"
@@ -138,7 +137,6 @@ export default function EditorialPolicyPage() {
         </li>
         <li>
           <a
-            className="underline decoration-slate-500 underline-offset-2"
             href="https://nextjs.org/docs"
             target="_blank"
             rel="noreferrer noopener"
@@ -149,7 +147,6 @@ export default function EditorialPolicyPage() {
         </li>
         <li>
           <a
-            className="underline decoration-slate-500 underline-offset-2"
             href="https://owasp.org/www-project-top-ten/"
             target="_blank"
             rel="noreferrer noopener"
@@ -160,20 +157,17 @@ export default function EditorialPolicyPage() {
         </li>
       </ul>
 
-      <h2 className="text-2xl font-semibold">Corrections and updates</h2>
-      <p className="leading-relaxed">
+      <h2>Corrections and updates</h2>
+      <p>
         Corrections are applied when errors are verified. Substantive revisions
         update the article’s modification date while preserving its original
         publication date, so readers can evaluate freshness.
       </p>
 
-      <p className="leading-relaxed">
+      <p>
         If you find an issue or outdated section, contact me through the contact
         page or email at{" "}
-        <a
-          className="underline decoration-slate-500 underline-offset-2"
-          href={`mailto:${siteConfig.email}`}
-        >
+        <a href={`mailto:${siteConfig.email}`}>
           {siteConfig.email}
         </a>
         . Verified fixes are published directly in source with transparent

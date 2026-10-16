@@ -5,9 +5,9 @@
   grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
 }
 .sidebar {
-  padding: 0 32px 32px;
+  padding: 0 28px 32px;
   min-height: 100vh;
-  border-right: 1px solid var(--border);
+  border-right: 0;
   position: sticky;
   top: 0;
   height: 100dvh;
@@ -21,12 +21,12 @@
   display: block;
   width: 100%;
   height: auto;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 .identity-name {
   display: block;
-  font-size: clamp(1.75rem, 2.7vw, 2.5rem);
-  letter-spacing: -0.05em;
+  font-size: clamp(1.75rem, 2.3vw, 2.125rem);
+  letter-spacing: -0.04em;
   font-weight: 700;
   line-height: 1.1;
   white-space: nowrap;
@@ -34,18 +34,18 @@
 .identity-role {
   font-size: 0.8125rem;
   margin-top: 12px;
-  white-space: nowrap;
+  line-height: 1.5;
 }
 .identity-description {
   color: var(--text-muted);
   margin-top: 24px;
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  font-size: var(--text-action);
+  line-height: 1.65;
 }
 .primary-nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   margin-top: 32px;
 }
 .primary-nav a,
@@ -53,52 +53,44 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  min-height: 44px;
-  font-size: 1.0625rem;
+  min-height: 48px;
+  padding: 10px 12px;
+  margin-inline: -12px;
+  border-radius: var(--radius-control);
+  font-size: 1rem;
   line-height: 1.3;
 }
 .primary-nav a[aria-current="page"] {
-  color: var(--accent);
+  color: var(--brand-900);
+  background: var(--brand-100);
   font-weight: 600;
+}
+.primary-nav a:hover,
+.social-nav a:hover {
+  background: var(--surface-soft);
+  color: var(--text);
 }
 .primary-nav svg,
 .social-nav svg {
   flex-shrink: 0;
+  stroke-width: 1.65;
 }
 .social-nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  padding-top: 8px;
 }
 .social-nav a {
   color: var(--text-muted);
   font-size: 0.9375rem;
-  gap: 12px;
-}
-.social-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 32px;
-  height: 32px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--text);
-}
-.social-nav a:hover .social-mark {
-  border-color: var(--brand-300);
-  background: var(--brand-100);
-  color: var(--brand-700);
 }
 .social-nav a:hover {
   color: var(--accent);
 }
 .page-column {
-  --page-gutter: 40px;
+  --page-gutter: clamp(32px, 3.3vw, 56px);
   min-width: 0;
   padding: 0 var(--page-gutter);
   display: flex;
@@ -106,15 +98,13 @@
   min-height: 100dvh;
 }
 .page-header {
-  min-height: 68px;
-  padding-block: 12px;
-  border-bottom: 1px solid var(--border);
+  min-height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  font-size: 0.9375rem;
-  line-height: 1.3;
+  gap: 20px;
+  font-size: 15px;
+  line-height: 1.5;
 }
 .header-breadcrumb {
   min-width: 0;
@@ -173,9 +163,16 @@
 }
 .resume-link,
 .theme-toggle {
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
+  border: 0;
+  background: transparent;
+}
+.page-header .theme-toggle {
+  width: 44px;
+  height: 44px;
+}
+.page-header .theme-toggle svg {
+  width: 20px;
+  height: 20px;
 }
 .theme-toggle {
   color: var(--text);
@@ -195,7 +192,10 @@
 #main-content {
   flex: 1;
   min-width: 0;
-  outline: none;
+}
+#main-content:focus-visible {
+  outline: 2px solid var(--brand-700);
+  outline-offset: 8px;
 }
 .site-footer {
   display: flex;
@@ -204,8 +204,8 @@
   justify-content: space-between;
   gap: 8px 24px;
   border-top: 1px solid var(--border);
-  margin-top: 32px;
-  padding: 16px 0;
+  margin-top: 40px;
+  padding: 24px 0;
   color: var(--text-muted);
   font-size: var(--text-caption);
 }
@@ -218,8 +218,9 @@
 .footer-social,
 .footer-legal {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 4px 16px;
 }
 .footer-links a {
   display: inline-flex;
@@ -235,18 +236,4 @@
 }
 .footer-social svg {
   flex-shrink: 0;
-}
-
-/* Join structural dividers to the page edges while keeping content inset. */
-.page-header,
-.site-footer,
-#main-content > :is(
-  .section-block,
-  .home-about,
-  .compact-toolkit,
-  .blog-library,
-  .projects-grid
-) {
-  margin-inline: calc(-1 * var(--page-gutter));
-  padding-inline: var(--page-gutter);
 }

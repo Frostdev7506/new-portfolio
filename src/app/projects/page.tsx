@@ -16,7 +16,6 @@ export default function ProjectsPage() {
   return (
     <>
       <PageIntro
-        eyebrow="From the workbench."
         title="Projects"
         description={notebook.projectsDescription}
         image="/illustrations/projects.png"

@@ -1,6 +1,4 @@
-import { GithubIcon as Github, LinkedinIcon as Linkedin } from "@/components/shared/brand-icons";
-import { Fragment } from "react";
-import { Globe, Mail, Smartphone } from "lucide-react";
+import { Github, Globe, Linkedin, Mail, Smartphone } from "lucide-react";
 import resumeData from "@/data/resume.json";
 
 const { personal } = resumeData;
@@ -14,18 +12,17 @@ const links = [
 
 export function ResumeHeader() {
   return (
-    <div className="text-center mb-3">
-      <h1 className="text-3xl font-bold mb-1">{personal.name}</h1>
-      <div className="flex flex-wrap justify-center gap-2 items-center text-[10px]">
-        {links.map(({ label, href, icon: Icon }, index) => (
-          <Fragment key={href}>
-            {index > 0 && <span className="text-gray-400">|</span>}
-            <a href={href} className="flex items-center gap-1 text-[#003399] hover:underline">
-              <Icon className="w-3 h-3" /> {label}
+    <header className="resume-header">
+      <h2 id="resume-name">{personal.name}</h2>
+      <ul className="resume-contact-links" aria-label="Contact and profiles">
+        {links.map(({ label, href, icon: Icon }) => (
+          <li key={href}>
+            <a href={href}>
+              <Icon size={16} strokeWidth={1.75} aria-hidden="true" /> {label}
             </a>
-          </Fragment>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </header>
   );
 }

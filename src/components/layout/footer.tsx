@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { Youtube } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/shared/brand-icons";
+import { Github, Linkedin, Rss, Youtube } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 export function Footer() {
@@ -16,7 +15,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <GithubIcon size={16} />
+            <Github size={18} aria-hidden="true" />
             GitHub
           </a>
           <a
@@ -24,7 +23,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <LinkedinIcon size={16} />
+            <Linkedin size={18} aria-hidden="true" />
             LinkedIn
           </a>
           <a
@@ -32,8 +31,12 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Youtube size={16} aria-hidden="true" />
+            <Youtube size={18} aria-hidden="true" />
             YouTube
+          </a>
+          <a href="/feed.xml" type="application/rss+xml" aria-label="RSS feed">
+            <Rss size={18} aria-hidden="true" />
+            RSS
           </a>
         </div>
         <div className="footer-legal">

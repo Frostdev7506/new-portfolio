@@ -14,15 +14,11 @@ export function Toolkit({ compact = false }: { compact?: boolean }) {
   return (
     <section
       aria-label={compact ? "My toolkit" : undefined}
+      aria-labelledby={compact ? undefined : "toolkit-title"}
       id="tech-stack"
       className={compact ? "compact-toolkit" : "section-block toolkit"}
     >
-      {!compact && (
-        <>
-          <p className="eyebrow">My toolkit.</p>
-          <h2>What I work with</h2>
-        </>
-      )}
+      {!compact && <h2 id="toolkit-title">What I work with</h2>}
       <div className="toolkit-grid">
         {groups.map((group) => {
           const Icon = icons[group.icon];

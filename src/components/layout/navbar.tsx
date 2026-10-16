@@ -1,6 +1,5 @@
 "use client";
 
-import { GithubIcon as Github, LinkedinIcon as Linkedin } from "@/components/shared/brand-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,6 +7,8 @@ import {
   ArrowUpRight,
   FileText,
   Folder,
+  Github,
+  Linkedin,
   Mail,
   Pencil,
   UserRound,
@@ -38,7 +39,7 @@ export function Navbar() {
         />
         <span className="identity-name">{siteConfig.name}</span>
       </Link>
-      <p className="identity-role mono">{notebook.tagline}</p>
+      <p className="identity-role">{notebook.tagline}</p>
       <p className="identity-description">{siteConfig.longDescription}</p>
       <nav className="primary-nav" aria-label="Primary">
         {siteConfig.nav.map(({ label, href }) => {
@@ -50,7 +51,7 @@ export function Navbar() {
               key={href}
               aria-current={active ? "page" : undefined}
             >
-              <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+              <Icon size={22} strokeWidth={1.65} aria-hidden="true" />
               {label}
             </Link>
           );
@@ -62,9 +63,7 @@ export function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className="social-mark">
-            <Github size={18} />
-          </span>
+          <Github size={22} strokeWidth={1.65} aria-hidden="true" />
           GitHub
         </a>
         <a
@@ -72,16 +71,12 @@ export function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className="social-mark">
-            <Linkedin size={18} />
-          </span>
+          <Linkedin size={22} strokeWidth={1.65} aria-hidden="true" />
           LinkedIn
         </a>
         <Link href="/resume">
-          <span className="social-mark">
-            <FileText size={20} strokeWidth={1.75} aria-hidden="true" />
-          </span>
-          View résumé <ArrowUpRight size={20} strokeWidth={1.75} aria-hidden="true" />
+          <FileText size={22} strokeWidth={1.65} aria-hidden="true" />
+          View résumé <ArrowUpRight size={20} strokeWidth={1.65} aria-hidden="true" />
         </Link>
       </nav>
     </aside>

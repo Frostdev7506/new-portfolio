@@ -4,9 +4,9 @@ import { TextLink } from "@/components/shared/text-link";
 
 export function AboutIntro() {
   return (
-    <section id="about" className="about-intro">
+    <section id="about" className="about-intro" aria-labelledby="about-intro-title">
       <div>
-        <h2>Building across the stack.</h2>
+        <h2 id="about-intro-title">Building across the stack.</h2>
         {notebook.about.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}

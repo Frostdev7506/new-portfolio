@@ -20,8 +20,10 @@ export function CopyEmail() {
       <div>
         <a href={"mailto:" + siteConfig.email}>{siteConfig.email}</a>
         <Button
+          type="button"
           variant="ghost"
           size="icon"
+          className="copy-email-button"
           aria-label="Copy email address"
           onClick={copy}
         >
