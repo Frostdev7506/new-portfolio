@@ -21,6 +21,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="describedby" href="/llms.txt" />
+      </head>
       <body className={noteFont.variable + " antialiased"}>
         <ThemeProvider>
           <script
