@@ -159,9 +159,9 @@ export function ArticleEditor({ initial, covers, posts, onDirtyChange, onSaved }
       <header className="studio-document-header">
         <div><p className="studio-file">{draft.slug}.md</p><p role="status" className="studio-save-status">{busy ? "Working…" : dirty ? "Unsaved changes" : status}</p></div>
         <div className="studio-actions">
-          <Button variant="ghost" title="Download your current edits as Markdown" onClick={() => download(draft)}><Download size={16} /><span className="studio-action-label">Export</span></Button>
-          <Button variant="outline" disabled={busy || !!recovery} onClick={() => dirty ? setReloadOpen(true) : void reload()}><RotateCcw size={16} />Reload file</Button>
-          <Button disabled={!dirty || busy || !!recovery} onClick={() => void save()}><Save size={16} />{busy ? "Saving…" : "Save changes"}</Button>
+          <Button variant="ghost" title="Download your current edits as Markdown" aria-label="Export article as Markdown" onClick={() => download(draft)}><Download size={16} aria-hidden="true" /><span className="studio-action-label">Export</span></Button>
+          <Button variant="outline" disabled={busy || !!recovery} onClick={() => dirty ? setReloadOpen(true) : void reload()}><RotateCcw size={16} aria-hidden="true" />Reload file</Button>
+          <Button disabled={!dirty || busy || !!recovery} onClick={() => void save()}><Save size={16} aria-hidden="true" />{busy ? "Saving…" : "Save changes"}</Button>
         </div>
       </header>
       {recovery && <div className="studio-notice">
@@ -179,7 +179,7 @@ export function ArticleEditor({ initial, covers, posts, onDirtyChange, onSaved }
       <Tabs.Root defaultValue="content">
         <div className="studio-modebar">
           <Tabs.List aria-label="Article editing sections"><Tabs.Trigger value="content">Content</Tabs.Trigger><Tabs.Trigger value="settings">Article details</Tabs.Trigger><Tabs.Trigger value="seo">SEO</Tabs.Trigger></Tabs.List>
-          <a href={`/blog/${draft.slug}`} target="_blank" rel="noreferrer">Open saved article <ArrowUpRight size={14} /></a>
+          <a href={`/blog/${draft.slug}`} target="_blank" rel="noreferrer">Open saved article <ArrowUpRight size={14} aria-hidden="true" /></a>
         </div>
         <Tabs.Content value="content" forceMount className="studio-tab-content">
           <div className="studio-writing-controls">

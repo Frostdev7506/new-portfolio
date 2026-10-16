@@ -6,7 +6,6 @@ export function AboutSummary() {
   return (
     <section id="about" className="home-about" aria-labelledby="about-title">
       <div>
-        <p className="eyebrow">About</p>
         <h2 id="about-title">A little context.</h2>
         {homeNotebook.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         <TextLink href="/about">More about me</TextLink>

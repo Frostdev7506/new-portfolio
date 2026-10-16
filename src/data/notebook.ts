@@ -1,6 +1,7 @@
 export const notebook = {
   tagline: "Full-stack developer · India",
   featuredSlug: "optimistic-uploads",
+  featuredSummary: "Upload the file while the caption is being written.",
   blogDescription:
     "Practical guides to web development and AI engineering, with diagrams, worked examples, and interview questions on LLM inference and caching.",
   projectsDescription:
@@ -12,6 +13,12 @@ export const notebook = {
   ],
   contactDescription:
     "A project, a question, or a conversation — I’d love to hear from you.",
+};
+
+export const contactNote = {
+  title: "Have something in mind?",
+  description: notebook.contactDescription,
+  action: "Write to me",
 };
 
 export const experience = [
@@ -65,10 +72,16 @@ export const certifications = [
 ];
 
 export const homeNotebook = {
-  eyebrow: "Neeraj’s portfolio & blog",
+  eyebrow: "Portfolio / Blog",
   title: ["I build for the web.", "And write things down."],
-  description: "I’m Neeraj, a full-stack developer in India. Here you’ll find the things I build and the notes I keep along the way.",
-  blogLink: "Read the blog",
+  description: "Fullstack Engineer. Who is somewhat curious!!",
+  actions: {
+    blog: "Read the blog",
+  },
+  projects: {
+    eyebrow: "Projects",
+    title: "Things I’ve built.",
+  },
   about: [
     "Most recently, I worked as a Full Stack Engineer at Toadster Technologies. Before that, I built workflow automation and service integrations at Neoveda, and web and mobile products for Greattr at Oneagrow Fintech.",
     "I share projects here and use the blog to explain what I learn about building for the web.",

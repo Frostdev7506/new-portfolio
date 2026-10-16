@@ -15,7 +15,6 @@ export default function ResumePage() {
   return (
     <>
       <PageIntro
-        eyebrow="Experience, on paper."
         title="Résumé"
         description="My professional experience, projects, and skills."
       />

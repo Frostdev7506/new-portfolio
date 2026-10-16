@@ -49,7 +49,11 @@ export default async function BlogPostPage({ params }: Props) {
         }}
       />
       {process.env.NODE_ENV === "development" && (
-        <div className="pt-5"><Button asChild variant="outline"><Link href={`/dev/blog?article=${post.slug}`}>Edit article ↗</Link></Button></div>
+        <div className="pt-5">
+          <Button asChild variant="outline">
+            <Link href={`/dev/blog?article=${post.slug}`}>Edit article</Link>
+          </Button>
+        </div>
       )}
       <header className="article-header">
         <Link href="/blog" className="article-back">
@@ -60,9 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
         <p className="article-deck">{post.description}</p>
         <div className="article-byline">
           <Link href="/about">{siteConfig.name}</Link>
-          <span aria-hidden="true">·</span>
           <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <span aria-hidden="true">·</span>
           <span>{post.readtime}</span>
         </div>
         {post.updated !== post.date && (

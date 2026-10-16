@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Caveat } from "next/font/google";
+import { Caveat, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { PageHeader } from "@/components/layout/page-header";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { baseMetadata, personJsonLd, serializeJsonLd, websiteJsonLd } from "@/lib/seo";
+
+const bodyFont = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 const noteFont = Caveat({
   subsets: ["latin"],
@@ -24,7 +30,9 @@ export default function RootLayout({
       <head>
         <link rel="describedby" href="/llms.txt" />
       </head>
-      <body className={noteFont.variable + " antialiased"}>
+      <body
+        className={bodyFont.variable + " " + noteFont.variable + " antialiased"}
+      >
         <ThemeProvider>
           <script
             type="application/ld+json"

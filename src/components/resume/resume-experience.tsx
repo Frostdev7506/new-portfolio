@@ -4,19 +4,19 @@ import { ResumeSection } from "./resume-section";
 export function ResumeExperience() {
   return (
     <ResumeSection title="Work Experience">
-      <div className="flex flex-col gap-2">
+      <div className="resume-entries">
         {resumeData.experience.map((job, index) => (
-          <div key={index}>
-            <div className="flex justify-between items-baseline mb-1">
-              <span dangerouslySetInnerHTML={{ __html: job.title }} />
-              <span className="text-[10px] whitespace-nowrap">{job.date}</span>
-            </div>
-            <ul className="list-disc pl-4 marker:text-black space-y-[1px]">
+          <section key={index} className="resume-entry">
+            <header className="resume-entry-heading">
+              <h4 dangerouslySetInnerHTML={{ __html: job.title }} />
+              <p className="resume-date">{job.date}</p>
+            </header>
+            <ul className="resume-points">
               {job.points.map((point, pointIndex) => (
                 <li key={pointIndex} dangerouslySetInnerHTML={{ __html: point }} />
               ))}
             </ul>
-          </div>
+          </section>
         ))}
       </div>
     </ResumeSection>

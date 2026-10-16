@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import type { PostSummary } from "@/lib/post-content";
 import { formatDate } from "@/lib/utils";
 
@@ -23,17 +22,15 @@ export function BlogPostCard({ post }: { post: PostSummary }) {
         />
       </Link>
       <div className="post-card-copy">
-        <p className="eyebrow">{post.category}</p>
+        <p className="post-category">{post.category}</p>
         <h3>
           <Link href={`/blog/${post.slug}`}>
             {post.title}
-            <ArrowUpRight aria-hidden="true" />
           </Link>
         </h3>
         <p className="post-card-description">{post.description}</p>
         <p className="post-meta">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <span aria-hidden="true">·</span>
           <span>{post.readtime}</span>
         </p>
       </div>

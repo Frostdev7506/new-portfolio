@@ -21,12 +21,11 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(profilePageJsonLd()) }}
       />
-      <PageIntro eyebrow="The person behind the work." title="About me" />
+      <PageIntro title="About me" />
       <AboutIntro />
       <Experience detailed />
       <Toolkit />
       <section className="section-block education">
-        <p className="eyebrow">Education and certifications.</p>
         <div className="education-grid">
           <div>
             <GraduationCap size={36} strokeWidth={1.4} aria-hidden="true" />

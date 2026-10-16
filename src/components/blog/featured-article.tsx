@@ -1,44 +1,46 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Newsreader } from "next/font/google";
 import type { PostSummary } from "@/lib/post-content";
 import { formatDate } from "@/lib/utils";
 import { TextLink } from "@/components/shared/text-link";
 
-export function FeaturedArticle({ post }: { post: PostSummary }) {
-  const href = `/blog/${post.slug}`;
+const editorialFont = Newsreader({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+export function FeaturedArticle({
+  post,
+  summary = post.description,
+}: {
+  post: PostSummary;
+  summary?: string;
+}) {
   return (
     <article className="featured-article blog-feature">
       <div className="feature-copy">
-        <p className="eyebrow">Start here · Featured article</p>
-        <h2>
-          <Link href={href}>{post.title}</Link>
-        </h2>
-        <p className="feature-description">{post.description}</p>
+        <h2 className={editorialFont.className}>{post.title}</h2>
+        <p className="feature-description">{summary}</p>
         <p className="post-meta">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <span aria-hidden="true">·</span>
           <span>{post.readtime}</span>
         </p>
         <div className="feature-links">
-          <TextLink href={href}>Read article</TextLink>
+          <TextLink href={`/blog/${post.slug}`}>Read article</TextLink>
         </div>
       </div>
-      <Link
-        href={href}
-        className="feature-art-link"
-        tabIndex={-1}
-        aria-hidden="true"
-      >
+      <div className="feature-art-panel">
         <Image
           src={post.cover}
           alt=""
           width={1536}
           height={1024}
           className="feature-art"
-          sizes="(max-width: 900px) 100vw, 480px"
+          sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 600px"
           priority
         />
-      </Link>
+      </div>
     </article>
   );
 }

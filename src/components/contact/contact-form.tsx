@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContactForm } from "./use-contact-form";
 
@@ -15,6 +15,7 @@ export function ContactForm() {
       onSubmit={onSubmit}
       noValidate
       onChange={clearStatus}
+      aria-busy={isSubmitting}
     >
       <fieldset disabled={isSubmitting}>
         <legend className="sr-only">Send an enquiry</legend>
@@ -24,7 +25,6 @@ export function ContactForm() {
             id="user_name"
             name="user_name"
             autoComplete="name"
-            placeholder="Your name"
             required
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? "name-error" : undefined}
@@ -41,7 +41,10 @@ export function ContactForm() {
             id="user_email"
             name="user_email"
             type="email"
+            inputMode="email"
             autoComplete="email"
+            autoCapitalize="none"
+            spellCheck={false}
             placeholder="you@example.com"
             required
             aria-invalid={Boolean(errors.email)}
@@ -88,7 +91,11 @@ export function ContactForm() {
         size="lg"
       >
         {isSubmitting ? "Sending…" : submitLabel}
-        <ArrowRight aria-hidden="true" />
+        {isSubmitting ? (
+          <LoaderCircle className="contact-submit-spinner" aria-hidden="true" />
+        ) : (
+          <ArrowRight aria-hidden="true" />
+        )}
       </Button>
       <div role="status" aria-live="polite" className="form-status">
         {status}

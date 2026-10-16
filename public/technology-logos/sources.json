@@ -1,0 +1,145 @@
+{
+  "repository": "https://github.com/devicons/devicon",
+  "commit": "6a37858047b0e8d9c9c0e68f4a071fc410652e89",
+  "retrieved": "2026-10-15",
+  "license": "MIT (repository license preserved in LICENSE.devicon.txt)",
+  "licenseSource": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/LICENSE",
+  "brandNotice": "Product names, logos, and brands remain property of their respective owners. Displayed only to identify technologies; no endorsement or affiliation is implied. The repository MIT license does not grant trademark rights.",
+  "upstreamLegalNotice": "https://github.com/devicons/devicon/wiki/Legal",
+  "upstreamDistributionNotice": "The upstream legal page describes distribution as non-commercial and requires compliance with each brand policy. These unmodified logos identify technologies in a personal portfolio; they are not sold or monetized.",
+  "assets": [
+    {
+      "file": "mongodb.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/mongodb/mongodb-original.svg",
+      "sha256": "d9f2bf7041264f4747e9969fb82ede0199c0ac97dfa8632aa0687d702ec05f7b",
+      "bytes": 5611,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "express.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/express/express-original.svg",
+      "sha256": "27ec7e3d21d59102c046a96277877abf78aa9d7ad244277345d9c395486d42d4",
+      "bytes": 914,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "react.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/react/react-original.svg",
+      "sha256": "5825b649c8c04dec13ecf01d0182401bd0ec71789d2fa06224866d882cd1515f",
+      "bytes": 2387,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "nodejs.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/nodejs/nodejs-original.svg",
+      "sha256": "3218687c5ea24a4d4c0a33dc5c287da38c33a72dcfe9382469d7ce4e0bf661fb",
+      "bytes": 1806,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "javascript.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/javascript/javascript-original.svg",
+      "sha256": "0656ff65fc8eeacda5c78d7f9ffe91ec1eb919db64f56e0b7dcd460af4bbd36c",
+      "bytes": 1144,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "typescript.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/typescript/typescript-original.svg",
+      "sha256": "c9191199f4049920c2fc19035b8a6664f37f4689fcd9e8434e786097e78863f0",
+      "bytes": 943,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "nextjs.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/nextjs/nextjs-original.svg",
+      "sha256": "d9435c4ede7133b376c0173a80226bb3856729366707cd96e9a66e39448d0288",
+      "bytes": 749,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "tailwindcss.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/tailwindcss/tailwindcss-original.svg",
+      "sha256": "f8cec54589553807eb603bcaf4e056aa090196211698b056542e3cc62a2f3448",
+      "bytes": 689,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "python.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/python/python-original.svg",
+      "sha256": "71493b4a732f0532b3a03a7a95da3ee11a65766367c8303b901ffbe7bf91a3a2",
+      "bytes": 2300,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "postgresql.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/postgresql/postgresql-original.svg",
+      "sha256": "f220a436258ed014c512ba4f9c0de6b9e5c2c4b55331a0a29f8c7a1a12c36443",
+      "bytes": 9178,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "mysql.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/mysql/mysql-original.svg",
+      "sha256": "f73fa5d6b9da33fbf540ff96f5360c24b6d29d883ecfe6fcaecf89a8d3456067",
+      "bytes": 2765,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "redis.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/redis/redis-original.svg",
+      "sha256": "4707378b190878f36f7e6e1c01fa3ee7e7884c76101809d191dddd943a2e6bdb",
+      "bytes": 1728,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "apachekafka.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/apachekafka/apachekafka-original.svg",
+      "sha256": "2505c5b688c18c8fd5dd8e888561eb7b23a56a75d291ff17e8ee18770193f3e8",
+      "bytes": 1711,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "docker.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/docker/docker-original.svg",
+      "sha256": "3fd830ea69431ed7a0b8d068cd5b34ad3f00a1a78195d50f13ff56713f2462e1",
+      "bytes": 4452,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "kubernetes.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/kubernetes/kubernetes-original.svg",
+      "sha256": "fb31e4163238978201cfde0601728ee5168b74e476c32c37739bed626fa281ae",
+      "bytes": 8951,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "githubactions.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/githubactions/githubactions-original.svg",
+      "sha256": "3a2524052ccf301d1a239f20cfef98d655e060c51cc29c5e94c867913899a47e",
+      "bytes": 2854,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "amazonwebservices.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+      "sha256": "5b4d8371d79a5c0d3a27ea4e929f772e68d47f7d267496bf9211d5f60fcf8084",
+      "bytes": 3743,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "azure.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/azure/azure-original.svg",
+      "sha256": "7923db83e3f9755bd412241a683fa996fb7a9d0259b5084de449e6be92f7ca20",
+      "bytes": 1713,
+      "changes": "None; copied verbatim."
+    },
+    {
+      "file": "googlecloud.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/6a37858047b0e8d9c9c0e68f4a071fc410652e89/icons/googlecloud/googlecloud-original.svg",
+      "sha256": "1615b3e53228faa14378f1abb2b78e5f6c3f0ec562bc37db3efde885714e6c2f",
+      "bytes": 782,
+      "changes": "None; copied verbatim."
+    }
+  ]
+}

@@ -1,7 +1,6 @@
 "use client";
 
 import { Tabs } from "radix-ui";
-import { ArrowRight } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { ProjectPreview } from "./project-preview";
 
@@ -15,12 +14,8 @@ export function ProjectTabs({ projects }: { projects: Project[] }) {
             value={String(index)}
             className="project-choice"
           >
-            <span className="project-number" aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </span>
             <span className="project-choice-title">{project.title}</span>
             <span className="project-summary">{project.summary}</span>
-            <ArrowRight size={22} aria-hidden="true" />
           </Tabs.Trigger>
         ))}
       </Tabs.List>

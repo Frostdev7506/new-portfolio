@@ -1,16 +1,17 @@
-/* Keep this order: shared and responsive rules refine earlier styles. */
+/* Foundations, shared primitives, then domain styles; shell breakpoints come last. */
 @import "tailwindcss";
-@import "../styles/home.css";
 @import "../styles/theme.css";
 @import "../styles/base.css";
 @import "../styles/layout.css";
 @import "../styles/shared.css";
+@import "../styles/banners.css";
+@import "../styles/home.css";
 @import "../styles/featured-article.css";
 @import "../styles/projects.css";
 @import "../styles/about.css";
-@import "../styles/banners.css";
+@import "../styles/technology-stack.css";
 @import "../styles/blog.css";
 @import "../styles/contact.css";
 @import "../styles/article.css";
-@import "../styles/responsive.css";
 @import "../styles/resume.css";
+@import "../styles/responsive.css";

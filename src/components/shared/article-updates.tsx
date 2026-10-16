@@ -13,7 +13,6 @@ export function ArticleUpdates() {
       aria-labelledby="updates-title"
     >
       <div>
-        <p className="eyebrow">Stay in the loop.</p>
         <h2 id="updates-title">
           {newsletterUrl ? articleUpdates.title : articleUpdates.feedTitle}
         </h2>

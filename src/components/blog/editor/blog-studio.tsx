@@ -91,11 +91,11 @@ export function BlogStudio({ initialSlug }: { initialSlug?: string }) {
 
   return (
     <div className="blog-studio">
-      <header className="studio-header"><div><p className="eyebrow">LOCAL WORKSPACE</p><h1>Blog Studio<span>.</span></h1><p>Shape the story. See it as your readers will.</p></div><span className="studio-dev-badge">Development only</span></header>
+      <header className="studio-header"><div><h1>Blog Studio</h1><p>Write and preview your articles.</p></div><span className="studio-dev-badge">Development only</span></header>
       <div className="studio-layout">
         <aside className="studio-library" aria-label="Choose an article">
-          <div className="studio-library-heading"><BookOpen size={17} /><h2>Your articles</h2><span>{index?.posts.length ?? "—"}</span></div>
-          <label className="studio-search"><Search size={16} /><input aria-label="Find an article" placeholder="Find an article…" value={query} onChange={(event) => setQuery(event.target.value)} /></label>
+          <div className="studio-library-heading"><BookOpen size={17} aria-hidden="true" /><h2>Your articles</h2><span>{index?.posts.length ?? "—"}</span></div>
+          <label className="studio-search"><Search size={16} aria-hidden="true" /><input type="search" name="studio-search" autoComplete="off" aria-label="Find an article" placeholder="Find an article…" value={query} onChange={(event) => setQuery(event.target.value)} /></label>
           <nav aria-label="Articles">{posts.map((post) => (
             <Button variant="ghost" key={post.slug} className="studio-article-button" aria-current={document?.slug === post.slug ? "page" : undefined} onClick={() => {
               if (document?.slug === post.slug) return;

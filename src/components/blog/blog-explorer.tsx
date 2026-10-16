@@ -28,10 +28,7 @@ export function BlogExplorer({ posts }: { posts: PostSummary[] }) {
   return (
     <section className="blog-library" aria-labelledby="library-heading">
       <div className="library-heading">
-        <div>
-          <p className="eyebrow">Blog index</p>
-          <h2 id="library-heading">Find your next idea.</h2>
-        </div>
+        <h2 id="library-heading">All articles</h2>
         <a className="rss-link" href="/feed.xml">
           <Rss aria-hidden="true" /> RSS feed
         </a>
@@ -41,9 +38,11 @@ export function BlogExplorer({ posts }: { posts: PostSummary[] }) {
         <span className="sr-only">Search articles</span>
         <input
           type="search"
+          name="article-search"
+          autoComplete="off"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search topics, tools, or a question…"
+          placeholder="Search articles…"
         />
       </label>
       <div className="blog-topics" role="group" aria-label="Filter by topic">
@@ -66,7 +65,7 @@ export function BlogExplorer({ posts }: { posts: PostSummary[] }) {
       </div>
       <p className="library-count" role="status">
         {filtered.length} {filtered.length === 1 ? "article" : "articles"}
-        {query.trim() ? ` matching “${query.trim()}”` : " to explore"}
+        {query.trim() ? ` matching “${query.trim()}”` : ""}
       </p>
       <div className="post-list">
         {filtered.map((post) => (
