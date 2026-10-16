@@ -78,6 +78,7 @@ export const homeNotebook = {
   actions: {
     blog: "Read the blog",
   },
+  contactAction: "Let’s talk.",
   projects: {
     eyebrow: "Projects",
     title: "Things I’ve built.",
@@ -93,5 +94,4 @@ export const articleUpdates = {
   description: "Practical notes on web development, AI, and the lessons I learn while building. Get new articles and occasional updates by email.",
   feedTitle: "Article updates",
   feedDescription: "Follow new articles on web development and AI in your favorite feed reader.",
-  note: "Subscribe through Kit. Unsubscribe anytime.",
 };
