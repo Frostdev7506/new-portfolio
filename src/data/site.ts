@@ -8,7 +8,7 @@ export const siteConfig = {
     "Neeraj Butola’s portfolio and blog: web applications, cloud systems, projects, and what I learn along the way.",
   longDescription:
     "I build web applications and cloud systems, and write about what I learn along the way.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://neerajbutola.in").replace(/\/+$/, ""),
+  url: process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "") || "https://neerajbutola.in",
   locale: "en_US",
   language: "en",
   image: "/dev-ed-wave.png",

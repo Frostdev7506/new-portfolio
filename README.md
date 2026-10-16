@@ -105,6 +105,32 @@ The first three entries appear in the homepage selector; all entries appear on `
 
 Supporting endpoints: `/api/hello`, `/api/github-repos`, `/robots.txt`, `/sitemap.xml`, `/llms.txt`, and `/manifest.webmanifest`.
 
+### Agent-readable content
+
+| Endpoint | Content |
+| --- | --- |
+| `/llms.txt` | Concise site overview and links to public, indexable articles in Markdown |
+| `/llms.md` | The same overview served as `text/markdown` |
+| `/llms-full.txt` | Profile, experience, education, projects, contact details, and unrestricted published articles in one response |
+| `/llms-full.md` | The same content bundle served as `text/markdown` |
+| `/blog/[slug]/index.md` | One complete article, with publication metadata and its canonical HTML URL |
+
+These static routes use the existing public site data and `content/posts/*.md`; they exclude drafts and regenerate when the site is built/deployed. The index and aggregate bundle also exclude posts with a different canonical URL or restrictive indexing, following, or preview settings, so a permissive duplicate does not bypass those settings. Individual Markdown responses retain the article's exact canonical and robots directives in HTTP headers. `.txt` responses use `text/plain`, and all successful responses allow one hour of caching. Internal article links resolve against the original article permalink using `NEXT_PUBLIC_SITE_URL` (or the site's default domain), even when its citation canonical points elsewhere.
+
+HTML pages advertise `/llms.txt` with a `rel="describedby"` link, and the text/Markdown endpoints provide the equivalent HTTP `Link` header. Article HTML also advertises its Markdown version with `rel="alternate" type="text/markdown"`; article Markdown responses link back to the canonical HTML URL. Unknown or draft article slugs return 404. The content bundle covers the profile, projects, and blog; it links to the canonical pages for the full résumé and site policies.
+
+The index and discovery links follow the [llms.txt proposal](https://llmstxt.org/). The optional full-text bundle follows the convention described in [Vercel's implementation guide](https://vercel.com/academy/agent-friendly-apis/add-llms-txt). Explicit Markdown URLs work without a JavaScript renderer or content negotiation; publishing them does not guarantee crawler adoption or search visibility.
+
+### AI search and production access
+
+The public canonical domain defaults to `https://neerajbutola.in`. Set `NEXT_PUBLIC_SITE_URL` before building when deploying to a different canonical domain. Surrounding whitespace and trailing slashes are normalized so HTML metadata, sitemap, RSS, and Markdown links agree.
+
+The existing `User-agent: *` / `Allow: /` policy permits search and retrieval crawlers, including OAI-SearchBot, Claude-SearchBot, and PerplexityBot. Additional named allow rules do not grant extra access. Search/retrieval and model-training crawlers have different purposes; a training opt-in is not a prerequisite for search visibility. See [OpenAI](https://developers.openai.com/api/docs/bots), [Anthropic](https://privacy.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler), and [Perplexity](https://docs.perplexity.ai/docs/resources/perplexity-crawlers).
+
+For AI search, retain crawlable HTML with visible text, working internal links, accurate structured data, and the canonical sitemap. Google says it does not use `llms.txt` for Search visibility; [its AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) applies the usual indexing requirements. [Bing recommends accessible, current sitemaps](https://blogs.bing.com/webmaster/2025/7/Keeping-Content-Discoverable-with-Sitemaps-in-AI-Powered-Search/) for discovery in search and Copilot.
+
+Before deploying, compare the production sitemap with this checkout: retain current articles and permanent redirects for renamed URLs. After deployment, check the public HTML, `/robots.txt`, `/sitemap.xml`, and every advertised Markdown route for successful responses without authentication, CAPTCHA, or `noindex`/`nosnippet` restrictions. Verify Google Search Console and Bing Webmaster Tools indexing separately. If hosting-level bot protection blocks verified crawlers, use the providers' current official IP guidance; a request with a spoofed user-agent alone cannot verify access from their networks.
+
 ## Verification
 
 ```sh

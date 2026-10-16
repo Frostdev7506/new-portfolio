@@ -190,7 +190,10 @@ export function buildBlogMetadata(post: BlogSeoPost, site: BlogSeoSite): Metadat
     category: post.category,
     alternates: {
       canonical: seo.canonicalUrl,
-      types: { "application/rss+xml": new URL("/feed.xml", site.url).href },
+      types: {
+        "application/rss+xml": new URL("/feed.xml", site.url).href,
+        "text/markdown": new URL(`/blog/${post.slug}/index.md`, site.url).href,
+      },
     },
     // Override the layout's Googlebot defaults with the article's exact policy.
     robots: { ...seo.robots, googleBot: seo.robots },
