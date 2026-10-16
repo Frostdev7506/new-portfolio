@@ -21,11 +21,6 @@ export function ArticleUpdates() {
             ? articleUpdates.description
             : articleUpdates.feedDescription}
         </p>
-        {newsletterUrl && (
-          <p className="updates-note">
-            {articleUpdates.note} <a href="/privacy">Privacy</a>
-          </p>
-        )}
       </div>
       <div className="updates-actions">
         {newsletterUrl && (

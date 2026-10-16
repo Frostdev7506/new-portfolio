@@ -8,5 +8,10 @@
     "repository": "https://github.com/vercel-labs/agent-skills",
     "path": "skills/web-design-guidelines",
     "commit": "063bee94c3f4df8453406c830b0a7df0f2860278"
+  },
+  "ui-landingpage-generator": {
+    "repository": "https://github.com/felix-huber/ui-landingpage-generator-skill",
+    "path": ".",
+    "commit": "8dc143767218bc884b502a054b5d3fc401411a4b"
   }
 }

@@ -1,0 +1,9 @@
+# Output directories
+result/
+result_*/
+
+# Generated files
+*.html
+
+# OS files
+.DS_Store

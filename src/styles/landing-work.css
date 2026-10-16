@@ -1,0 +1,149 @@
+.landing-page .lp-work {
+  padding-block: 96px;
+  scroll-margin-top: 96px;
+}
+.landing-page .lp-work > .project-index {
+  padding-block: 0;
+}
+.landing-page .lp-work .project-index h2,
+.landing-page .lp-toolkit h2 {
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(2.5rem, 4.2vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+.landing-page .lp-toolkit {
+  padding-block: 96px;
+  scroll-margin-top: 96px;
+  background: var(--brand-100);
+}
+.landing-page .lp-toolkit-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr);
+  gap: 64px;
+  align-items: start;
+}
+.landing-page .lp-toolkit h2 {
+  max-width: 7ch;
+}
+.landing-page .lp-technology-groups {
+  display: grid;
+  gap: 32px;
+  min-width: 0;
+}
+.landing-page .lp-technology-row {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.landing-page .lp-technology-row h3 {
+  padding-top: 8px;
+  color: var(--brand-900);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-wrap: wrap;
+}
+.landing-page .lp-technology-row ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.landing-page .lp-technology-row li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+.landing-page .lp-technology-logo {
+  display: grid;
+  place-items: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fffdf8;
+}
+.landing-page .lp-technology-logo img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+.landing-page .lp-technology-primary h3 {
+  padding-top: 12px;
+}
+.landing-page .lp-technology-primary li {
+  font-weight: 500;
+}
+.landing-page .lp-technology-primary .lp-technology-logo {
+  flex-basis: 48px;
+  width: 48px;
+  height: 48px;
+}
+.landing-page .lp-technology-primary img {
+  width: 32px;
+  height: 32px;
+}
+@media (max-width: 1100px) {
+  .landing-page .lp-toolkit-layout {
+    grid-template-columns: minmax(0, 0.65fr) minmax(0, 2fr);
+    gap: 40px;
+  }
+  .landing-page .lp-technology-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .landing-page .lp-technology-row h3 {
+    padding-top: 0;
+  }
+}
+@media (min-width: 761px) {
+  .landing-page .lp-work .project-explorer {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+  }
+}
+@media (max-width: 700px) {
+  .landing-page .lp-work,
+  .landing-page .lp-toolkit {
+    padding-block: 64px;
+  }
+  .landing-page .lp-toolkit-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+  .landing-page .lp-toolkit h2 {
+    max-width: none;
+  }
+  .landing-page .lp-technology-row ul {
+    gap: 12px 20px;
+  }
+}
+@media (max-width: 440px) {
+  .landing-page .lp-technology-row ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+  .landing-page .lp-technology-row li > span:last-child {
+    overflow-wrap: anywhere;
+  }
+  .landing-page .lp-technology-primary .lp-technology-logo {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+  .landing-page .lp-technology-primary img {
+    width: 26px;
+    height: 26px;
+  }
+}
