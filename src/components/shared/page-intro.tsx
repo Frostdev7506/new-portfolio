@@ -26,6 +26,7 @@ export function PageIntro({
           alt=""
           width={480}
           height={320}
+          sizes="(max-width: 700px) 220px, (max-width: 900px) 240px, 320px"
           className="intro-art"
           priority
         />

@@ -17,46 +17,29 @@ export function Experience({ detailed = false }: { detailed?: boolean }) {
         {!detailed && <TextLink href="/resume">Full résumé</TextLink>}
       </div>
       <ol className="experience-list" aria-label="Career timeline">
-        {experience.map((job) => {
-          const logo = (
+        {experience.map((job) => (
+          <li key={job.company}>
             <Image
               src={job.logo}
               alt=""
               width={48}
               height={48}
+              sizes="48px"
               className="job-logo"
             />
-          );
-
-          return (
-            <li key={job.company}>
-              {!detailed && (
-                <>
-                  <div className="job-dates">
-                    <span className="job-period">{job.period}</span>
-                  </div>
-                  <span className="job-milestone" aria-hidden="true">
-                    {logo}
-                  </span>
-                </>
-              )}
-              <div className="job-copy">
-                <div className="job-heading">
-                  {detailed && logo}
-                  <div>
-                    <h3>{job.company}</h3>
-                    <p className="job-role">{job.role}</p>
-                    <p className="job-details">{job.details}</p>
-                    {job.description && (
-                      <p className="job-description">{job.description}</p>
-                    )}
-                  </div>
-                </div>
+            <div className="job-copy">
+              <div className="job-heading">
+                <h3>{job.company}</h3>
+                <span className="job-period">{job.period}</span>
               </div>
-              {detailed && <span className="job-period">{job.period}</span>}
-            </li>
-          );
-        })}
+              <p className="job-role">{job.role}</p>
+              <p className="job-details">{job.details}</p>
+              {job.description && (
+                <p className="job-description">{job.description}</p>
+              )}
+            </div>
+          </li>
+        ))}
       </ol>
     </section>
   );

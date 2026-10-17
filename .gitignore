@@ -14,6 +14,9 @@
 /coverage
 /.playwright-cli/
 /output/playwright/landing-recreation/
+/output/playwright/inner-pages/
+/output/playwright/inner-page-design/
+/output/inner-page-alignment-2026-10-17/
 
 # next.js
 /.next/

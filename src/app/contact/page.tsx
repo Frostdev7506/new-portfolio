@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, Github, Linkedin, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/contact/contact-form";
 import { CopyEmail } from "@/components/contact/copy-email";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PageIntro } from "@/components/shared/page-intro";
 import { notebook } from "@/data/notebook";
 import { siteConfig } from "@/data/site";
@@ -15,7 +16,13 @@ export const metadata = buildPageMetadata({
 
 export default function ContactPage() {
   return (
-    <>
+    <div className="contact-page">
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Contact", href: "/contact" },
+        ]}
+      />
       <PageIntro
         className="contact-intro"
         title="Contact"
@@ -64,6 +71,6 @@ export default function ContactPage() {
           </p>
         </aside>
       </div>
-    </>
+    </div>
   );
 }

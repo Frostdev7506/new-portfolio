@@ -36,7 +36,7 @@
   --action-bg: #c94023;
   --action-hover: #a9321c;
   --action-text: #ffffff;
-  --sidebar-width: clamp(248px, 21vw, 300px);
+  --page-gutter: clamp(24px, 5vw, 80px);
 }
 
 .dark {

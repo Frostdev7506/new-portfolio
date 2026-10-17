@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Caveat, DM_Sans } from "next/font/google";
+import { DM_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/navbar";
-import { PageHeader } from "@/components/layout/page-header";
+import { SiteHeader } from "@/components/layout/site-header";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { baseMetadata, personJsonLd, serializeJsonLd, websiteJsonLd } from "@/lib/seo";
@@ -13,11 +12,11 @@ const bodyFont = DM_Sans({
   display: "swap",
 });
 
-const noteFont = Caveat({
+const editorialFont = Newsreader({
   subsets: ["latin"],
-  variable: "--font-note",
+  variable: "--font-editorial",
   display: "swap",
-  weight: "400",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = baseMetadata();
@@ -31,7 +30,7 @@ export default function RootLayout({
         <link rel="describedby" href="/llms.txt" />
       </head>
       <body
-        className={bodyFont.variable + " " + noteFont.variable + " antialiased"}
+        className={`${bodyFont.variable} ${editorialFont.variable} antialiased`}
       >
         <ThemeProvider>
           <script
@@ -44,14 +43,11 @@ export default function RootLayout({
             Skip to content
           </a>
           <div className="site-shell">
-            <Navbar />
-            <div className="page-column">
-              <PageHeader />
-              <main id="main-content" tabIndex={-1}>
-                {children}
-              </main>
-              <Footer />
-            </div>
+            <SiteHeader />
+            <main id="main-content" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>

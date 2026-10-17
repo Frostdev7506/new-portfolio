@@ -17,8 +17,9 @@ export function AboutIntro() {
         alt="An open notebook connects web apps, APIs, and cloud systems: ideas, build, learn."
         width={1448}
         height={1086}
-        sizes="(max-width: 900px) 100vw, 500px"
+        sizes="(max-width: 700px) 90vw, 440px"
         className="notebook-art"
+        priority
       />
     </section>
   );

@@ -1,13 +1,17 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { FeaturedArticle } from "@/components/blog/featured-article";
+import { FeaturedArticles } from "@/components/blog/featured-articles";
 import { BlogExplorer } from "@/components/blog/blog-explorer";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PageIntro } from "@/components/shared/page-intro";
 import { ArticleUpdates } from "@/components/shared/article-updates";
 import { getAllPosts, toPostSummary } from "@/lib/posts";
-import { blogJsonLd, buildPageMetadata, serializeJsonLd } from "@/lib/seo";
+import { blogJsonLd, buildPageMetadata, fullUrl, serializeJsonLd } from "@/lib/seo";
 import { notebook } from "@/data/notebook";
 import { siteConfig } from "@/data/site";
+
+const breadcrumbItems = [
+  { name: "Home", href: "/" },
+  { name: notebook.blogTitle, href: "/blog" },
+];
 
 export const metadata = {
   ...buildPageMetadata({
@@ -23,63 +27,55 @@ export const metadata = {
 
 export default async function BlogPage() {
   const posts = (await getAllPosts()).map(toPostSummary);
-  const featured =
-    posts.find((post) => post.slug === notebook.featuredSlug) ?? posts[0];
+  const selected = notebook.featuredSlugs.flatMap((slug) => {
+    const post = posts.find((candidate) => candidate.slug === slug);
+    return post ? [post] : [];
+  });
+  const featured = [
+    ...selected,
+    ...posts.filter((post) => !selected.some((item) => item.slug === post.slug)),
+  ].slice(0, 5);
   const breadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: `${siteConfig.url}/blog`,
-      },
-    ],
+    "@id": fullUrl("/blog#breadcrumb"),
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: fullUrl(item.href),
+    })),
+  };
+  const blog = blogJsonLd(posts, notebook.blogDescription);
+  const collectionPage = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": fullUrl("/blog#webpage"),
+    url: fullUrl("/blog"),
+    name: notebook.blogTitle,
+    description: notebook.blogDescription,
+    inLanguage: siteConfig.language,
+    isPartOf: { "@id": fullUrl("/#website") },
+    breadcrumb: { "@id": breadcrumb["@id"] },
+    mainEntity: { "@id": blog["@id"] },
   };
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: serializeJsonLd([
-            blogJsonLd(posts, notebook.blogDescription),
-            breadcrumb,
-          ]),
+          __html: serializeJsonLd([blog, breadcrumb, collectionPage]),
         }}
       />
+      <Breadcrumbs items={breadcrumbItems} includeJsonLd={false} />
       <PageIntro
         className="blog-intro"
-        title="Things worth writing down."
-        description={notebook.blogDescription}
-        image="/illustrations/blog-notebooks.png"
+        title={notebook.blogTitle}
+        description={notebook.blogIntro}
       />
-      {process.env.NODE_ENV === "development" && (
-        <div className="py-4">
-          <Button asChild variant="outline">
-            <Link href="/dev/blog">Open Blog Studio</Link>
-          </Button>
-        </div>
-      )}
-      {featured && (
-        <FeaturedArticle
-          post={featured}
-          summary={
-            featured.slug === notebook.featuredSlug
-              ? notebook.featuredSummary
-              : undefined
-          }
-        />
-      )}
+      <FeaturedArticles posts={featured} />
       <BlogExplorer posts={posts} />
       <ArticleUpdates />
-      <div className="notebook-end">
-        <span className="handwritten">
-          Always learning. Still taking notes.
-        </span>
-        <a href={siteConfig.social.linkedin}>More notes on LinkedIn</a>
-      </div>
     </>
   );
 }

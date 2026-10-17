@@ -1,25 +1,31 @@
+.resume-page .page-intro {
+  padding-bottom: 24px;
+}
 .resume-document {
-  margin-top: 48px;
+  margin: 64px auto 0;
 }
 .resume-content {
-  max-width: 75ch;
+  max-width: 1120px;
   min-width: 0;
+  margin-inline: auto;
   color: var(--text);
-  font-size: var(--text-body);
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.75;
   overflow-wrap: anywhere;
 }
 .resume-content strong {
   font-weight: 600;
 }
 .resume-header {
-  padding-bottom: 32px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 64px;
 }
 .resume-header h2 {
-  margin-bottom: 16px;
-  font-size: var(--text-section);
-  line-height: 1.15;
+  margin-bottom: 24px;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(36px, 3.2vw, 48px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
 }
 .resume-contact-links,
 .resume-project-links {
@@ -27,17 +33,19 @@
   flex-wrap: wrap;
   gap: 8px 24px;
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 .resume-contact-links li {
   min-width: 0;
 }
-.resume-contact-links a {
+.resume-contact-links a,
+.resume-project-links a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 32px;
-  font-size: 0.875rem;
+  min-height: 44px;
+  font-size: 15px;
 }
 .resume-contact-links svg {
   flex-shrink: 0;
@@ -45,7 +53,7 @@
 .resume-content a {
   color: var(--brand-900);
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
   text-decoration-thickness: 1px;
 }
 .resume-content a:hover {
@@ -53,18 +61,27 @@
   text-decoration-thickness: 2px;
 }
 .resume-section {
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(160px, 0.6fr) minmax(0, 2fr);
+  align-items: start;
+  gap: clamp(32px, 5vw, 72px);
+  margin-top: 64px;
 }
 .resume-section > h3 {
-  margin-bottom: 20px;
-  color: var(--brand-900);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.3;
+  margin: 0;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.resume-section-content {
+  min-width: 0;
+  max-width: 68ch;
 }
 .resume-entries {
   display: grid;
-  gap: 32px;
+  gap: 40px;
 }
 .resume-entry-heading {
   display: flex;
@@ -72,68 +89,81 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 8px 24px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .resume-entry-heading h4 {
   min-width: 0;
-  flex: 1 1 22rem;
-  font-size: 1rem;
-  line-height: 1.6;
+  flex: 1 1 24rem;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 .resume-date {
   color: var(--text-muted);
-  font-size: 0.8125rem;
+  font-size: 14px;
   font-variant-numeric: tabular-nums;
 }
 .resume-points {
   list-style: disc;
-  padding-left: 1.25em;
+  margin: 0;
+  padding-left: 1.2em;
 }
 .resume-points li + li {
-  margin-top: 8px;
+  margin-top: 12px;
 }
 .resume-points li::marker {
   color: var(--text-muted);
-}
-.resume-project-links {
-  font-size: 0.875rem;
 }
 .resume-education {
   display: grid;
   grid-template-columns: 7rem minmax(0, 1fr);
   align-items: baseline;
-  gap: 12px;
+  gap: 16px;
 }
 .resume-certifications {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 32px;
+  gap: 16px 32px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .resume-skills {
   display: grid;
-  gap: 16px;
+  gap: 24px;
+  margin: 0;
 }
 .resume-skills > div {
   display: grid;
   grid-template-columns: 9rem minmax(0, 1fr);
-  gap: 16px;
+  gap: 24px;
+}
+.resume-skills dd {
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .resume-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .resume-content {
+    max-width: 72ch;
+  }
+  .resume-header {
+    margin-bottom: 48px;
+  }
 }
 @media (max-width: 600px) {
   .resume-document {
-    margin-top: 32px;
+    margin-top: 48px;
   }
   .resume-content {
-    font-size: 1rem;
+    font-size: 16px;
   }
   .resume-contact-links {
     gap: 4px 20px;
-  }
-  .resume-contact-links a {
-    min-height: 44px;
-  }
-  .resume-section {
-    margin-top: 32px;
   }
   .resume-entry-heading {
     display: block;
@@ -142,18 +172,109 @@
   .resume-project-links {
     margin-top: 8px;
   }
-  .resume-project-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-  }
   .resume-certifications,
   .resume-education,
   .resume-skills > div {
-    grid-template-columns: 1fr;
-    gap: 4px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
   }
   .resume-certifications {
-    gap: 12px;
+    gap: 16px;
+  }
+}
+@media print {
+  @page resume {
+    margin: 18mm;
+    background: #fff;
+  }
+  html:has(.resume-page) {
+    page: resume;
+    /* next-themes sets the screen color scheme inline. */
+    color-scheme: light !important;
+    background: #fff;
+  }
+  body:has(.resume-page) {
+    background: #fff;
+    color: #111;
+  }
+  body:has(.resume-page) > :not(.site-shell),
+  body:has(.resume-page) :is(.site-masthead, .site-footer) {
+    display: none;
+  }
+  body:has(.resume-page) :is(.site-shell, #main-content) {
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .resume-page > :is(.page-intro, .resume-download) {
+    display: none;
+  }
+  .resume-document,
+  .resume-content {
+    max-width: none;
+    margin: 0;
+    color: #111;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+  .resume-header {
+    margin-bottom: 20pt;
+  }
+  .resume-header h2 {
+    font-size: 28pt;
+    margin-bottom: 10pt;
+  }
+  .resume-content a,
+  .resume-date {
+    color: #333;
+  }
+  .resume-contact-links {
+    gap: 4pt 14pt;
+  }
+  .resume-contact-links a,
+  .resume-project-links a {
+    min-height: 0;
+    font-size: 9pt;
+  }
+  .resume-section {
+    display: block;
+    margin-top: 22pt;
+  }
+  .resume-section > h3 {
+    margin-bottom: 10pt;
+    font-size: 17pt;
+    break-after: avoid-page;
+  }
+  .resume-section-content {
+    max-width: none;
+  }
+  .resume-entries {
+    gap: 18pt;
+  }
+  .resume-entry-heading {
+    margin-bottom: 6pt;
+    break-after: avoid-page;
+  }
+  .resume-entry-heading h4 {
+    font-size: 11pt;
+  }
+  .resume-date {
+    font-size: 9pt;
+  }
+  .resume-points li {
+    break-inside: avoid-page;
+  }
+  .resume-points li + li {
+    margin-top: 5pt;
+  }
+  .resume-content p {
+    orphans: 3;
+    widows: 3;
+  }
+  .resume-skills {
+    gap: 10pt;
   }
 }

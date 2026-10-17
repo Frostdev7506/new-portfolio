@@ -4,7 +4,7 @@ export function ResumeSection({ title, children }: { title: string; children: Re
   return (
     <section className="resume-section">
       <h3>{title}</h3>
-      {children}
+      <div className="resume-section-content">{children}</div>
     </section>
   );
 }
