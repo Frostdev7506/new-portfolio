@@ -1,0 +1,166 @@
+{
+  "checkedAt": "2026-10-17T20:29:06.359714+00:00",
+  "environment": "Local production build on port 3002; user-agent simulation, not proof of search-engine indexing or live CDN crawler access.",
+  "checks": {
+    "lint": "passed",
+    "tests": "92 passed",
+    "productionBuild": "passed"
+  },
+  "articles": [
+    {
+      "slug": "context-engineering-explained",
+      "html": [
+        {
+          "simulatedUserAgent": "Googlebot",
+          "status": 200,
+          "title": "Context Engineering vs Prompt Engineering Explained",
+          "description": "Understand context engineering vs prompt engineering through an LLM customer-support example, tool calls, context windows, and practical tests.",
+          "canonical": "https://neerajbutola.in/blog/context-engineering-explained",
+          "robots": "index, follow, max-image-preview:large",
+          "h1": "Context Engineering Explained",
+          "schema": [
+            "BlogPosting",
+            "BreadcrumbList"
+          ],
+          "socialImage": "https://neerajbutola.in/illustrations/articles/context-engineering.png"
+        },
+        {
+          "simulatedUserAgent": "bingbot",
+          "status": 200,
+          "title": "Context Engineering vs Prompt Engineering Explained",
+          "description": "Understand context engineering vs prompt engineering through an LLM customer-support example, tool calls, context windows, and practical tests.",
+          "canonical": "https://neerajbutola.in/blog/context-engineering-explained",
+          "robots": "index, follow, max-image-preview:large",
+          "h1": "Context Engineering Explained",
+          "schema": [
+            "BlogPosting",
+            "BreadcrumbList"
+          ],
+          "socialImage": "https://neerajbutola.in/illustrations/articles/context-engineering.png"
+        },
+        {
+          "simulatedUserAgent": "OAI-SearchBot",
+          "status": 200,
+          "title": "Context Engineering vs Prompt Engineering Explained",
+          "description": "Understand context engineering vs prompt engineering through an LLM customer-support example, tool calls, context windows, and practical tests.",
+          "canonical": "https://neerajbutola.in/blog/context-engineering-explained",
+          "robots": "index, follow, max-image-preview:large",
+          "h1": "Context Engineering Explained",
+          "schema": [
+            "BlogPosting",
+            "BreadcrumbList"
+          ],
+          "socialImage": "https://neerajbutola.in/illustrations/articles/context-engineering.png"
+        }
+      ],
+      "markdown": {
+        "status": 200,
+        "contentType": "text/markdown; charset=utf-8",
+        "canonicalLinkHeader": "<https://neerajbutola.in/blog/context-engineering-explained>; rel=\"canonical\", </llms.txt>; rel=\"describedby\"",
+        "robots": "index, follow, max-image-preview:large",
+        "containsFullTextDiagramsAndVideo": true
+      },
+      "crossLink": "prompt-injection-explained",
+      "coverServed": true
+    },
+    {
+      "slug": "prompt-injection-explained",
+      "html": [
+        {
+          "simulatedUserAgent": "Googlebot",
+          "status": 200,
+          "title": "Prompt Injection Explained: Direct and Indirect Attacks",
+          "description": "Learn how direct and indirect prompt injection work, why tool access raises the risk, and how backend permissions, approval, and testing reduce harm.",
+          "canonical": "https://neerajbutola.in/blog/prompt-injection-explained",
+          "robots": "index, follow, max-image-preview:large",
+          "h1": "Prompt Injection Explained: Direct and Indirect Attacks",
+          "schema": [
+            "BlogPosting",
+            "BreadcrumbList"
+          ],
+          "socialImage": "https://neerajbutola.in/illustrations/articles/prompt-injection.png"
+        },
+        {
+          "simulatedUserAgent": "bingbot",
+          "status": 200,
+          "title": "Prompt Injection Explained: Direct and Indirect Attacks",
+          "description": "Learn how direct and indirect prompt injection work, why tool access raises the risk, and how backend permissions, approval, and testing reduce harm.",
+          "canonical": "https://neerajbutola.in/blog/prompt-injection-explained",
+          "robots": "index, follow, max-image-preview:large",
+          "h1": "Prompt Injection Explained: Direct and Indirect Attacks",
+          "schema": [
+            "BlogPosting",
+            "BreadcrumbList"
+          ],
+          "socialImage": "https://neerajbutola.in/illustrations/articles/prompt-injection.png"
+        },
+        {
+          "simulatedUserAgent": "OAI-SearchBot",
+          "status": 200,
+          "title": "Prompt Injection Explained: Direct and Indirect Attacks",
+          "description": "Learn how direct and indirect prompt injection work, why tool access raises the risk, and how backend permissions, approval, and testing reduce harm.",
+          "canonical": "https://neerajbutola.in/blog/prompt-injection-explained",
+          "robots": "index, follow, max-image-preview:large",
+          "h1": "Prompt Injection Explained: Direct and Indirect Attacks",
+          "schema": [
+            "BlogPosting",
+            "BreadcrumbList"
+          ],
+          "socialImage": "https://neerajbutola.in/illustrations/articles/prompt-injection.png"
+        }
+      ],
+      "markdown": {
+        "status": 200,
+        "contentType": "text/markdown; charset=utf-8",
+        "canonicalLinkHeader": "<https://neerajbutola.in/blog/prompt-injection-explained>; rel=\"canonical\", </llms.txt>; rel=\"describedby\"",
+        "robots": "index, follow, max-image-preview:large",
+        "containsFullTextDiagramsAndVideo": true
+      },
+      "crossLink": "context-engineering-explained",
+      "coverServed": true
+    }
+  ],
+  "discovery": [
+    {
+      "path": "/blog",
+      "status": 200,
+      "containsBothArticles": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "containsBothArticles": true
+    },
+    {
+      "path": "/feed.xml",
+      "status": 200,
+      "containsBothArticles": true
+    },
+    {
+      "path": "/llms.txt",
+      "status": 200,
+      "containsBothArticles": true
+    },
+    {
+      "path": "/llms.md",
+      "status": 200,
+      "containsBothArticles": true
+    },
+    {
+      "path": "/llms-full.md",
+      "status": 200,
+      "containsBothArticles": true
+    },
+    {
+      "path": "/llms-full.txt",
+      "status": 200,
+      "containsBothArticles": true
+    }
+  ],
+  "robots": "User-Agent: *\nAllow: /\n\nHost: https://neerajbutola.in\nSitemap: https://neerajbutola.in/sitemap.xml\n",
+  "limitations": [
+    "No ranking or AI-citation guarantee.",
+    "Search Console, Bing Webmaster Tools and actual crawler logs were not accessed.",
+    "Public availability requires PR merge and deployment."
+  ]
+}
