@@ -9,6 +9,7 @@ import { FeaturedArticle } from "./featured-article";
 export function FeaturedArticles({ posts }: { posts: PostSummary[] }) {
   const trackRef = useRef<HTMLOListElement>(null);
   const [visible, setVisible] = useState({
+    measured: false,
     first: 0,
     last: Math.min(2, posts.length - 1),
     atStart: true,
@@ -27,13 +28,14 @@ export function FeaturedArticles({ posts }: { posts: PostSummary[] }) {
       const count = Math.max(1, Math.floor((track.clientWidth + gap + 1) / step));
       const first = Math.round(track.scrollLeft / step);
       const next = {
+        measured: true,
         first,
         last: Math.min(posts.length - 1, first + count - 1),
         atStart: track.scrollLeft <= 1,
         atEnd: track.scrollLeft >= track.scrollWidth - track.clientWidth - 1,
       };
       setVisible((current) =>
-        current.first === next.first && current.last === next.last &&
+        current.measured && current.first === next.first && current.last === next.last &&
         current.atStart === next.atStart && current.atEnd === next.atEnd
           ? current
           : next,
@@ -111,7 +113,7 @@ export function FeaturedArticles({ posts }: { posts: PostSummary[] }) {
               priority={position === 0}
               position={position + 1}
               total={posts.length}
-              hidden={position < visible.first || position > visible.last}
+              hidden={visible.measured && (position < visible.first || position > visible.last)}
             />
           </li>
         ))}
