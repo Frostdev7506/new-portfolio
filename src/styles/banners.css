@@ -1,36 +1,24 @@
-.contact-banner,
-.explore-banner {
-  background: var(--brand-100);
-  border-radius: 12px;
+.contact-banner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 32px;
-  padding: 32px;
-  margin: 24px 0 0;
-}
-.contact-banner > img {
-  width: 23%;
-  max-width: 220px;
-  height: 145px;
-  object-fit: contain;
+  padding: 64px 0;
+  margin-top: 24px;
 }
 .contact-banner h2 {
-  font-size: var(--text-card);
-  margin-bottom: 8px;
-}
-.banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px 24px;
-  align-items: center;
-  margin-top: 16px;
+  max-width: 22ch;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.12;
 }
 .primary-button {
   min-height: 48px;
   height: auto;
   min-width: 160px;
-  background: var(--action-bg);
-  color: var(--action-text);
+  background: var(--text);
+  color: var(--page-bg);
   border: 0;
   border-radius: var(--radius-control);
   padding: 12px 24px;
@@ -38,19 +26,14 @@
   line-height: 1.4;
 }
 .primary-button:hover {
-  background: var(--action-hover);
-  color: var(--action-text);
+  background: var(--brand-900);
+  color: var(--page-bg);
 }
-@media (max-width: 900px) {
-  .contact-banner,
-  .explore-banner {
-    padding: 24px;
-    gap: 16px;
+@media (max-width: 700px) {
+  .contact-banner {
+    padding-block: 40px;
+    gap: 24px;
     flex-direction: column;
     align-items: flex-start;
-  }
-  .contact-banner > img {
-    width: 145px;
-    height: 96px;
   }
 }

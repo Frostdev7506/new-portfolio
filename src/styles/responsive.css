@@ -1,126 +1,49 @@
-/* Responsive rules for the shared shell. Domain styles own their breakpoints. */
-@media (max-width: 1200px) and (min-width: 901px) {
-  .sidebar {
-    padding-inline: 24px;
+/* Shared shell breakpoints; domain styles own their content layouts. */
+@media (max-width: 1000px) {
+  .site-masthead,
+  .site-navigation {
+    gap: 20px;
   }
-  .page-column {
-    --page-gutter: 32px;
-  }
-  .identity-name {
-    font-size: 1.75rem;
+  .site-header-actions {
+    gap: 8px;
   }
 }
 @media (max-width: 900px) {
-  .site-shell {
-    display: block;
-  }
-  .sidebar {
-    position: static;
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-    padding: 16px 24px 0;
-  }
-  .identity {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: fit-content;
-  }
-  .brand-art {
-    width: 64px;
-    height: 52px;
-    object-fit: contain;
-    margin: 0;
-  }
-  .identity-name {
-    font-size: 1.5rem;
-  }
-  .identity-role {
-    font-size: var(--text-caption);
-    margin: 0 0 0 76px;
-  }
-  .identity-description,
-  .social-nav {
-    display: none;
-  }
-  .primary-nav {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: 24px;
-    gap: 4px;
-  }
-  .primary-nav a {
-    justify-content: center;
-    gap: 8px;
-    margin: 0;
-    padding: 10px 4px;
-    font-size: var(--text-small);
-  }
-  .primary-nav svg {
-    width: 18px;
-    height: 18px;
-  }
-  .page-column {
-    --page-gutter: 24px;
-    min-height: calc(100dvh - 160px);
-  }
-  .page-header {
-    min-height: 64px;
-    font-size: var(--text-small);
-    gap: 8px;
-    padding-block: 8px;
-  }
-  .header-breadcrumb {
-    flex: 1;
-  }
-  .header-actions {
-    margin-left: auto;
-  }
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
     gap: 8px;
+    margin-top: 48px;
   }
   .footer-links {
     column-gap: 24px;
   }
-  h1 {
-    font-size: clamp(2.125rem, 1.5rem + 3vw, 3rem);
-  }
 }
-@media (max-width: 600px) {
-  .header-breadcrumb ol,
-  .header-breadcrumb li {
-    gap: 4px;
+@media (max-width: 700px) {
+  .site-masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding-top: 16px;
+    row-gap: 8px;
   }
-  .breadcrumb-home {
-    justify-content: center;
-    margin-left: -12px;
+  .site-header-actions {
+    grid-column: 2;
+    grid-row: 1;
   }
-  .breadcrumb-home span {
+  .site-resume {
     display: none;
   }
-  .resume-link {
-    padding-inline: 10px;
-    font-size: var(--text-small);
-  }
-  .header-breadcrumb li:last-child {
-    flex: 1;
+  .site-navigation {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    gap: 16px;
   }
 }
 @media (max-width: 380px) {
-  .sidebar {
-    padding-inline: 16px;
+  :root {
+    --page-gutter: 20px;
   }
-  .page-column {
-    --page-gutter: 16px;
-  }
-  .primary-nav a {
-    flex-direction: column;
-    gap: 4px;
-  }
-  .identity-name {
-    font-size: 1.375rem;
+  .site-navigation {
+    gap: 12px;
   }
 }

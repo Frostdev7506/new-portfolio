@@ -1,4 +1,5 @@
 import { ResumeViewer } from "@/components/resume/resume-viewer";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PageIntro } from "@/components/shared/page-intro";
 import { TextLink } from "@/components/shared/text-link";
 import { siteConfig } from "@/data/site";
@@ -13,17 +14,23 @@ export const metadata = buildPageMetadata({
 
 export default function ResumePage() {
   return (
-    <>
+    <div className="resume-page">
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Résumé", href: "/resume" },
+        ]}
+      />
       <PageIntro
         title="Résumé"
         description="My professional experience, projects, and skills."
       />
-      <TextLink href={siteConfig.resumeUrl} external>
+      <TextLink href={siteConfig.resumeUrl} external className="resume-download">
         Download PDF
       </TextLink>
       <div className="resume-document">
         <ResumeViewer />
       </div>
-    </>
+    </div>
   );
 }

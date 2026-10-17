@@ -18,7 +18,7 @@ export function ProjectCard({ project }: { project: Project }) {
           width={960}
           height={540}
           className="project-cover"
-          sizes="(max-width: 900px) 100vw, (max-width: 1200px) 40vw, 600px"
+          sizes="(max-width: 700px) 90vw, (max-width: 1400px) 43vw, 616px"
         />
       </a>
       <div className="project-copy">
@@ -28,9 +28,9 @@ export function ProjectCard({ project }: { project: Project }) {
           </a>
         </h2>
         <p>{project.description}</p>
-        <p className="project-technologies">
-          {project.technologies.join(" · ")}
-        </p>
+        <ul className="project-technologies" aria-label="Technologies">
+          {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
+        </ul>
         <TextLink href={project.link} external>
           {project.linkLabel}
         </TextLink>

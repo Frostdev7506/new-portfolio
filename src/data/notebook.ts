@@ -1,7 +1,14 @@
 export const notebook = {
   tagline: "Full-stack developer · India",
-  featuredSlug: "optimistic-uploads",
-  featuredSummary: "Upload the file while the caption is being written.",
+  blogTitle: "Blog",
+  blogIntro: "Web development, AI, and the decisions behind the code.",
+  featuredSlugs: [
+    "llm-model-routing",
+    "optimistic-uploads",
+    "prompt-caching-explained",
+    "latency-before-scaling",
+    "different-types-of-website-rendering",
+  ],
   blogDescription:
     "Practical guides to web development and AI engineering, with diagrams, worked examples, and interview questions on LLM inference and caching.",
   projectsDescription:

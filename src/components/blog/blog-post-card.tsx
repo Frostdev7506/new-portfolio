@@ -17,7 +17,7 @@ export function BlogPostCard({ post }: { post: PostSummary }) {
           alt=""
           width={1536}
           height={1024}
-          sizes="(max-width: 600px) 100vw, 240px"
+          sizes="(max-width: 700px) 90vw, 600px"
           className="post-art"
         />
       </Link>

@@ -1,9 +1,9 @@
-import { FileText, GraduationCap } from "lucide-react";
 import { AboutIntro } from "@/components/about/about-intro";
 import { Experience } from "@/components/about/experience";
 import { Toolkit } from "@/components/about/toolkit";
-import { ContactBanner } from "@/components/shared/contact-banner";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PageIntro } from "@/components/shared/page-intro";
+import { TextLink } from "@/components/shared/text-link";
 import { education, certifications } from "@/data/notebook";
 import { buildPageMetadata, profilePageJsonLd, serializeJsonLd } from "@/lib/seo";
 
@@ -16,10 +16,16 @@ export const metadata = buildPageMetadata({
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="about-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(profilePageJsonLd()) }}
+      />
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: "About", href: "/about" },
+        ]}
       />
       <PageIntro title="About me" />
       <AboutIntro />
@@ -28,7 +34,6 @@ export default function AboutPage() {
       <section className="section-block education">
         <div className="education-grid">
           <div>
-            <GraduationCap size={36} strokeWidth={1.4} aria-hidden="true" />
             <div>
               <h2>Education</h2>
               <p>{education.degree}</p>
@@ -36,7 +41,6 @@ export default function AboutPage() {
             </div>
           </div>
           <div>
-            <FileText size={34} strokeWidth={1.4} aria-hidden="true" />
             <div>
               <h2>Certifications</h2>
               <ul>
@@ -48,7 +52,10 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <ContactBanner />
-    </>
+      <section className="about-closing" aria-labelledby="about-contact-title">
+        <h2 id="about-contact-title">Let’s build something useful.</h2>
+        <TextLink href="/contact">Get in touch</TextLink>
+      </section>
+    </div>
   );
 }

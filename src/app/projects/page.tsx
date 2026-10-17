@@ -2,6 +2,7 @@ import { projects } from "@/data/projects";
 import { notebook } from "@/data/notebook";
 import { siteConfig } from "@/data/site";
 import { ProjectCard } from "@/components/projects/project-card";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PageIntro } from "@/components/shared/page-intro";
 import { TextLink } from "@/components/shared/text-link";
 import { buildPageMetadata } from "@/lib/seo";
@@ -14,7 +15,13 @@ export const metadata = buildPageMetadata({
 
 export default function ProjectsPage() {
   return (
-    <>
+    <div className="projects-page">
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Projects", href: "/projects" },
+        ]}
+      />
       <PageIntro
         title="Projects"
         description={notebook.projectsDescription}
@@ -31,6 +38,6 @@ export default function ProjectsPage() {
           Explore GitHub
         </TextLink>
       </div>
-    </>
+    </div>
   );
 }

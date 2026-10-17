@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { siteConfig } from "@/data/site";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, serializeJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Editorial Policy",
@@ -18,20 +19,6 @@ export default function EditorialPolicyPage() {
   const pageUrl = `${siteConfig.url}/editorial-policy`;
   const lastUpdatedIso = "2026-10-10";
   const lastUpdatedText = "October 10, 2026";
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Editorial Policy",
-        item: pageUrl,
-      },
-    ],
-  };
-
   const editorialJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -44,15 +31,16 @@ export default function EditorialPolicyPage() {
 
   return (
     <section className="document-page policy-page">
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(editorialJsonLd) }}
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Editorial Policy", href: "/editorial-policy" },
+        ]}
       />
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(editorialJsonLd) }}
       />
       <h1>Editorial Policy</h1>
       <p className="document-updated">

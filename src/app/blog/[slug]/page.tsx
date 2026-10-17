@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight } from "lucide-react";
 import { MarkdownContent } from "@/components/blog/markdown-content";
 import { ShareLinks } from "@/components/blog/share-links";
 import { ArticleNavigation } from "@/components/blog/article-navigation";
 import { YouTubeVideo } from "@/components/blog/youtube-video";
 import { ArticleUpdates } from "@/components/shared/article-updates";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { siteConfig } from "@/data/site";
 import {
   getAllPosts,
@@ -40,6 +40,10 @@ export default async function BlogPostPage({ params }: Props) {
   );
   const shareUrl = getBlogPostUrl(post.slug);
   const { jsonLd } = resolveBlogSeo(post, siteConfig);
+  const breadcrumbItems = jsonLd[1].itemListElement.map(({ name, item }) => ({
+    name,
+    href: new URL(item).pathname,
+  }));
   return (
     <article className="article-page" id="article-top">
       <script
@@ -48,31 +52,24 @@ export default async function BlogPostPage({ params }: Props) {
           __html: serializeJsonLd(jsonLd),
         }}
       />
-      {process.env.NODE_ENV === "development" && (
-        <div className="pt-5">
-          <Button asChild variant="outline">
-            <Link href={`/dev/blog?article=${post.slug}`}>Edit article</Link>
-          </Button>
-        </div>
-      )}
+      <Breadcrumbs items={breadcrumbItems} includeJsonLd={false} />
       <header className="article-header">
-        <Link href="/blog" className="article-back">
-          <ArrowLeft aria-hidden="true" /> All articles
-        </Link>
-        <p className="article-category">{post.category}</p>
-        <h1>{post.title}</h1>
-        <p className="article-deck">{post.description}</p>
-        <div className="article-byline">
-          <Link href="/about">{siteConfig.name}</Link>
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <span>{post.readtime}</span>
+        <div className="article-header-copy">
+          <p className="article-category">{post.category}</p>
+          <h1>{post.title}</h1>
+          <p className="article-deck">{post.description}</p>
+          <div className="article-byline">
+            <Link href="/about">{siteConfig.name}</Link>
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <span>{post.readtime}</span>
+          </div>
+          {post.updated !== post.date && (
+            <p className="article-updated">
+              Updated{" "}
+              <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+            </p>
+          )}
         </div>
-        {post.updated !== post.date && (
-          <p className="article-updated">
-            Updated{" "}
-            <time dateTime={post.updated}>{formatDate(post.updated)}</time>
-          </p>
-        )}
         {post.youtubeId ? (
           <YouTubeVideo
             key={post.youtubeId}
@@ -86,7 +83,7 @@ export default async function BlogPostPage({ params }: Props) {
               alt={post.coverAlt}
               width={post.coverWidth ?? 1536}
               height={post.coverHeight ?? 1024}
-              sizes="(max-width: 480px) 100vw, 420px"
+              sizes="(max-width: 700px) 90vw, 420px"
               priority
             />
           </figure>
