@@ -161,6 +161,35 @@
   "limitations": [
     "No ranking or AI-citation guarantee.",
     "Search Console, Bing Webmaster Tools and actual crawler logs were not accessed.",
-    "Public availability requires PR merge and deployment."
-  ]
+    "Public availability of the blog articles requires PR merge and deployment."
+  ],
+  "reviewFollowup": {
+    "checkedAt": "2026-10-18T07:15:24.718232+00:00",
+    "jailbreakingDefinition": "Aligned with OWASP: a form of prompt injection targeting model safety restrictions.",
+    "checks": {
+      "lint": "passed",
+      "tests": "92 passed",
+      "productionBuild": "passed",
+      "whitespace": "passed"
+    },
+    "videoAvailability": {
+      "checkedAt": "2026-10-18T07:15:24.718232+00:00",
+      "videoId": "RYmhrVb4BZg",
+      "videoUrl": "https://youtube.com/shorts/RYmhrVb4BZg",
+      "oEmbed": {
+        "url": "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=RYmhrVb4BZg&format=json",
+        "status": 200,
+        "contentType": "application/json",
+        "title": "Prompt Injection Explained: Direct vs Indirect Attacks | Day 7",
+        "authorName": "Neeraj Butola"
+      },
+      "thumbnail": {
+        "url": "https://i.ytimg.com/vi/RYmhrVb4BZg/maxresdefault.jpg",
+        "status": 200,
+        "contentType": "image/jpeg"
+      },
+      "studioVisibility": "Public",
+      "studioVerifiedAfterReload": true
+    }
+  }
 }

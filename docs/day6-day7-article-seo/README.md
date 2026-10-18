@@ -19,7 +19,11 @@ The final production responses were checked for both articles with simulated Goo
 
 Both articles appear in `/blog`, `/sitemap.xml`, `/feed.xml`, `/llms.txt`, `/llms.md`, `/llms-full.md` and `/llms-full.txt`. Both PNG covers return 200. The existing wildcard robots policy permits crawling and advertises the sitemap.
 
-See [verification.json](verification.json), [Day 6 preview](context-engineering-preview.png) and [Day 7 preview](prompt-injection-preview.png). Day 7's video is scheduled for 14:00 IST on 18 October and may show no thumbnail/playback before release; the article text remains available independently.
+See [verification.json](verification.json), [Day 6 preview](context-engineering-preview.png) and [Day 7 preview](prompt-injection-preview.png). Day 7's video was made public at the user's request before the original 14:00 IST release. On 18 October at 12:45 IST, Studio showed Public after saving and reloading; unauthenticated YouTube oEmbed and the thumbnail both returned HTTP 200. The linked video is available before this PR is merged.
+
+## CodeRabbit follow-up
+
+The Day 7 article now identifies jailbreaking as a form of prompt injection targeting safety restrictions, attributed to OWASP. Lint, all 92 tests, the production build and whitespace checks passed after this correction. The video-availability finding was addressed by publishing the existing video; no player or runtime changes were needed.
 
 ## Evidence and limits
 
