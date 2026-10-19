@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Retrieve the right context before answering</title>
+  <desc id="desc">An error-code question enters scoped hybrid search, then a reranker selects a source passage for an answer with a citation.</desc>
+  <defs>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#b3ac97" opacity="0.32"/></pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#287e72" stroke-width="2" stroke-linejoin="round"/></marker>
+  </defs>
+  <rect width="1200" height="630" fill="#f5efdf"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect x="28" y="28" width="1144" height="574" rx="20" fill="none" stroke="#bcb7a5" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#293a35">
+    <text x="70" y="105" font-size="43" font-weight="700">Retrieve the right context.</text>
+    <text x="70" y="152" font-size="28" fill="#57665b">Then answer with a source.</text>
+    <rect x="70" y="232" width="282" height="270" rx="18" fill="#fffaf0" stroke="#293a35" stroke-width="3"/>
+    <rect x="95" y="262" width="232" height="54" rx="8" fill="#d5e8df"/>
+    <text x="211" y="297" text-anchor="middle" font-size="25" font-weight="700">ERR_404_NULL?</text>
+    <path d="M102 351 H302 M102 381 H280 M102 411 H295 M102 441 H252" fill="none" stroke="#a8afa0" stroke-width="9" stroke-linecap="round"/>
+    <rect x="91" y="366" width="221" height="29" rx="5" fill="#d5e8df" stroke="#287e72" stroke-width="2"/>
+    <path d="M103 381 H276" stroke="#287e72" stroke-width="7" stroke-linecap="round"/>
+    <text x="211" y="542" text-anchor="middle" font-size="24">Support question</text>
+    <path d="M363 366 H417" fill="none" stroke="#287e72" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="435" y="232" width="288" height="270" rx="18" fill="#d5e8df" stroke="#287e72" stroke-width="3"/>
+    <text x="579" y="276" text-anchor="middle" font-size="25" font-weight="700">Scoped search</text>
+    <rect x="458" y="305" width="242" height="59" rx="9" fill="#fffaf0" stroke="#287e72" stroke-width="2"/>
+    <text x="579" y="342" text-anchor="middle" font-size="24">Dense + keyword</text>
+    <path d="M579 366 V394" stroke="#287e72" stroke-width="4"/>
+    <rect x="458" y="397" width="242" height="72" rx="9" fill="#fffaf0" stroke="#287e72" stroke-width="2"/>
+    <text x="579" y="441" text-anchor="middle" font-size="25" font-weight="700">Rerank</text>
+    <path d="M734 366 H788" fill="none" stroke="#287e72" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="807" y="232" width="323" height="270" rx="18" fill="#fffaf0" stroke="#293a35" stroke-width="3"/>
+    <text x="968" y="277" text-anchor="middle" font-size="26" font-weight="700">Answer + source</text>
+    <path d="M839 326 H1095 M839 358 H1060 M839 390 H1080" fill="none" stroke="#a8afa0" stroke-width="9" stroke-linecap="round"/>
+    <rect x="835" y="426" width="267" height="47" rx="8" fill="#d5e8df"/>
+    <text x="968" y="457" text-anchor="middle" font-size="22" fill="#287e72">Troubleshooting · v2</text>
+  </g>
+</svg>
