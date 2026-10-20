@@ -25,23 +25,47 @@ takeaway: >-
   answer.
 draft: false
 ---
-When an AI agent hallucinates on internal company data, teams usually swap models or consider fine-tuning.The problem though is almost always noisy retrieval and poor context formatting. Instead, build a production-ready RAG pipeline.Retrieval-Augmented Generation (RAG) supplies external context to an LLM at inference time, avoiding expensive fine-tuning. But while it expands the model's working memory, it doesn't clean messy source data or eliminate comprehension errors on its own.
+When an AI support agent gives a wrong answer, check which document passages it received before changing the model. It may have missed the fix, read an old guide or lost an important warning.
 
-This is Day 8 of the AI Engineering Interview Series. While the video above provides a high-level overview, here we’ll break down the architectural decisions behind making a RAG pipeline production-ready.
+**Retrieval-Augmented Generation (RAG)** searches external documents and puts relevant passages into the model's request before it answers. This lets the model use current or private information without retraining. These passages become part of the model's **context**: all the text available to it for that request. RAG can improve an answer, but it doesn't repair incorrect sources or guarantee that the model will use them correctly.
+
+This is Day 8 of the AI Engineering Interview Series. The video outlines the pipeline; below, we'll follow one support question through each decision.
 
 Let's anchor this with a concrete support query:
 
 **“How do I fix ERR_404_NULL in version 2.4?”**
 
-The exact fix lives in our `runbook.pdf`. However, our knowledge base also contains similar error codes, deprecated v2.1 documentation, and customer-specific configs. Here is how to ensure the model retrieves the exact answer without hallucinating.
+The fix lives in our fictional `runbook.pdf`. The same knowledge base also holds similar error codes, old version 2.1 guides and customer-specific configuration files. We need the applicable procedure from a document this user is allowed to read. If we can't find it, the assistant should say the evidence is insufficient instead of guessing. This is called **abstaining**.
 
 ```diagram
-{"title":"From source documents to an answer with evidence","layout":"flow","steps":[{"label":"Prepare sources offline","detail":"Keep each searchable passage linked to its parent and source."},{"label":"Search within access scope","detail":"Combine semantic and keyword candidates for the right product version."},{"label":"Expand and rerank","detail":"Fetch allowed parent passages; score each with the question."},{"label":"Answer or abstain","detail":"Use supported context, cite the source, or explain what is missing."}],"caption":"Access checks apply throughout."}
+{
+  "title": "From source documents to an answer with evidence",
+  "layout": "flow",
+  "steps": [
+    {
+      "label": "Prepare searchable passages",
+      "detail": "Split documents before queries arrive and link passages to their source sections."
+    },
+    {
+      "label": "Find permitted matches",
+      "detail": "Search by meaning and keywords within the user's document permissions."
+    },
+    {
+      "label": "Select useful evidence",
+      "detail": "Fetch complete passages and rank them against the question."
+    },
+    {
+      "label": "Answer with sources",
+      "detail": "Preserve the source conditions and cite them, or explain what evidence is missing."
+    }
+  ],
+  "caption": "Access checks apply throughout."
+}
 ```
 
 ## 1. Index small, retrieve enough context
 
-Chunking determines which document fragments can be searched independently. A setting like “500 tokens with 50-token overlap” is easy to configure, but it doesn't tell you whether a fragment contains enough information to answer a question.
+Chunking splits a document into passages that can be searched independently. A token is a small piece of text counted by the model: a word, part of a word or punctuation. “500 tokens with 50-token overlap” means each chunk contains about 500 tokens, with 50 repeated between neighbouring chunks. That setting alone doesn't tell you whether a passage contains enough information to answer a question.
 
 There are two competing needs: **a precise search match** and **enough context to explain the answer**.
 
@@ -68,9 +92,7 @@ The user asks: **“How do I fix ERR_404_NULL in version 2.4?”** An answer nee
 
 ### A. Flat retrieval: the matching chunk can miss the fix
 
-In a flat setup, the text you index is also the text you send to the model. Suppose fixed-size splitting cuts the section into three independently searchable chunks:
-
-Now suppose search returns chunk 1, but chunks 2 and 3 don't make the final context.
+In a flat setup, the text stored for search is also the text sent to the model. Suppose fixed-size splitting creates three chunks, but only chunk 1 is selected for the final context:
 
 ```diagram
 {
@@ -110,7 +132,7 @@ Question: How do I fix ERR_404_NULL in version 2.4?
 
 The model has no source-backed fix to give. It should say the evidence is incomplete; if it invents a generic recovery command, that's an unsupported answer.
 
-Flat retrieval can work when chunks are self-contained or when several retrieved chunks supply the missing context. The problem here is the split plus the context selection. Mentioning an exact error code doesn't guarantee the highest vector-similarity score, either; we'll add a lexical signal in section 2.
+Flat retrieval can work when each chunk contains a complete explanation, or when several retrieved chunks supply the missing context. Here, the split and the selection leave out the procedure. An exact error code can still rank poorly when search focuses on meaning; section 2 adds keyword matching.
 
 Increasing chunk size can keep the procedure together, but it also brings more text into search and generation. Bigger chunks aren't automatically worse, and smaller ones aren't automatically more accurate. Test the tradeoff on questions that require the surrounding conditions.
 
@@ -119,8 +141,8 @@ Increasing chunk size can keep the procedure together, but it also brings more t
 **Parent-child retrieval separates the search unit from the answer context.** A short child helps locate the relevant passage. Its parent supplies the larger, coherent section behind that match. The [LlamaIndex recursive-retrieval example](https://developers.llamaindex.ai/python/framework/integrations/retrievers/recursive_retriever_nodes/) shows how references connect smaller indexed nodes to larger nodes.
 
 - **Children:** Small searchable fragments, each linked to its parent. One child can describe the error and version; another can describe the fix.
-- **Parent:** The bounded section containing the prerequisites, cause, procedure and warning.
-- **Storage:** Keep child text, embeddings and metadata available to the vector and lexical indexes, and parent text in a document store. Redis, MongoDB or SQLite are possible choices; a single system can also hold both if it supports the required lookups.
+- **Parent:** A larger but deliberately limited section containing the prerequisites, cause, procedure and warning.
+- **Storage:** Put the small child passages in a searchable index and keep parent text retrievable by ID. Redis, MongoDB or SQLite can hold the parents; one database can also hold both child records and parents.
 
 For a starting experiment, children might contain 30–60 words and parents 150–500 words. Those are illustrative ranges, not requirements. Our short runbook section can stay smaller. Preserve a coherent procedure and measure retrieval quality instead of padding text to reach a number.
 
@@ -136,13 +158,15 @@ The error child might look like this:
 }
 ```
 
-The fix child has its own `chunk_id` but shares that `parent_id` and revision. Tenant and document permissions must travel with these records too.
+The fix child has its own `chunk_id` but shares the same `parent_id` and source revision. `source_revision` identifies an edit of the runbook; `product_version` identifies the software it describes. Those are different kinds of version.
+
+A **tenant** is a customer or account sharing the service. Store which tenant owns each record and who is allowed to read it.
 
 At query time:
 
 1. **Retrieve a child.** Search finds an allowed fragment relevant to the error and version.
 2. **Read its parent reference.** Use `parent_id` and `source_revision` to identify the matching section.
-3. **Fetch the allowed parent.** Recheck access and revision, then retrieve section 4.2. If multiple children point to it, include the parent once.
+3. **Fetch the allowed parent.** Recheck access and revision, then retrieve section 4.2. If several children point to that parent, include it once. Removing repeated copies is called **deduplication**.
 4. **Assemble the context.** Use that bounded parent in place of the isolated child. In the pipeline below, rerank the expanded passages before selecting the final context.
 
 ```diagram
@@ -163,7 +187,7 @@ At query time:
     "label": "Shared parent: section 4.2, rev-17",
     "detail": "Fetch the prerequisites, cause, complete fix and active-sync warning together."
   },
-  "caption": "Search the children. Follow parent_id from a matching child to fetch its allowed parent; include that section once."
+  "caption": "Search the children. Follow a matching child's parent ID to fetch the permitted section; include it once."
 }
 ```
 
@@ -185,59 +209,26 @@ A sentence window can still cross a section boundary or miss a distant warning. 
 
 | Rule | What to do | What it prevents |
 | --- | --- | --- |
-| Preserve semantic boundaries | Split around headings, paragraphs, code blocks and tables. Keep warnings with their procedures and table headers with their rows. | A matching fragment loses the conditions needed to interpret it. |
+| Keep related text together | Split around headings, paragraphs, code blocks and tables. Keep warnings with their procedures and table headers with their rows. | A matching fragment loses the conditions needed to interpret it. |
 | Keep stable IDs and explicit revisions | Store child, parent and source IDs, source revision, location, product version and access metadata. Resolve the parent from the same revision as the child. | An old search hit is paired with a new procedure or the wrong customer's section. |
-| Publish a complete revision | Stage the new parents and child records, verify their links, then switch the active revision. Use a transaction where the storage supports one; separate databases don't necessarily share a transaction. Propagate updates and deletions to both indexes and caches. | Missing parents, stale children and answers assembled from mixed revisions. |
-| Bound the expansion | Fetch the relevant parent section, deduplicate it and enforce per-passage and total context budgets. | Every small hit expands into an entire PDF and crowds out useful evidence. |
+| Publish a complete revision | Write new parents and children without making them searchable, check their links, then activate that revision. If one database can commit both writes together, use a transaction. Keep search indexes and caches in step with updates and deletions. | Missing parents, stale children and answers assembled from mixed revisions. |
+| Limit the fetched context | Fetch the relevant parent section, deduplicate it and enforce per-passage and total context budgets. | Every small hit expands into an entire PDF and crowds out useful evidence. |
 
 Tune child size, parent size and overlap together. Overlap can preserve a boundary, but it can also repeat text. The test is whether the allowed context contains the complete answer, including the version, prerequisites and warning.
-
 
 ## 2. Search by meaning and by the words that matter
 
 The same incident can arrive as “How do I fix `ERR_404_NULL` in version 2.4?” or “The worker keeps losing its connection before the handshake finishes.” Search needs to handle both.
 
-An embedding model represents a passage as a vector. **Dense search** compares the question's vector with passage vectors, which helps when the wording differs. **Lexical search**, such as BM25, scores matching terms. It helps distinctive error codes, configuration names and product identifiers surface. [Pinecone's hybrid-search guide](https://docs.pinecone.io/guides/search/hybrid-search) describes ways to combine these signals.
+**Meaning-based search**, also called **dense search**, uses an embedding model to turn each passage into a list of numbers called a vector. It represents the question in the same way and compares the vectors. This helps find related explanations even when the wording differs.
 
-Neither branch settles the question by itself. A glossary can repeat `ERR_404_NULL` without explaining its recovery procedure. A semantically similar startup guide can describe a restart without addressing this failure.
+**Keyword search**, also called **lexical search**, finds matching terms. BM25 is a common way to score these matches. It helps error codes, configuration names and product identifiers surface. Using both kinds of search is called **hybrid search**. [Pinecone's guide](https://docs.pinecone.io/guides/search/hybrid-search) describes several implementations.
 
-```diagram
-{
-  "title": "One question, two search signals",
-  "layout": "comparison",
-  "input": { "label": "Question + authenticated scope", "detail": "ERR_404_NULL, version 2.4, within the user's allowed documents." },
-  "steps": [
-    { "label": "Dense search", "detail": "Find related meaning, including differently worded descriptions of the failure." },
-    { "label": "Lexical search", "detail": "Find matching terms, including the error code and configuration names." }
-  ],
-  "output": { "label": "Fused shortlist", "detail": "Combine the rankings using shared record IDs." },
-  "caption": "Both branches use the same access scope. RRF combines rank positions from both lists."
-}
-```
+A glossary can repeat the exact error code without explaining its fix. A startup guide can sound related without addressing this failure. We need both search signals, followed by a check of which passage answers the question.
 
-### Walk through a hybrid result
+### Filter by access and version before either search
 
-Together, the searches return three passages, all authorized and applicable to version 2.4. `D1`–`D3` identify the passages; they aren't ranking positions. Each hit points to a different parent. In the search columns, **rank 1 means first**.
-
-| Retrieved passage | Dense rank | Lexical rank | RRF score, c = 60 |
-| --- | --- | --- | --- |
-| `D1` · Recovery runbook | 3 | 1 | 0.03227 |
-| `D2` · Error glossary | 1 | 2 | 0.03252 |
-| `D3` · Startup checklist | 2 | — | 0.01613 |
-
-The dash means D3 is absent from the retained lexical results. These rankings are illustrative, not a prediction of how every embedding model will behave.
-
-Don't add a cosine-similarity score directly to a BM25 score: their scales differ. **Reciprocal rank fusion (RRF)** uses positions instead. For each result list containing a record, add `1 / (c + rank)`, with ranks starting at 1. An absent record contributes zero. [Elasticsearch documents the formula and ranking-window controls](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion).
-
-For D1, the calculation is `1/63 + 1/61 ≈ 0.03227`. D2 scores slightly higher because it appears near the top of both lists. Fusion has found plausible material; it hasn't determined which passage contains the fix. That's the reranker's next job.
-
-BM25 also doesn't guarantee literal identifier equality. An analyzer may split underscores or normalize casing, so check how it handles `ERR_404_NULL` versus `ERR_404_AUTH`. If equality is required, query a dedicated exact-match field as well. [Elasticsearch's term-query reference](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-term-query) explains the distinction from analyzed text.
-
-The candidate window matters. A record outside both retained lists cannot benefit from fusion. Start with a measured shortlist—for example, 20 hits from each branch—then fetch unique parents and cap the rerank workload. Treat those counts as tuning choices, not defaults that guarantee recall.
-
-### Decide who can search before running either branch
-
-The authenticated user determines access scope. A sentence such as “search Tenant B's files” inside the question cannot grant that access.
+**Access scope** means the documents this signed-in user is allowed to search. Resolve it from the user's trusted session and permission records. A sentence such as “search Tenant B's files” inside the question cannot grant that access.
 
 For a user in Tenant A, the eligibility check might look like this:
 
@@ -248,19 +239,31 @@ For a user in Tenant A, the eligibility check might look like this:
 | Tenant A, restricted incident report | Excluded by document permissions. |
 | Tenant A, fix marked 2.1-only | Excluded for this question unless explicitly compatible with 2.4. |
 
-Derive the tenant and document permissions from trusted identity and authorization records. Apply them to both searches before selecting top-k candidates. If you search everything first and filter afterward, forbidden records may already have reached your application and displaced useful allowed hits.
+Apply access filters to both searches before collecting their top results. If you select the top results before filtering, forbidden hits can crowd allowed passages out of the shortlist, and protected text may reach later pipeline stages.
 
 ```diagram
 {
   "title": "Access checks surround retrieval",
   "layout": "flow",
   "steps": [
-    { "label": "Authenticate", "detail": "Identify the user from a trusted session, not the question text." },
-    { "label": "Resolve access", "detail": "Determine the allowed tenant, documents and applicable product version." },
-    { "label": "Scope both searches", "detail": "Exclude forbidden records before collecting dense and lexical candidates." },
-    { "label": "Check each fetch", "detail": "Recheck parent passages and cached answers against current permissions." }
+    {
+      "label": "Authenticate",
+      "detail": "Identify the user from a trusted session, not the question text."
+    },
+    {
+      "label": "Resolve access",
+      "detail": "Determine the allowed tenant and documents from trusted permission records."
+    },
+    {
+      "label": "Scope both searches",
+      "detail": "Apply access filters and product-version rules before collecting results."
+    },
+    {
+      "label": "Check each fetch",
+      "detail": "Recheck parent passages and cached answers against current permissions."
+    }
   ],
-  "caption": "A relevant match still has to be authorized. Permission changes also affect cached results."
+  "caption": "Access decides what the user may read. Version rules decide which procedure applies."
 }
 ```
 
@@ -270,13 +273,78 @@ Version compatibility needs its own policy: a guide covering 2.x may apply to 2.
 
 Carry these checks into parent retrieval and caches. If a runbook is revoked or deleted, old child hits and cached answers must stop making it usable. [OWASP's RAG security guidance](https://cheatsheetseries.owasp.org/cheatsheets/RAG_Security_Cheat_Sheet.html) covers access metadata and source lifecycle controls. Storing a `tenant_id` field alone doesn't enforce authorization.
 
+### Search the allowed documents in two ways
+
+```diagram
+{
+  "title": "One question, two search signals",
+  "layout": "comparison",
+  "input": { "label": "Question + permitted documents", "detail": "ERR_404_NULL, version 2.4, within this user's access scope." },
+  "steps": [
+    { "label": "Meaning search", "detail": "Find descriptions such as a connection dropping before the handshake." },
+    { "label": "Keyword search", "detail": "Find terms such as ERR_404_NULL and POOL_TIMEOUT." }
+  ],
+  "output": { "label": "Combined shortlist", "detail": "Bring useful results from both searches into one ranked list." },
+  "caption": "The two searches use the same access and version filters. Next, combine their ranked results."
+}
+```
+
+### Combine the rankings with RRF
+
+The two searches produce different kinds of scores. For example, meaning search might give a passage `0.82`, while BM25 gives it `12`. Those numbers come from different scoring rules. The `12` isn't evidence of a stronger match just because it's larger. Adding the raw scores would mix their scales without accounting for that difference.
+
+**Reciprocal rank fusion (RRF)** combines the passages' **positions in the result lists** instead. It gives each passage points for its position in each list, then adds those points:
+
+```text
+points from one list = 1 / (c + rank)
+combined RRF score = meaning-search points + keyword-search points
+```
+
+- `rank` is the position in that search's results: 1 is first, 2 is second, and so on.
+- `c` is a fixed number added to every rank. Larger values make nearby ranks contribute more similar amounts. We'll use `c = 60`, which is also the default in [Elasticsearch's RRF implementation](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion).
+- A passage missing from one retained list gets zero points from that list. It can still get points from the other search.
+
+Together, our searches return three passages, all permitted for this user and applicable to version 2.4. `D1`–`D3` identify the passages; they aren't ranking positions. Each hit points to a different parent.
+
+| Retrieved passage | Meaning rank | Keyword rank | Combined RRF score |
+| --- | --- | --- | --- |
+| `D1` · Recovery runbook | 3 | 1 | 0.03227 |
+| `D2` · Error glossary | 1 | 2 | 0.03252 |
+| `D3` · Startup checklist | 2 | — | 0.01613 |
+
+These ranks are an example, not a prediction of every search model's behavior. The dash means D3 wasn't kept in the keyword results; it doesn't prove that the index contains no matching words.
+
+For **D1, the recovery runbook**, calculate the contributions separately:
+
+1. Meaning rank 3 contributes `1 / (60 + 3) = 1/63`.
+2. Keyword rank 1 contributes `1 / (60 + 1) = 1/61`.
+3. Add them: `1/63 + 1/61 ≈ 0.03227`.
+
+The same calculation gives `1/61 + 1/62 ≈ 0.03252` for D2. D3 gets only `1/62 ≈ 0.01613`, because it receives zero points from the keyword list. **The combined order is D2, then D1, then D3.**
+
+D2 leads because positions 1 and 2 together earn slightly more points than D1's positions 3 and 1. This score summarizes the search rankings; it isn't a probability that the passage contains the right answer. The glossary still lacks the recovery procedure. Section 3 checks the question against each passage before deciding which evidence to use.
+
+### Require exact error-code matches when needed
+
+Keyword search can transform text before matching it—for example, by lowercasing words or splitting on punctuation. These processing rules are called an **analyzer**. Test how your actual settings handle `ERR_404_NULL` and `ERR_404_AUTH`; don't assume that a text search requires the complete code to be identical.
+
+If the question requires that specific code, store it separately in an **exact-value field**, such as an Elasticsearch `keyword` field, and query that field for `ERR_404_NULL`. Decide whether letter case matters and apply that rule consistently when storing and querying codes. [Elasticsearch's term-query guide](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-term-query) explains why an exact query must match what was actually indexed.
+
+### Choose how many search results to keep
+
+Each search may match many passages, but we normally pass only its first **N results** to fusion. Those retained passages are the **candidates**. In Elasticsearch RRF, this per-search fusion limit is called `rank_window_size`.
+
+For example, keeping 20 results from each search produces at most 40 child hits before removing overlaps. Several hits may lead to the same parent, so the number of unique parents can be smaller. If D1 ranks 21st in both searches, neither retained list contains it and RRF cannot bring it back.
+
+A larger shortlist gives more passages a chance, but can require more parent lookups and reranker work. Compare different limits on labelled questions where you know which source should be found. Choose a limit that balances finding the right evidence with response time and cost.
+
 ## 3. Rerank the passages against the actual question
 
 Our fused list puts D2, the glossary, ahead of D1, the recovery runbook. Both mention the error; only one contains the requested procedure.
 
-A **bi-encoder** embeds the question and passages independently, then compares their vectors. Document vectors can be prepared in advance, making this useful for finding candidates in a large collection.
+Reranking means taking the shortlist and **reordering it for this question**. The meaning-search stage usually uses a **bi-encoder**: it embeds the question and passages separately, so passage vectors can be prepared before a request arrives. That makes broad search fast.
 
-A **cross-encoder** reads the question and one candidate passage together and assigns a relevance score. Run it on each shortlisted passage, then reorder them. [Sentence Transformers' retrieve-and-rerank guide](https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html) describes this two-stage approach.
+A **cross-encoder** reads the question and one passage together. It can judge their relationship more closely, but needs a model pass for each candidate. Use it on the shortlist rather than every document. [Sentence Transformers' retrieve-and-rerank guide](https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html) describes this tradeoff.
 
 Before scoring, fetch the allowed parents and deduplicate them. Here each hit has a different parent; we'll keep D1–D3 as aliases for those expanded passages, with their source references attached.
 
@@ -313,7 +381,7 @@ Check the model's input limit. If a long parent is truncated before its fix or w
 
 If you rerank children first to reduce latency, inspect the expanded text before generation as well. Measure that cheaper path against reranking the parents; don't assume the orders are equivalent.
 
-A high relevance score isn't a portable probability that an answer is correct. A passage can be on-topic and stale or factually wrong. Tune any score threshold on labelled questions for the chosen model. And if D1 never entered the shortlist, reranking cannot recover it—fix candidate retrieval first.
+A reranker score of `0.9` does not mean the passage has a 90% chance of being correct. Scores from different rerankers may also use different scales. A passage can be relevant and still be stale or wrong. Test any rejection threshold on questions with known relevant sources. If D1 never entered the shortlist, reranking cannot recover it; improve the earlier search step first.
 
 ## 4. Give the model evidence it can actually use
 
@@ -345,7 +413,7 @@ Suppose the application's request policy allows 8,000 tokens for combined input 
 }
 ```
 
-Count the fully formatted request with the target model's tokenizer. If several child hits resolve to D1's same parent revision, include that parent once. Add other passages only when they supply missing evidence. Keep the prerequisites and warning with the fix; if that complete passage won't fit, select a better bounded passage rather than trimming away its conditions.
+Count the complete request with the model's **tokenizer**, the tool that converts text into tokens. If several child hits resolve to the same parent revision as D1, include it once. Add other passages only when they supply missing evidence. Keep the prerequisites and warning with the fix; if the section won't fit, select a shorter passage that still contains all the required conditions.
 
 ### Give each selected passage a usable source identity
 
@@ -394,7 +462,7 @@ Checking that `S1` exists is necessary, but it doesn't establish that the source
 }
 ```
 
-Resolve citation links from your own source records instead of trusting model-generated URLs. Automated claim checks or a second model can help, but evaluate their false accepts and false rejections on labelled examples.
+Resolve citation links from your own source records instead of trusting model-generated URLs. Automated checks or a second model can help compare claims with sources. Test how often the checker lets unsupported claims through and how often it rejects supported claims.
 
 If the retrieved passage only defines the error, the response should say it lacks a supported recovery procedure for 2.4. If two applicable sources disagree, expose that conflict rather than quietly selecting one.
 
@@ -436,14 +504,15 @@ Define failure behavior before shipping:
 | No compatible, authorized recovery passage | Ask for a missing version or say no supported fix was found. |
 | Two applicable sources disagree | Cite the conflicting guidance and ask for disambiguation; don't quietly choose a recovery procedure. |
 | Child points to a missing or mismatched parent revision | Reject that candidate and repair the index relationship; don't substitute an arbitrary latest parent. |
-| One search branch or the reranker times out | Use a tested fallback that preserves access and evidence checks, or return a temporary failure. |
+| Meaning or keyword search times out | Use the surviving search branch only if that fallback has been evaluated. Keep access and evidence checks; otherwise return a temporary failure. |
+| Reranker times out | Use the fused order only if that fallback has been evaluated. Keep access and evidence checks; otherwise return a temporary failure. |
 | Source IDs resolve but recovery claims aren't supported | Revise the response or abstain; don't release it just because citations exist. |
 
-Keep a request trace linking candidate IDs and ranks, fetched parent revisions, selected source IDs and the validation decision. That lets you locate a failure without guessing which stage lost the evidence.
+Keep a **request trace**: a record of candidate IDs and ranks, fetched parent revisions, final source IDs and the validation decision. It shows where a passage was dropped or a claim was rejected.
 
 ## Test the retrieval and the answer separately
 
-Use questions with labelled source passages and an acceptable answer or abstention. Keep tuning questions separate from the held-out set used to judge improvements. Microsoft's guidance distinguishes [retrieval evaluation](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-information-retrieval) from [end-to-end answer evaluation](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase).
+For each test question, record the source passages that should support an answer—or that no supported answer exists. These expected sources are the labels. Use some questions to tune the pipeline and keep a separate **held-out set** for evaluation, so the final check uses questions you didn't tune on. Microsoft's guidance distinguishes [retrieval evaluation](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-information-retrieval) from [end-to-end answer evaluation](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase).
 
 ### Diagnose the failure before changing the model
 
@@ -462,7 +531,7 @@ Suppose the assistant tells the user to restart during an active sync job. Inspe
 }
 ```
 
-If D1 was retrieved but a token limit cut off its last line, increasing the rerank score threshold won't restore the warning. If D1 reached the model intact but the answer contradicted it, investigate generation and validation. Those are different fixes.
+If a token limit cut off D1's warning, fix how context is assembled. If the warning reached the model but the answer contradicted it, investigate generation and validation.
 
 Build cases that distinguish these failures:
 
@@ -484,6 +553,6 @@ Build cases that distinguish these failures:
 - **Answer and citation quality:** Does the response answer the question, preserve the prerequisites and warning, and cite passages that support each recovery claim?
 - **Abstention:** Does it reject unsupported questions while still answering supported ones? A bot that declines everything can appear safe while being useless.
 - **Access isolation:** Do forbidden records stay excluded after permission changes, source deletion, parent expansion and cache reuse?
-- **Latency and cost:** Record embedding, both searches, parent fetches, reranking, generation, validation and retries. Compare end-to-end p50 and p95 as well as stage timings so an average doesn't hide slow requests.
+- **Latency and cost:** Record the time and cost of embedding, both searches, parent fetches, reranking, generation, validation and retries. End-to-end **p50** is the median response time; **p95** is the time within which 95% of requests finish. Track both, plus stage timings, so typical performance doesn't hide slow requests.
 
-Change one part at a time and rerun the same held-out questions. A larger rerank shortlist may improve recall but cost more latency; shorter parents may fit the budget but lose warnings. For our running example, the useful result is concrete: the allowed 2.4 procedure reaches the model intact, the answer preserves its conditions, and missing evidence produces a clear abstention.
+Change one part at a time and rerun the same evaluation questions. A larger shortlist can give more passages a chance but take longer to process; shorter parents may fit the budget but lose warnings. For our running example, the useful result is concrete: the allowed 2.4 procedure reaches the model intact, the answer preserves its conditions, and missing evidence produces a clear abstention.
