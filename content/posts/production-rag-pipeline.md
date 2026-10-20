@@ -1,27 +1,39 @@
 ---
-title: "Production RAG Explained"
-seoTitle: "Production RAG Pipeline: Chunking, Hybrid Search and Reranking"
-youtubeId: "sbBbtV1DqYQ"
-description: "Build a production RAG pipeline: prepare linked chunks, combine semantic and keyword search, enforce access, rerank passages and generate cited answers."
-date: "2026-10-19"
-updated: "2026-10-20"
-category: "Practical AI"
-tags: ["RAG", "Retrieval", "LLMs", "AI Engineering"]
-cover: "/illustrations/articles/production-rag-pipeline.png"
-coverAlt: "A support question passes through scoped hybrid search and reranking to reach an answer linked to a troubleshooting source."
+title: Production RAG Explained
+seoTitle: 'Production RAG Pipeline: Chunking, Hybrid Search and Reranking'
+youtubeId: sbBbtV1DqYQ
+description: >-
+  Build a production RAG pipeline: prepare linked chunks, combine semantic and
+  keyword search, enforce access, rerank passages and generate cited answers.
+date: '2026-10-19'
+updated: '2026-10-20'
+category: Practical AI
+tags:
+  - RAG
+  - Retrieval
+  - LLMs
+  - AI Engineering
+cover: /illustrations/articles/production-rag-pipeline.png
+coverAlt: >-
+  A support question passes through scoped hybrid search and reranking to reach
+  an answer linked to a troubleshooting source.
 coverWidth: 1200
 coverHeight: 630
-takeaway: "A useful RAG answer starts with relevant, authorized, current sources. Retrieve broadly, rerank carefully and check whether the evidence supports the answer."
+takeaway: >-
+  A useful RAG answer starts with relevant, authorized, current sources.
+  Retrieve broadly, rerank carefully and check whether the evidence supports the
+  answer.
+draft: false
 ---
-Your support bot gives a confident fix. You try it. It doesn't work because the bot used a runbook for the wrong product version.
+When an AI agent hallucinates on internal company data, teams usually swap models or consider fine-tuning.The problem though is almost always noisy retrieval and poor context formatting. Instead, build a production-ready RAG pipeline.Retrieval-Augmented Generation (RAG) supplies external context to an LLM at inference time, avoiding expensive fine-tuning. But while it expands the model's working memory, it doesn't clean messy source data or eliminate comprehension errors on its own.
 
-Before swapping the model, check what it was given to read.
+This is Day 8 of the AI Engineering Interview Series. While the video above provides a high-level overview, here we’ll break down the architectural decisions behind making a RAG pipeline production-ready.
 
-**Retrieval-augmented generation (RAG) retrieves source material and puts it into the model's context before it generates an answer.** It can give the model information from your documents without training that information into its weights. It doesn't make those documents correct, or guarantee that the model will use them correctly.
+Let's anchor this with a concrete support query:
 
-This is Day 8 of the AI Engineering Interview Series. The video above covers the pipeline; here we'll work through the decisions behind it.
+**“How do I fix ERR_404_NULL in version 2.4?”**
 
-Let's use one fictional support case: **“How do I fix `ERR_404_NULL` in version 2.4?”** Our `runbook.pdf` has the relevant section. Other documents mention similar errors, older versions and another customer's configuration.
+The exact fix lives in our `runbook.pdf`. However, our knowledge base also contains similar error codes, deprecated v2.1 documentation, and customer-specific configs. Here is how to ensure the model retrieves the exact answer without hallucinating.
 
 ```diagram
 {"title":"From source documents to an answer with evidence","layout":"flow","steps":[{"label":"Prepare sources offline","detail":"Keep each searchable passage linked to its parent and source."},{"label":"Search within access scope","detail":"Combine semantic and keyword candidates for the right product version."},{"label":"Expand and rerank","detail":"Fetch allowed parent passages; score each with the question."},{"label":"Answer or abstain","detail":"Use supported context, cite the source, or explain what is missing."}],"caption":"Access checks apply throughout."}
@@ -29,30 +41,161 @@ Let's use one fictional support case: **“How do I fix `ERR_404_NULL` in versio
 
 ## 1. Index small, retrieve enough context
 
-Chunking decides which pieces of a document can be found independently. If a chunk contains only an error code, search may find it but miss the condition or fix beside it. If the chunk is an entire manual, unrelated content competes with the useful passage.
+Chunking determines which document fragments can be searched independently. A setting like “500 tokens with 50-token overlap” is easy to configure, but it doesn't tell you whether a fragment contains enough information to answer a question.
 
-Start with the document's structure: headings, paragraphs, code blocks and tables. Keep a table header with its values and a warning with the procedure it qualifies. A token count alone won't tell you whether a passage makes sense.
+There are two competing needs: **a precise search match** and **enough context to explain the answer**.
 
-### Keep the child linked to its parent
+- **Too small:** The chunk mentions the error code, but the fix, prerequisites or warning sit in another chunk.
+- **Too large:** The fix shares a chunk with unrelated procedures. That can make the relevant passage harder to retrieve and adds noise to the model's context.
 
-With **parent-document retrieval**, you search small child chunks, then fetch the larger passage behind a match. The child may mention `ERR_404_NULL`; its parent holds the explanation, version requirement and recovery steps. That parent can be a paragraph or section rather than the whole PDF. The [LlamaIndex recursive-retrieval example](https://developers.llamaindex.ai/python/framework/integrations/retrievers/recursive_retriever_nodes/) shows this pattern. Sentence-window retrieval is similar: return the matching sentence with its neighbours.
+Let's follow the same `ERR_404_NULL` question through flat retrieval and parent-child retrieval.
 
-Store enough metadata to preserve that relationship:
+### The runbook we're searching
 
-| Metadata | Why it matters |
-| --- | --- |
-| Chunk ID and parent ID | Find the matching child, fetch its parent and remove duplicate parent results. |
-| Source ID, revision and location | Trace an answer to a specific document version and section or page. |
-| Tenant and permission metadata | Apply the same access rules to indexed chunks and fetched parents. |
-| Product version and update time | Distinguish the applicable fix from an old or unrelated one. |
+For this example, imagine `runbook.pdf` contains the following section. The error and recovery procedure are fictional; they let us compare what each pipeline actually passes to the model.
 
-Use stable IDs so an update can replace the right records. When a source changes, update its children, parents and search indexes together. If old chunks remain searchable beside a new parent, the pipeline can assemble an answer from mismatched revisions.
+> **Section 4.2: Handling ERR_404_NULL**
+>
+> **Prerequisites:** Docker v24+ and Cluster Admin permissions.
+>
+> In version 2.4, this error occurs when the connection pool drops before the handshake finishes.
+>
+> **Fix:** Set `POOL_TIMEOUT=30` in `/etc/app.conf`, then restart the app-worker service with `systemctl restart app-worker`.
+>
+> **Warning:** Do not execute this while active sync jobs are running.
 
-Test chunk size, parent size and overlap on real questions. Overlap can preserve a boundary, but it also creates repeated text. Expanding every hit to a whole document can undo the benefit of precise retrieval.
+The user asks: **“How do I fix ERR_404_NULL in version 2.4?”** An answer needs the procedure and its conditions, not just a passage that repeats the error code.
+
+### A. Flat retrieval: the matching chunk can miss the fix
+
+In a flat setup, the text you index is also the text you send to the model. Suppose fixed-size splitting cuts the section into three independently searchable chunks:
+
+Now suppose search returns chunk 1, but chunks 2 and 3 don't make the final context.
+
+```diagram
+{
+  "title": "Flat retrieval: the fix is in a different chunk",
+  "layout": "comparison",
+  "input": {
+    "label": "Source: runbook section 4.2",
+    "detail": "One section is split into three independently searchable chunks."
+  },
+  "steps": [
+    {
+      "label": "Chunk 1: kept",
+      "detail": "Error heading and prerequisites. This is the only chunk sent to the model."
+    },
+    {
+      "label": "Chunk 2: omitted",
+      "detail": "The version 2.4 condition and connection-pool cause."
+    },
+    {
+      "label": "Chunk 3: omitted",
+      "detail": "The configuration change, restart command and active-sync warning."
+    }
+  ],
+  "caption": "In this example, retrieval finds the error heading but leaves the procedure out of the prompt."
+}
+```
+
+The prompt now contains:
+
+```text
+Context [S1]:
+Section 4.2: Handling ERR_404_NULL.
+Prerequisites: Docker v24+ and Cluster Admin permissions.
+
+Question: How do I fix ERR_404_NULL in version 2.4?
+```
+
+The model has no source-backed fix to give. It should say the evidence is incomplete; if it invents a generic recovery command, that's an unsupported answer.
+
+Flat retrieval can work when chunks are self-contained or when several retrieved chunks supply the missing context. The problem here is the split plus the context selection. Mentioning an exact error code doesn't guarantee the highest vector-similarity score, either; we'll add a lexical signal in section 2.
+
+Increasing chunk size can keep the procedure together, but it also brings more text into search and generation. Bigger chunks aren't automatically worse, and smaller ones aren't automatically more accurate. Test the tradeoff on questions that require the surrounding conditions.
+
+### B. Parent-child retrieval: search the fragment, fetch the section
+
+**Parent-child retrieval separates the search unit from the answer context.** A short child helps locate the relevant passage. Its parent supplies the larger, coherent section behind that match. The [LlamaIndex recursive-retrieval example](https://developers.llamaindex.ai/python/framework/integrations/retrievers/recursive_retriever_nodes/) shows how references connect smaller indexed nodes to larger nodes.
+
+- **Children:** Small searchable fragments, each linked to its parent. One child can describe the error and version; another can describe the fix.
+- **Parent:** The bounded section containing the prerequisites, cause, procedure and warning.
+- **Storage:** Keep child text, embeddings and metadata available to the vector and lexical indexes, and parent text in a document store. Redis, MongoDB or SQLite are possible choices; a single system can also hold both if it supports the required lookups.
+
+For a starting experiment, children might contain 30–60 words and parents 150–500 words. Those are illustrative ranges, not requirements. Our short runbook section can stay smaller. Preserve a coherent procedure and measure retrieval quality instead of padding text to reach a number.
+
+The error child might look like this:
+
+```json
+{
+  "chunk_id": "child_runbook_402_error",
+  "parent_id": "parent_runbook_sec_402",
+  "source_id": "runbook.pdf",
+  "source_revision": "rev-17",
+  "product_version": "2.4"
+}
+```
+
+The fix child has its own `chunk_id` but shares that `parent_id` and revision. Tenant and document permissions must travel with these records too.
+
+At query time:
+
+1. **Retrieve a child.** Search finds an allowed fragment relevant to the error and version.
+2. **Read its parent reference.** Use `parent_id` and `source_revision` to identify the matching section.
+3. **Fetch the allowed parent.** Recheck access and revision, then retrieve section 4.2. If multiple children point to it, include the parent once.
+4. **Assemble the context.** Use that bounded parent in place of the isolated child. In the pipeline below, rerank the expanded passages before selecting the final context.
+
+```diagram
+{
+  "title": "Parent-child retrieval: two children, one section",
+  "layout": "comparison",
+  "steps": [
+    {
+      "label": "Matched child",
+      "detail": "ERR_404_NULL in version 2.4. Links to section 4.2, rev-17."
+    },
+    {
+      "label": "Sibling child",
+      "detail": "POOL_TIMEOUT=30 and app-worker restart. Links to section 4.2, rev-17."
+    }
+  ],
+  "output": {
+    "label": "Shared parent: section 4.2, rev-17",
+    "detail": "Fetch the prerequisites, cause, complete fix and active-sync warning together."
+  },
+  "caption": "Search the children. Follow parent_id from a matching child to fetch its allowed parent; include that section once."
+}
+```
+
+The question stays the same. The context now includes the complete runbook section above, so an answer can preserve the conditions around the fix:
+
+> “For version 2.4, first confirm Docker v24+, Cluster Admin permissions and that no sync jobs are active. Set `POOL_TIMEOUT=30` in `/etc/app.conf`, then run `systemctl restart app-worker` [S1].”
+
+Parent expansion makes the missing evidence available. It doesn't guarantee the answer will use it correctly; citation and claim checks still matter.
+
+### A related option: sentence-window retrieval
+
+**Sentence-window retrieval** indexes individual sentences and expands a match to nearby sentences before generation. For example, a window might include three sentences before and three after the match. The [LlamaIndex sentence-window example](https://developers.llamaindex.ai/python/examples/node_postprocessor/metadatareplacementdemo/) demonstrates replacing a retrieved sentence with its stored surrounding context.
+
+This is useful for continuous prose, such as transcripts or reports, where headings don't reliably identify complete answer sections. Parent-child retrieval is a useful fit for structured runbooks, manuals and API documentation. Test both against the shape of your documents.
+
+A sentence window can still cross a section boundary or miss a distant warning. Keep it within the permitted document revision and cap its size.
+
+### Production rules that keep the relationship intact
+
+| Rule | What to do | What it prevents |
+| --- | --- | --- |
+| Preserve semantic boundaries | Split around headings, paragraphs, code blocks and tables. Keep warnings with their procedures and table headers with their rows. | A matching fragment loses the conditions needed to interpret it. |
+| Keep stable IDs and explicit revisions | Store child, parent and source IDs, source revision, location, product version and access metadata. Resolve the parent from the same revision as the child. | An old search hit is paired with a new procedure or the wrong customer's section. |
+| Publish a complete revision | Stage the new parents and child records, verify their links, then switch the active revision. Use a transaction where the storage supports one; separate databases don't necessarily share a transaction. Propagate updates and deletions to both indexes and caches. | Missing parents, stale children and answers assembled from mixed revisions. |
+| Bound the expansion | Fetch the relevant parent section, deduplicate it and enforce per-passage and total context budgets. | Every small hit expands into an entire PDF and crowds out useful evidence. |
+
+Tune child size, parent size and overlap together. Overlap can preserve a boundary, but it can also repeat text. The test is whether the allowed context contains the complete answer, including the version, prerequisites and warning.
+
 
 ## 2. Search by meaning and by the words that matter
 
-An embedding model turns each passage into a vector, and a vector database finds nearby ones using a configured similarity measure. That lets “The app can't find my record” match a runbook section about failed lookups even when the wording differs.
+An embedding model turns each passage into a vector, and a vector database finds nearby ones using a configured similarity measure. That lets “The worker keeps losing its connection” match a runbook section about a connection pool dropping during a handshake, even when the wording differs.
 
 Identifiers need extra care. A passage about `ERR_404_NULL` and one about `ERR_404_AUTH` can look similar while requiring different fixes. Dense retrieval can find exact codes, but it may not rank the right one first.
 
@@ -109,16 +252,18 @@ Source: S1
 Document: runbook.pdf
 Revision: rev-17
 Product version: 2.4
-Section: Lookup failures
+Section: 4.2 — Handling ERR_404_NULL
 
-ERR_404_NULL:
-No active mapping exists.
-Create an active mapping, then retry.
+Prerequisites: Docker v24+ and Cluster Admin permissions.
+Cause: The connection pool drops before the handshake finishes.
+Fix: Set POOL_TIMEOUT=30 in /etc/app.conf, then run
+systemctl restart app-worker.
+Warning: Do not execute while active sync jobs are running.
 ```
 
 Keep the source content separate from application instructions. Tell the model to answer the question using the supplied evidence, cite source IDs beside supported claims and say when the evidence is insufficient. If two sources conflict, have it report the conflict rather than quietly choosing a convenient answer.
 
-For this example, an answer might be: “In version 2.4, check for an active mapping before retrying the lookup [S1].” If no retrieved passage explains the fix, “I couldn't find a supported fix for version 2.4” is more useful than a confident guess.
+For this example, a citation should cover both the recovery procedure and its conditions: “Once the prerequisites are met and no sync jobs are active, set `POOL_TIMEOUT=30` and restart `app-worker` \[S1].” If no retrieved passage explains the fix, “I couldn't find a supported fix for version 2.4” is more useful than a confident guess.
 
 ### Check the citation, then check the claim
 
@@ -170,16 +315,16 @@ If the answer is wrong, first ask whether the right passage ever reached the mod
 
 Build a small labelled set from real support questions, with the expected source and acceptable answer or abstention. Keep tuning examples separate from your final evaluation set. Microsoft's guidance separates [retrieval evaluation](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-information-retrieval) from [end-to-end answer evaluation](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase), which helps locate the failure.
 
-| Test case | What it should catch |
-| --- | --- |
-| Correct code and version | The applicable recovery passage reaches the final context and supports the answer. |
-| Similar-looking code | The system distinguishes `ERR_404_NULL` from a different error. |
-| Different wording | Semantic retrieval finds the runbook without requiring the exact document sentence. |
-| Missing answer | The assistant says what is missing or asks a useful question. |
-| Old product version | A stale fix doesn't silently become current guidance. |
+| Test case                          | What it should catch                                                                       |
+| ---------------------------------- | ------------------------------------------------------------------------------------------ |
+| Correct code and version           | The applicable recovery passage reaches the final context and supports the answer.         |
+| Similar-looking code               | The system distinguishes `ERR_404_NULL` from a different error.                            |
+| Different wording                  | Semantic retrieval finds the runbook without requiring the exact document sentence.        |
+| Missing answer                     | The assistant says what is missing or asks a useful question.                              |
+| Old product version                | A stale fix doesn't silently become current guidance.                                      |
 | Another tenant's matching document | No unauthorized content appears in candidates, parent fetches, cache responses or answers. |
-| Revoked or deleted source | Old permissions and removed passages stop being usable through indexes and caches. |
-| Instruction hidden in a document | Retrieved text cannot grant tool permissions or override application controls. |
+| Revoked or deleted source          | Old permissions and removed passages stop being usable through indexes and caches.         |
+| Instruction hidden in a document   | Retrieved text cannot grant tool permissions or override application controls.             |
 
 Measure different parts of the path:
 
