@@ -217,13 +217,13 @@ Neither branch settles the question by itself. A glossary can repeat `ERR_404_NU
 
 ### Walk through a hybrid result
 
-Suppose the two searches return these ranks. Each example hit belongs to a different parent passage, and all three are authorized and applicable to version 2.4. `D1`–`D3` are short aliases; keep the actual chunk IDs consistent across both branches.
+Together, the searches return three passages, all authorized and applicable to version 2.4. `D1`–`D3` identify the passages; they aren't ranking positions. Each hit points to a different parent. In the search columns, **rank 1 means first**.
 
-| Candidate | Dense rank | Lexical rank | RRF score, c = 60 |
+| Retrieved passage | Dense rank | Lexical rank | RRF score, c = 60 |
 | --- | --- | --- | --- |
-| D1: the recovery runbook from section 1 | 3 | 1 | 0.03227 |
-| D2: a glossary defining the error | 1 | 2 | 0.03252 |
-| D3: a general worker-startup checklist | 2 | — | 0.01613 |
+| `D1` · Recovery runbook | 3 | 1 | 0.03227 |
+| `D2` · Error glossary | 1 | 2 | 0.03252 |
+| `D3` · Startup checklist | 2 | — | 0.01613 |
 
 The dash means D3 is absent from the retained lexical results. These rankings are illustrative, not a prediction of how every embedding model will behave.
 
