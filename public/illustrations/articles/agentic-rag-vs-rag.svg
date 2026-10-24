@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Agentic RAG compared with standard RAG</title>
+  <desc id="desc">A fixed retrieval path sits beside an evidence-driven loop. The comparison emphasizes that application code controls standard RAG while the model chooses the next retrieval in agentic RAG.</desc>
+  <defs>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#31444a" stroke-width="1" opacity=".3"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M2 2L9 6L2 10" fill="none" stroke="context-stroke" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="#101b20"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="26" y="26" width="1148" height="578" rx="24" fill="none" stroke="#42575e" stroke-width="2"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="64" y="75" fill="#8fa4aa" font-size="20" font-weight="700" letter-spacing="2">AI ENGINEERING</text>
+    <text x="1136" y="75" fill="#8fa4aa" font-size="20" font-weight="700" text-anchor="end">CONTROL FLOW</text>
+    <text x="64" y="151" fill="#f4f0e6" font-size="62" font-weight="700">Agentic RAG vs RAG</text>
+    <text x="64" y="190" fill="#b7c7ca" font-size="25">The difference is who chooses the next retrieval.</text>
+
+    <rect x="64" y="232" width="496" height="292" rx="22" fill="#18272c" stroke="#6d858b" stroke-width="2"/>
+    <rect x="640" y="232" width="496" height="292" rx="22" fill="#18272c" stroke="#52d6c6" stroke-width="3"/>
+
+    <text x="96" y="278" fill="#b7c7ca" font-size="18" font-weight="700" letter-spacing="1.5">STANDARD RAG</text>
+    <text x="672" y="278" fill="#52d6c6" font-size="18" font-weight="700" letter-spacing="1.5">AGENTIC RAG</text>
+
+    <g fill="none" stroke="#9fb0b4" stroke-width="4" marker-end="url(#arrow)">
+      <path d="M188 365H202"/>
+      <path d="M308 365H322"/>
+      <path d="M428 365H442"/>
+    </g>
+    <g fill="#f4f0e6" stroke="#6d858b" stroke-width="2">
+      <rect x="88" y="325" width="100" height="80" rx="14"/>
+      <rect x="208" y="325" width="100" height="80" rx="14"/>
+      <rect x="328" y="325" width="100" height="80" rx="14"/>
+      <rect x="448" y="325" width="86" height="80" rx="14"/>
+    </g>
+    <g fill="#18272c" font-size="18" font-weight="700" text-anchor="middle">
+      <text x="138" y="371">Query</text>
+      <text x="258" y="371">Retrieve</text>
+      <text x="378" y="371">Rerank</text>
+      <text x="491" y="371">Answer</text>
+    </g>
+    <text x="312" y="464" fill="#b7c7ca" font-size="21" text-anchor="middle">Application code defines the path</text>
+
+    <g fill="#f4f0e6" stroke="#52d6c6" stroke-width="2.5">
+      <rect x="680" y="316" width="126" height="74" rx="14"/>
+      <rect x="874" y="316" width="126" height="74" rx="14"/>
+      <rect x="777" y="423" width="126" height="74" rx="14"/>
+    </g>
+    <g fill="#18272c" font-size="17" font-weight="700" text-anchor="middle">
+      <text x="743" y="359">Search</text>
+      <text x="937" y="359">Read evidence</text>
+      <text x="840" y="453">Choose next</text>
+      <text x="840" y="476">retrieval</text>
+    </g>
+    <g fill="none" stroke="#52d6c6" stroke-width="4" marker-end="url(#arrow)">
+      <path d="M806 353H866"/>
+      <path d="M937 390C937 420 923 438 911 448"/>
+      <path d="M777 460C729 456 708 432 708 397"/>
+    </g>
+
+    <rect x="408" y="555" width="384" height="37" rx="18.5" fill="#21343a"/>
+    <text x="600" y="581" fill="#f4f0e6" font-size="19" font-weight="700" text-anchor="middle">Permissions and validation stay in the app</text>
+  </g>
+</svg>
