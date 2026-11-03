@@ -76,6 +76,7 @@ export function getBlogSeoChecks(document: AuditDocument, site: { url: string; n
     let pageUrl: URL | undefined;
     try { pageUrl = new URL(`/blog/${slug}`, site.url); } catch { /* A partial site URL should not crash the editor. */ }
     function checkLink(value: string) {
+      if (value === "#highlight") return;
       if (!pageUrl) return;
       let target: URL;
       try { target = new URL(value, pageUrl); } catch { invalidLinks.add(value); return; }

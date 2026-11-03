@@ -392,6 +392,31 @@
 .prose-custom tbody tr:last-child td {
   border-bottom: 0;
 }
+.prose-custom .article-table tr:has(.table-highlight) > td {
+  background: var(--brand-100);
+  color: var(--text);
+}
+.prose-custom .article-table tr:has(.table-highlight) > td:first-child {
+  box-shadow: inset 3px 0 var(--brand-700), 1px 0 var(--border);
+}
+.prose-custom .table-highlight {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
+}
+.prose-custom .table-highlight-label {
+  padding: 2px 8px;
+  border: 1px solid var(--brand-700);
+  border-radius: 4px;
+  color: var(--brand-700);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
 .prose-custom table:has(th:nth-child(3)) {
   min-width: 600px;
 }

@@ -70,6 +70,12 @@ test("local link checks handle relative paths and encoded anchors but skip exter
   assert.equal(check(incompleteSite, "links").status, "warning");
 });
 
+test("table highlight markers do not count as broken section links", () => {
+  const content = '## Results\n\n| Score |\n| --- |\n| [84%](#highlight "Peak validation") |';
+  assert.equal(check(audit(content), "links").status, "pass");
+  assert.equal(check(audit(`${content}\n\n[Missing section](#missing)`), "links").status, "warning");
+});
+
 test("duplicates compare effective overrides and normalized whitespace without matching the current article", () => {
   const posts = [{ slug: "current-article", ...metadata }, { slug: "duplicate", ...metadata, title: "Other visible title", seoTitle: " a useful ARTICLE | author ", seoDescription: "A clear  description of this article." }];
   const duplicate = audit("## Content\n\nText", {}, posts);
