@@ -40,6 +40,15 @@ export function MarkdownContent({ content }: { content: string }) {
           [rehypeHighlight, { ignoreMissing: true, detect: false }],
         ]}
         components={{
+          a: ({ href, title, children }) =>
+            href === "#highlight" ? (
+              <mark className="table-highlight">
+                {children}
+                {title && <span className="table-highlight-label">{title}</span>}
+              </mark>
+            ) : (
+              <a href={href} title={title}>{children}</a>
+            ),
           h2: ({ id, children }) => (
             <Heading level={2} id={id}>
               {children}

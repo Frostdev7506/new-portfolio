@@ -1,5 +1,5 @@
 export const notebook = {
-  tagline: "Full-stack developer · India",
+  tagline: "Fullstack AI Engineer · India",
   blogTitle: "Blog",
   blogIntro: "Web development, AI, and the decisions behind the code.",
   featuredSlugs: [
