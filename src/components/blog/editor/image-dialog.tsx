@@ -37,7 +37,7 @@ function ImageForm({ initialValues, editing }: {
     setError("");
     setBusy(true);
     try {
-      if (file && file.size > 5 * 1024 * 1024) throw new Error("Images must be 5 MB or smaller.");
+      if (file && file.size > 10 * 1024 * 1024) throw new Error("Images must be 10 MB or smaller.");
       if (file && !uploadImage) throw new Error("Image uploads are unavailable.");
       const source = getArticleImageSource(file && uploadImage ? await uploadImage(file) : src.trim());
       if (!source) throw new Error("Choose an image file, a local path beginning with /, or an HTTPS image URL.");
@@ -73,7 +73,7 @@ function ImageForm({ initialValues, editing }: {
                     aria-describedby={`${id}-file-hint`}
                     onChange={(event) => setFile(event.target.files?.[0] ?? null)}
                   />
-                  <small id={`${id}-file-hint`}>PNG, JPEG, WebP or GIF, up to 5 MB.</small>
+                  <small id={`${id}-file-hint`}>PNG, JPEG, WebP or GIF, up to 10 MB.</small>
                   {file && <Button type="button" variant="ghost" size="sm" onClick={() => { setFile(null); if (fileInput.current) fileInput.current.value = ""; }}>Remove selected file</Button>}
                 </div>
               )}

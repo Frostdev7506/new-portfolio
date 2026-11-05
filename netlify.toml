@@ -1,0 +1,10 @@
+# Netlify serves files from public/ through its own static layer, so the
+# Cache-Control rule in next.config.ts never reaches these responses. Five days
+# bounds how long a replaced illustration can stay stale in a returning browser.
+#
+# Build settings stay in the Netlify UI; this file only adds response headers.
+
+[[headers]]
+  for = "/illustrations/*"
+  [headers.values]
+    Cache-Control = "public, max-age=432000"

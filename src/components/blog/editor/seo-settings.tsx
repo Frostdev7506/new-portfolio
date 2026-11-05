@@ -107,7 +107,7 @@ export function SeoSettings({ document, covers, posts, onChange, onError }: Prop
       <small id={`seo-${key}-hint`}>Choose an existing PNG, JPEG, WebP or GIF. SVG artwork can remain in the article; use a raster image for sharing.</small>
     </div>
     <Button asChild variant="outline" className="studio-upload"><label><Upload size={16} />{uploading === key ? "Uploading…" : `Upload ${key === "ogImage" ? "social" : "X"} image`}<input type="file" aria-label={`Upload ${key === "ogImage" ? "social" : "X"} image`} accept="image/png,image/jpeg,image/webp,image/gif" disabled={uploading !== null} onChange={(event) => { const file = event.target.files?.[0]; if (file) void upload(file, key); event.target.value = ""; }} /></label></Button>
-    <small className="studio-upload-help">Up to 5 MB. Use a landscape image around 1200 × 630 for large cards.</small>
+    <small className="studio-upload-help">Up to 10 MB. Use a landscape image around 1200 × 630 for large cards.</small>
   </div>;
 
   return (

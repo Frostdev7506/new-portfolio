@@ -350,9 +350,13 @@ test("image uploads verify signature, ignore user filenames and reject SVG or ov
   const result = await uploadEditorImage(imageRequest(png, "../../unsafe.svg", "image/svg+xml"), root);
   assert.match(result.url, /^\/illustrations\/blog\/[a-f0-9-]+\.png$/);
   assert.deepEqual(await fs.readFile(path.join(root, "public", result.url)), png);
+  const largestImage = Buffer.alloc(10 * 1024 * 1024);
+  png.copy(largestImage);
+  const largestResult = await uploadEditorImage(imageRequest(largestImage), root);
+  assert.deepEqual(await fs.readFile(path.join(root, "public", largestResult.url)), largestImage);
   await assert.rejects(uploadEditorImage(imageRequest(Buffer.from("<svg onload='alert(1)'/>")), root), { status: 400 });
-  await assert.rejects(uploadEditorImage(imageRequest(Buffer.alloc(5 * 1024 * 1024 + 1)), root), { status: 413 });
-  assert.equal((await fs.readdir(path.join(root, "public", "illustrations", "blog"))).length, 1);
+  await assert.rejects(uploadEditorImage(imageRequest(Buffer.alloc(10 * 1024 * 1024 + 1)), root), { status: 413 });
+  assert.equal((await fs.readdir(path.join(root, "public", "illustrations", "blog"))).length, 2);
 }));
 
 

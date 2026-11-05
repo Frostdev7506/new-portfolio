@@ -92,7 +92,7 @@ export function ArticleSettings({ metadata, covers, onChange, onError }: Props) 
                 }} />
               </label>
             </Button>
-            <small>PNG, JPEG, WebP or GIF · up to 5 MB</small>
+            <small>PNG, JPEG, WebP or GIF · up to 10 MB</small>
             {field("coverAlt", "Image description", { multiline: true, hint: "Describe the image for readers using a screen reader." })}
             <div className="studio-field-grid">
               {(["coverWidth", "coverHeight"] as const).map((key) => (
