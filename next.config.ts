@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   compress: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Keep optimized variants for five days as well. The upstream file rule below only
+    // covers the raw file; browsers load images through /_next/image.
+    minimumCacheTTL: 432000,
     remotePatterns: [
       {
         protocol: "https",
@@ -109,11 +112,13 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/(.*)\\.(svg|jpg|jpeg|png|webp|avif|ico)$",
+        // Illustration filenames are stable, so a long TTL can pin replaced artwork.
+        // Five days bounds how long a corrected image stays stale in a returning browser.
+        source: "/(.*)\\.(svg|jpg|jpeg|png|webp|avif|ico)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=432000",
           },
         ],
       },
