@@ -87,7 +87,6 @@ export const homeNotebook = {
   },
   contactAction: "Let’s talk.",
   projects: {
-    eyebrow: "Projects",
     title: "Things I’ve built.",
   },
   about: [

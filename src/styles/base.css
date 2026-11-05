@@ -84,9 +84,6 @@ video {
   flex-shrink: 0;
   stroke-width: 1.75;
 }
-.mono {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-}
 .eyebrow {
   color: var(--brand-700);
   font-size: var(--text-small);

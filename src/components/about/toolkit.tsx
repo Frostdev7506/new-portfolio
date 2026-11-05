@@ -8,24 +8,21 @@ const icons = {
   cloud: Cloud,
 };
 
-export function Toolkit({ compact = false }: { compact?: boolean }) {
-  const groups = compact ? toolkit.filter((group) => group.showOnHome) : toolkit;
-
+export function Toolkit() {
   return (
     <section
-      aria-label={compact ? "My toolkit" : undefined}
-      aria-labelledby={compact ? undefined : "toolkit-title"}
+      aria-labelledby="toolkit-title"
       id="tech-stack"
-      className={compact ? "compact-toolkit" : "section-block toolkit"}
+      className="section-block toolkit"
     >
-      {!compact && <h2 id="toolkit-title">What I work with</h2>}
+      <h2 id="toolkit-title">What I work with</h2>
       <div className="toolkit-grid">
-        {groups.map((group) => {
+        {toolkit.map((group) => {
           const Icon = icons[group.icon];
           return (
             <div key={group.title} className="toolkit-item">
               <Icon
-                size={compact ? 32 : 42}
+                size={42}
                 strokeWidth={1.5}
                 aria-hidden="true"
               />

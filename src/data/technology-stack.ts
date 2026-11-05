@@ -5,7 +5,6 @@ export type Technology = {
 };
 
 export const technologyStackCopy = {
-  eyebrow: "My toolkit.",
   title: "Across the stack.",
   mern: "MERN",
   cloud: "Cloud platforms",
