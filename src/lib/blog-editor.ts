@@ -12,7 +12,7 @@ import type {
 } from "./blog-editor-types.ts";
 
 const MAX_DOCUMENT_BYTES = 1024 * 1024;
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 const requiredStrings = [
   "title", "description", "category", "takeaway", "cover", "coverAlt", "date",
 ] as const;
@@ -362,7 +362,7 @@ export async function uploadEditorImage(request: Request, root = process.cwd()) 
   }
   const file = form.get("file");
   if (!(file instanceof File) || file.size === 0) throw new BlogEditorError(400, "Choose an image to upload.");
-  if (file.size > MAX_IMAGE_BYTES) throw new BlogEditorError(413, "Images must be 5 MB or smaller.");
+  if (file.size > MAX_IMAGE_BYTES) throw new BlogEditorError(413, "Images must be 10 MB or smaller.");
   const image = Buffer.from(await file.arrayBuffer());
   let extension: string | undefined;
   if (image.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) extension = "png";
