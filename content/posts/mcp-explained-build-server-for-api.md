@@ -20,7 +20,7 @@ cover: /illustrations/articles/mcp-api-production-guide.png
 coverAlt: A request flows from an AI assistant through an MCP server to a support API.
 coverWidth: 1920
 coverHeight: 1080
-draft: true
+draft: false
 ---
 Suppose you have a support product. It already has an API. A customer asks an AI assistant, “What happened to ticket T104?”
 
