@@ -39,14 +39,6 @@
 .featured-carousel-controls {
   gap: 20px;
 }
-.featured-position-count {
-  color: var(--text-muted);
-  font-size: 13px;
-  font-variant-numeric: tabular-nums;
-}
-.featured-count-divider {
-  margin-inline: 4px;
-}
 .featured-arrow-buttons button {
   border-radius: 50%;
   background: var(--surface-soft);

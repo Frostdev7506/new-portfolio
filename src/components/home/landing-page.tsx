@@ -29,7 +29,7 @@ export function LandingPage() {
             alt="A browser, a server, and an open notebook connected by a teal cable."
             width={1254}
             height={1254}
-            sizes="(max-width: 700px) 90vw, (max-width: 1100px) 42vw, 520px"
+            sizes="(max-width: 700px) 288px, (max-width: 1000px) 40vw, 480px"
             priority
           />
         </div>

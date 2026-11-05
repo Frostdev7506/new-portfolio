@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Résumé",
   description:
-    "Neeraj Butola’s full-stack and cloud engineering experience, projects, and skills.",
+    `Neeraj Butola’s experience, projects, and skills as a ${siteConfig.role}.`,
   path: "/resume",
 });
 

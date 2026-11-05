@@ -4,13 +4,12 @@ import { Toolkit } from "@/components/about/toolkit";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PageIntro } from "@/components/shared/page-intro";
 import { TextLink } from "@/components/shared/text-link";
-import { education, certifications } from "@/data/notebook";
+import { education, certifications, notebook } from "@/data/notebook";
 import { buildPageMetadata, profilePageJsonLd, serializeJsonLd } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
   title: "About",
-  description:
-    "I’m Neeraj Butola, a full-stack developer building web applications, APIs, and cloud systems.",
+  description: notebook.about[0],
   path: "/about",
 });
 

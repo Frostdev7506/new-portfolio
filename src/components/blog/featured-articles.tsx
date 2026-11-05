@@ -72,10 +72,10 @@ export function FeaturedArticles({ posts }: { posts: PostSummary[] }) {
         <h2 id="featured-title">Featured</h2>
         {posts.length > 1 && (
           <div className="featured-carousel-controls">
-            <p className="featured-position-count" role="status" aria-atomic="true">
-              <span className="sr-only">Showing featured articles </span>
+            <p className="sr-only" role="status" aria-atomic="true">
+              Showing featured articles {" "}
               {visible.first + 1}{visible.last > visible.first && `–${visible.last + 1}`}
-              <span className="featured-count-divider"> / </span>
+              {" of "}
               {posts.length}
             </p>
             <div className="featured-arrow-buttons">
