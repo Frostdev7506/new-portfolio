@@ -19,6 +19,15 @@ const posts = await Promise.all(
   ),
 );
 
+test("the MCP guide includes its cover and local illustrations", async () => {
+  const guide = posts.find((post) => post.slug === "mcp-explained-build-server-for-api");
+  assert.ok(guide);
+  const illustrations = [...guide.content.matchAll(/!\[[^\]]*\]\((\/[^\s)]+)/g)].map((match) => match[1]);
+  for (const image of [guide.cover, ...illustrations]) {
+    await access(`public${image}`);
+  }
+});
+
 test("series URLs redirect permanently to articles with the matching video and short SEO title", async () => {
   const redirects = await nextConfig.redirects();
   for (const [oldSlug, slug, youtubeId] of [
