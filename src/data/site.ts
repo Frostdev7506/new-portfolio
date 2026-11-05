@@ -39,11 +39,6 @@ export const siteConfig = {
     "React/Next.js",
     "Node/Express",
   ],
-  stats: [
-    { label: "Experience", value: "4+ yrs" },
-    { label: "Projects", value: "50+" },
-    { label: "Uptime", value: "99.9%" },
-  ],
 };
 
 export const defaultKeywords = [

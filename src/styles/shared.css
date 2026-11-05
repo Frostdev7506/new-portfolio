@@ -75,12 +75,6 @@
 .text-link:hover {
   text-decoration: underline;
 }
-.quiet-link {
-  color: var(--text);
-  font-size: var(--text-action);
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
 .section-block {
   padding-block: var(--section-space);
 }

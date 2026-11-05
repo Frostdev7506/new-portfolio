@@ -35,10 +35,6 @@ export async function getPostSlugs() {
   return (await getAllPosts()).map((post) => post.slug);
 }
 
-export async function getRecentPosts(limit = 2) {
-  return (await getAllPosts()).slice(0, limit);
-}
-
 export function getBlogPostUrl(slug: string) {
   return `${siteConfig.url}/blog/${slug}`;
 }

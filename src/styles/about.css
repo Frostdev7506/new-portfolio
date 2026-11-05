@@ -166,12 +166,6 @@
   font-size: 17px;
   line-height: 1.7;
 }
-.compact-toolkit {
-  padding-block: var(--section-space);
-}
-.compact-toolkit .toolkit-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 .education-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
@@ -246,8 +240,7 @@
     display: block;
     margin-top: 8px;
   }
-  .toolkit-grid,
-  .compact-toolkit .toolkit-grid {
+  .toolkit-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
