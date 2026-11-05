@@ -1,21 +1,18 @@
 .landing-page .lp-work {
-  padding-block: 96px;
-  scroll-margin-top: 96px;
+  padding-block: var(--landing-section-space);
 }
 .landing-page .lp-work > .project-index {
   padding-block: 0;
 }
-.landing-page .lp-work .project-index h2,
-.landing-page .lp-toolkit h2 {
-  font-family: var(--font-editorial), Georgia, serif;
-  font-size: clamp(2.5rem, 4.2vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+.landing-page .lp-work .project-choice {
+  border-radius: 0 8px 8px 0;
+  transition: background-color 160ms ease;
+}
+.landing-page .lp-work .project-choice:hover {
+  background: var(--brand-100);
 }
 .landing-page .lp-toolkit {
-  padding-block: 96px;
-  scroll-margin-top: 96px;
+  padding-block: var(--landing-section-space);
   background: var(--brand-100);
 }
 .landing-page .lp-toolkit-layout {
@@ -25,7 +22,7 @@
   align-items: start;
 }
 .landing-page .lp-toolkit h2 {
-  max-width: 7ch;
+  max-width: 10ch;
 }
 .landing-page .lp-technology-groups {
   display: grid;
@@ -97,7 +94,7 @@
 @media (max-width: 1100px) {
   .landing-page .lp-toolkit-layout {
     grid-template-columns: minmax(0, 0.65fr) minmax(0, 2fr);
-    gap: 40px;
+    gap: 32px;
   }
   .landing-page .lp-technology-row {
     grid-template-columns: minmax(0, 1fr);
@@ -112,11 +109,29 @@
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
   }
 }
-@media (max-width: 700px) {
-  .landing-page .lp-work,
-  .landing-page .lp-toolkit {
-    padding-block: 64px;
+@media (max-width: 900px) {
+  .landing-page .lp-work .project-explorer {
+    gap: 24px;
   }
+  .landing-page .lp-work .section-heading-row {
+    align-items: baseline;
+    gap: 8px 16px;
+  }
+  .landing-page .lp-work .project-index-list {
+    gap: 4px;
+  }
+  .landing-page .lp-work .project-choice {
+    gap: 4px;
+    padding: 12px 16px;
+  }
+  .landing-page .lp-work .project-choice-title {
+    font-size: 1.0625rem;
+  }
+  .landing-page .lp-work .project-summary {
+    font-size: 0.875rem;
+  }
+}
+@media (max-width: 700px) {
   .landing-page .lp-toolkit-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;

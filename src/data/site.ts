@@ -3,11 +3,11 @@ import { getNewsletterUrl } from "../lib/newsletter.ts";
 export const siteConfig = {
   name: "Neeraj Butola",
   shortName: "DevelopedByNeeraj",
-  role: "Full-Stack MERN + Cloud Engineer",
+  role: "Fullstack AI Engineer",
   description:
-    "Neeraj Butola’s open notebook: web applications, cloud systems, projects, and notes on what I learn along the way.",
+    "Neeraj Butola’s open notebook: fullstack AI engineering, web applications, cloud systems, and notes on what I learn along the way.",
   longDescription:
-    "I build web applications and cloud systems, and write about what I learn along the way.",
+    "I’m a Fullstack AI Engineer. I build web applications and cloud systems, and write about what I learn along the way.",
   url: process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "") || "https://neerajbutola.in",
   locale: "en_US",
   language: "en",
@@ -43,6 +43,7 @@ export const siteConfig = {
 
 export const defaultKeywords = [
   "Neeraj Butola",
+  "Fullstack AI Engineer",
   "MERN developer",
   "Next.js developer portfolio",
   "full stack developer",

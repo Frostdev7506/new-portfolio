@@ -48,8 +48,10 @@
   background: var(--surface);
 }
 .blog-search:focus-within {
+  border-color: var(--brand-700);
   outline: 2px solid var(--brand-700);
-  outline-offset: 3px;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-700) 18%, transparent);
 }
 .blog-search > svg {
   flex-shrink: 0;

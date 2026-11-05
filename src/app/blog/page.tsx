@@ -71,7 +71,6 @@ export default async function BlogPage() {
       <PageIntro
         className="blog-intro"
         title={notebook.blogTitle}
-        description={notebook.blogIntro}
       />
       <FeaturedArticles posts={featured} />
       <BlogExplorer posts={posts} />

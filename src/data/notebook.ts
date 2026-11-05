@@ -1,7 +1,6 @@
 export const notebook = {
   tagline: "Fullstack AI Engineer · India",
   blogTitle: "Blog",
-  blogIntro: "Web development, AI, and the decisions behind the code.",
   featuredSlugs: [
     "llm-model-routing",
     "optimistic-uploads",
@@ -14,7 +13,7 @@ export const notebook = {
   projectsDescription:
     "Web applications, experiments, and the things I’ve built along the way.",
   about: [
-    "I’m Neeraj Butola, a full-stack developer based in India. I build web applications, APIs, and the cloud systems that connect them.",
+    "I’m Neeraj Butola, a Fullstack AI Engineer based in India. I build web applications, APIs, and the cloud systems that connect them.",
     "My work spans fintech products, workflow automation, and full-stack applications. I enjoy turning complex requirements into software people can use.",
     "This site brings together my projects, blog, and what I learn along the way.",
   ],
@@ -79,9 +78,10 @@ export const certifications = [
 ];
 
 export const homeNotebook = {
-  eyebrow: "Portfolio / Blog",
+  eyebrow: "Hi, I’m Neeraj.",
   title: ["I build for the web.", "And write things down."],
-  description: "Fullstack Engineer. Who is somewhat curious!!",
+  description:
+    "Fullstack AI Engineer, curious by default. I build for the web and share what I learn along the way.",
   actions: {
     blog: "Read the blog",
   },
