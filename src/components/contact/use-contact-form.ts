@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
+import posthog from "posthog-js";
 import { siteConfig } from "@/data/site";
 import { contactMailto, validateContact, type ContactErrors } from "@/lib/contact";
 
@@ -31,6 +32,9 @@ export function useContactForm() {
     setDraftLink("");
 
     if (Object.keys(nextErrors).length) {
+      posthog.capture("contact_form_validation_failed", {
+        invalid_field_count: Object.keys(nextErrors).length,
+      });
       setStatus("Please check the highlighted fields.");
       let firstField = "message";
       if (nextErrors.name) firstField = "user_name";
@@ -40,6 +44,9 @@ export function useContactForm() {
     }
 
     if (!serviceId || !templateId || !publicKey) {
+      posthog.capture("contact_form_email_draft_prepared", {
+        reason: "delivery_not_configured",
+      });
       setDraftLink(contactMailto(siteConfig.email, values));
       setStatus(
         "Your email is ready. Open it in your email app to review and send.",
@@ -61,9 +68,14 @@ export function useContactForm() {
         },
         { publicKey },
       );
+      posthog.capture("contact_form_sent", { delivery_method: "emailjs" });
       setStatus("Thanks — your message has been sent.");
       form.reset();
     } catch {
+      posthog.capture("contact_form_send_failed", { delivery_method: "emailjs" });
+      posthog.capture("contact_form_email_draft_prepared", {
+        reason: "delivery_failed",
+      });
       setStatus(
         "Your message could not be sent. Your draft is still here; you can send it by email instead.",
       );
