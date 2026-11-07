@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Check, Copy } from "lucide-react";
+import posthog from "posthog-js";
 import { Button } from "@/components/ui/button";
 
 export function CopyButton({
@@ -22,6 +23,7 @@ export function CopyButton({
   async function copy() {
     try {
       await navigator.clipboard.writeText(text);
+      posthog.capture("article_content_copied");
       setStatus("Copied");
     } catch {
       setStatus("Couldn’t copy. Select and copy the text instead.");

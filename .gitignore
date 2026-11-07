@@ -48,3 +48,5 @@ next-env.d.ts
 
 # local generated artifacts and video projects
 /output/
+.env.local
+.env

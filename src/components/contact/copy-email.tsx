@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import posthog from "posthog-js";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/site";
 
@@ -10,6 +11,7 @@ export function CopyEmail() {
   async function copy() {
     try {
       await navigator.clipboard.writeText(siteConfig.email);
+      posthog.capture("email_address_copied");
       setStatus("Email copied.");
     } catch {
       setStatus("Couldn’t copy. Select the email address to copy it.");
