@@ -18,6 +18,7 @@ cover: /illustrations/articles/agent-browser.png
 coverAlt: A terminal controls a browser contact form using numbered element references.
 coverWidth: 1200
 coverHeight: 630
+youtubeId: Y1sdih8Ay3M
 takeaway: >-
   agent-browser lets Claude inspect a running website, use its controls
   and check the result. Its skill provides the operating instructions.
