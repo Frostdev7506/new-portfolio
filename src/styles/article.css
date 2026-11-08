@@ -1074,3 +1074,30 @@
     font-size: 2rem;
   }
 }
+
+.article-audio {
+  display: grid;
+  gap: 12px;
+  padding: 20px 0;
+  border-block: 1px solid var(--border);
+}
+.article-audio-label {
+  color: var(--text);
+  font-weight: 600;
+}
+.article-audio audio {
+  width: 100%;
+  min-width: 0;
+}
+.article-audio audio:focus-visible {
+  outline: 2px solid var(--brand-700);
+  outline-offset: 4px;
+  border-radius: var(--radius-control);
+}
+.article-audio > a {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+}
