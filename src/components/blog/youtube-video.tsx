@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Play } from "lucide-react";
+import posthog from "posthog-js";
 import { Button } from "@/components/ui/button";
 
 export function YouTubeVideo({
@@ -38,7 +39,10 @@ export function YouTubeVideo({
             variant="ghost"
             className="article-video-play"
             aria-label={`Play ${title}`}
-            onClick={() => setPlaying(true)}
+            onClick={() => {
+              posthog.capture("embedded_video_started");
+              setPlaying(true);
+            }}
           >
             <Image
               src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
