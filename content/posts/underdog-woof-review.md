@@ -1,14 +1,15 @@
 ---
-title: 'Underdog Woof: Small, Local Text-to-Speech'
-seoTitle: 'Underdog Woof Explained: Local Text-to-Speech on CPU'
+title: Underdog Woof Review
+seoTitle: 'Underdog Woof Review: Local Text-to-Speech on CPU'
 description: >-
-  Meet Underdog Woof, a small English text-to-speech model that runs on a
-  CPU. Explore its capabilities, local setup, and audio samples from my Mac.
+  Underdog Woof review: run English text-to-speech on CPU, hear Juno and
+  Mira, and follow my Mac setup and timing tests.
 date: '2026-11-08'
 category: Practical AI
 tags:
   - Text to Speech
   - Local AI
+  - Offline TTS
   - Underdog Woof
   - Python
 cover: /illustrations/articles/underdog-woof.png
@@ -23,11 +24,22 @@ takeaway: >-
   non-commercial license before publishing audio for work.
 draft: false
 ---
-[Underdog Woof](https://huggingface.co/ConwayResearch/Underdog-Woof) is a small English **text-to-speech model**. You give it written text, and it generates spoken audio on your own computer.
+[Underdog Woof](https://huggingface.co/ConwayResearch/Underdog-Woof) is a small English **text-to-speech (TTS) model**. You give it written text, and it generates spoken audio on your own computer.
 
 The downloadable release fits two voices into a model file of about 40.6 MB and runs on a CPU with Python and NumPy. It doesn’t need a GPU or an API key. Once the files and dependencies are downloaded, speech generation runs locally.
 
 I tried it on my Mac. Here’s what it can do, how the local setup works, and the recordings I saved while testing it.
+
+| Model detail | Downloadable release tested here |
+| --- | --- |
+| Task and language | English text-to-speech |
+| Model file | About 40.6 MB for the two-voice version |
+| Runtime | Local CPU inference with Python and NumPy; no GPU or API key required |
+| Voices and output | Juno and Mira; 24 kHz mono WAV |
+| Offline use | Speech generation works offline after downloading the files and dependencies |
+| License | Non-commercial with attribution; commercial use requires a separate license |
+
+These release details come from the [official model card](https://huggingface.co/ConwayResearch/Underdog-Woof). The recordings and timing observations below come from my own local tests.
 
 ## What can Underdog Woof do?
 
@@ -137,6 +149,8 @@ During setup, we ran a separate short greeting in each voice. The CLI reported:
 These are one run per voice on my Mac. The [CLI timer](https://huggingface.co/ConwayResearch/Underdog-Woof/blob/be702960539777fc3f698e54335276a8391b00f9/underdog_woof/__main__.py) measures generation after the model is loaded and before the WAV is saved. It excludes downloading, installation, model loading, and file writing.
 
 The longer clips embedded above came from my later test. Their durations don’t supply generation timings, and this small experiment doesn’t establish how Woof compares with other speech models.
+
+In this local TTS test, the small download and short commands made Woof easy to try. Both voices generated the passage on my Mac, and the two initial greetings generated faster than their playback durations. I’d still test pronunciation on the script I actually need and check the license before using it in a project.
 
 ## A few things to try next
 
