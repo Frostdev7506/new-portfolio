@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import { toString } from "hast-util-to-string";
 import type { ComponentPropsWithoutRef } from "react";
-import { getArticleImageSource, parseDiagram } from "@/lib/article-content";
+import { getArticleAudioSource, getArticleImageSource, parseDiagram } from "@/lib/article-content";
 import { ArticleDiagram } from "./article-diagram";
 import { CopyButton } from "./copy-button";
 
@@ -40,15 +40,29 @@ export function MarkdownContent({ content }: { content: string }) {
           [rehypeHighlight, { ignoreMissing: true, detect: false }],
         ]}
         components={{
-          a: ({ href, title, children }) =>
-            href === "#highlight" ? (
+          a: ({ href, title, children, node }) => {
+            const audioSource = getArticleAudioSource(href);
+            if (audioSource) {
+              const label = title || (node ? toString(node) : "Audio sample");
+              return (
+                <span className="article-audio">
+                  <span className="article-audio-label">{children}</span>
+                  <audio controls preload="none" src={audioSource} aria-label={label} />
+                  <a href={audioSource} target="_blank" rel="noopener" aria-label={`Open ${label} MP3 in a new tab`}>
+                    Open MP3
+                  </a>
+                </span>
+              );
+            }
+            return href === "#highlight" ? (
               <mark className="table-highlight">
                 {children}
                 {title && <span className="table-highlight-label">{title}</span>}
               </mark>
             ) : (
               <a href={href} title={title}>{children}</a>
-            ),
+            );
+          },
           h2: ({ id, children }) => (
             <Heading level={2} id={id}>
               {children}

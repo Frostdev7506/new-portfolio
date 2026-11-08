@@ -66,6 +66,7 @@ const nextConfig: NextConfig = {
       "script-src 'self' 'unsafe-inline' https://*.posthog.com",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https:",
+      "media-src 'self' https://unique-mermaid-13d924.netlify.app",
       "font-src 'self' data:",
       "connect-src 'self' https://api.github.com https://api.emailjs.com https://*.emailjs.com https://*.posthog.com",
       "worker-src 'self' blob:",

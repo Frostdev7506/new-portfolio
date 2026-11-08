@@ -70,6 +70,20 @@ export function getArticleImageSource(source: unknown): string | null {
   }
 }
 
+export function getArticleAudioSource(source: unknown): string | null {
+  const safeSource = getArticleImageSource(source);
+  if (!safeSource) return null;
+  if (safeSource.startsWith("/")) {
+    return /^\/audio\/(?:[a-z0-9-]+\/)*[a-z0-9-]+\.mp3$/.test(safeSource)
+      ? safeSource
+      : null;
+  }
+  const url = new URL(safeSource);
+  return url.pathname.endsWith(".mp3") && !url.search && !url.hash
+    ? safeSource
+    : null;
+}
+
 export function getArticleStructure(content: string) {
   const tree = unified().use(remarkParse).use(remarkGfm).parse(content) as Root;
   const slugger = new GithubSlugger();
