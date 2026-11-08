@@ -22,7 +22,7 @@ youtubeId: Y1sdih8Ay3M
 takeaway: >-
   agent-browser lets Claude inspect a running website, use its controls
   and check the result. Its skill provides the operating instructions.
-draft: true
+draft: false
 ---
 A code change does not prove that a website works. After fixing a contact form, Claude still needs to open it, try the inputs and check the result.
 

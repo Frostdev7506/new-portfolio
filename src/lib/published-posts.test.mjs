@@ -66,10 +66,17 @@ test("the published collection has ten LinkedIn expansions plus the revised rend
   const slugs = new Set(published.map((post) => post.slug));
   for (const post of published) {
     assert.ok(post.wordCount > 0, `${post.slug}: empty article`);
-    assert.ok(
-      post.diagramCount >= 1,
-      `${post.slug}: missing explanatory diagram`,
-    );
+    if (post.slug === "agent-browser-explained") {
+      assert.match(post.content, /```bash\nagent-browser open /);
+      assert.match(post.content, /agent-browser snapshot -i/);
+      assert.match(post.content, /agent-browser screenshot contact-confirmation\.png/);
+      assert.equal(post.youtubeId, "Y1sdih8Ay3M");
+    } else {
+      assert.ok(
+        post.diagramCount >= 1,
+        `${post.slug}: missing explanatory diagram`,
+      );
+    }
     assert.ok(post.headings.length >= 4, `${post.slug}: missing structure`);
     assert.equal(post.draft, false);
     assert.ok(post.coverAlt.length > 30);
