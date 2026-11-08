@@ -150,7 +150,7 @@ These are one run per voice on my Mac. The [CLI timer](https://huggingface.co/Co
 
 The longer clips embedded above came from my later test. Their durations don’t supply generation timings, and this small experiment doesn’t establish how Woof compares with other speech models.
 
-For my first local TTS experiment, the small download and short commands made Woof easy to try. Both voices generated the passage on my Mac, and the two initial greetings generated faster than their playback durations. I’d still test pronunciation on the script I actually need and check the license before using it in a project.
+In this local TTS test, the small download and short commands made Woof easy to try. Both voices generated the passage on my Mac, and the two initial greetings generated faster than their playback durations. I’d still test pronunciation on the script I actually need and check the license before using it in a project.
 
 ## A few things to try next
 
